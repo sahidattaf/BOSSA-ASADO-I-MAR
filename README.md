@@ -1,101 +1,137 @@
+# BOSSA Asado i Mar — Public Website + AI Hospitality OS
 
-# Bossa Asado i Mar – Project Codex
+BOSSA Asado i Mar is a Curaçao fire-grill restaurant concept built around smoke, sea, rooftop energy, WhatsApp-first reservations, and AI-powered hospitality.
 
-## 🚀 Overview
-Bossa Asado i Mar is a curated tourist experience in Curaçao, combining culinary tours, data collection, content creation, and real estate marketing. Our mission is to become the premier culinary and real estate content creation experience provider in Curaçao and the Caribbean, driven by innovative data insights and robust partnerships.
-
----
-
-## 🧭 Implementation Phases
-
-### Phase 1: Setup & Planning (Months 1–2)
-- Budget Approval & Allocation ($17,500)
-- Partnership Confirmations (3 real estate agencies, hospitality partners)
-- Website & Digital Presence Launch (domain, hosting, reservation platform)
-- Pilot Teaser Video Production
-- Initial Marketing Campaign Launch (social media, email)
-- Data Capture Systems (Google Forms & Sheets, Looker Studio dashboard)
-
-### Phase 2: Pilot Launch & Validation (Months 3–5)
-- Pilot Tours Commencement (3 tours/week)
-- Content Creation (Weekly Videos, Reels)
-- Creator "Pro Pack" Implementation (Studio & editing services)
-- Initial Revenue Generation (tour fees, content packs, sponsors)
-- Feedback Collection & Iteration (Typeform)
-
-### Phase 3: Expansion & Monetization (Months 6–12)
-- Increase Tour Capacity (5 groups/week)
-- Premium Content & Real Estate Partnerships
-- Long-term Sponsorship Contracts
-- Quarterly Investor Events
-- Establish Annualized Revenue Streams
-
-### Phase 4: Sustainable Growth & Expansion (Year 2+)
-- Regional Market Expansion Planning (Aruba, Bonaire, Sint Maarten)
-- Analytics Monetization & AI Integration (Insights, recommendations)
-- Ongoing Content & Marketing Management
+**Official domain:** https://bossaasado.com  
+**Repository:** https://github.com/sahidattaf/BOSSA-ASADO-I-MAR  
+**Primary deployment target:** Vercel
 
 ---
 
-## 📈 Financial Targets & KPIs
+## Current Build Status
 
-| KPI                        | Target      |
-|----------------------------|-------------|
-| Initial Monthly Revenue    | $19,400     |
-| Annual Revenue (Year 1)    | $232,800    |
-| Profit Margin              | 61%         |
-| Monthly Tourist Bookings   | 80+         |
-| Monthly Creator Packages   | 20          |
-| Monthly Real Estate Videos | 4           |
+This repo is being upgraded from a business codex repository into a deployable public website.
 
----
+### Added for deployment
 
-## 🛠️ Tools & Platforms
-
-- **Website & Reservations:** Wix, Calendly
-- **Content Production:** Adobe Premiere, Canva Pro, CapCut
-- **CRM & Email:** HubSpot, Mailchimp
-- **Social Media:** Meta Business Suite
-- **Analytics & Dashboards:** Google Sheets, Looker Studio
-- **AI & Personalization:** Amazon Personalize, ChatGPT
+- `package.json` — Next.js project configuration
+- `app/layout.tsx` — root layout + metadata
+- `app/page.tsx` — first public BOSSA landing page
+- `app/globals.css` — mobile-first styling
+- `next.config.mjs` — Next.js config
+- `.gitignore` — cleaned for Next.js + Vercel
 
 ---
 
-## 🚩 Risk & Mitigation Strategies
+## Website Scope — Phase 1
 
-- **Attendance Variability:** Discounts, targeted ads
-- **Weather Issues:** Indoor venue backup
-- **Content Costs:** Freelancer contracts
-- **Compliance Risks:** GDPR-compliant data handling
+The first version of the BOSSA website should launch with:
 
----
+- Homepage
+- Menu direction
+- WhatsApp reservation CTA
+- Events / rooftop storytelling
+- AI Concierge placeholder
+- Contact / location section
 
-## 📌 Milestone Tracker
+Future pages:
 
-| Milestone                        | Deadline   | Status |
-|----------------------------------|------------|--------|
-| Budget & Financing Approved      | Month 1    | ☐      |
-| Website Launch & Initial Marketing | Month 1–2 | ☐      |
-| First Tour Completed             | Month 3    | ☐      |
-| First Revenue Achieved           | Month 3    | ☐      |
-| Full Capacity Reached            | Month 6    | ☐      |
-
----
-
-## 🚦 Critical Success Checklist
-
-- [ ] Budget & Funding Secured
-- [ ] Initial Partnerships Confirmed
-- [ ] Website & Reservations Operational
-- [ ] First Tour Executed Successfully
-- [ ] First Revenue Streams Activated
+- `/menu`
+- `/reserve`
+- `/events`
+- `/private-dining`
+- `/ai-concierge`
+- `/about`
+- `/subscribe`
 
 ---
 
-## 🌟 Long-Term Vision
+## Recommended Stack
 
-Become the premier culinary and real estate content creation experience provider in Curaçao and the Caribbean, driven by innovative data insights and robust partnerships.
+```text
+Notion = internal BOSSA operating system
+GitHub = code source
+Vercel = public website deployment
+Cloudflare = DNS / domain control
+Supabase = reservations, leads, chat history later
+WhatsApp = fastest reservation CTA
+```
 
 ---
 
-*For more details, see `bossa_codex_plan.md`.*
+## Local Development
+
+Install dependencies:
+
+```bash
+npm install
+```
+
+Run the development server:
+
+```bash
+npm run dev
+```
+
+Build for production:
+
+```bash
+npm run build
+```
+
+Start production server locally:
+
+```bash
+npm start
+```
+
+---
+
+## Deployment Flow
+
+```text
+VS Code / GitHub
+   ↓
+Vercel project import
+   ↓
+Preview deployment
+   ↓
+Connect bossaasado.com
+   ↓
+Production launch
+```
+
+---
+
+## Source Documents
+
+The original business codex remains in:
+
+- `bossa_codex_plan.md`
+
+The Notion system contains the fuller BOSSA operating structure, including:
+
+- BOSSA Domain
+- BOSSA Operations & Content Hub
+- BOSSA Playbook
+- BOSSA Agent / Sub-Agent Operating Logic
+- AI Build Workflow OS
+
+---
+
+## Immediate Next Actions
+
+- [ ] Connect this repo to a Vercel project
+- [ ] Confirm the production domain mapping for `bossaasado.com`
+- [ ] Replace placeholder WhatsApp number with the real BOSSA number
+- [ ] Add real opening hours
+- [ ] Add final menu items and prices
+- [ ] Add real images / video hero
+- [ ] Add AI Concierge implementation
+- [ ] Add Supabase reservation capture later
+
+---
+
+## Important Note
+
+This is now the public website foundation. Keep internal SOPs, agent prompts, staff flows, and operating dashboards inside Notion unless they are safe to publish.
