@@ -4,6 +4,7 @@ const whatsappUrl = `https://wa.me/${whatsappNumber}`;
 const routes = [
   ['Menu', '#menu'],
   ['Weekend Fire', '/weekend-fire'],
+  ['Party Menu', '/party-menu'],
   ['Reserve', '#reserve'],
   ['Hours', '#hours'],
   ['AI Concierge', '#concierge'],
@@ -151,6 +152,9 @@ export default function HomePage() {
           <a className="button" href="/weekend-fire">
             Weekend Fire Boxes
           </a>
+          <a className="button" href="/party-menu">
+            Party Menu
+          </a>
           <a className="button" href="tel:+59995230683">
             Call +5999 523 0683
           </a>
@@ -199,6 +203,26 @@ export default function HomePage() {
               <li>No modifications</li>
               <li>When the fire rests — we close</li>
             </ul>
+          </div>
+        </div>
+      </section>
+
+      <section id="party" className="section">
+        <div className="container split">
+          <div>
+            <span className="badge">Party Menu</span>
+            <h2>Group orders, sharing platters, and private fire moments.</h2>
+            <p>
+              Built for birthdays, office orders, rooftop moments, family gatherings, and content shoots. The party menu uses the same fire system: boxes, classics, skewers, sandwiches, soups, sides, and sauces.
+            </p>
+            <div className="cta-row">
+              <a className="button primary" href="/party-menu">Open Party Menu</a>
+              <a className="button" href={whatsappUrl} target="_blank" rel="noreferrer">Request quote</a>
+            </div>
+          </div>
+          <div className="media-placeholder">
+            <span>🍖</span>
+            <strong>Party platter image slot</strong>
           </div>
         </div>
       </section>
@@ -274,17 +298,6 @@ export default function HomePage() {
             <strong>Sunday</strong>
             <span>12:00 PM – 10:00 PM</span>
           </div>
-        </div>
-      </section>
-
-      <section id="events" className="section">
-        <div className="container">
-          <span className="badge">Events</span>
-          <h2>Weekend fire nights, rooftop specials, and creator moments.</h2>
-          <p>
-            BOSSA can become more than a restaurant: a content engine, tourist experience, and local gathering point
-            for fire-roast collaborations, private dining, and rooftop events.
-          </p>
         </div>
       </section>
 
