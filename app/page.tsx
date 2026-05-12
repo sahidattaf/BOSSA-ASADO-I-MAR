@@ -3,9 +3,9 @@ const whatsappUrl = `https://wa.me/${whatsappNumber}`;
 
 const routes = [
   ['Menu', '#menu'],
+  ['Weekend Fire', '/weekend-fire'],
   ['Reserve', '#reserve'],
   ['Hours', '#hours'],
-  ['Events', '#events'],
   ['AI Concierge', '#concierge'],
 ];
 
@@ -148,6 +148,9 @@ export default function HomePage() {
           <a className="button primary" href={whatsappUrl} target="_blank" rel="noreferrer">
             Reserve on WhatsApp
           </a>
+          <a className="button" href="/weekend-fire">
+            Weekend Fire Boxes
+          </a>
           <a className="button" href="tel:+59995230683">
             Call +5999 523 0683
           </a>
@@ -170,6 +173,32 @@ export default function HomePage() {
           <div className="media-placeholder" aria-label="BOSSA fire-grill visual placeholder">
             <span>🔥</span>
             <strong>Fire · Smoke · Charcoal · Curaçao</strong>
+          </div>
+        </div>
+      </section>
+
+      <section id="weekend-fire" className="section promo-section">
+        <div className="container split">
+          <div>
+            <span className="badge">Weekend Fire Event</span>
+            <h2>Take-out boxes built for Friday, Saturday, and Sunday.</h2>
+            <p>
+              A limited weekend ritual: Community Fire Box, Classic Chicken, Classic Ribs, skewers, fire sandwiches,
+              soups, and fast WhatsApp ordering. Simple boxes. Fast flow. Fire decides the rhythm.
+            </p>
+            <div className="cta-row">
+              <a className="button primary" href="/weekend-fire">Open Weekend Fire page</a>
+              <a className="button" href={whatsappUrl} target="_blank" rel="noreferrer">Order on WhatsApp</a>
+            </div>
+          </div>
+          <div className="info-card">
+            <h3>Weekend Fire rules</h3>
+            <ul>
+              <li>Take-out only</li>
+              <li>Limited daily batches</li>
+              <li>No modifications</li>
+              <li>When the fire rests — we close</li>
+            </ul>
           </div>
         </div>
       </section>
