@@ -170,14 +170,15 @@ export default function HomePage() {
             <span className="badge">Visual direction</span>
             <h2>Real fire, real food, real BOSSA energy.</h2>
             <p>
-              The next upgrade is to move the BOSSA images and video from Notion into the website asset folder,
-              then replace this cinematic placeholder with the actual fire-grill visuals.
+              Experience the authentic fire-grill visuals: from hero grill area to roasted ribs, fire breads to island drinks.
+              Every image captures the smoke, heat, and Caribbean soul of BOSSA Asado i Mar.
             </p>
           </div>
-          <div className="media-placeholder" aria-label="BOSSA fire-grill visual placeholder">
-            <span>🔥</span>
-            <strong>Fire · Smoke · Charcoal · Curaçao</strong>
-          </div>
+          <img 
+            src="/images/bossa/hero-grill-area.png" 
+            alt="BOSSA fire-grill hero visual showing the grill area with fire and charcoal"
+            style={{ maxWidth: '100%', borderRadius: '8px' }}
+          />
         </div>
       </section>
 
@@ -195,15 +196,11 @@ export default function HomePage() {
               <a className="button" href={whatsappUrl} target="_blank" rel="noreferrer">Order on WhatsApp</a>
             </div>
           </div>
-          <div className="info-card">
-            <h3>Weekend Fire rules</h3>
-            <ul>
-              <li>Take-out only</li>
-              <li>Limited daily batches</li>
-              <li>No modifications</li>
-              <li>When the fire rests — we close</li>
-            </ul>
-          </div>
+          <img 
+            src="/images/bossa/fire-ribs-box.png" 
+            alt="BOSSA weekend fire ribs box presentation"
+            style={{ maxWidth: '100%', borderRadius: '8px' }}
+          />
         </div>
       </section>
 
@@ -213,17 +210,18 @@ export default function HomePage() {
             <span className="badge">Party Menu</span>
             <h2>Group orders, sharing platters, and private fire moments.</h2>
             <p>
-              Built for birthdays, office orders, rooftop moments, family gatherings, and content shoots. The party menu uses the same fire system: boxes, classics, skewers, sandwiches, soups, sides, and sauces.
+              Built for birthdays, office orders, rooftop moments, family gatherings, and content shoots. The party menu uses the same fire system: boxes, classics, skewers, sandwiches, soups, and island energy.
             </p>
             <div className="cta-row">
               <a className="button primary" href="/party-menu">Open Party Menu</a>
               <a className="button" href={whatsappUrl} target="_blank" rel="noreferrer">Request quote</a>
             </div>
           </div>
-          <div className="media-placeholder">
-            <span>🍖</span>
-            <strong>Party platter image slot</strong>
-          </div>
+          <img 
+            src="/images/bossa/bbq-party-del-rey.jpg" 
+            alt="BOSSA party BBQ platter for group dining"
+            style={{ maxWidth: '100%', borderRadius: '8px' }}
+          />
         </div>
       </section>
 

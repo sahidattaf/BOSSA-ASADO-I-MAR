@@ -40,11 +40,31 @@ const orderSteps = [
   'Pickup happens fast — when the fire rests, we close.',
 ];
 
-const assetSlots = [
-  ['Party platter hero', '/images/bossa/party-menu-platter.jpg'],
-  ['Weekend Fire boxes', '/images/bossa/weekend-fire-box.jpg'],
-  ['Rooftop event mood', '/images/bossa/rooftop-event.jpg'],
-  ['Marketing video poster', '/images/bossa/marketing-video-poster.jpg'],
+const visualGallery = [
+  {
+    src: '/images/bossa/bbq-party-del-rey.jpg',
+    alt: 'BOSSA BBQ Party Del Rey menu flyer',
+  },
+  {
+    src: '/images/bossa/fire-ribs-box.png',
+    alt: 'Fire ribs box presentation',
+  },
+  {
+    src: '/images/bossa/fire-breads.png',
+    alt: 'BOSSA fire breads sandwiches',
+  },
+  {
+    src: '/images/bossa/drinks-bebidas.png',
+    alt: 'BOSSA tropical drinks and bebidas',
+  },
+  {
+    src: '/images/bossa/peanuts.png',
+    alt: 'BOSSA pinda snack and peanuts',
+  },
+  {
+    src: '/images/bossa/restaurant-design.jpg',
+    alt: 'BOSSA terrace and restaurant design',
+  },
 ];
 
 export default function PartyMenuPage() {
@@ -58,8 +78,11 @@ export default function PartyMenuPage() {
           <a href="/">Home</a>
           <a href="/weekend-fire">Weekend Fire</a>
           <a href="#packages">Packages</a>
-          <a href="#assets">Visuals</a>
-          <a href={whatsappUrl} target="_blank" rel="noreferrer">WhatsApp</a>
+          <a href="#gallery">Visuals</a>
+          <a href="#audio">Audio</a>
+          <a href={whatsappUrl} target="_blank" rel="noreferrer">
+            WhatsApp
+          </a>
         </nav>
       </header>
 
@@ -74,7 +97,26 @@ export default function PartyMenuPage() {
           <a className="button primary" href={whatsappUrl} target="_blank" rel="noreferrer">
             Request party quote
           </a>
-          <a className="button" href="/weekend-fire">View Weekend Fire</a>
+          <a className="button" href="/weekend-fire">
+            View Weekend Fire
+          </a>
+        </div>
+      </section>
+
+      <section className="section media-section">
+        <div className="container media-grid">
+          <div>
+            <span className="badge">Party visual</span>
+            <h2>BBQ party energy, built for groups.</h2>
+            <p>
+              Use this page for family boxes, office orders, birthdays, private dining, and weekend group pickup.
+            </p>
+          </div>
+          <img
+            src="/images/bossa/bbq-party-del-rey.jpg"
+            alt="BOSSA BBQ Party Del Rey flyer"
+            style={{ width: '100%', borderRadius: '12px' }}
+          />
         </div>
       </section>
 
@@ -86,13 +128,16 @@ export default function PartyMenuPage() {
             These packages are built from the same BOSSA fire system: boxes, classics, skewers, sandwiches,
             soups, sides, and sauces. Final quantity depends on fire capacity and pickup timing.
           </p>
+
           <div className="grid weekend-grid">
             {partyPackages.map((pkg) => (
               <article className="card tall-card" key={pkg.name}>
                 <h3>{pkg.name}</h3>
                 <strong className="price-line">{pkg.price}</strong>
                 <p>{pkg.description}</p>
-                <p><strong>Best for:</strong> {pkg.bestFor}</p>
+                <p>
+                  <strong>Best for:</strong> {pkg.bestFor}
+                </p>
               </article>
             ))}
           </div>
@@ -111,44 +156,70 @@ export default function PartyMenuPage() {
           <div className="info-card">
             <h3>Ordering steps</h3>
             <ol>
-              {orderSteps.map((step) => <li key={step}>{step}</li>)}
+              {orderSteps.map((step) => (
+                <li key={step}>{step}</li>
+              ))}
             </ol>
           </div>
         </div>
       </section>
 
-      <section id="assets" className="section media-section">
+      <section id="gallery" className="section media-section">
         <div className="container">
-          <span className="badge">Asset slots</span>
-          <h2>Ready for your Notion images and marketing video.</h2>
+          <span className="badge">BOSSA Party Visuals</span>
+          <h2>Real food. Real fire. Real BOSSA.</h2>
           <p>
-            Upload the final visuals into <code>/public/images/bossa/</code> using these names. Then the website can show the real food, party,
-            and video assets without relying on temporary Notion links.
+            Fire-roasted meats, island drinks, fresh fire breads, peanuts, and terrace energy for your party menu.
           </p>
-          <div className="grid">
-            {assetSlots.map(([label, path]) => (
-              <article className="card" key={path}>
-                <h3>{label}</h3>
-                <p><code>{path}</code></p>
-              </article>
+
+          <div className="grid" style={{ marginTop: '30px' }}>
+            {visualGallery.map((visual) => (
+              <div className="photo-card" key={visual.src}>
+                <img
+                  src={visual.src}
+                  alt={visual.alt}
+                  style={{ width: '100%', borderRadius: '12px', objectFit: 'cover' }}
+                />
+              </div>
             ))}
           </div>
         </div>
       </section>
 
-      <section id="marketing-video" className="section">
+      <section id="audio" className="section">
         <div className="container media-grid">
           <div>
-            <span className="badge">Marketing video section</span>
-            <h2>Party menu reel direction.</h2>
+            <span className="badge">Party music & ambiance</span>
+            <h2>Audio experience</h2>
             <p>
-              Open with fire and box reveal, show the spread, show the handoff, then close with the WhatsApp CTA.
-              Keep text short: “Limited batches”, “Order ahead”, “Fire decides the rhythm.”
+              Let the BOSSA Asado i Mar soundtrack set the mood. This is the flavor of fire, smoke, and island soul.
             </p>
           </div>
-          <div className="media-placeholder">
-            <span>🎬</span>
-            <strong>Video slot: /images/bossa/party-menu-video.mp4</strong>
+          <div className="info-card">
+            <h3>BOSSA Anthem</h3>
+            <audio controls style={{ width: '100%', marginTop: '12px' }}>
+              <source src="/audio/bossa/sabor-di-bossa-papiamentu.mp3" type="audio/mpeg" />
+              Your browser does not support the audio element.
+            </audio>
+            <p style={{ marginTop: '12px', fontSize: '14px' }}>
+              <em>Sabor di Bossa Papiamentu</em> — fire, smoke, and island flavor.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section className="section">
+        <div className="container">
+          <span className="badge">Ready to celebrate?</span>
+          <h2>Let’s make your party unforgettable.</h2>
+          <p>
+            Contact BOSSA on WhatsApp with your event details. We’ll confirm availability, customize your order,
+            and make sure your fire experience is built around the pit.
+          </p>
+          <div className="cta-row">
+            <a className="button primary" href={whatsappUrl} target="_blank" rel="noreferrer">
+              Request Party Quote via WhatsApp
+            </a>
           </div>
         </div>
       </section>
