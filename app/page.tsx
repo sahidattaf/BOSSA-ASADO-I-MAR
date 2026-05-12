@@ -9,17 +9,21 @@ const partyMessage = encodeURIComponent(
 const reservationMessage = encodeURIComponent(
   'Bon dia BOSSA, I want to reserve. Name: ___ Date: ___ Time: ___ Party size: ___ Special notes: ___'
 );
+const weekendMessage = encodeURIComponent(
+  'Bon dia BOSSA, Weekend Fire! Please confirm what boxes are available today. Name: ___ Pickup time: ___ Quantity: ___'
+);
 
 const orderUrl = `${whatsappUrl}?text=${orderMessage}`;
 const partyUrl = `${whatsappUrl}?text=${partyMessage}`;
 const reservationUrl = `${whatsappUrl}?text=${reservationMessage}`;
+const weekendUrl = `${whatsappUrl}?text=${weekendMessage}`;
 
 const routes = [
   ['How it Works', '#how-it-works'],
   ['Menu', '#menu'],
   ['Weekend Fire', '/weekend-fire'],
   ['Party Menu', '/party-menu'],
-  ['Reserve', '#reserve'],
+  ['Location', '#location'],
   ['Hours', '#hours'],
 ];
 
@@ -32,7 +36,7 @@ const conversionCards = [
   },
   {
     title: 'Weekend boxes are limited',
-    text: 'Friday to Sunday is built around limited fire batches: ribs, roast chicken, sides, fire bread, and BOSSA JUS.',
+    text: 'Thursday to Sunday is built around limited fire batches: ribs, roast chicken, sides, fire bread, and BOSSA JUS.',
     cta: 'View Weekend Fire',
     href: '/weekend-fire',
   },
@@ -118,7 +122,7 @@ const menuSections = [
         name: 'Pulled Roast Chicken Sandwich',
         price: 'ANG 12',
         description:
-          'Fire-grilled pan bollo filled with pulled roast chicken, garlic mayo, and pickled onions.',
+          'Fire-grilled pan bollo filled with pulled roast chicken, garlic mayo, and pickled onions. Smoky, crunchy, dushi.',
       },
       {
         name: 'Wood-Fired Pork Sandwich',
@@ -197,10 +201,10 @@ export default function HomePage() {
 
       <section id="top" className="container hero">
         <span className="badge">Opposite Avila Hotel · Pietermaai · Wood Fire & Caribbean Soul</span>
-        <h1>Fire-grill boxes, ribs, party food, and island smoke — ordered fast on WhatsApp.</h1>
+        <h1>Wood fire, Caribbean soul, and BOSSA boxes ordered fast on WhatsApp.</h1>
         <p className="lead">
-          BOSSA Asado i Mar is built for Curaçao fire flavor: roast boxes, ribs, fire breads, skewers,
-          soups, party orders, and weekend pickup energy. Order ahead, reserve your table, or request a group quote.
+          Fire-grilled chicken, tamarind-rum ribs, smoked skewers, Bossa sandwiches, soups, party orders,
+          and weekend pickup energy in the Pietermaai area of Willemstad.
         </p>
         <div className="cta-row">
           <a className="button primary" href={orderUrl} target="_blank" rel="noreferrer">
@@ -241,8 +245,8 @@ export default function HomePage() {
             <span className="badge">Visual direction</span>
             <h2>Real fire, real food, real BOSSA energy.</h2>
             <p>
-              Experience the authentic fire-grill visuals: from hero grill area to roasted ribs, fire breads to island drinks.
-              Every image captures the smoke, heat, and Caribbean soul of BOSSA Asado i Mar.
+              Live the fire, taste the smoke. From the grill area to roasted ribs, fire breads, island drinks,
+              and party boxes — every visual should feel like Curaçao hardwood smoke.
             </p>
           </div>
           <img
@@ -273,11 +277,30 @@ export default function HomePage() {
         </div>
       </section>
 
+      <section className="section">
+        <div className="container info-card" style={{ textAlign: 'center' }}>
+          <span className="badge">Weekend Fire & Party Grill</span>
+          <h2>🔥 Live coals. Roast boxes. Ribs. Party skewers. 🔥</h2>
+          <p>
+            Thursday–Sunday from 12:00 PM to 10:00 PM. Limited batches, cold drinks, hardwood smoke,
+            and the smell of kandela dushi. Order early — when the fire rests, we close.
+          </p>
+          <div className="cta-row" style={{ justifyContent: 'center' }}>
+            <a className="button primary" href={weekendUrl} target="_blank" rel="noreferrer">
+              Ask what boxes are available
+            </a>
+            <a className="button" href="/party-menu">
+              Plan a party order
+            </a>
+          </div>
+        </div>
+      </section>
+
       <section id="weekend-fire" className="section promo-section">
         <div className="container split">
           <div>
             <span className="badge">Weekend Fire Event</span>
-            <h2>Take-out boxes built for Friday, Saturday, and Sunday.</h2>
+            <h2>Take-out boxes built for Thursday through Sunday.</h2>
             <p>
               A limited weekend ritual: Community Fire Box, Classic Chicken, Classic Ribs, skewers, fire sandwiches,
               soups, and fast WhatsApp ordering. Simple boxes. Fast flow. Fire decides the rhythm.
@@ -318,8 +341,8 @@ export default function HomePage() {
 
       <section id="menu" className="section">
         <div className="container">
-          <span className="badge">Final menu preview</span>
-          <h2>Built around the pit.</h2>
+          <span className="badge">Fire & Smoke Menu</span>
+          <h2>Papiamentu · English · Dutch · Español — served with dushi and smoke.</h2>
           <p>
             Scan, choose, and let the fire decide the rhythm. Prices are listed in ANG and can be updated as
             the menu evolves.
@@ -370,6 +393,34 @@ export default function HomePage() {
         </div>
       </section>
 
+      <section id="location" className="section media-section">
+        <div className="container split">
+          <div>
+            <span className="badge">Come to the fire</span>
+            <h2>New Nederland Nuyesweg 116 · Pietermaai Area · Willemstad</h2>
+            <p>
+              BOSSA is positioned for local lunch, dinner, weekend boxes, and visitors around Avila Hotel and Pietermaai.
+              Follow the smoke, send a WhatsApp, and confirm what is fresh from the fire today.
+            </p>
+            <div className="cta-row">
+              <a className="button primary" href={orderUrl} target="_blank" rel="noreferrer">
+                WhatsApp BOSSA
+              </a>
+              <a className="button" href="https://www.google.com/maps/search/?api=1&query=New%20Nederland%20Nuyesweg%20116%20Willemstad%20Curacao" target="_blank" rel="noreferrer">
+                Open Google Maps
+              </a>
+            </div>
+          </div>
+          <div className="info-card">
+            <h3>Quick info</h3>
+            <p>📍 Opposite Avila Hotel / Pietermaai area</p>
+            <p>🔥 Wood fire & charcoal only</p>
+            <p>📞 +5999 523 0683</p>
+            <p>⏱️ Thursday–Sunday · 12:00 PM–10:00 PM</p>
+          </div>
+        </div>
+      </section>
+
       <section id="hours" className="section">
         <div className="container split">
           <div>
@@ -411,6 +462,7 @@ export default function HomePage() {
           <div>
             <strong>BOSSA Asado i Mar</strong>
             <p>New Nederland Nuyesweg 116 · Pietermaai Area · Willemstad, Curaçao</p>
+            <p>#BossaAsado · #WeekendFireGrill · #KandelaDushi</p>
           </div>
           <div>
             <p>WhatsApp: +5999 523 0683</p>
