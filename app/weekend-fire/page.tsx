@@ -5,19 +5,22 @@ const fireBoxes = [
   {
     name: 'Community Fire Box',
     price: 'ANG 20.00',
-    description: '4 chicken pieces, one side, small fire bread, and BOSSA JUS. Built for speed, value, and weekend volume.',
+    description:
+      '4 chicken pieces, one side, small fire bread, and BOSSA JUS. Built for speed, value, and weekend volume.',
     bullets: ['Choice of one side', 'No drink included', 'No modifications', 'Limited daily batches'],
   },
   {
     name: 'Chicken Classic',
     price: 'ANG 49.50',
-    description: '8 chicken pieces, 2 sides, fire bread, and BOSSA JUS. Family-style and margin-friendly.',
+    description:
+      '8 chicken pieces, 2 sides, fire bread, and BOSSA JUS. Family-style and margin-friendly.',
     bullets: ['Take-out only', '2 sides included', 'Fire bread included', 'While stock lasts'],
   },
   {
     name: 'Ribs Classic',
     price: 'ANG 49.50',
-    description: '2 whole ribs portions, 2 sides, fire glaze, and fire bread. Slow smoke, fast handoff.',
+    description:
+      '2 whole ribs portions, 2 sides, fire glaze, and fire bread. Slow smoke, fast handoff.',
     bullets: ['Fire glaze', '2 sides included', 'Fire bread included', 'Limited daily batches'],
   },
 ];
@@ -51,7 +54,9 @@ export default function WeekendFirePage() {
           <a href="#boxes">Boxes</a>
           <a href="#rules">Rules</a>
           <a href="#video">Marketing Video</a>
-          <a href={whatsappUrl} target="_blank" rel="noreferrer">Order</a>
+          <a href={whatsappUrl} target="_blank" rel="noreferrer">
+            Order
+          </a>
         </nav>
       </header>
 
@@ -66,7 +71,26 @@ export default function WeekendFirePage() {
           <a className="button primary" href={whatsappUrl} target="_blank" rel="noreferrer">
             Order on WhatsApp
           </a>
-          <a className="button" href="#boxes">View fire boxes</a>
+          <a className="button" href="#boxes">
+            View fire boxes
+          </a>
+        </div>
+      </section>
+
+      <section className="section media-section">
+        <div className="container media-grid">
+          <div>
+            <span className="badge">Weekend Fire Visual</span>
+            <h2>Smoke, ribs, boxes, and fast pickup energy.</h2>
+            <p>
+              This campaign is built for limited boxes, clear ordering, and strong weekend food visuals.
+            </p>
+          </div>
+          <img
+            src="/images/bossa/bbq-party-del-rey.jpg"
+            alt="BBQ Party Del Rey weekend fire menu"
+            style={{ width: '100%', borderRadius: '12px' }}
+          />
         </div>
       </section>
 
@@ -75,6 +99,7 @@ export default function WeekendFirePage() {
           <span className="badge">Active Weekend Menu</span>
           <h2>Fire box menu.</h2>
           <p>Simple boxes. Fast flow. Fire decides the rhythm. No mods. Limited batches.</p>
+
           <div className="grid weekend-grid">
             {fireBoxes.map((box) => (
               <article className="card tall-card" key={box.name}>
@@ -82,7 +107,9 @@ export default function WeekendFirePage() {
                 <strong className="price-line">{box.price}</strong>
                 <p>{box.description}</p>
                 <ul>
-                  {box.bullets.map((bullet) => <li key={bullet}>{bullet}</li>)}
+                  {box.bullets.map((bullet) => (
+                    <li key={bullet}>{bullet}</li>
+                  ))}
                 </ul>
               </article>
             ))}
@@ -93,16 +120,35 @@ export default function WeekendFirePage() {
       <section className="section">
         <div className="container split">
           <div>
+            <span className="badge">Signature Ribs</span>
+            <h2>Weekend Fire ribs, ready for the box.</h2>
+            <p>
+              Slow-smoked, glazed, and packed with sides. This is the visual anchor for Weekend Fire.
+            </p>
+          </div>
+          <img
+            src="/images/bossa/ribs-bossa.png"
+            alt="BOSSA fire ribs box"
+            style={{ width: '100%', borderRadius: '12px' }}
+          />
+        </div>
+      </section>
+
+      <section className="section">
+        <div className="container split">
+          <div>
             <span className="badge">Sides</span>
             <h2>Add-ons that keep the flow clean.</h2>
-            <p>Keep the take-out system simple: one box, one label, sealed BOSSA JUS, fire bread on top, fast handoff.</p>
+            <p>
+              Keep the take-out system simple: one box, one label, sealed BOSSA JUS, fire bread on top, fast handoff.
+            </p>
           </div>
           <div className="hours-card">
             {sides.map(([name, price]) => (
-              <>
-                <strong key={`${name}-name`}>{name}</strong>
-                <span key={`${name}-price`}>{price}</span>
-              </>
+              <div key={name}>
+                <strong>{name}</strong>
+                <span>{price}</span>
+              </div>
             ))}
           </div>
         </div>
@@ -139,25 +185,19 @@ export default function WeekendFirePage() {
               and close with the ordering CTA.
             </p>
             <div className="cta-row">
-              <a className="button primary" href={whatsappUrl} target="_blank" rel="noreferrer">Order before sold out</a>
+              <a className="button primary" href={whatsappUrl} target="_blank" rel="noreferrer">
+                Order before sold out
+              </a>
             </div>
           </div>
           <div className="info-card">
             <h3>Shot checklist</h3>
             <ul>
-              {videoShots.map((shot) => <li key={shot}>{shot}</li>)}
+              {videoShots.map((shot) => (
+                <li key={shot}>{shot}</li>
+              ))}
             </ul>
           </div>
-        </div>
-      </section>
-
-      <section className="section">
-        <div className="container">
-          <span className="badge">Public CTA copy</span>
-          <h2>Weekend Fire is back.</h2>
-          <p className="lead">
-            Limited take-out boxes built around BOSSA’s fire experience. Order via WhatsApp and come early — when the fire rests, we close.
-          </p>
         </div>
       </section>
 
