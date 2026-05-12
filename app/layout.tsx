@@ -1,6 +1,9 @@
 import type { Metadata } from 'next';
 import './globals.css';
 
+const whatsappNumber = '59995230683';
+const whatsappUrl = `https://wa.me/${whatsappNumber}`;
+
 export const metadata: Metadata = {
   title: 'BOSSA Asado i Mar | Fire, Flavor & Sea in Curaçao',
   description:
@@ -13,13 +16,20 @@ export const metadata: Metadata = {
     siteName: 'BOSSA Asado i Mar',
     locale: 'en_US',
     type: 'website',
+    images: ['/images/bossa/bbq-party-del-rey.jpg'],
   },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        {children}
+        <a className="sticky-whatsapp" href={whatsappUrl} target="_blank" rel="noreferrer" aria-label="Order or reserve BOSSA on WhatsApp">
+          <span>WhatsApp</span>
+          <strong>Order / Reserve</strong>
+        </a>
+      </body>
     </html>
   );
 }
