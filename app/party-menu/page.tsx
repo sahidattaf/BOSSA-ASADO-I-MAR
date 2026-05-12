@@ -1,5 +1,8 @@
 const whatsappNumber = '59995230683';
-const whatsappUrl = `https://wa.me/${whatsappNumber}`;
+const partyMessage = encodeURIComponent(
+  'Bon dia BOSSA, I want a party quote. Date: ___ Group size: ___ Pickup/event time: ___ Package preference: ___'
+);
+const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${partyMessage}`;
 
 const partyPackages = [
   {
@@ -209,14 +212,14 @@ export default function PartyMenuPage() {
       </section>
 
       <section className="section">
-        <div className="container">
+        <div className="container info-card" style={{ textAlign: 'center' }}>
           <span className="badge">Ready to celebrate?</span>
           <h2>Let’s make your party unforgettable.</h2>
           <p>
             Contact BOSSA on WhatsApp with your event details. We’ll confirm availability, customize your order,
             and make sure your fire experience is built around the pit.
           </p>
-          <div className="cta-row">
+          <div className="cta-row" style={{ justifyContent: 'center' }}>
             <a className="button primary" href={whatsappUrl} target="_blank" rel="noreferrer">
               Request Party Quote via WhatsApp
             </a>
