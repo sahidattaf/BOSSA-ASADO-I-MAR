@@ -1,13 +1,70 @@
 const whatsappNumber = '59995230683';
 const whatsappUrl = `https://wa.me/${whatsappNumber}`;
+const orderMessage = encodeURIComponent(
+  'Bon dia BOSSA, I want to place an order. Name: ___ Pickup time: ___ Items: ___ Quantity: ___'
+);
+const partyMessage = encodeURIComponent(
+  'Bon dia BOSSA, I want a party quote. Date: ___ Group size: ___ Pickup/event time: ___ Package preference: ___'
+);
+const reservationMessage = encodeURIComponent(
+  'Bon dia BOSSA, I want to reserve. Name: ___ Date: ___ Time: ___ Party size: ___ Special notes: ___'
+);
+
+const orderUrl = `${whatsappUrl}?text=${orderMessage}`;
+const partyUrl = `${whatsappUrl}?text=${partyMessage}`;
+const reservationUrl = `${whatsappUrl}?text=${reservationMessage}`;
 
 const routes = [
+  ['How it Works', '#how-it-works'],
   ['Menu', '#menu'],
   ['Weekend Fire', '/weekend-fire'],
   ['Party Menu', '/party-menu'],
   ['Reserve', '#reserve'],
   ['Hours', '#hours'],
-  ['AI Concierge', '#concierge'],
+];
+
+const conversionCards = [
+  {
+    title: 'Order fast on WhatsApp',
+    text: 'Send your name, pickup time, and items. BOSSA confirms availability before the fire line starts packing.',
+    cta: 'Start order',
+    href: orderUrl,
+  },
+  {
+    title: 'Weekend boxes are limited',
+    text: 'Friday to Sunday is built around limited fire batches: ribs, roast chicken, sides, fire bread, and BOSSA JUS.',
+    cta: 'View Weekend Fire',
+    href: '/weekend-fire',
+  },
+  {
+    title: 'Party orders by request',
+    text: 'For birthdays, office orders, family gatherings, rooftop nights, and private fire moments, request a quote ahead.',
+    cta: 'Request party quote',
+    href: partyUrl,
+  },
+];
+
+const howItWorks = [
+  {
+    step: '01',
+    title: 'Choose your fire format',
+    text: 'Pick roast boxes, ribs, fire breads, skewers, soups, or a party bundle depending on your group and timing.',
+  },
+  {
+    step: '02',
+    title: 'Send WhatsApp details',
+    text: 'Send name, date, pickup or reservation time, quantity, and special notes. Keep the message clear and fast.',
+  },
+  {
+    step: '03',
+    title: 'BOSSA confirms capacity',
+    text: 'The team confirms availability, pickup timing, and what the fire can still produce before the batch sells out.',
+  },
+  {
+    step: '04',
+    title: 'Pickup, dine, or celebrate',
+    text: 'Come for lunch, dinner, take-out boxes, or group orders. Fire first. Sauce second. Island soul always.',
+  },
 ];
 
 const menuSections = [
@@ -139,15 +196,18 @@ export default function HomePage() {
       </header>
 
       <section id="top" className="container hero">
-        <span className="badge">Pietermaai, Curaçao · Wood Fire & Caribbean Soul</span>
-        <h1>Fire-grill dining with smoke, sea, rooftop energy, and island soul.</h1>
+        <span className="badge">Opposite Avila Hotel · Pietermaai · Wood Fire & Caribbean Soul</span>
+        <h1>Fire-grill boxes, ribs, party food, and island smoke — ordered fast on WhatsApp.</h1>
         <p className="lead">
-          BOSSA Asado i Mar is where fire, smoke, and island flavor meet. Wood fire and charcoal only,
-          built for roast boxes, ribs, sandwiches, skewers, soups, weekend energy, and WhatsApp-first reservations.
+          BOSSA Asado i Mar is built for Curaçao fire flavor: roast boxes, ribs, fire breads, skewers,
+          soups, party orders, and weekend pickup energy. Order ahead, reserve your table, or request a group quote.
         </p>
         <div className="cta-row">
-          <a className="button primary" href={whatsappUrl} target="_blank" rel="noreferrer">
-            Reserve on WhatsApp
+          <a className="button primary" href={orderUrl} target="_blank" rel="noreferrer">
+            Order on WhatsApp
+          </a>
+          <a className="button" href={reservationUrl} target="_blank" rel="noreferrer">
+            Reserve a table
           </a>
           <a className="button" href="/weekend-fire">
             Weekend Fire Boxes
@@ -158,9 +218,20 @@ export default function HomePage() {
           <a className="button" href="tel:+59995230683">
             Call +5999 523 0683
           </a>
-          <a className="button" href="#menu">
-            View menu
-          </a>
+        </div>
+      </section>
+
+      <section className="section media-section">
+        <div className="container grid">
+          {conversionCards.map((card) => (
+            <article className="card" key={card.title}>
+              <h3>{card.title}</h3>
+              <p>{card.text}</p>
+              <a className="button primary" href={card.href} target={card.href.startsWith('http') ? '_blank' : undefined} rel={card.href.startsWith('http') ? 'noreferrer' : undefined}>
+                {card.cta}
+              </a>
+            </article>
+          ))}
         </div>
       </section>
 
@@ -174,11 +245,31 @@ export default function HomePage() {
               Every image captures the smoke, heat, and Caribbean soul of BOSSA Asado i Mar.
             </p>
           </div>
-          <img 
-            src="/images/bossa/hero-grill-area.png" 
+          <img
+            src="/images/bossa/hero-grill-area.png"
             alt="BOSSA fire-grill hero visual showing the grill area with fire and charcoal"
             style={{ maxWidth: '100%', borderRadius: '8px' }}
           />
+        </div>
+      </section>
+
+      <section id="how-it-works" className="section">
+        <div className="container">
+          <span className="badge">How BOSSA Works</span>
+          <h2>Simple order flow. Clean fire execution.</h2>
+          <p>
+            BOSSA is designed around speed, clarity, and limited fire capacity. The easier the order flow,
+            the better the food comes out of the pit.
+          </p>
+          <div className="grid weekend-grid">
+            {howItWorks.map((item) => (
+              <article className="card tall-card" key={item.step}>
+                <span className="badge">{item.step}</span>
+                <h3>{item.title}</h3>
+                <p>{item.text}</p>
+              </article>
+            ))}
+          </div>
         </div>
       </section>
 
@@ -193,11 +284,11 @@ export default function HomePage() {
             </p>
             <div className="cta-row">
               <a className="button primary" href="/weekend-fire">Open Weekend Fire page</a>
-              <a className="button" href={whatsappUrl} target="_blank" rel="noreferrer">Order on WhatsApp</a>
+              <a className="button" href={orderUrl} target="_blank" rel="noreferrer">Order on WhatsApp</a>
             </div>
           </div>
-          <img 
-            src="/images/bossa/fire-ribs-box.png" 
+          <img
+            src="/images/bossa/fire-ribs-box.png"
             alt="BOSSA weekend fire ribs box presentation"
             style={{ maxWidth: '100%', borderRadius: '8px' }}
           />
@@ -214,11 +305,11 @@ export default function HomePage() {
             </p>
             <div className="cta-row">
               <a className="button primary" href="/party-menu">Open Party Menu</a>
-              <a className="button" href={whatsappUrl} target="_blank" rel="noreferrer">Request quote</a>
+              <a className="button" href={partyUrl} target="_blank" rel="noreferrer">Request quote</a>
             </div>
           </div>
-          <img 
-            src="/images/bossa/bbq-party-del-rey.jpg" 
+          <img
+            src="/images/bossa/bbq-party-del-rey.jpg"
             alt="BOSSA party BBQ platter for group dining"
             style={{ maxWidth: '100%', borderRadius: '8px' }}
           />
@@ -266,13 +357,13 @@ export default function HomePage() {
             <h2>Fast reservations. Less back-and-forth.</h2>
             <p>
               Message BOSSA on WhatsApp with your name, date, time, party size, seating preference, and special notes.
-              The AI concierge will later help structure these requests before staff confirmation.
+              Staff confirms the final booking so your table and timing stay clean.
             </p>
           </div>
           <div className="info-card">
             <h3>Reserve now</h3>
             <p>WhatsApp: +5999 523 0683</p>
-            <a className="button primary" href={whatsappUrl} target="_blank" rel="noreferrer">
+            <a className="button primary" href={reservationUrl} target="_blank" rel="noreferrer">
               Start WhatsApp reservation
             </a>
           </div>
@@ -287,26 +378,31 @@ export default function HomePage() {
             <p>Lunch, smoke, dinner, and weekend fire energy in Pietermaai.</p>
           </div>
           <div className="hours-card">
-            <strong>Thursday</strong>
-            <span>12:00 PM – 10:00 PM</span>
-            <strong>Friday</strong>
-            <span>12:00 PM – 10:00 PM</span>
-            <strong>Saturday</strong>
-            <span>12:00 PM – 10:00 PM</span>
-            <strong>Sunday</strong>
-            <span>12:00 PM – 10:00 PM</span>
+            <div><strong>Thursday</strong><span>12:00 PM – 10:00 PM</span></div>
+            <div><strong>Friday</strong><span>12:00 PM – 10:00 PM</span></div>
+            <div><strong>Saturday</strong><span>12:00 PM – 10:00 PM</span></div>
+            <div><strong>Sunday</strong><span>12:00 PM – 10:00 PM</span></div>
           </div>
         </div>
       </section>
 
       <section id="concierge" className="section">
-        <div className="container">
-          <span className="badge">AI concierge</span>
-          <h2>Coming next: BOSSA AI Concierge.</h2>
-          <p>
-            The chatbot will answer menu, hours, location, events, private dining, and reservation questions, then hand
-            off to WhatsApp when human confirmation is needed.
-          </p>
+        <div className="container split">
+          <div>
+            <span className="badge">AI concierge</span>
+            <h2>Coming next: BOSSA AI Concierge.</h2>
+            <p>
+              The chatbot will answer menu, hours, location, events, private dining, and reservation questions, then hand
+              off to WhatsApp when human confirmation is needed.
+            </p>
+          </div>
+          <div className="info-card">
+            <h3>Best first message</h3>
+            <p>“Bon dia BOSSA, I want to order/reserve. My name is ___, for ___ people, on ___ at ___.”</p>
+            <a className="button primary" href={orderUrl} target="_blank" rel="noreferrer">
+              Send WhatsApp now
+            </a>
+          </div>
         </div>
       </section>
 
