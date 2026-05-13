@@ -87,6 +87,14 @@ audio { width: 100%; margin-top: 16px; }
 }
 .sticky-whatsapp span { font-size: 11px; text-transform: uppercase; letter-spacing: 0.12em; opacity: 0.78; }
 .sticky-whatsapp strong { font-size: 14px; }
+
+/* Defensive cleanup for stale duplicate Weekend Fire endings seen on deployed cache. */
+.weekend-fire-page .final-weekend-fire-section ~ section,
+.weekend-fire-page .weekend-fire-footer ~ section,
+.weekend-fire-page .weekend-fire-footer ~ footer {
+  display: none !important;
+}
+
 @media (max-width: 900px) { .hero-grid, .visual-strip { grid-template-columns: 1fr; } }
 @media (max-width: 760px) {
   body { padding-bottom: 96px; }
