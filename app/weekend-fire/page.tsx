@@ -47,7 +47,7 @@ const videoShots = [
 
 export default function WeekendFirePage() {
   return (
-    <main>
+    <main className="weekend-fire-page">
       <header className="container nav">
         <a className="brand" href="/" aria-label="BOSSA Asado i Mar home">
           BOSSA ASADO I MAR
@@ -178,7 +178,7 @@ export default function WeekendFirePage() {
         </div>
       </section>
 
-      <section id="video" className="section media-section">
+      <section id="video" className="section media-section final-weekend-fire-section">
         <div className="container media-grid">
           <div>
             <span className="badge">Marketing video ready</span>
@@ -204,7 +204,7 @@ export default function WeekendFirePage() {
         </div>
       </section>
 
-      <footer className="footer">
+      <footer className="footer weekend-fire-footer">
         <div className="container footer-grid">
           <div>
             <strong>BOSSA Weekend Fire</strong>
