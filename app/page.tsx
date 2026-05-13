@@ -36,7 +36,7 @@ const conversionCards = [
   },
   {
     title: 'Weekend boxes are limited',
-    text: 'Thursday to Sunday is built around limited fire batches: ribs, roast chicken, sides, fire bread, and BOSSA JUS.',
+    text: 'Thursday to Sunday is built around limited fire batches: Bossa Box Mix, ribs, roast chicken, chorizo, sides, baked potato, bread, and BOSSA JUS.',
     cta: 'View Weekend Fire',
     href: '/weekend-fire',
   },
@@ -280,10 +280,11 @@ export default function HomePage() {
       <section className="section">
         <div className="container info-card" style={{ textAlign: 'center' }}>
           <span className="badge">Weekend Fire & Party Grill</span>
-          <h2>🔥 Live coals. Roast boxes. Ribs. Party skewers. 🔥</h2>
+          <h2>🔥 Live coals. Bossa Box Mix. Roast boxes. Ribs. Party skewers. 🔥</h2>
           <p>
             Thursday–Sunday from 12:00 PM to 10:00 PM. Limited batches, cold drinks, hardwood smoke,
-            and the smell of kandela dushi. Order early — when the fire rests, we close.
+            and the smell of kandela dushi. Featured weekend special: Bossa Box Mix with 4 piece chicken,
+            1 full ribs, 1 chorizo, salad, baked potato, and bread for ANG 49.50.
           </p>
           <div className="cta-row" style={{ justifyContent: 'center' }}>
             <a className="button primary" href={weekendUrl} target="_blank" rel="noreferrer">
@@ -302,8 +303,8 @@ export default function HomePage() {
             <span className="badge">Weekend Fire Event</span>
             <h2>Take-out boxes built for Thursday through Sunday.</h2>
             <p>
-              A limited weekend ritual: Community Fire Box, Classic Chicken, Classic Ribs, skewers, fire sandwiches,
-              soups, and fast WhatsApp ordering. Simple boxes. Fast flow. Fire decides the rhythm.
+              A limited weekend ritual: Bossa Box Mix, Community Fire Box, Classic Chicken, Classic Ribs, skewers,
+              fire sandwiches, soups, and fast WhatsApp ordering. Simple boxes. Fast flow. Fire decides the rhythm.
             </p>
             <div className="cta-row">
               <a className="button primary" href="/weekend-fire">Open Weekend Fire page</a>

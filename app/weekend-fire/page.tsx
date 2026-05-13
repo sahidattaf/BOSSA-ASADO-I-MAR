@@ -6,6 +6,13 @@ const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${orderMessage}`;
 
 const fireBoxes = [
   {
+    name: 'Bossa Box Mix',
+    price: 'ANG 49.50',
+    description:
+      '4 piece chicken, 1 full ribs, 1 chorizo, salad, baked potato, and bread. Built as the featured Weekend Fire sharing box.',
+    bullets: ['4 piece chicken', '1 full ribs', '1 chorizo', 'Salad, baked potato, and bread'],
+  },
+  {
     name: 'Community Fire Box',
     price: 'ANG 20.00',
     description:
@@ -35,14 +42,11 @@ const sides = [
   ['Fire bread', 'ANG 4.00'],
 ];
 
-const videoShots = [
-  'Fire close-up: embers, smoke, grill sound',
-  'Chicken skin crisping on the fire',
-  'BOSSA JUS pour into the box',
-  'Side scoop: potato, cassava, or salad',
-  'Fire bread stack and box close',
-  'Handoff / pickup moment',
-  'End card: Thu–Sun, 12:00 PM–10:00 PM',
+const pickupSteps = [
+  'Send WhatsApp with your name, pickup time, box choice, and quantity.',
+  'BOSSA confirms what is still available from the fire batch.',
+  'Your box is packed with sides, fire bread, and BOSSA JUS.',
+  'Pickup fast. Eat hot. Come early before sold out.',
 ];
 
 export default function WeekendFirePage() {
@@ -56,7 +60,7 @@ export default function WeekendFirePage() {
           <a href="/">Home</a>
           <a href="#boxes">Boxes</a>
           <a href="#rules">Rules</a>
-          <a href="#video">Marketing Video</a>
+          <a href="#pickup">Pickup Flow</a>
           <a href={whatsappUrl} target="_blank" rel="noreferrer">
             Order
           </a>
@@ -67,8 +71,8 @@ export default function WeekendFirePage() {
         <span className="badge">Weekend Fire · Take-out only</span>
         <h1>Limited fire boxes. Thursday through Sunday — until the fire rests.</h1>
         <p className="lead">
-          Weekend Fire is BOSSA’s take-out ritual: simple boxes, fast flow, limited batches, and no overpromising.
-          Community first, fire-led, built for speed, consistency, and volume.
+          Weekend Fire is BOSSA’s take-out ritual: Bossa Box Mix, simple boxes, fast flow, limited batches,
+          and no overpromising. Community first, fire-led, built for speed, consistency, and volume.
         </p>
         <div className="cta-row">
           <a className="button primary" href={whatsappUrl} target="_blank" rel="noreferrer">
@@ -84,7 +88,7 @@ export default function WeekendFirePage() {
         <div className="container media-grid">
           <div>
             <span className="badge">Weekend Fire Visual</span>
-            <h2>Smoke, ribs, boxes, and fast pickup energy.</h2>
+            <h2>Smoke, ribs, Bossa Box Mix, and fast pickup energy.</h2>
             <p>
               This campaign is built for limited boxes, clear ordering, and strong weekend food visuals.
             </p>
@@ -101,7 +105,7 @@ export default function WeekendFirePage() {
         <div className="container">
           <span className="badge">Active Weekend Menu</span>
           <h2>Fire box menu.</h2>
-          <p>Simple boxes. Fast flow. Fire decides the rhythm. No mods. Limited batches.</p>
+          <p>Featured box: Bossa Box Mix with 4 piece chicken, 1 full ribs, 1 chorizo, salad, baked potato, and bread. Simple boxes. Fast flow. Fire decides the rhythm.</p>
 
           <div className="grid weekend-grid">
             {fireBoxes.map((box) => (
@@ -178,14 +182,14 @@ export default function WeekendFirePage() {
         </div>
       </section>
 
-      <section id="video" className="section media-section final-weekend-fire-section">
+      <section id="pickup" className="section media-section final-weekend-fire-section">
         <div className="container media-grid">
           <div>
-            <span className="badge">Marketing video ready</span>
-            <h2>15–25 second Weekend Fire Reel.</h2>
+            <span className="badge">Pickup flow</span>
+            <h2>Order early. Pickup fast. Eat hot.</h2>
             <p>
-              Use this video direction for Instagram, TikTok, and WhatsApp broadcast. Hook fast, show proof, highlight one box,
-              and close with the ordering CTA.
+              Weekend Fire works best when the order is clear before the rush starts. Send WhatsApp, confirm availability,
+              and pick up while the box is still hot from the fire.
             </p>
             <div className="cta-row">
               <a className="button primary" href={whatsappUrl} target="_blank" rel="noreferrer">
@@ -194,12 +198,12 @@ export default function WeekendFirePage() {
             </div>
           </div>
           <div className="info-card">
-            <h3>Shot checklist</h3>
-            <ul>
-              {videoShots.map((shot) => (
-                <li key={shot}>{shot}</li>
+            <h3>How pickup works</h3>
+            <ol>
+              {pickupSteps.map((step) => (
+                <li key={step}>{step}</li>
               ))}
-            </ul>
+            </ol>
           </div>
         </div>
       </section>
