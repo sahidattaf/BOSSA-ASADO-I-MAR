@@ -6,28 +6,42 @@ const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${orderMessage}`;
 
 const fireBoxes = [
   {
-    name: 'Bossa Box Mix',
+    name: 'Box #1 — Bossa Box Mix',
     price: 'ANG 49.50',
     description:
       '4 piece chicken, 1 full ribs, 1 chorizo, salad, baked potato, and bread. Built as the featured Weekend Fire sharing box.',
     bullets: ['4 piece chicken', '1 full ribs', '1 chorizo', 'Salad, baked potato, and bread'],
   },
   {
-    name: 'Community Fire Box',
+    name: 'Box #2 — Tenderloin & Chicken Skewer Box',
+    price: 'ANG 49.50',
+    description:
+      '1 tenderloin skewer with onion and pepper, 1 chicken skewer with onion and pepper, 1 side, and small bread.',
+    bullets: ['1 tenderloin skewer with onion and pepper', '1 chicken skewer with onion and pepper', 'Choice of 1 side', 'Small bread included'],
+  },
+  {
+    name: 'Box #3 — Fire Bread Sandwich Box',
+    price: 'ANG 49.50',
+    description:
+      'A sandwich box for sharing: choose chicken sandwich or chicken salad sandwich, plus pork, chorizo, and stew beef or tongue sandwich.',
+    bullets: ['1 chicken sandwich or chicken salad sandwich', '1 pork sandwich', '1 chorizo sandwich', '1 stew beef sandwich or tongue sandwich'],
+  },
+  {
+    name: 'Box #4 — Community Fire Box',
     price: 'ANG 20.00',
     description:
       '4 chicken pieces, one side, small fire bread, and BOSSA JUS. Built for speed, value, and weekend volume.',
     bullets: ['Choice of one side', 'No drink included', 'No modifications', 'Limited daily batches'],
   },
   {
-    name: 'Chicken Classic',
+    name: 'Box #5 — Chicken Classic',
     price: 'ANG 49.50',
     description:
       '8 chicken pieces, 2 sides, fire bread, and BOSSA JUS. Family-style and margin-friendly.',
     bullets: ['Take-out only', '2 sides included', 'Fire bread included', 'While stock lasts'],
   },
   {
-    name: 'Ribs Classic',
+    name: 'Box #6 — Ribs Classic',
     price: 'ANG 49.50',
     description:
       '2 whole ribs portions, 2 sides, fire glaze, and fire bread. Slow smoke, fast handoff.',
@@ -43,9 +57,9 @@ const sides = [
 ];
 
 const pickupSteps = [
-  'Send WhatsApp with your name, pickup time, box choice, and quantity.',
+  'Send WhatsApp with your name, pickup time, box number, and quantity.',
   'BOSSA confirms what is still available from the fire batch.',
-  'Your box is packed with sides, fire bread, and BOSSA JUS.',
+  'Your box is packed with sides, bread, sauces, and BOSSA fire flavor.',
   'Pickup fast. Eat hot. Come early before sold out.',
 ];
 
@@ -71,8 +85,8 @@ export default function WeekendFirePage() {
         <span className="badge">Weekend Fire · Take-out only</span>
         <h1>Limited fire boxes. Thursday through Sunday — until the fire rests.</h1>
         <p className="lead">
-          Weekend Fire is BOSSA’s take-out ritual: Bossa Box Mix, simple boxes, fast flow, limited batches,
-          and no overpromising. Community first, fire-led, built for speed, consistency, and volume.
+          Weekend Fire is BOSSA’s take-out ritual: numbered fire boxes, Bossa Box Mix, skewer boxes,
+          sandwich boxes, fast flow, limited batches, and no overpromising.
         </p>
         <div className="cta-row">
           <a className="button primary" href={whatsappUrl} target="_blank" rel="noreferrer">
@@ -88,9 +102,9 @@ export default function WeekendFirePage() {
         <div className="container media-grid">
           <div>
             <span className="badge">Weekend Fire Visual</span>
-            <h2>Smoke, ribs, Bossa Box Mix, and fast pickup energy.</h2>
+            <h2>Smoke, ribs, skewers, sandwiches, and fast pickup energy.</h2>
             <p>
-              This campaign is built for limited boxes, clear ordering, and strong weekend food visuals.
+              This campaign is built for limited numbered boxes, clear ordering, and strong weekend food visuals.
             </p>
           </div>
           <img
@@ -105,7 +119,10 @@ export default function WeekendFirePage() {
         <div className="container">
           <span className="badge">Active Weekend Menu</span>
           <h2>Fire box menu.</h2>
-          <p>Featured box: Bossa Box Mix with 4 piece chicken, 1 full ribs, 1 chorizo, salad, baked potato, and bread. Simple boxes. Fast flow. Fire decides the rhythm.</p>
+          <p>
+            Order by box number. Box #1 is the Bossa Box Mix. Box #2 is the skewer box. Box #3 is the Fire Bread Sandwich Box.
+            Simple boxes. Fast flow. Fire decides the rhythm.
+          </p>
 
           <div className="grid weekend-grid">
             {fireBoxes.map((box) => (
@@ -147,7 +164,7 @@ export default function WeekendFirePage() {
             <span className="badge">Sides</span>
             <h2>Add-ons that keep the flow clean.</h2>
             <p>
-              Keep the take-out system simple: one box, one label, sealed BOSSA JUS, fire bread on top, fast handoff.
+              Keep the take-out system simple: one box number, one label, sealed BOSSA JUS, bread on top, fast handoff.
             </p>
           </div>
           <div className="hours-card">
@@ -173,9 +190,9 @@ export default function WeekendFirePage() {
             <ul>
               <li>Take-out only</li>
               <li>No delivery</li>
-              <li>No modifications</li>
+              <li>No modifications during rush</li>
               <li>Limited daily batches</li>
-              <li>Order early before sold out</li>
+              <li>Order by box number before sold out</li>
               <li>When the fire rests — we close</li>
             </ul>
           </div>
@@ -186,10 +203,10 @@ export default function WeekendFirePage() {
         <div className="container media-grid">
           <div>
             <span className="badge">Pickup flow</span>
-            <h2>Order early. Pickup fast. Eat hot.</h2>
+            <h2>Order by number. Pickup fast. Eat hot.</h2>
             <p>
-              Weekend Fire works best when the order is clear before the rush starts. Send WhatsApp, confirm availability,
-              and pick up while the box is still hot from the fire.
+              Weekend Fire works best when the order is clear before the rush starts. Send WhatsApp with the box number,
+              confirm availability, and pick up while the box is still hot from the fire.
             </p>
             <div className="cta-row">
               <a className="button primary" href={whatsappUrl} target="_blank" rel="noreferrer">
