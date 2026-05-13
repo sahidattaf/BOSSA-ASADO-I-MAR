@@ -1,5 +1,8 @@
 const whatsappNumber = '59995230683';
-const whatsappUrl = `https://wa.me/${whatsappNumber}`;
+const orderMessage = encodeURIComponent(
+  'Bon dia BOSSA, Weekend Fire! Please confirm what boxes are available today. Name: ___ Pickup time: ___ Quantity: ___'
+);
+const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${orderMessage}`;
 
 const fireBoxes = [
   {
@@ -39,7 +42,7 @@ const videoShots = [
   'Side scoop: potato, cassava, or salad',
   'Fire bread stack and box close',
   'Handoff / pickup moment',
-  'End card: Fri–Sun, 11:00 AM until fire rests',
+  'End card: Thu–Sun, 12:00 PM–10:00 PM',
 ];
 
 export default function WeekendFirePage() {
@@ -62,7 +65,7 @@ export default function WeekendFirePage() {
 
       <section className="container hero">
         <span className="badge">Weekend Fire · Take-out only</span>
-        <h1>Limited fire boxes. Friday, Saturday, Sunday — until the fire rests.</h1>
+        <h1>Limited fire boxes. Thursday through Sunday — until the fire rests.</h1>
         <p className="lead">
           Weekend Fire is BOSSA’s take-out ritual: simple boxes, fast flow, limited batches, and no overpromising.
           Community first, fire-led, built for speed, consistency, and volume.
@@ -165,10 +168,10 @@ export default function WeekendFirePage() {
             <h3>Non-negotiables</h3>
             <ul>
               <li>Take-out only</li>
-              <li>No reservations</li>
               <li>No delivery</li>
               <li>No modifications</li>
               <li>Limited daily batches</li>
+              <li>Order early before sold out</li>
               <li>When the fire rests — we close</li>
             </ul>
           </div>
@@ -209,7 +212,7 @@ export default function WeekendFirePage() {
           </div>
           <div>
             <p>WhatsApp: +5999 523 0683</p>
-            <p>Weekend Fire: Friday–Sunday · 11:00 AM until fire rests</p>
+            <p>Weekend Fire: Thursday–Sunday · 12:00 PM–10:00 PM</p>
           </div>
         </div>
       </footer>
