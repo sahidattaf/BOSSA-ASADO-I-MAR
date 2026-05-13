@@ -90,9 +90,9 @@ const menuSections = [
       },
       {
         name: 'Bossa Box Mix',
-        price: 'ANG 15',
+        price: 'ANG 49.50',
         description:
-          'Rice, beans, sweet plantain, and your choice of meat: chicken, ribs, beef, or shrimp. A complete meal.',
+          '4 piece chicken, 1 full ribs, 1 chorizo, salad, baked potato, and bread. Built as a complete fire box for sharing.',
       },
     ],
   },
