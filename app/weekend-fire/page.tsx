@@ -1,6 +1,6 @@
 const whatsappNumber = '59995230683';
 const orderMessage = encodeURIComponent(
-  'Bon dia BOSSA, Weekend Fire! Please confirm what boxes are available today. Name: ___ Pickup time: ___ Quantity: ___'
+  'Bon dia BOSSA, Weekend Fire! Please confirm what boxes are available today. Name: ___ Pickup time: ___ Box number: ___ Quantity: ___'
 );
 const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${orderMessage}`;
 
@@ -47,6 +47,20 @@ const fireBoxes = [
       '2 whole ribs portions, 2 sides, fire glaze, and fire bread. Slow smoke, fast handoff.',
     bullets: ['Fire glaze', '2 sides included', 'Fire bread included', 'Limited daily batches'],
   },
+  {
+    name: 'Box #7 — Beach Box Daily Special',
+    price: 'ANG 99.50',
+    description:
+      'Family-style beach box with 1/2 whole chicken, 1 whole ribs, 1 chorizo, 1 tenderloin skewer with paprika and onion, 1 chicken skewer with pepper and onion, 2 baked potatoes, and 1 bread.',
+    bullets: [
+      '1/2 whole chicken',
+      '1 whole ribs',
+      '1 chorizo',
+      '1 tenderloin skewer with paprika and onion',
+      '1 chicken skewer with pepper and onion',
+      '2 baked potatoes and 1 bread',
+    ],
+  },
 ];
 
 const sides = [
@@ -86,7 +100,7 @@ export default function WeekendFirePage() {
         <h1>Limited fire boxes. Thursday through Sunday — until the fire rests.</h1>
         <p className="lead">
           Weekend Fire is BOSSA’s take-out ritual: numbered fire boxes, Bossa Box Mix, skewer boxes,
-          sandwich boxes, fast flow, limited batches, and no overpromising.
+          sandwich boxes, Beach Box daily special, fast flow, limited batches, and no overpromising.
         </p>
         <div className="cta-row">
           <a className="button primary" href={whatsappUrl} target="_blank" rel="noreferrer">
@@ -102,9 +116,9 @@ export default function WeekendFirePage() {
         <div className="container media-grid">
           <div>
             <span className="badge">Weekend Fire Visual</span>
-            <h2>Smoke, ribs, skewers, sandwiches, and fast pickup energy.</h2>
+            <h2>Smoke, ribs, skewers, sandwiches, Beach Box, and fast pickup energy.</h2>
             <p>
-              This campaign is built for limited numbered boxes, clear ordering, and strong weekend food visuals.
+              This campaign is built for limited numbered boxes, clear ordering, daily specials, and strong weekend food visuals.
             </p>
           </div>
           <img
@@ -121,7 +135,7 @@ export default function WeekendFirePage() {
           <h2>Fire box menu.</h2>
           <p>
             Order by box number. Box #1 is the Bossa Box Mix. Box #2 is the skewer box. Box #3 is the Fire Bread Sandwich Box.
-            Simple boxes. Fast flow. Fire decides the rhythm.
+            Box #7 is the Beach Box Daily Special for family-style sharing. Simple boxes. Fast flow. Fire decides the rhythm.
           </p>
 
           <div className="grid weekend-grid">
@@ -193,6 +207,7 @@ export default function WeekendFirePage() {
               <li>No modifications during rush</li>
               <li>Limited daily batches</li>
               <li>Order by box number before sold out</li>
+              <li>Box #7 can rotate as the daily special</li>
               <li>When the fire rests — we close</li>
             </ul>
           </div>
