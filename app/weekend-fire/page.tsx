@@ -61,6 +61,19 @@ const fireBoxes = [
       '2 baked potatoes and 1 bread',
     ],
   },
+  {
+    name: 'Box #8 — Local Fire Box',
+    price: 'ANG 39.50',
+    description:
+      'Local-style fire box with 1 porkchop, 1 fillet galina, 1 whole leg chicken piece, 1 chorizo, 1 bread, and 1 baked potato.',
+    bullets: [
+      '1 porkchop',
+      '1 fillet galina',
+      '1 whole leg chicken piece: 1 drumstick and 1 thigh',
+      '1 chorizo',
+      '1 bread and 1 baked potato',
+    ],
+  },
 ];
 
 const sides = [
@@ -100,7 +113,7 @@ export default function WeekendFirePage() {
         <h1>Limited fire boxes. Thursday through Sunday — until the fire rests.</h1>
         <p className="lead">
           Weekend Fire is BOSSA’s take-out ritual: numbered fire boxes, Bossa Box Mix, skewer boxes,
-          sandwich boxes, Beach Box daily special, fast flow, limited batches, and no overpromising.
+          sandwich boxes, Beach Box daily special, Local Fire Box, fast flow, limited batches, and no overpromising.
         </p>
         <div className="cta-row">
           <a className="button primary" href={whatsappUrl} target="_blank" rel="noreferrer">
@@ -116,7 +129,7 @@ export default function WeekendFirePage() {
         <div className="container media-grid">
           <div>
             <span className="badge">Weekend Fire Visual</span>
-            <h2>Smoke, ribs, skewers, sandwiches, Beach Box, and fast pickup energy.</h2>
+            <h2>Smoke, ribs, skewers, sandwiches, Beach Box, Local Box, and fast pickup energy.</h2>
             <p>
               This campaign is built for limited numbered boxes, clear ordering, daily specials, and strong weekend food visuals.
             </p>
@@ -135,7 +148,7 @@ export default function WeekendFirePage() {
           <h2>Fire box menu.</h2>
           <p>
             Order by box number. Box #1 is the Bossa Box Mix. Box #2 is the skewer box. Box #3 is the Fire Bread Sandwich Box.
-            Box #7 is the Beach Box Daily Special for family-style sharing. Simple boxes. Fast flow. Fire decides the rhythm.
+            Box #7 is the Beach Box Daily Special for family-style sharing. Box #8 is the Local Fire Box. Simple boxes. Fast flow. Fire decides the rhythm.
           </p>
 
           <div className="grid weekend-grid">
@@ -208,6 +221,7 @@ export default function WeekendFirePage() {
               <li>Limited daily batches</li>
               <li>Order by box number before sold out</li>
               <li>Box #7 can rotate as the daily special</li>
+              <li>Box #8 is the local-value box</li>
               <li>When the fire rests — we close</li>
             </ul>
           </div>
