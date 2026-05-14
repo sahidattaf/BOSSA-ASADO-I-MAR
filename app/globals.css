@@ -87,6 +87,57 @@ audio { width: 100%; margin-top: 16px; }
 }
 .sticky-whatsapp span { font-size: 11px; text-transform: uppercase; letter-spacing: 0.12em; opacity: 0.78; }
 .sticky-whatsapp strong { font-size: 14px; }
+.language-switcher {
+  position: fixed;
+  top: 16px;
+  right: 18px;
+  z-index: 60;
+}
+.language-switcher summary {
+  list-style: none;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 14px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: rgba(18, 13, 10, 0.82);
+  color: var(--text);
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(12px);
+  font-weight: 800;
+}
+.language-switcher summary::-webkit-details-marker { display: none; }
+.language-globe { font-size: 18px; }
+.language-current { font-size: 12px; text-transform: uppercase; letter-spacing: 0.08em; }
+.language-menu {
+  position: absolute;
+  top: calc(100% + 10px);
+  right: 0;
+  display: grid;
+  gap: 8px;
+  min-width: 210px;
+  padding: 10px;
+  border: 1px solid var(--line);
+  border-radius: 22px;
+  background: rgba(18, 13, 10, 0.96);
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(14px);
+}
+.language-option {
+  display: grid;
+  grid-template-columns: 28px 42px 1fr;
+  align-items: center;
+  gap: 8px;
+  padding: 10px;
+  border-radius: 16px;
+  color: var(--text);
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+.language-option:hover { background: rgba(255,255,255,0.08); transform: translateY(-1px); }
+.language-option strong { color: var(--gold); }
+.language-option small { color: var(--muted); }
 
 /* Defensive cleanup for stale duplicate Weekend Fire endings seen on deployed cache. */
 .weekend-fire-page .final-weekend-fire-section ~ section,
@@ -99,11 +150,15 @@ audio { width: 100%; margin-top: 16px; }
 @media (max-width: 760px) {
   body { padding-bottom: 96px; }
   .nav { align-items: flex-start; gap: 16px; flex-direction: column; }
-  .nav-links { gap: 12px; }
+  .nav-links { gap: 12px; padding-right: 88px; }
   .grid, .media-grid, .split, .footer-grid { grid-template-columns: 1fr; }
   .hero { padding-top: 54px; }
   .menu-item, .hours-card { grid-template-columns: 1fr; }
   .hours-card span { text-align: left; }
   .hours-card > div { grid-template-columns: 1fr; gap: 4px; }
   .sticky-whatsapp { left: 16px; right: 16px; bottom: 14px; text-align: center; justify-items: center; }
+  .language-switcher { top: 12px; right: 12px; }
+  .language-switcher summary { padding: 9px 10px; }
+  .language-current { display: none; }
+  .language-menu { right: 0; min-width: 190px; }
 }

@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import LanguageSwitcher from './components/LanguageSwitcher';
 import './globals.css';
 
 const whatsappNumber = '59995230683';
@@ -24,6 +25,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en">
       <body>
+        <LanguageSwitcher />
         {children}
         <a className="sticky-whatsapp" href={whatsappUrl} target="_blank" rel="noreferrer" aria-label="Order or reserve BOSSA on WhatsApp">
           <span>WhatsApp</span>
