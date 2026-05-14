@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import LanguageSwitcher from './components/LanguageSwitcher';
 import './globals.css';
+import './home-polish.css';
 
 const whatsappNumber = '59995230683';
 const whatsappUrl = `https://wa.me/${whatsappNumber}`;
