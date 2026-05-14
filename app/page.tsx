@@ -21,6 +21,7 @@ const weekendUrl = `${whatsappUrl}?text=${weekendMessage}`;
 const routes = [
   ['How it Works', '#how-it-works'],
   ['Menu', '#menu'],
+  ['Videos', '#videos'],
   ['Weekend Fire', '/weekend-fire'],
   ['Party Menu', '/party-menu'],
   ['Location', '#location'],
@@ -183,6 +184,17 @@ const menuSections = [
   },
 ];
 
+const youtubeVideos = [
+  {
+    title: 'BOSSA Asado i Mar — Fire & Flavor Video',
+    embedUrl: 'https://www.youtube.com/embed/fin2x52-A6Y',
+  },
+  {
+    title: 'BOSSA Asado i Mar — Weekend Fire Video',
+    embedUrl: 'https://www.youtube.com/embed/wxO63r9nkHs',
+  },
+];
+
 export default function HomePage() {
   return (
     <main>
@@ -316,6 +328,31 @@ export default function HomePage() {
             alt="BOSSA weekend fire ribs box presentation"
             style={{ maxWidth: '100%', borderRadius: '8px' }}
           />
+        </div>
+      </section>
+
+      <section id="videos" className="section media-section">
+        <div className="container">
+          <span className="badge">BOSSA YouTube Channel</span>
+          <h2>Watch the fire before you order.</h2>
+          <p>
+            See the BOSSA Asado i Mar energy in motion: fire, food, smoke, island flavor, and weekend box energy.
+          </p>
+          <div className="grid video-grid">
+            {youtubeVideos.map((video) => (
+              <article className="video-card" key={video.embedUrl}>
+                <div className="video-frame">
+                  <iframe
+                    src={video.embedUrl}
+                    title={video.title}
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    allowFullScreen
+                  />
+                </div>
+                <h3>{video.title}</h3>
+              </article>
+            ))}
+          </div>
         </div>
       </section>
 
