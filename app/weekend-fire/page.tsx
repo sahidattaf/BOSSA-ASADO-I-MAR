@@ -139,6 +139,7 @@ export default function WeekendFirePage() {
           <a href="/">Home</a>
           <a href="#boxes">Boxes</a>
           <a href="#specials">Specials</a>
+          <a href="#audio">Audio</a>
           <a href="#videos">Videos</a>
           <a href="#pickup">Pickup Flow</a>
           <a href={whatsappUrl} target="_blank" rel="noreferrer">
@@ -161,6 +162,26 @@ export default function WeekendFirePage() {
           <a className="button" href="#boxes">
             View Box #1–#8
           </a>
+        </div>
+      </section>
+
+      <section id="audio" className="section media-section">
+        <div className="container media-grid">
+          <div>
+            <span className="badge">Weekend Fire Sound</span>
+            <h2>Let guests hear the BOSSA mood before they order.</h2>
+            <p>
+              This audio block gives Weekend Fire its own brand feeling: Papiamentu, smoke, island energy, and box pickup rhythm.
+            </p>
+          </div>
+          <div className="info-card audio-card">
+            <h3>Sabor di BOSSA — Papiamentu</h3>
+            <audio controls preload="metadata">
+              <source src="/audio/bossa/sabor-di-bossa-papiamentu.mp3" type="audio/mpeg" />
+              Your browser does not support the audio element.
+            </audio>
+            <p>Play this while choosing Box #1–#8.</p>
+          </div>
         </div>
       </section>
 
