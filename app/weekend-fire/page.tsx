@@ -1,55 +1,79 @@
 const whatsappNumber = '59995230683';
-const orderMessage = encodeURIComponent(
+const baseWhatsappUrl = `https://wa.me/${whatsappNumber}`;
+const generalOrderMessage = encodeURIComponent(
   'Bon dia BOSSA, Weekend Fire! Please confirm what boxes are available today. Name: ___ Pickup time: ___ Box number: ___ Quantity: ___'
 );
-const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${orderMessage}`;
+const whatsappUrl = `${baseWhatsappUrl}?text=${generalOrderMessage}`;
+
+const buildBoxOrderUrl = (boxNumber: string, boxName: string) => {
+  const message = encodeURIComponent(
+    `Bon dia BOSSA, I want to order ${boxNumber} — ${boxName}. Name: ___ Pickup time: ___ Quantity: ___`
+  );
+
+  return `${baseWhatsappUrl}?text=${message}`;
+};
 
 const fireBoxes = [
   {
-    name: 'Box #1 — Bossa Box Mix',
+    number: '#1',
+    name: 'Bossa Box Mix',
     price: 'ANG 49.50',
+    tag: 'Featured Box',
     description:
       '4 piece chicken, 1 full ribs, 1 chorizo, salad, baked potato, and bread. Built as the featured Weekend Fire sharing box.',
     bullets: ['4 piece chicken', '1 full ribs', '1 chorizo', 'Salad, baked potato, and bread'],
   },
   {
-    name: 'Box #2 — Tenderloin & Chicken Skewer Box',
+    number: '#2',
+    name: 'Tenderloin & Chicken Skewer Box',
     price: 'ANG 49.50',
+    tag: 'Skewer Box',
     description:
       '1 tenderloin skewer with onion and pepper, 1 chicken skewer with onion and pepper, 1 side, and small bread.',
     bullets: ['1 tenderloin skewer with onion and pepper', '1 chicken skewer with onion and pepper', 'Choice of 1 side', 'Small bread included'],
   },
   {
-    name: 'Box #3 — Fire Bread Sandwich Box',
+    number: '#3',
+    name: 'Fire Bread Sandwich Box',
     price: 'ANG 49.50',
+    tag: 'Sandwich Box',
     description:
       'A sandwich box for sharing: choose chicken sandwich or chicken salad sandwich, plus pork, chorizo, and stew beef or tongue sandwich.',
     bullets: ['1 chicken sandwich or chicken salad sandwich', '1 pork sandwich', '1 chorizo sandwich', '1 stew beef sandwich or tongue sandwich'],
   },
   {
-    name: 'Box #4 — Community Fire Box',
+    number: '#4',
+    name: 'Community Fire Box',
     price: 'ANG 20.00',
+    tag: 'Value Box',
     description:
       '4 chicken pieces, one side, small fire bread, and BOSSA JUS. Built for speed, value, and weekend volume.',
     bullets: ['Choice of one side', 'No drink included', 'No modifications', 'Limited daily batches'],
   },
   {
-    name: 'Box #5 — Chicken Classic',
+    number: '#5',
+    name: 'Chicken Classic',
     price: 'ANG 49.50',
+    tag: 'Family Chicken',
     description:
       '8 chicken pieces, 2 sides, fire bread, and BOSSA JUS. Family-style and margin-friendly.',
     bullets: ['Take-out only', '2 sides included', 'Fire bread included', 'While stock lasts'],
   },
   {
-    name: 'Box #6 — Ribs Classic',
+    number: '#6',
+    name: 'Ribs Classic',
     price: 'ANG 49.50',
+    tag: 'Ribs Box',
     description:
       '2 whole ribs portions, 2 sides, fire glaze, and fire bread. Slow smoke, fast handoff.',
     bullets: ['Fire glaze', '2 sides included', 'Fire bread included', 'Limited daily batches'],
   },
   {
-    name: 'Box #7 — Beach Box Daily Special',
+    number: '#7',
+    name: 'Beach Box Daily Special',
     price: 'ANG 99.50',
+    tag: 'Daily Special Slot',
+    isFeatured: true,
     description:
       'Family-style beach box with 1/2 whole chicken, 1 whole ribs, 1 chorizo, 1 tenderloin skewer with paprika and onion, 1 chicken skewer with pepper and onion, 2 baked potatoes, and 1 bread.',
     bullets: [
@@ -62,8 +86,11 @@ const fireBoxes = [
     ],
   },
   {
-    name: 'Box #8 — Local Fire Box',
+    number: '#8',
+    name: 'Local Fire Box',
     price: 'ANG 39.50',
+    tag: 'Local Value Box',
+    isLocal: true,
     description:
       'Local-style fire box with 1 porkchop, 1 fillet galina, 1 whole leg chicken piece, 1 chorizo, 1 bread, and 1 baked potato.',
     bullets: [
@@ -84,10 +111,21 @@ const sides = [
 ];
 
 const pickupSteps = [
-  'Send WhatsApp with your name, pickup time, box number, and quantity.',
+  'Choose your box number from #1 to #8.',
+  'Tap the order button or send WhatsApp with your name, pickup time, box number, and quantity.',
   'BOSSA confirms what is still available from the fire batch.',
-  'Your box is packed with sides, bread, sauces, and BOSSA fire flavor.',
   'Pickup fast. Eat hot. Come early before sold out.',
+];
+
+const youtubeVideos = [
+  {
+    title: 'BOSSA Asado i Mar — Fire & Flavor Video',
+    embedUrl: 'https://www.youtube.com/embed/fin2x52-A6Y',
+  },
+  {
+    title: 'BOSSA Asado i Mar — Weekend Fire Video',
+    embedUrl: 'https://www.youtube.com/embed/wxO63r9nkHs',
+  },
 ];
 
 export default function WeekendFirePage() {
@@ -100,7 +138,8 @@ export default function WeekendFirePage() {
         <nav className="nav-links" aria-label="Weekend Fire navigation">
           <a href="/">Home</a>
           <a href="#boxes">Boxes</a>
-          <a href="#rules">Rules</a>
+          <a href="#specials">Specials</a>
+          <a href="#videos">Videos</a>
           <a href="#pickup">Pickup Flow</a>
           <a href={whatsappUrl} target="_blank" rel="noreferrer">
             Order
@@ -108,9 +147,9 @@ export default function WeekendFirePage() {
         </nav>
       </header>
 
-      <section className="container hero">
+      <section className="container hero weekend-hero">
         <span className="badge">Weekend Fire · Take-out only</span>
-        <h1>Limited fire boxes. Thursday through Sunday — until the fire rests.</h1>
+        <h1>Order by box number. Pickup fast. Eat hot.</h1>
         <p className="lead">
           Weekend Fire is BOSSA’s take-out ritual: numbered fire boxes, Bossa Box Mix, skewer boxes,
           sandwich boxes, Beach Box daily special, Local Fire Box, fast flow, limited batches, and no overpromising.
@@ -120,8 +159,36 @@ export default function WeekendFirePage() {
             Order on WhatsApp
           </a>
           <a className="button" href="#boxes">
-            View fire boxes
+            View Box #1–#8
           </a>
+        </div>
+      </section>
+
+      <section id="specials" className="section media-section">
+        <div className="container grid weekend-highlight-grid">
+          <article className="info-card special-card">
+            <span className="badge">Daily Special Slot</span>
+            <h2>Box #7 — Beach Box</h2>
+            <strong className="price-line">ANG 99.50</strong>
+            <p>
+              The family-style box for beach days, groups, and heavy appetite. This is the box we can rotate later as the daily special.
+            </p>
+            <a className="button primary" href={buildBoxOrderUrl('#7', 'Beach Box Daily Special')} target="_blank" rel="noreferrer">
+              Order Box #7
+            </a>
+          </article>
+
+          <article className="info-card local-card">
+            <span className="badge">Local Value Box</span>
+            <h2>Box #8 — Local Fire Box</h2>
+            <strong className="price-line">ANG 39.50</strong>
+            <p>
+              Porkchop, fillet galina, whole leg chicken piece, chorizo, bread, and baked potato. Built for local value and fast pickup.
+            </p>
+            <a className="button primary" href={buildBoxOrderUrl('#8', 'Local Fire Box')} target="_blank" rel="noreferrer">
+              Order Box #8
+            </a>
+          </article>
         </div>
       </section>
 
@@ -147,13 +214,20 @@ export default function WeekendFirePage() {
           <span className="badge">Active Weekend Menu</span>
           <h2>Fire box menu.</h2>
           <p>
-            Order by box number. Box #1 is the Bossa Box Mix. Box #2 is the skewer box. Box #3 is the Fire Bread Sandwich Box.
-            Box #7 is the Beach Box Daily Special for family-style sharing. Box #8 is the Local Fire Box. Simple boxes. Fast flow. Fire decides the rhythm.
+            Order by box number. Box #7 is the Beach Box Daily Special. Box #8 is the Local Fire Box.
+            Simple boxes. Fast flow. Fire decides the rhythm.
           </p>
 
-          <div className="grid weekend-grid">
+          <div className="grid weekend-grid box-card-grid">
             {fireBoxes.map((box) => (
-              <article className="card tall-card" key={box.name}>
+              <article
+                className={`card tall-card box-card ${box.isFeatured ? 'featured-box-card' : ''} ${box.isLocal ? 'local-box-card' : ''}`}
+                key={box.number}
+              >
+                <div className="box-card-top">
+                  <span className="box-number">Box {box.number}</span>
+                  <span className="box-tag">{box.tag}</span>
+                </div>
                 <h3>{box.name}</h3>
                 <strong className="price-line">{box.price}</strong>
                 <p>{box.description}</p>
@@ -162,6 +236,34 @@ export default function WeekendFirePage() {
                     <li key={bullet}>{bullet}</li>
                   ))}
                 </ul>
+                <a className="button primary box-order-button" href={buildBoxOrderUrl(box.number, box.name)} target="_blank" rel="noreferrer">
+                  Order Box {box.number}
+                </a>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section id="videos" className="section media-section">
+        <div className="container">
+          <span className="badge">BOSSA YouTube Channel</span>
+          <h2>Watch the fire before you order.</h2>
+          <p>
+            Use the videos as trust proof: food, smoke, island energy, and the real BOSSA story in motion.
+          </p>
+          <div className="grid video-grid">
+            {youtubeVideos.map((video) => (
+              <article className="video-card" key={video.embedUrl}>
+                <div className="video-frame">
+                  <iframe
+                    src={video.embedUrl}
+                    title={video.title}
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    allowFullScreen
+                  />
+                </div>
+                <h3>{video.title}</h3>
               </article>
             ))}
           </div>
