@@ -7,8 +7,11 @@ const languages = [
   { code: 'pap', label: 'Papiamentu', short: 'PAP', flag: '🇨🇼', href: `https://translate.google.com/translate?sl=en&tl=pap&u=${encodeURIComponent(siteUrl)}` },
   { code: 'nl', label: 'Nederlands', short: 'NL', flag: '🇳🇱', href: `https://translate.google.com/translate?sl=en&tl=nl&u=${encodeURIComponent(siteUrl)}` },
   { code: 'es', label: 'Español', short: 'ES', flag: '🇪🇸', href: `https://translate.google.com/translate?sl=en&tl=es&u=${encodeURIComponent(siteUrl)}` },
-  { code: 'pt', label: 'Português', short: 'PT', flag: '🇧🇷', href: `https://translate.google.com/translate?sl=en&tl=pt&u=${encodeURIComponent(siteUrl)}` },
+  { code: 'pt', label: 'Português / Brazil', short: 'PT', flag: '🇧🇷', href: `https://translate.google.com/translate?sl=en&tl=pt&u=${encodeURIComponent(siteUrl)}` },
   { code: 'de', label: 'Deutsch', short: 'DE', flag: '🇩🇪', href: `https://translate.google.com/translate?sl=en&tl=de&u=${encodeURIComponent(siteUrl)}` },
+  { code: 'fr', label: 'Français', short: 'FR', flag: '🇫🇷', href: `https://translate.google.com/translate?sl=en&tl=fr&u=${encodeURIComponent(siteUrl)}` },
+  { code: 'it', label: 'Italiano', short: 'IT', flag: '🇮🇹', href: `https://translate.google.com/translate?sl=en&tl=it&u=${encodeURIComponent(siteUrl)}` },
+  { code: 'ar', label: 'العربية', short: 'AR', flag: '🇦🇪', href: `https://translate.google.com/translate?sl=en&tl=ar&u=${encodeURIComponent(siteUrl)}` },
 ];
 
 export default function LanguageSwitcher() {
