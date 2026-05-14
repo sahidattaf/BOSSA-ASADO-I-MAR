@@ -23,14 +23,24 @@ body {
 a { color: inherit; text-decoration: none; }
 img { max-width: 100%; display: block; }
 .container { width: min(1120px, calc(100% - 32px)); margin: 0 auto; }
-.nav { display: flex; justify-content: space-between; align-items: center; padding: 24px 0; }
+.nav { display: flex; justify-content: space-between; align-items: center; padding: 24px 0; gap: 20px; }
 .brand { font-weight: 800; letter-spacing: 0.08em; }
-.nav-links { display: flex; gap: 18px; color: var(--muted); font-size: 14px; flex-wrap: wrap; }
+.brand-lockup { display: inline-flex; align-items: center; gap: 12px; min-width: fit-content; }
+.brand-logo { width: 76px; height: 42px; object-fit: contain; border-radius: 12px; box-shadow: 0 12px 30px rgba(0,0,0,0.28); }
+.nav-links { display: flex; gap: 18px; color: var(--muted); font-size: 14px; flex-wrap: wrap; justify-content: flex-end; }
 .nav-links a { transition: color 0.2s ease, opacity 0.2s ease; }
 .nav-links a:hover { color: var(--gold); }
 .hero { padding: 92px 0 72px; }
+.brand-hero { padding-top: 56px; }
 .weekend-hero { padding-bottom: 54px; }
 .hero-grid { display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 34px; align-items: center; }
+.hero-copy { position: relative; z-index: 1; }
+.hero-visual-card { position: relative; overflow: hidden; border-radius: 32px; border: 1px solid var(--line); box-shadow: var(--shadow); background: #080504; }
+.hero-visual-card img { width: 100%; min-height: 430px; object-fit: cover; }
+.hero-visual-card::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0,0,0,0), rgba(0,0,0,0.34)); pointer-events: none; }
+.hero-visual-caption { position: absolute; left: 18px; right: 18px; bottom: 18px; z-index: 1; display: grid; gap: 4px; padding: 14px 16px; border-radius: 20px; background: rgba(18, 13, 10, 0.74); border: 1px solid rgba(255,255,255,0.16); backdrop-filter: blur(12px); }
+.hero-visual-caption strong { color: var(--gold); }
+.hero-visual-caption span { color: var(--muted); font-size: 14px; }
 .badge { display: inline-flex; border: 1px solid var(--line); border-radius: 999px; padding: 8px 12px; color: var(--gold); background: rgba(255,255,255,0.04); font-size: 14px; }
 h1 { max-width: 900px; margin: 22px 0 18px; font-size: clamp(44px, 8vw, 92px); line-height: 0.92; letter-spacing: -0.06em; }
 .lead { max-width: 760px; color: var(--muted); font-size: clamp(18px, 2.4vw, 24px); line-height: 1.55; }
@@ -90,6 +100,8 @@ audio { width: 100%; margin-top: 16px; }
 .featured-box-card { border-color: rgba(255,106,26,0.64); box-shadow: 0 24px 80px rgba(255,106,26,0.12); }
 .local-box-card { border-color: rgba(243,179,91,0.56); }
 .footer { padding: 34px 0 48px; color: var(--muted); border-top: 1px solid var(--line); }
+.footer-brand { display: flex; gap: 16px; align-items: flex-start; }
+.footer-logo { width: 116px; max-width: 32vw; border-radius: 14px; border: 1px solid var(--line); background: #080504; }
 .sticky-whatsapp {
   position: fixed;
   right: 18px;
@@ -169,14 +181,18 @@ audio { width: 100%; margin-top: 16px; }
 @media (max-width: 760px) {
   body { padding-bottom: 96px; }
   .nav { align-items: flex-start; gap: 16px; flex-direction: column; }
-  .nav-links { gap: 12px; padding-right: 88px; }
+  .brand-lockup { padding-right: 88px; }
+  .brand-logo { width: 68px; height: 38px; }
+  .nav-links { gap: 12px; padding-right: 88px; justify-content: flex-start; }
   .grid, .media-grid, .split, .footer-grid { grid-template-columns: 1fr; }
   .hero { padding-top: 54px; }
+  .hero-visual-card img { min-height: 300px; }
   .menu-item, .hours-card { grid-template-columns: 1fr; }
   .hours-card span { text-align: left; }
   .hours-card > div { grid-template-columns: 1fr; gap: 4px; }
   .box-card-top { align-items: flex-start; flex-direction: column; }
   .box-tag { text-align: left; }
+  .footer-brand { flex-direction: column; }
   .sticky-whatsapp { left: 16px; right: 16px; bottom: 14px; text-align: center; justify-items: center; }
   .language-switcher { top: 12px; right: 12px; }
   .language-switcher summary { padding: 9px 10px; }
