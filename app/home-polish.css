@@ -1,105 +1,38 @@
 /* PR #24: premium homepage hero polish */
-.brand-hero {
-  padding-top: 44px;
-  padding-bottom: 72px;
-}
+.brand-hero { padding-top: 44px; padding-bottom: 72px; }
+.brand-hero .hero-grid { grid-template-columns: minmax(0, 0.94fr) minmax(420px, 1.06fr); gap: clamp(28px, 4vw, 56px); align-items: center; }
+.brand-hero .hero-copy { max-width: 650px; }
+.brand-hero h1 { max-width: 680px; font-size: clamp(44px, 5.2vw, 74px); line-height: 0.98; letter-spacing: -0.052em; }
+.brand-hero .lead { max-width: 610px; font-size: clamp(17px, 1.7vw, 22px); line-height: 1.62; }
+.hero-visual-card { border-color: rgba(255, 247, 237, 0.18); box-shadow: 0 30px 90px rgba(0, 0, 0, 0.48); isolation: isolate; }
+.hero-visual-card img { height: clamp(360px, 42vw, 540px); min-height: 0; object-position: center; transform: scale(1.01); }
+.hero-visual-card::before { content: ''; position: absolute; inset: 0; background: radial-gradient(circle at 74% 18%, rgba(255, 211, 142, 0.22), transparent 22%), linear-gradient(180deg, rgba(0,0,0,0.04), rgba(0,0,0,0.5)); pointer-events: none; z-index: 1; }
+.hero-visual-card::after { z-index: 2; }
+.hero-visual-caption { z-index: 3; }
+.language-switcher { top: 92px; right: 22px; }
 
-.brand-hero .hero-grid {
-  grid-template-columns: minmax(0, 0.94fr) minmax(420px, 1.06fr);
-  gap: clamp(28px, 4vw, 56px);
-  align-items: center;
-}
+/* PR #25: premium restaurant brand flow */
+.premium-hero h1 { max-width: 620px; }
+.hero-proof-row { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 22px; }
+.hero-proof-row span, .signature-kicker { display: inline-flex; width: fit-content; border: 1px solid rgba(243, 179, 91, 0.28); border-radius: 999px; padding: 8px 11px; color: var(--gold); background: rgba(243, 179, 91, 0.06); font-size: 13px; font-weight: 800; letter-spacing: 0.03em; }
+.premium-section { background: radial-gradient(circle at 16% 18%, rgba(255, 106, 26, 0.12), transparent 28%), rgba(255, 255, 255, 0.018); }
+.section-heading-row { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(280px, 0.72fr); gap: 28px; align-items: end; margin-bottom: 26px; }
+.section-heading-row h2 { margin-bottom: 0; }
+.signature-grid { grid-template-columns: repeat(3, 1fr); }
+.signature-card { min-height: 320px; display: flex; flex-direction: column; position: relative; overflow: hidden; }
+.signature-card::after { content: ''; position: absolute; inset: auto -20% -28% 25%; height: 150px; border-radius: 999px; background: rgba(255, 106, 26, 0.12); filter: blur(8px); }
+.signature-card > * { position: relative; z-index: 1; }
+.signature-card .button { margin-top: auto; width: fit-content; }
+.trust-section { background: linear-gradient(135deg, rgba(255, 106, 26, 0.08), rgba(68, 199, 196, 0.035)); }
+.trust-list { display: grid; gap: 12px; }
+.trust-row { display: grid; grid-template-columns: 34px 1fr; gap: 12px; align-items: center; padding: 12px; border-radius: 18px; border: 1px solid rgba(255, 247, 237, 0.1); background: rgba(255, 255, 255, 0.04); }
+.trust-row span { display: inline-flex; width: 34px; height: 34px; align-items: center; justify-content: center; border-radius: 50%; background: var(--fire); color: #120d0a; font-weight: 900; }
+.trust-row strong { color: var(--text); line-height: 1.4; }
+.premium-weekend-band { background: linear-gradient(180deg, rgba(255, 106, 26, 0.08), rgba(255, 255, 255, 0.015)), radial-gradient(circle at 50% 0%, rgba(243, 179, 91, 0.14), transparent 34%); }
+.premium-cta-card, .premium-final-cta { border-color: rgba(243, 179, 91, 0.26); box-shadow: 0 34px 100px rgba(0, 0, 0, 0.42); }
+.premium-final-cta { text-align: center; background: radial-gradient(circle at 50% 0%, rgba(255, 106, 26, 0.2), transparent 38%), linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.035)); border: 1px solid var(--line); border-radius: 34px; padding: clamp(30px, 6vw, 62px); }
+.premium-final-cta h2 { max-width: 850px; margin-inline: auto; }
+.premium-final-cta p { max-width: 720px; margin-inline: auto; }
 
-.brand-hero .hero-copy {
-  max-width: 650px;
-}
-
-.brand-hero h1 {
-  max-width: 680px;
-  font-size: clamp(44px, 5.2vw, 74px);
-  line-height: 0.98;
-  letter-spacing: -0.052em;
-}
-
-.brand-hero .lead {
-  max-width: 610px;
-  font-size: clamp(17px, 1.7vw, 22px);
-  line-height: 1.62;
-}
-
-.hero-visual-card {
-  border-color: rgba(255, 247, 237, 0.18);
-  box-shadow: 0 30px 90px rgba(0, 0, 0, 0.48);
-  isolation: isolate;
-}
-
-.hero-visual-card img {
-  height: clamp(360px, 42vw, 540px);
-  min-height: 0;
-  object-position: center;
-  transform: scale(1.01);
-}
-
-.hero-visual-card::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(circle at 74% 18%, rgba(255, 211, 142, 0.22), transparent 22%), linear-gradient(180deg, rgba(0,0,0,0.04), rgba(0,0,0,0.5));
-  pointer-events: none;
-  z-index: 1;
-}
-
-.hero-visual-card::after {
-  z-index: 2;
-}
-
-.hero-visual-caption {
-  z-index: 3;
-}
-
-.language-switcher {
-  top: 92px;
-  right: 22px;
-}
-
-@media (max-width: 980px) {
-  .brand-hero .hero-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .brand-hero .hero-copy,
-  .brand-hero h1 {
-    max-width: 780px;
-  }
-}
-
-@media (max-width: 760px) {
-  .brand-hero {
-    padding-top: 32px;
-  }
-
-  .brand-hero h1 {
-    font-size: clamp(42px, 12vw, 58px);
-    line-height: 1;
-  }
-
-  .hero-visual-card {
-    border-radius: 24px;
-  }
-
-  .hero-visual-card img {
-    height: 320px;
-    min-height: 0;
-  }
-
-  .hero-visual-caption {
-    left: 12px;
-    right: 12px;
-    bottom: 12px;
-  }
-
-  .language-switcher {
-    top: 12px;
-    right: 12px;
-  }
-}
+@media (max-width: 980px) { .brand-hero .hero-grid, .section-heading-row, .signature-grid { grid-template-columns: 1fr; } .brand-hero .hero-copy, .brand-hero h1 { max-width: 780px; } }
+@media (max-width: 760px) { .brand-hero { padding-top: 32px; } .brand-hero h1 { font-size: clamp(42px, 12vw, 58px); line-height: 1; } .hero-visual-card { border-radius: 24px; } .hero-visual-card img { height: 320px; min-height: 0; } .hero-visual-caption { left: 12px; right: 12px; bottom: 12px; } .language-switcher { top: 12px; right: 12px; } .hero-proof-row span { font-size: 12px; } .signature-card { min-height: 280px; } }
