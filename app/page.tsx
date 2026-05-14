@@ -1,3 +1,5 @@
+import { menuSections } from './data/menu';
+
 const whatsappNumber = '59995230683';
 const whatsappUrl = `https://wa.me/${whatsappNumber}`;
 const orderMessage = encodeURIComponent(
@@ -21,6 +23,7 @@ const weekendUrl = `${whatsappUrl}?text=${weekendMessage}`;
 const routes = [
   ['How it Works', '#how-it-works'],
   ['Menu', '#menu'],
+  ['Audio', '#audio'],
   ['Videos', '#videos'],
   ['Weekend Fire', '/weekend-fire'],
   ['Party Menu', '/party-menu'],
@@ -69,118 +72,6 @@ const howItWorks = [
     step: '04',
     title: 'Pickup, dine, or celebrate',
     text: 'Come for lunch, dinner, take-out boxes, or group orders. Fire first. Sauce second. Island soul always.',
-  },
-];
-
-const menuSections = [
-  {
-    title: 'Bossa Roast Boxes',
-    note: 'Takeaway · family style · wood fire and charcoal only',
-    items: [
-      {
-        name: 'Bossa Roast Box (4 pcs)',
-        price: 'ANG 22',
-        description:
-          '4 pcs of fire-roasted chicken, marinated 24h. Light smoke, crispy edges. Served with roasted potatoes, corn, salad, and fire jus.',
-      },
-      {
-        name: 'Bossa Roast Box (8 pcs)',
-        price: 'ANG 38',
-        description:
-          '8 pcs of roast chicken, perfect for sharing. Deep smoky flavor, tender meat. Served with the same sides.',
-      },
-      {
-        name: 'Bossa Box Mix',
-        price: 'ANG 49.50',
-        description:
-          '4 piece chicken, 1 full ribs, 1 chorizo, salad, baked potato, and bread. Built as a complete fire box for sharing.',
-      },
-    ],
-  },
-  {
-    title: 'Fire Ribs',
-    note: 'Tamarind-rum glaze · slow smoke · fire comfort',
-    items: [
-      {
-        name: 'Fire Ribs (half rack)',
-        price: 'ANG 18',
-        description:
-          'Half rack of tamarind-rum glazed ribs, slow-smoked until tender. Served with roasted potatoes, corn, salad, and bread.',
-      },
-      {
-        name: 'Fire Ribs (full rack)',
-        price: 'ANG 32',
-        description:
-          'Full rack of ribs with deep Curaçao hardwood flavor. Built for the truly hungry.',
-      },
-    ],
-  },
-  {
-    title: 'Fire Bread Sandwiches',
-    note: 'Crispy bread · smoke · sauces · island bite',
-    items: [
-      {
-        name: 'Pulled Roast Chicken Sandwich',
-        price: 'ANG 12',
-        description:
-          'Fire-grilled pan bollo filled with pulled roast chicken, garlic mayo, and pickled onions. Smoky, crunchy, dushi.',
-      },
-      {
-        name: 'Wood-Fired Pork Sandwich',
-        price: 'ANG 14',
-        description: 'Wood-fired pork, crispy bread, tamarind BBQ sauce, and fresh slaw.',
-      },
-      {
-        name: 'Beef Tenderloin Sandwich',
-        price: 'ANG 18',
-        description:
-          'Tender flame-grilled beef tenderloin with toasted bread, herb butter, arugula, and caramelized onion.',
-      },
-      {
-        name: 'Grilled Chicken Salad Sandwich',
-        price: 'ANG 19.50',
-        description: 'Grilled chicken, fresh salad, garlic oil, and BOSSA fire flavor.',
-      },
-    ],
-  },
-  {
-    title: 'Skewers / Pinchos',
-    note: 'Flame-grilled · smoky · served with fire sides',
-    items: [
-      {
-        name: 'Chicken Skewer',
-        price: 'ANG 14',
-        description:
-          'Marinated chicken skewer, flame-grilled with bell pepper, onion, and lime. Served with roasted corn and garlic sauce.',
-      },
-      {
-        name: 'Beef Skewer',
-        price: 'ANG 16',
-        description: 'Tender beef skewer, lightly smoked with bold and spicy fire flavor.',
-      },
-      {
-        name: 'Shrimp Skewer',
-        price: 'ANG 18',
-        description: 'Large shrimp skewer, grilled until crisp with garlic butter and herbs.',
-      },
-    ],
-  },
-  {
-    title: 'Soups & Stews',
-    note: 'Soul in a bowl · slow fire comfort',
-    items: [
-      {
-        name: 'Bossa Beef Soup',
-        price: 'ANG 12',
-        description:
-          'Hearty beef soup, slow-simmered with large chunks of meat, potato, carrot, and herbs.',
-      },
-      {
-        name: 'Bossa Chicken Soup',
-        price: 'ANG 10',
-        description: 'Homestyle chicken soup with light smoke and vegetables. A hug in a bowl.',
-      },
-    ],
   },
 ];
 
@@ -248,6 +139,30 @@ export default function HomePage() {
               </a>
             </article>
           ))}
+        </div>
+      </section>
+
+      <section id="audio" className="section media-section">
+        <div className="container media-grid">
+          <div>
+            <span className="badge">BOSSA Sound</span>
+            <h2>Play the BOSSA anthem while guests explore the menu.</h2>
+            <p>
+              The audio adds Papiamentu flavor and brand emotion to the homepage. It also keeps the website feeling alive while guests choose boxes, skewers, sandwiches, drinks, and sides.
+            </p>
+            <div className="cta-row">
+              <a className="button" href="/weekend-fire">Open Weekend Fire Boxes</a>
+              <a className="button primary" href={orderUrl} target="_blank" rel="noreferrer">Order on WhatsApp</a>
+            </div>
+          </div>
+          <div className="info-card audio-card">
+            <h3>Sabor di BOSSA — Papiamentu</h3>
+            <audio controls preload="metadata">
+              <source src="/audio/bossa/sabor-di-bossa-papiamentu.mp3" type="audio/mpeg" />
+              Your browser does not support the audio element.
+            </audio>
+            <p>Use this as the sound layer for the homepage, Weekend Fire, and future campaign pages.</p>
+          </div>
         </div>
       </section>
 
@@ -380,18 +295,25 @@ export default function HomePage() {
       <section id="menu" className="section">
         <div className="container">
           <span className="badge">Fire & Smoke Menu</span>
-          <h2>Papiamentu · English · Dutch · Español — served with dushi and smoke.</h2>
+          <h2>Editable menu blocks: roast boxes, skewers, sandwiches, drinks, sides, soups and stews.</h2>
           <p>
-            Scan, choose, and let the fire decide the rhythm. Prices are listed in ANG and can be updated as
-            the menu evolves.
+            This menu is now powered by one editable data file: <code>app/data/menu.ts</code>. Update names, prices,
+            descriptions, drinks, sides, and category blocks there — the website menu updates cleanly while the language switcher still works.
           </p>
-          <div className="menu-stack">
+          <div className="menu-category-jump">
             {menuSections.map((section) => (
-              <article className="menu-section" key={section.title}>
+              <a href={`#menu-${section.id}`} key={section.id}>{section.title}</a>
+            ))}
+          </div>
+          <div className="menu-stack editable-menu-stack">
+            {menuSections.map((section) => (
+              <article className="menu-section editable-menu-section" id={`menu-${section.id}`} key={section.id}>
                 <div className="menu-section-header">
                   <div>
+                    <span className="badge">Editable block</span>
                     <h3>{section.title}</h3>
                     <p>{section.note}</p>
+                    <small>{section.editableNote}</small>
                   </div>
                 </div>
                 <div className="menu-items">
