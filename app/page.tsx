@@ -90,8 +90,9 @@ export default function HomePage() {
   return (
     <main>
       <header className="container nav">
-        <a className="brand" href="#top" aria-label="BOSSA Asado i Mar home">
-          BOSSA ASADO I MAR
+        <a className="brand brand-lockup" href="#top" aria-label="BOSSA Asado i Mar home">
+          <img src="/images/bossa/bossa-logo-fire-gold.svg" alt="" className="brand-logo" />
+          <span>BOSSA ASADO I MAR</span>
         </a>
         <nav className="nav-links" aria-label="Primary navigation">
           {routes.map(([label, href]) => (
@@ -102,29 +103,43 @@ export default function HomePage() {
         </nav>
       </header>
 
-      <section id="top" className="container hero">
-        <span className="badge">Opposite Avila Hotel · Pietermaai · Wood Fire & Caribbean Soul</span>
-        <h1>Wood fire, Caribbean soul, and BOSSA boxes ordered fast on WhatsApp.</h1>
-        <p className="lead">
-          Fire-grilled chicken, tamarind-rum ribs, smoked skewers, Bossa sandwiches, soups, party orders,
-          and weekend pickup energy in the Pietermaai area of Willemstad.
-        </p>
-        <div className="cta-row">
-          <a className="button primary" href={orderUrl} target="_blank" rel="noreferrer">
-            Order on WhatsApp
-          </a>
-          <a className="button" href={reservationUrl} target="_blank" rel="noreferrer">
-            Reserve a table
-          </a>
-          <a className="button" href="/weekend-fire">
-            Weekend Fire Boxes
-          </a>
-          <a className="button" href="/party-menu">
-            Party Menu
-          </a>
-          <a className="button" href="tel:+59995230683">
-            Call +5999 523 0683
-          </a>
+      <section id="top" className="container hero brand-hero">
+        <div className="hero-grid">
+          <div className="hero-copy">
+            <span className="badge">Opposite Avila Hotel · Pietermaai · Wood Fire & Caribbean Soul</span>
+            <h1>Wood fire, Caribbean soul, and BOSSA boxes ordered fast on WhatsApp.</h1>
+            <p className="lead">
+              Fire-grilled chicken, tamarind-rum ribs, smoked skewers, Bossa sandwiches, soups, party orders,
+              and weekend pickup energy in the Pietermaai area of Willemstad.
+            </p>
+            <div className="cta-row">
+              <a className="button primary" href={orderUrl} target="_blank" rel="noreferrer">
+                Order on WhatsApp
+              </a>
+              <a className="button" href={reservationUrl} target="_blank" rel="noreferrer">
+                Reserve a table
+              </a>
+              <a className="button" href="/weekend-fire">
+                Weekend Fire Boxes
+              </a>
+              <a className="button" href="/party-menu">
+                Party Menu
+              </a>
+              <a className="button" href="tel:+59995230683">
+                Call +5999 523 0683
+              </a>
+            </div>
+          </div>
+          <div className="hero-visual-card">
+            <img
+              src="/images/bossa/bossa-hero-pietermaai-business-hub.svg"
+              alt="BOSSA Pietermaai Business Hub rooftop sunset hero"
+            />
+            <div className="hero-visual-caption">
+              <strong>Pietermaai Business Hub</strong>
+              <span>Retail · Beauty · Rooftop Dining · BOSSA fire energy</span>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -419,10 +434,13 @@ export default function HomePage() {
 
       <footer className="footer">
         <div className="container footer-grid">
-          <div>
-            <strong>BOSSA Asado i Mar</strong>
-            <p>New Nederland Nuyesweg 116 · Pietermaai Area · Willemstad, Curaçao</p>
-            <p>#BossaAsado · #WeekendFireGrill · #KandelaDushi</p>
+          <div className="footer-brand">
+            <img src="/images/bossa/bossa-logo-fire-gold.svg" alt="BOSSA Asado i Mar logo" className="footer-logo" />
+            <div>
+              <strong>BOSSA Asado i Mar</strong>
+              <p>New Nederland Nuyesweg 116 · Pietermaai Area · Willemstad, Curaçao</p>
+              <p>#BossaAsado · #WeekendFireGrill · #KandelaDushi</p>
+            </div>
           </div>
           <div>
             <p>WhatsApp: +5999 523 0683</p>
