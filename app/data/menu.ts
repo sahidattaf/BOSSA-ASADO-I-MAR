@@ -7,21 +7,21 @@ export const menuSections = [
     items: [
       {
         name: 'Bossa Roast Box (4 pcs)',
-        price: 'ANG 22',
+        price: 'ANG 29',
         description:
           '4 pcs of fire-roasted chicken, marinated 24h. Light smoke, crispy edges. Served with roasted potatoes, corn, salad, and fire jus.',
       },
       {
         name: 'Bossa Roast Box (8 pcs)',
-        price: 'ANG 38',
+        price: 'ANG 49',
         description:
-          '8 pcs of roast chicken, perfect for sharing. Deep smoky flavor, tender meat. Served with the same sides.',
+          '8 pcs of roast chicken, perfect for sharing. Deep smoky flavor, tender meat. Served with roasted potatoes, corn, salad, and fire jus.',
       },
       {
         name: 'Bossa Box Mix',
-        price: 'ANG 49.50',
+        price: 'ANG 29',
         description:
-          '4 piece chicken, 1 full ribs, 1 chorizo, salad, baked potato, and bread. Built as a complete fire box for sharing.',
+          'Rice, beans, sweet plantain, and your choice of meat: chicken, ribs, beef, or shrimp. A complete meal.',
       },
     ],
   },
@@ -53,19 +53,21 @@ export const menuSections = [
     items: [
       {
         name: 'Chicken Skewer',
-        price: 'ANG 14',
+        price: 'ANG 29',
         description:
-          'Marinated chicken skewer, flame-grilled with bell pepper, onion, and lime. Served with roasted corn and garlic sauce.',
+          'Marinated chicken skewer, flame-grilled with bell pepper, onion, and lime. Served with roasted potatoes, fresh salad, bread, and garlic sauce.',
       },
       {
-        name: 'Beef Skewer',
-        price: 'ANG 16',
-        description: 'Tender beef skewer, lightly smoked with bold and spicy fire flavor.',
+        name: 'Beef Tenderloin Skewer',
+        price: 'ANG 45',
+        description:
+          'Tender beef skewer, lightly smoked and grilled with bold fire flavor. Served with roasted potatoes, fresh salad, bread, and garlic sauce.',
       },
       {
         name: 'Shrimp Skewer',
-        price: 'ANG 18',
-        description: 'Large shrimp skewer, grilled until crisp with garlic butter and herbs.',
+        price: 'ANG 30',
+        description:
+          'Large shrimp skewer, grilled until crisp with garlic butter and herbs.',
       },
     ],
   },
@@ -83,29 +85,33 @@ export const menuSections = [
       },
       {
         name: 'Wood-Fired Pork Sandwich',
-        price: 'ANG 14',
-        description: 'Wood-fired pork, crispy bread, tamarind BBQ sauce, and fresh slaw.',
+        price: 'ANG 13',
+        description:
+          'Wood-fired pork, crispy bread, tamarind BBQ sauce, and fresh slaw.',
       },
       {
         name: 'Chorizo Sandwich',
         price: 'ANG 14',
-        description: 'Fire-grilled chorizo in warm bread with pickled onion and BOSSA sauce.',
+        description:
+          'Fire-grilled chorizo in warm bread with pickled onion and BOSSA sauce.',
       },
       {
         name: 'Stew Beef Sandwich',
         price: 'ANG 16',
-        description: 'Slow beef stew packed into fire bread with rich gravy and island herbs.',
+        description:
+          'Slow beef stew packed into fire bread with rich gravy and island herbs.',
       },
       {
         name: 'Beef Tenderloin Sandwich',
-        price: 'ANG 18',
+        price: 'ANG 20',
         description:
           'Tender flame-grilled beef tenderloin with toasted bread, herb butter, arugula, and caramelized onion.',
       },
       {
         name: 'Grilled Chicken Salad Sandwich',
-        price: 'ANG 19.50',
-        description: 'Grilled chicken, fresh salad, garlic oil, and BOSSA fire flavor.',
+        price: 'ANG 12.50',
+        description:
+          'Grilled chicken, fresh salad, garlic oil, and BOSSA fire flavor.',
       },
     ],
   },
@@ -168,14 +174,15 @@ export const menuSections = [
     items: [
       {
         name: 'Bossa Beef Soup',
-        price: 'ANG 12',
+        price: 'ANG 15',
         description:
           'Hearty beef soup, slow-simmered with large chunks of meat, potato, carrot, and herbs.',
       },
       {
         name: 'Bossa Chicken Soup',
-        price: 'ANG 10',
-        description: 'Homestyle chicken soup with light smoke and vegetables. A hug in a bowl.',
+        price: 'ANG 11',
+        description:
+          'Homestyle chicken soup with light smoke and vegetables. A hug in a bowl.',
       },
     ],
   },
