@@ -17,19 +17,19 @@ const menuSections = [
     items: [
       {
         name: 'Bossa Roast Box (4 pcs)',
-        price: 'ANG 22',
+        price: 'ANG 29',
         description:
           '4 pcs of fire-roasted chicken, marinated 24h. Light smoke, crispy edges. Served with roasted potatoes, corn, salad, and fire jus.',
       },
       {
         name: 'Bossa Roast Box (8 pcs)',
-        price: 'ANG 38',
+        price: 'ANG 49',
         description:
-          '8 pcs of roast chicken, perfect for sharing. Deep smoky flavor, tender meat. Served with the same sides.',
+          '8 pcs of roast chicken, perfect for sharing. Deep smoky flavor, tender meat. Served with roasted potatoes, corn, salad, and fire jus.
       },
       {
         name: 'Bossa Box Mix',
-        price: 'ANG 15',
+        price: 'ANG 29',
         description:
           'Rice, beans, sweet plantain, and your choice of meat: chicken, ribs, beef, or shrimp. A complete meal.',
       },
@@ -65,18 +65,18 @@ const menuSections = [
       },
       {
         name: 'Wood-Fired Pork Sandwich',
-        price: 'ANG 14',
+        price: 'ANG 13',
         description: 'Wood-fired pork, crispy bread, tamarind BBQ sauce, and fresh slaw.',
       },
       {
         name: 'Beef Tenderloin Sandwich',
-        price: 'ANG 18',
+        price: 'ANG 20',
         description:
           'Tender flame-grilled beef tenderloin with toasted bread, herb butter, arugula, and caramelized onion.',
       },
       {
         name: 'Grilled Chicken Salad Sandwich',
-        price: 'ANG 19.50',
+        price: 'ANG 12.50',
         description: 'Grilled chicken, fresh salad, garlic oil, and BOSSA fire flavor.',
       },
     ],
@@ -87,18 +87,18 @@ const menuSections = [
     items: [
       {
         name: 'Chicken Skewer',
-        price: 'ANG 14',
+        price: 'ANG 29',
         description:
-          'Marinated chicken skewer, flame-grilled with bell pepper, onion, and lime. Served with roasted corn and garlic sauce.',
+          'Marinated chicken skewer, flame-grilled with bell pepper, onion, and lime. Served with roasted potatoes and fresh salad & bread & garlic sauce.',
       },
       {
-        name: 'Beef Skewer',
-        price: 'ANG 16',
-        description: 'Tender beef skewer, lightly smoked with bold and spicy fire flavor.',
+        name: 'Beef Tenderloin Skewer',
+        price: 'ANG 45',
+        description: 'Tender beef skewer, lightly smoked/grill with bold and fire flavor.served with roast potatoes,and fresh salad, and bread and garlic sauce.',
       },
       {
         name: 'Shrimp Skewer',
-        price: 'ANG 18',
+        price: 'ANG 30',
         description: 'Large shrimp skewer, grilled until crisp with garlic butter and herbs.',
       },
     ],
@@ -109,13 +109,13 @@ const menuSections = [
     items: [
       {
         name: 'Bossa Beef Soup',
-        price: 'ANG 12',
+        price: 'ANG 15',
         description:
           'Hearty beef soup, slow-simmered with large chunks of meat, potato, carrot, and herbs.',
       },
       {
         name: 'Bossa Chicken Soup',
-        price: 'ANG 10',
+        price: 'ANG 11',
         description: 'Homestyle chicken soup with light smoke and vegetables. A hug in a bowl.',
       },
     ],
