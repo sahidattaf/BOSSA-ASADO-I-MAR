@@ -13,6 +13,16 @@ const buildBoxOrderUrl = (boxNumber: string, boxName: string) => {
   return `${baseWhatsappUrl}?text=${message}`;
 };
 
+const buildSeaSpecialUrl = (specialName: string) => {
+  const message = encodeURIComponent(
+    `Bon dia BOSSA, I want info about the Weekend Fire & Sea Special: ${specialName}. Name: ___ Date: ___ Pickup/time: ___ Quantity: ___`
+  );
+
+  return `${baseWhatsappUrl}?text=${message}`;
+};
+
+const stripePlaceholderUrl = '#stripe-links-coming-soon';
+
 const fireBoxes = [
   {
     number: '#1',
@@ -103,6 +113,39 @@ const fireBoxes = [
   },
 ];
 
+const seaSpecials = [
+  {
+    name: 'Grilled Fish Fire Box',
+    price: 'Coming soon',
+    image: '/images/bossa/sea-specials/grilled-fish-fire-box.svg',
+    description: 'Fresh fish from the fire with side, salad, bread, and BOSSA sauce. Final fish depends on daily catch.',
+  },
+  {
+    name: 'Shrimp Fire Box',
+    price: 'Coming soon',
+    image: '/images/bossa/sea-specials/shrimp-fire-box.svg',
+    description: 'Grilled shrimp or shrimp skewers with fire seasoning, sides, and garlic-style sauce.',
+  },
+  {
+    name: 'Lobster Fire Special',
+    price: 'Coming soon',
+    image: '/images/bossa/sea-specials/lobster-fire-special.svg',
+    description: 'Limited lobster from the fire. Built for sunset orders, premium guests, and special weekends.',
+  },
+  {
+    name: 'Mixed Seafood Fire Platter',
+    price: 'Coming soon',
+    image: '/images/bossa/sea-specials/mixed-seafood-fire-platter.svg',
+    description: 'A mixed seafood fire platter with fish, shrimp, lobster option, sides, and island sauces.',
+  },
+  {
+    name: 'Sunset Cocktail Offer',
+    price: 'Coming soon',
+    image: '/images/bossa/sea-specials/sunset-cocktail-offer.svg',
+    description: 'Limited sunset cocktail pairing for seafood specials. Built for weekend atmosphere and terrace energy.',
+  },
+];
+
 const sides = [
   ['Oven baked potato', 'ANG 6.00'],
   ['Boiled cassava', 'ANG 6.00'],
@@ -138,6 +181,7 @@ export default function WeekendFirePage() {
         <nav className="nav-links" aria-label="Weekend Fire navigation">
           <a href="/">Home</a>
           <a href="#boxes">Boxes</a>
+          <a href="#sea-specials">Fire & Sea</a>
           <a href="#specials">Specials</a>
           <a href="#audio">Audio</a>
           <a href="#videos">Videos</a>
@@ -162,6 +206,48 @@ export default function WeekendFirePage() {
           <a className="button" href="#boxes">
             View Box #1–#8
           </a>
+          <a className="button" href="#sea-specials">
+            Fire & Sea Coming Soon
+          </a>
+        </div>
+      </section>
+
+      <section id="sea-specials" className="section media-section sea-specials-section">
+        <div className="container">
+          <span className="badge">Coming Soon</span>
+          <h2>Weekend Fire & Sea Specials</h2>
+          <p>
+            Grilled fish, shrimp, lobster, and mixed seafood from the fire — paired with a limited sunset cocktail offer.
+            Stripe payment links and final product photos will be added after the weekend setup is ready.
+          </p>
+          <div className="grid sea-specials-grid">
+            {seaSpecials.map((special) => (
+              <article className="card sea-special-card" key={special.name}>
+                <img src={special.image} alt={`${special.name} coming soon`} />
+                <div className="sea-special-content">
+                  <span className="badge">Coming soon</span>
+                  <h3>{special.name}</h3>
+                  <strong className="price-line">{special.price}</strong>
+                  <p>{special.description}</p>
+                  <div className="sea-special-actions">
+                    <a className="button primary" href={buildSeaSpecialUrl(special.name)} target="_blank" rel="noreferrer">
+                      Confirm on WhatsApp
+                    </a>
+                    <a className="button disabled-payment" href={stripePlaceholderUrl} aria-disabled="true">
+                      Stripe link coming soon
+                    </a>
+                  </div>
+                </div>
+              </article>
+            ))}
+          </div>
+          <div id="stripe-links-coming-soon" className="info-card stripe-coming-soon-card">
+            <h3>Stripe payment links coming this weekend</h3>
+            <p>
+              Planned links: Weekend Fire & Sea Deposit, Seafood Grill Box, and Sunset Seafood Special. After the links are created,
+              these cards will switch from “coming soon” to live Pay / Deposit buttons.
+            </p>
+          </div>
         </div>
       </section>
 
