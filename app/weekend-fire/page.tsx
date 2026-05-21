@@ -1,150 +1,57 @@
 const whatsappNumber = '59995230683';
 const baseWhatsappUrl = `https://wa.me/${whatsappNumber}`;
-const generalOrderMessage = encodeURIComponent(
-  'Bon dia BOSSA, Weekend Fire! Please confirm what boxes are available today. Name: ___ Pickup time: ___ Box number: ___ Quantity: ___'
-);
-const whatsappUrl = `${baseWhatsappUrl}?text=${generalOrderMessage}`;
 
 const buildBoxOrderUrl = (boxNumber: string, boxName: string) => {
   const message = encodeURIComponent(
     `Bon dia BOSSA, I want to order ${boxNumber} — ${boxName}. Name: ___ Pickup time: ___ Quantity: ___`
   );
-
   return `${baseWhatsappUrl}?text=${message}`;
 };
 
-const fireBoxes = [
-  {
-    number: '#1',
-    name: 'Bossa Box Mix',
-    price: 'ANG 49.50',
-    tag: 'Featured Box',
-    description:
-      '4 piece chicken, 1 full ribs, 1 chorizo, salad, baked potato, and bread. Built as the featured Weekend Fire sharing box.',
-    bullets: ['4 piece chicken', '1 full ribs', '1 chorizo', 'Salad, baked potato, and bread'],
-  },
-  {
-    number: '#2',
-    name: 'Tenderloin & Chicken Skewer Box',
-    price: 'ANG 49.50',
-    tag: 'Skewer Box',
-    description:
-      '1 tenderloin skewer with onion and pepper, 1 chicken skewer with onion and pepper, 1 side, and small bread.',
-    bullets: ['1 tenderloin skewer with onion and pepper', '1 chicken skewer with onion and pepper', 'Choice of 1 side', 'Small bread included'],
-  },
-  {
-    number: '#3',
-    name: 'Fire Bread Sandwich Box',
-    price: 'ANG 49.50',
-    tag: 'Sandwich Box',
-    description:
-      'A sandwich box for sharing: choose chicken sandwich or chicken salad sandwich, plus pork, chorizo, and stew beef or tongue sandwich.',
-    bullets: ['1 chicken sandwich or chicken salad sandwich', '1 pork sandwich', '1 chorizo sandwich', '1 stew beef sandwich or tongue sandwich'],
-  },
-  {
-    number: '#4',
-    name: 'Community Fire Box',
-    price: 'ANG 20.00',
-    tag: 'Value Box',
-    description:
-      '4 chicken pieces, one side, small fire bread, and BOSSA JUS. Built for speed, value, and weekend volume.',
-    bullets: ['Choice of one side', 'No drink included', 'No modifications', 'Limited daily batches'],
-  },
-  {
-    number: '#5',
-    name: 'Chicken Classic',
-    price: 'ANG 49.50',
-    tag: 'Family Chicken',
-    description:
-      '8 chicken pieces, 2 sides, fire bread, and BOSSA JUS. Family-style and margin-friendly.',
-    bullets: ['Take-out only', '2 sides included', 'Fire bread included', 'While stock lasts'],
-  },
-  {
-    number: '#6',
-    name: 'Ribs Classic',
-    price: 'ANG 49.50',
-    tag: 'Ribs Box',
-    description:
-      '2 whole ribs portions, 2 sides, fire glaze, and fire bread. Slow smoke, fast handoff.',
-    bullets: ['Fire glaze', '2 sides included', 'Fire bread included', 'Limited daily batches'],
-  },
-  {
-    number: '#7',
-    name: 'Beach Box Daily Special',
-    price: 'ANG 99.50',
-    tag: 'Daily Special Slot',
-    isFeatured: true,
-    description:
-      'Family-style beach box with 1/2 whole chicken, 1 whole ribs, 1 chorizo, 1 tenderloin skewer with paprika and onion, 1 chicken skewer with pepper and onion, 2 baked potatoes, and 1 bread.',
-    bullets: [
-      '1/2 whole chicken',
-      '1 whole ribs',
-      '1 chorizo',
-      '1 tenderloin skewer with paprika and onion',
-      '1 chicken skewer with pepper and onion',
-      '2 baked potatoes and 1 bread',
-    ],
-  },
-  {
-    number: '#8',
-    name: 'Local Fire Box',
-    price: 'ANG 39.50',
-    tag: 'Local Value Box',
-    isLocal: true,
-    description:
-      'Local-style fire box with 1 porkchop, 1 fillet galina, 1 whole leg chicken piece, 1 chorizo, 1 bread, and 1 baked potato.',
-    bullets: [
-      '1 porkchop',
-      '1 fillet galina',
-      '1 whole leg chicken piece: 1 drumstick and 1 thigh',
-      '1 chorizo',
-      '1 bread and 1 baked potato',
-    ],
-  },
-];
+const generalOrderMessage = encodeURIComponent(
+  'Bon dia BOSSA, Weekend Fire! Please confirm what boxes are available today. Name: ___ Pickup time: ___ Box number: ___ Quantity: ___'
+);
+const whatsappUrl = `${baseWhatsappUrl}?text=${generalOrderMessage}`;
 
-const sides = [
-  ['Oven baked potato', 'ANG 6.00'],
-  ['Boiled cassava', 'ANG 6.00'],
-  ['Fresh salad', 'ANG 10.00'],
-  ['Fire bread', 'ANG 4.00'],
+const fireBoxes = [
+  ['#1', 'BOSSA Box Mix', 'XCG 49.50', 'Featured sharing box', '/images/bossa/weekend-fire/box-1-bossa-box-mix.png', 'Fire-roasted 1 pc chicken whole legs + 1/2 ribs + 1 chorizo + 1 porkchop + garlic bread + garlic sauce.'],
+  ['#2', 'Skewer Box', 'XCG 49.50', 'High-margin fire skewers', '/images/bossa/weekend-fire/box-2-skewer-box.png', 'Tenderloin skewer + chicken skewer + garlic sauce + garlic bread.'],
+  ['#3', 'Fire Bread Sandwich Box', 'XCG 49.50', 'Fire Bread variety', '/images/bossa/weekend-fire/box-3-fire-bread-sandwich-box.png', '#9 chicken salad 12 · #10 whole legs 12 · #11 chicken boneless 12 · #12 porkchop 12 · #13 chorizo 12 · #14 grilled steak / stew 15 · #15 tenderloin 20.'],
+  ['#4', 'Community Fire Box', 'XCG 19.50', 'Built for speed & volume', '/images/bossa/weekend-fire/box-4-community-fire-box.png', '4 chicken pieces + bread + garlic sauce + baked potato.'],
+  ['#5', 'Chicken Classic', 'XCG 49.50', 'Family-style fire meal', '/images/bossa/weekend-fire/box-5-chicken-classic.png', 'Whole fire-roasted chicken or 8 pc roast/grill chicken with 2 sides.'],
+  ['#6', 'Ribs Classic', 'XCG 49.50', 'Slow smoke · fast handoff', '/images/bossa/weekend-fire/box-6-ribs-classic.png', 'Slow-smoked ribs: 2 full ribs + garlic sauce + bread.'],
+  ['#7', 'SEA BOX Coming Soon', 'XCG 99.50', 'Heavy appetite special', '/images/bossa/weekend-fire/box-7-sea-box-coming-soon.png', 'Mixed grill and seafood platter with catch-of-the-day skewer, tenderloin skewer, and 2 sides.'],
+  ['#8', 'Local Fire Box', 'XCG 6+', 'Local pickup favorite', '/images/bossa/weekend-fire/box-8-local-fire-box.png', 'Fresh salad, seaweed, hummus, garlic bread/pita, baked potato, cassava, chorizo, boiled peanuts, and beer options.'],
 ];
 
 const pickupSteps = [
   'Choose your box number from #1 to #8.',
-  'Tap the order button or send WhatsApp with your name, pickup time, box number, and quantity.',
+  'Send WhatsApp with your name, pickup time, box number, and quantity.',
   'BOSSA confirms what is still available from the fire batch.',
   'Pickup fast. Eat hot. Come early before sold out.',
 ];
 
 const youtubeVideos = [
-  {
-    title: 'BOSSA Asado i Mar — Fire & Flavor Video',
-    embedUrl: 'https://www.youtube.com/embed/fin2x52-A6Y',
-  },
-  {
-    title: 'BOSSA Asado i Mar — Weekend Fire Video',
-    embedUrl: 'https://www.youtube.com/embed/wxO63r9nkHs',
-  },
+  { title: 'BOSSA Asado i Mar — Fire & Flavor Video', embedUrl: 'https://www.youtube.com/embed/fin2x52-A6Y' },
+  { title: 'BOSSA Asado i Mar — Weekend Fire Video', embedUrl: 'https://www.youtube.com/embed/wxO63r9nkHs' },
 ];
 
 export default function WeekendFirePage() {
   return (
     <main className="weekend-fire-page">
       <header className="container nav">
-        <a className="brand" href="/" aria-label="BOSSA Asado i Mar home">
-          BOSSA ASADO I MAR
+        <a className="brand brand-lockup" href="/" aria-label="BOSSA Asado i Mar home">
+          <img src="/images/bossa/bossa-logo-fire-gold.svg" alt="" className="brand-logo" />
+          <span>BOSSA ASADO I MAR</span>
         </a>
         <nav className="nav-links" aria-label="Weekend Fire navigation">
           <a href="/">Home</a>
           <a href="#boxes">Boxes</a>
-          <a href="#specials">Specials</a>
           <a href="#audio">Audio</a>
           <a href="#videos">Videos</a>
           <a href="#pickup">Pickup Flow</a>
-          <a href={whatsappUrl} target="_blank" rel="noreferrer">
-            Order
-          </a>
+          <a href="/weekend-fire/customize">Customizer</a>
+          <a href={whatsappUrl} target="_blank" rel="noreferrer">Order</a>
         </nav>
       </header>
 
@@ -152,16 +59,13 @@ export default function WeekendFirePage() {
         <span className="badge">Weekend Fire · Take-out only</span>
         <h1>Order by box number. Pickup fast. Eat hot.</h1>
         <p className="lead">
-          Weekend Fire is BOSSA’s take-out ritual: numbered fire boxes, Bossa Box Mix, skewer boxes,
-          sandwich boxes, Beach Box daily special, Local Fire Box, fast flow, limited batches, and no overpromising.
+          Weekend Fire is BOSSA’s take-out ritual: numbered boxes, final flyer assets, audio, video,
+          WhatsApp ordering, PNG/PDF/offline HTML export, and limited batches from Thursday to Sunday.
         </p>
         <div className="cta-row">
-          <a className="button primary" href={whatsappUrl} target="_blank" rel="noreferrer">
-            Order on WhatsApp
-          </a>
-          <a className="button" href="#boxes">
-            View Box #1–#8
-          </a>
+          <a className="button primary" href={whatsappUrl} target="_blank" rel="noreferrer">Order on WhatsApp</a>
+          <a className="button" href="#boxes">View Box #1–#8</a>
+          <a className="button" href="/weekend-fire/customize">Open flyer customizer</a>
         </div>
       </section>
 
@@ -170,9 +74,7 @@ export default function WeekendFirePage() {
           <div>
             <span className="badge">Weekend Fire Sound</span>
             <h2>Let guests hear the BOSSA mood before they order.</h2>
-            <p>
-              This audio block gives Weekend Fire its own brand feeling: Papiamentu, smoke, island energy, and box pickup rhythm.
-            </p>
+            <p>This audio block gives Weekend Fire its own Papiamentu fire, smoke, and island rhythm.</p>
           </div>
           <div className="info-card audio-card">
             <h3>Sabor di BOSSA — Papiamentu</h3>
@@ -180,53 +82,22 @@ export default function WeekendFirePage() {
               <source src="/audio/bossa/sabor-di-bossa-papiamentu.mp3" type="audio/mpeg" />
               Your browser does not support the audio element.
             </audio>
-            <p>Play this while choosing Box #1–#8.</p>
           </div>
-        </div>
-      </section>
-
-      <section id="specials" className="section media-section">
-        <div className="container grid weekend-highlight-grid">
-          <article className="info-card special-card">
-            <span className="badge">Daily Special Slot</span>
-            <h2>Box #7 — Beach Box</h2>
-            <strong className="price-line">ANG 99.50</strong>
-            <p>
-              The family-style box for beach days, groups, and heavy appetite. This is the box we can rotate later as the daily special.
-            </p>
-            <a className="button primary" href={buildBoxOrderUrl('#7', 'Beach Box Daily Special')} target="_blank" rel="noreferrer">
-              Order Box #7
-            </a>
-          </article>
-
-          <article className="info-card local-card">
-            <span className="badge">Local Value Box</span>
-            <h2>Box #8 — Local Fire Box</h2>
-            <strong className="price-line">ANG 39.50</strong>
-            <p>
-              Porkchop, fillet galina, whole leg chicken piece, chorizo, bread, and baked potato. Built for local value and fast pickup.
-            </p>
-            <a className="button primary" href={buildBoxOrderUrl('#8', 'Local Fire Box')} target="_blank" rel="noreferrer">
-              Order Box #8
-            </a>
-          </article>
         </div>
       </section>
 
       <section className="section media-section">
         <div className="container media-grid">
           <div>
-            <span className="badge">Weekend Fire Visual</span>
-            <h2>Smoke, ribs, skewers, sandwiches, Beach Box, Local Box, and fast pickup energy.</h2>
-            <p>
-              This campaign is built for limited numbered boxes, clear ordering, daily specials, and strong weekend food visuals.
-            </p>
+            <span className="badge">Final Weekend Flyer</span>
+            <h2>Edit once. Export PNG, PDF, or offline HTML.</h2>
+            <p>The customizer keeps the flyer editable and exportable for WhatsApp, Instagram, Canva, and print.</p>
+            <div className="cta-row">
+              <a className="button primary" href="/weekend-fire/customize">Open customizer</a>
+              <a className="button" href={whatsappUrl} target="_blank" rel="noreferrer">Order before sold out</a>
+            </div>
           </div>
-          <img
-            src="/images/bossa/bbq-party-del-rey.jpg"
-            alt="BBQ Party Del Rey weekend fire menu"
-            style={{ width: '100%', borderRadius: '12px' }}
-          />
+          <img src="/images/bossa/weekend-fire/box-1-bossa-box-mix.png" alt="BOSSA Weekend Fire final box visual" style={{ width: '100%', borderRadius: '12px' }} />
         </div>
       </section>
 
@@ -234,32 +105,19 @@ export default function WeekendFirePage() {
         <div className="container">
           <span className="badge">Active Weekend Menu</span>
           <h2>Fire box menu.</h2>
-          <p>
-            Order by box number. Box #7 is the Beach Box Daily Special. Box #8 is the Local Fire Box.
-            Simple boxes. Fast flow. Fire decides the rhythm.
-          </p>
-
+          <p>Simple boxes. Fast flow. Fire decides the rhythm.</p>
           <div className="grid weekend-grid box-card-grid">
-            {fireBoxes.map((box) => (
-              <article
-                className={`card tall-card box-card ${box.isFeatured ? 'featured-box-card' : ''} ${box.isLocal ? 'local-box-card' : ''}`}
-                key={box.number}
-              >
+            {fireBoxes.map(([number, name, price, tag, image, description]) => (
+              <article className="card tall-card box-card" key={number}>
+                <img src={image} alt={`${name} visual`} style={{ width: '100%', borderRadius: '14px', marginBottom: '14px' }} />
                 <div className="box-card-top">
-                  <span className="box-number">Box {box.number}</span>
-                  <span className="box-tag">{box.tag}</span>
+                  <span className="box-number">Box {number}</span>
+                  <span className="box-tag">{tag}</span>
                 </div>
-                <h3>{box.name}</h3>
-                <strong className="price-line">{box.price}</strong>
-                <p>{box.description}</p>
-                <ul>
-                  {box.bullets.map((bullet) => (
-                    <li key={bullet}>{bullet}</li>
-                  ))}
-                </ul>
-                <a className="button primary box-order-button" href={buildBoxOrderUrl(box.number, box.name)} target="_blank" rel="noreferrer">
-                  Order Box {box.number}
-                </a>
+                <h3>{name}</h3>
+                <strong className="price-line">{price}</strong>
+                <p>{description}</p>
+                <a className="button primary box-order-button" href={buildBoxOrderUrl(number, name)} target="_blank" rel="noreferrer">Order Box {number}</a>
               </article>
             ))}
           </div>
@@ -270,83 +128,15 @@ export default function WeekendFirePage() {
         <div className="container">
           <span className="badge">BOSSA YouTube Channel</span>
           <h2>Watch the fire before you order.</h2>
-          <p>
-            Use the videos as trust proof: food, smoke, island energy, and the real BOSSA story in motion.
-          </p>
           <div className="grid video-grid">
             {youtubeVideos.map((video) => (
               <article className="video-card" key={video.embedUrl}>
                 <div className="video-frame">
-                  <iframe
-                    src={video.embedUrl}
-                    title={video.title}
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                    allowFullScreen
-                  />
+                  <iframe src={video.embedUrl} title={video.title} allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen />
                 </div>
                 <h3>{video.title}</h3>
               </article>
             ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="section">
-        <div className="container split">
-          <div>
-            <span className="badge">Signature Ribs</span>
-            <h2>Weekend Fire ribs, ready for the box.</h2>
-            <p>
-              Slow-smoked, glazed, and packed with sides. This is the visual anchor for Weekend Fire.
-            </p>
-          </div>
-          <img
-            src="/images/bossa/ribs-bossa.png"
-            alt="BOSSA fire ribs box"
-            style={{ width: '100%', borderRadius: '12px' }}
-          />
-        </div>
-      </section>
-
-      <section className="section">
-        <div className="container split">
-          <div>
-            <span className="badge">Sides</span>
-            <h2>Add-ons that keep the flow clean.</h2>
-            <p>
-              Keep the take-out system simple: one box number, one label, sealed BOSSA JUS, bread on top, fast handoff.
-            </p>
-          </div>
-          <div className="hours-card">
-            {sides.map(([name, price]) => (
-              <div key={name}>
-                <strong>{name}</strong>
-                <span>{price}</span>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section id="rules" className="section">
-        <div className="container split">
-          <div>
-            <span className="badge">Operational rules</span>
-            <h2>No noise. Just heat.</h2>
-            <p>These rules protect speed, consistency, and guest expectations during the weekend rush.</p>
-          </div>
-          <div className="info-card">
-            <h3>Non-negotiables</h3>
-            <ul>
-              <li>Take-out only</li>
-              <li>No delivery</li>
-              <li>No modifications during rush</li>
-              <li>Limited daily batches</li>
-              <li>Order by box number before sold out</li>
-              <li>Box #7 can rotate as the daily special</li>
-              <li>Box #8 is the local-value box</li>
-              <li>When the fire rests — we close</li>
-            </ul>
           </div>
         </div>
       </section>
@@ -356,23 +146,14 @@ export default function WeekendFirePage() {
           <div>
             <span className="badge">Pickup flow</span>
             <h2>Order by number. Pickup fast. Eat hot.</h2>
-            <p>
-              Weekend Fire works best when the order is clear before the rush starts. Send WhatsApp with the box number,
-              confirm availability, and pick up while the box is still hot from the fire.
-            </p>
+            <p>Weekend Fire works best when the order is clear before the rush starts.</p>
             <div className="cta-row">
-              <a className="button primary" href={whatsappUrl} target="_blank" rel="noreferrer">
-                Order before sold out
-              </a>
+              <a className="button primary" href={whatsappUrl} target="_blank" rel="noreferrer">Order before sold out</a>
             </div>
           </div>
           <div className="info-card">
             <h3>How pickup works</h3>
-            <ol>
-              {pickupSteps.map((step) => (
-                <li key={step}>{step}</li>
-              ))}
-            </ol>
+            <ol>{pickupSteps.map((step) => <li key={step}>{step}</li>)}</ol>
           </div>
         </div>
       </section>
@@ -381,7 +162,7 @@ export default function WeekendFirePage() {
         <div className="container footer-grid">
           <div>
             <strong>BOSSA Weekend Fire</strong>
-            <p>New Nederland Nuyesweg 116 · Pietermaai Area · Willemstad, Curaçao</p>
+            <p>Oranjestraat 116 · Pietermaai · Willemstad, Curaçao</p>
           </div>
           <div>
             <p>WhatsApp: +5999 523 0683</p>
