@@ -1,47 +1,57 @@
 export const menuSections = [
   {
-    id: 'roast-boxes',
-    title: 'Bossa Roast Boxes',
-    note: 'Takeaway · family style · wood fire and charcoal only',
-    editableNote: 'Edit prices and descriptions here first, then the homepage menu updates automatically.',
+    id: 'weekend-boxes',
+    title: 'Weekend Fire Boxes',
+    note: 'Thursday–Sunday · take-out only · limited fire batches',
+    editableNote: 'Source of truth for the public website menu. Update this file first, then homepage menu blocks follow.',
     items: [
       {
-        name: 'Bossa Roast Box (4 pcs)',
-        price: 'ANG 29',
+        name: 'Box #1 — BOSSA Box Mix',
+        price: 'XCG 49.50',
         description:
-          '4 pcs of fire-roasted chicken, marinated 24h. Light smoke, crispy edges. Served with roasted potatoes, corn, salad, and fire jus.',
+          'Fire-roasted 1 pc chicken whole legs, 1/2 ribs, 1 chorizo, 1 porkchop, garlic bread, and garlic sauce.',
       },
       {
-        name: 'Bossa Roast Box (8 pcs)',
-        price: 'ANG 49',
+        name: 'Box #2 — Skewer Box',
+        price: 'XCG 49.50',
         description:
-          '8 pcs of roast chicken, perfect for sharing. Deep smoky flavor, tender meat. Served with roasted potatoes, corn, salad, and fire jus.',
+          'Tenderloin skewer and chicken skewer with garlic sauce and garlic bread. Tenderloin skewer 35 · chicken skewer 25.',
       },
       {
-        name: 'Bossa Box Mix',
-        price: 'ANG 29',
+        name: 'Box #3 — Fire Bread Sandwich Box',
+        price: 'XCG 49.50',
         description:
-          'Rice, beans, sweet plantain, and your choice of meat: chicken, ribs, beef, or shrimp. A complete meal.',
-      },
-    ],
-  },
-  {
-    id: 'ribs',
-    title: 'Fire Ribs',
-    note: 'Tamarind-rum glaze · slow smoke · fire comfort',
-    editableNote: 'Use this block for half rack, full rack, and future rib specials.',
-    items: [
-      {
-        name: 'Fire Ribs (half rack)',
-        price: 'ANG 18',
-        description:
-          'Half rack of tamarind-rum glazed ribs, slow-smoked until tender. Served with roasted potatoes, corn, salad, and bread.',
+          '#9 chicken salad 12 · #10 whole legs 12 · #11 chicken boneless 12 · #12 porkchop 12 · #13 chorizo 12 · #14 grilled steak / stew 15 · #15 tenderloin 20.',
       },
       {
-        name: 'Fire Ribs (full rack)',
-        price: 'ANG 32',
+        name: 'Box #4 — Community Fire Box',
+        price: 'XCG 19.50',
         description:
-          'Full rack of ribs with deep Curaçao hardwood flavor. Built for the truly hungry.',
+          '4 chicken pieces with bread, garlic sauce, and baked potato. Built for speed and volume.',
+      },
+      {
+        name: 'Box #5 — Chicken Classic',
+        price: 'XCG 49.50',
+        description:
+          'Whole fire-roasted chicken or 8 pc roast/grill chicken with 2 sides. Family-style fire meal.',
+      },
+      {
+        name: 'Box #6 — Ribs Classic',
+        price: 'XCG 49.50',
+        description:
+          'Slow-smoked ribs: 2 full ribs with garlic sauce and bread. Slow smoke, fast handoff.',
+      },
+      {
+        name: 'Box #7 — SEA BOX Coming Soon',
+        price: 'XCG 99.50',
+        description:
+          'Mixed grill and seafood platter with 1 catch-of-the-day skewer, 1 tenderloin skewer, and 2 sides.',
+      },
+      {
+        name: 'Box #8 — Local Fire Box',
+        price: 'XCG 6+',
+        description:
+          'Side-order style local pickup box: fresh salad, seaweed, hummus, garlic bread/pita, baked potato, cassava, chorizo, boiled peanuts, and beer options.',
       },
     ],
   },
@@ -49,97 +59,143 @@ export const menuSections = [
     id: 'skewers',
     title: 'Skewers / Pinchos',
     note: 'Flame-grilled · smoky · served with fire sides',
-    editableNote: 'Add tenderloin, chicken, beef, shrimp, pork, or veggie skewers here.',
+    editableNote: 'Use this block for chicken, tenderloin, shrimp, seafood, and future veggie skewers.',
     items: [
       {
         name: 'Chicken Skewer',
-        price: 'ANG 29',
+        price: 'XCG 25',
         description:
-          'Marinated chicken skewer, flame-grilled with bell pepper, onion, and lime. Served with roasted potatoes, fresh salad, bread, and garlic sauce.',
+          'Marinated chicken skewer grilled with bell pepper, onion, garlic sauce, and fire bread.',
       },
       {
-        name: 'Beef Tenderloin Skewer',
-        price: 'ANG 45',
+        name: 'Tenderloin Skewer',
+        price: 'XCG 35',
         description:
-          'Tender beef skewer, lightly smoked and grilled with bold fire flavor. Served with roasted potatoes, fresh salad, bread, and garlic sauce.',
+          'Tenderloin skewer with paprika/onion, bold fire flavor, garlic sauce, and fire bread.',
       },
       {
-        name: 'Shrimp Skewer',
-        price: 'ANG 30',
+        name: 'Seafood Skewer — Coming Soon',
+        price: 'Market price',
         description:
-          'Large shrimp skewer, grilled until crisp with garlic butter and herbs.',
+          'Catch-of-the-day, shrimp, lobster, or mixed seafood from the fire for the Weekend Fire & Sea Specials launch.',
       },
     ],
   },
   {
     id: 'sandwiches',
     title: 'Fire Bread Sandwiches',
-    note: 'Crispy bread · smoke · sauces · island bite',
-    editableNote: 'Use this block for chicken, chicken salad, pork, chorizo, stew beef, and tongue sandwiches.',
+    note: 'Crispy bread · smoke · sauce · island bite',
+    editableNote: 'This block supports sandwich trays, party orders, and the Box #3 sandwich box.',
     items: [
       {
-        name: 'Pulled Roast Chicken Sandwich',
-        price: 'ANG 12',
+        name: 'Chicken Salad Sandwich',
+        price: 'XCG 12',
         description:
-          'Fire-grilled pan bollo filled with pulled roast chicken, garlic mayo, and pickled onions. Smoky, crunchy, dushi.',
+          'Fresh chicken salad in fire bread with garlic oil and BOSSA flavor.',
       },
       {
-        name: 'Wood-Fired Pork Sandwich',
-        price: 'ANG 13',
+        name: 'Whole Leg Chicken Sandwich',
+        price: 'XCG 12',
         description:
-          'Wood-fired pork, crispy bread, tamarind BBQ sauce, and fresh slaw.',
+          'Whole leg chicken, crispy bread, and BOSSA jus.',
+      },
+      {
+        name: 'Boneless Chicken Sandwich',
+        price: 'XCG 12',
+        description:
+          'Boneless chicken with fire seasoning, bread, and sauce.',
+      },
+      {
+        name: 'Porkchop Sandwich',
+        price: 'XCG 12',
+        description:
+          'Wood-fired porkchop, crispy bread, and tamarind-style fire glaze.',
       },
       {
         name: 'Chorizo Sandwich',
-        price: 'ANG 14',
+        price: 'XCG 12',
         description:
-          'Fire-grilled chorizo in warm bread with pickled onion and BOSSA sauce.',
+          'Fire-grilled chorizo in warm bread with BOSSA sauce.',
       },
       {
-        name: 'Stew Beef Sandwich',
-        price: 'ANG 16',
+        name: 'Grilled Steak / Stew Beef Sandwich',
+        price: 'XCG 15',
         description:
-          'Slow beef stew packed into fire bread with rich gravy and island herbs.',
+          'Grilled steak or slow stew beef with fire bread and island herbs.',
       },
       {
-        name: 'Beef Tenderloin Sandwich',
-        price: 'ANG 20',
+        name: 'Tenderloin Sandwich',
+        price: 'XCG 20',
         description:
-          'Tender flame-grilled beef tenderloin with toasted bread, herb butter, arugula, and caramelized onion.',
-      },
-      {
-        name: 'Grilled Chicken Salad Sandwich',
-        price: 'ANG 12.50',
-        description:
-          'Grilled chicken, fresh salad, garlic oil, and BOSSA fire flavor.',
+          'Tenderloin with toasted bread, fire salt, and premium grill flavor.',
       },
     ],
   },
   {
     id: 'sides',
-    title: 'Sides',
+    title: 'Sides & Add-ons',
     note: 'Simple sides · fast pickup · box friendly',
-    editableNote: 'Update add-ons, portions, and side prices here.',
+    editableNote: 'Update portions and side prices here before publishing future flyers.',
     items: [
       {
-        name: 'Oven Baked Potato',
-        price: 'ANG 6',
-        description: 'Baked potato with fire seasoning. Built for boxes and fast service.',
+        name: 'Fresh Salad',
+        price: 'XCG 10',
+        description: 'Fresh salad for balance next to chicken, ribs, skewers, and sandwiches.',
+      },
+      {
+        name: 'Seaweed Bowl',
+        price: 'XCG 10',
+        description: 'Cold seaweed side for fire boxes and seafood specials.',
+      },
+      {
+        name: 'Hummus',
+        price: 'XCG 10',
+        description: 'Creamy hummus for bread, skewers, and party trays.',
+      },
+      {
+        name: 'Homemade Garlic Bread / Pita',
+        price: 'XCG 4',
+        description: 'Bread for sauce, smoke, and box dipping.',
+      },
+      {
+        name: 'Baked Potato',
+        price: 'XCG 7',
+        description: 'Baked potato with fire seasoning and optional garlic sauce.',
       },
       {
         name: 'Boiled Cassava',
-        price: 'ANG 6',
-        description: 'Soft cassava with island seasoning and simple fire comfort.',
+        price: 'XCG 10',
+        description: 'Soft cassava with island seasoning.',
       },
       {
-        name: 'Fresh Salad',
-        price: 'ANG 10',
-        description: 'Fresh salad for balance next to ribs, chicken, skewers, and sandwiches.',
+        name: 'Chorizo Piece',
+        price: 'XCG 6',
+        description: 'Single chorizo add-on for boxes or local pickup.',
       },
       {
-        name: 'Fire Bread',
-        price: 'ANG 4',
-        description: 'Small BOSSA bread for sauce, smoke, and box dipping.',
+        name: 'Boiled Peanuts',
+        price: 'XCG 6',
+        description: 'Local-style peanut bowl for snacking and side orders.',
+      },
+    ],
+  },
+  {
+    id: 'soups-stews',
+    title: 'Soups & Stews',
+    note: 'Soul in a bowl · slow fire comfort',
+    editableNote: 'Use this block for beef soup, chicken soup, stews, and rotating comfort specials.',
+    items: [
+      {
+        name: 'BOSSA Beef Soup',
+        price: 'XCG 15',
+        description:
+          'Hearty beef soup slow-simmered with meat, potato, carrot, and island herbs.',
+      },
+      {
+        name: 'BOSSA Chicken Soup',
+        price: 'XCG 11',
+        description:
+          'Homestyle chicken soup with vegetables, light smoke, and comfort flavor.',
       },
     ],
   },
@@ -150,39 +206,25 @@ export const menuSections = [
     editableNote: 'Add sodas, water, juices, cocktails, beer, and rooftop drinks here.',
     items: [
       {
-        name: 'Soft Drink',
-        price: 'ANG 5',
-        description: 'Cold soda selection. Final brands can be updated before opening.',
+        name: 'Beer',
+        price: 'XCG 6',
+        description: 'Cold beer for weekend boxes and party orders.',
       },
       {
-        name: 'Water',
-        price: 'ANG 4',
-        description: 'Still water for dine-in, pickup, and beach box orders.',
+        name: 'Soft Drink',
+        price: 'XCG 5',
+        description: 'Cold soda selection. Final brands can be updated before service.',
       },
       {
         name: 'House Juice',
-        price: 'ANG 7.50',
-        description: 'Fresh-style island juice. Flavor can rotate by day.',
-      },
-    ],
-  },
-  {
-    id: 'soups-stews',
-    title: 'Soups & Stews',
-    note: 'Soul in a bowl · slow fire comfort',
-    editableNote: 'Use this block for beef soup, chicken soup, stews, and daily comfort specials.',
-    items: [
-      {
-        name: 'Bossa Beef Soup',
-        price: 'ANG 15',
-        description:
-          'Hearty beef soup, slow-simmered with large chunks of meat, potato, carrot, and herbs.',
+        price: 'XCG 7.50',
+        description: 'Island juice. Flavor can rotate by day.',
       },
       {
-        name: 'Bossa Chicken Soup',
-        price: 'ANG 11',
+        name: 'Sunset Cocktail Offer — Coming Soon',
+        price: 'TBD',
         description:
-          'Homestyle chicken soup with light smoke and vegetables. A hug in a bowl.',
+          'Limited sunset cocktail offer for Weekend Fire & Sea Specials.',
       },
     ],
   },
