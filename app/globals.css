@@ -121,7 +121,9 @@ audio { width: 100%; margin-top: 16px; }
 .custom-flyer-shell { min-height: 100vh; padding: 20px; background: #0a0a0c; display: flex; flex-direction: column; align-items: center; }
 .skip-link { position: absolute; top: -42px; left: 0; background: #e67e22; color: #0a0a0c; padding: 8px 12px; z-index: 1000; text-decoration: none; font-weight: 800; border-radius: 0 0 8px 0; }
 .skip-link:focus-visible { top: 10px; outline: 2px solid #f5bd7a; }
-.toolbar { max-width: 1920px; width: 100%; display: flex; justify-content: flex-end; align-items: center; margin-bottom: 20px; gap: 15px; flex-wrap: wrap; }
+.toolbar { max-width: 1920px; width: 100%; display: flex; justify-content: flex-end; align-items: center; margin-bottom: 12px; gap: 12px; flex-wrap: wrap; }
+.toolbar-hint { margin-right: auto; border: 1px solid rgba(245,189,122,0.25); border-radius: 999px; padding: 10px 14px; color: #f5bd7a; background: rgba(255,255,255,0.04); font-size: 13px; font-weight: 800; }
+.export-status { max-width: 1920px; width: 100%; margin: 0 0 16px; color: #d0d0d0; font-size: 13px; text-align: right; }
 .btn-pdf, .btn-back { background: #e67e22; border: none; padding: 10px 24px; border-radius: 40px; font-weight: 800; color: #0a0a0c; cursor: pointer; transition: 0.2s; display: inline-flex; align-items: center; gap: 8px; font-size: 14px; }
 .btn-back { background: transparent; border: 1px solid #e67e22; color: #f5bd7a; }
 .btn-pdf:focus-visible, .btn-back:focus-visible { outline: 3px solid #f5bd7a; outline-offset: 2px; }
@@ -156,6 +158,8 @@ audio { width: 100%; margin-top: 16px; }
 .custom-sidebar h2 { font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif; font-size: 1.6rem; color: #e67e22; text-align: center; border-bottom: 2px solid #e67e22; width: 100%; margin: 0 0 1rem; letter-spacing: 1px; }
 .rule-item { display: flex; align-items: center; gap: 12px; margin: 1rem 0; color: #f5efe7; font-weight: 700; font-size: 0.9rem; }
 .rule-item > span:first-child { width: 28px; color: #e67e22; font-size: 1.2rem; }
+.qr-card { margin-top: 18px; padding-top: 14px; border-top: 1px solid #3a1500; display: grid; justify-items: center; gap: 8px; color: #f5bd7a; font-size: 12px; font-weight: 800; text-align: center; }
+.qr-card img { width: 100px; height: 100px; padding: 4px; background: #fff; border-radius: 8px; }
 .workflow { background: rgba(0,0,0,0.7); border-radius: 60px; padding: 0.8rem 1rem; display: flex; justify-content: space-around; margin: 1.8rem 0; border-top: 1px solid #e67e22; border-bottom: 1px solid #e67e22; flex-wrap: wrap; gap: 12px; }
 .step { text-align: center; font-weight: 800; font-size: 0.9rem; color: #e67e22; display: grid; gap: 5px; }
 .step > span:first-child { font-size: 1.4rem; color: #f5efe7; }
@@ -196,12 +200,13 @@ audio { width: 100%; margin-top: 16px; }
   .flyer-inner { padding: 1rem; }
   .cards-grid { grid-template-columns: 1fr; }
   .toolbar { justify-content: stretch; }
+  .toolbar-hint, .export-status { width: 100%; text-align: center; }
   .btn-pdf, .btn-back { width: 100%; justify-content: center; }
 }
 
 @media print {
   body { background: white; padding: 0; margin: 0; }
-  .no-print, .toolbar, .sticky-whatsapp, .language-switcher { display: none !important; }
+  .no-print, .toolbar, .export-status, .sticky-whatsapp, .language-switcher { display: none !important; }
   .custom-flyer-shell { padding: 0; background: white; }
   .flyer { box-shadow: none; max-width: 100%; margin: 0; border-radius: 0; }
   .editable-box-card { break-inside: avoid; }
