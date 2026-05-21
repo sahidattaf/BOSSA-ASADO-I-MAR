@@ -20,7 +20,7 @@ const initialBoxes: WeekendBox[] = [
     contents: 'Fire-roasted 1 pc chicken whole legs + 1/2 ribs + 1 chorizo + 1 porkchop + garlic bread + garlic sauce',
     price: 'XCG 49.50',
     tagline: 'Featured sharing box',
-    image: '/images/bossa/fire-ribs-box.png',
+    image: '/images/bossa/weekend-fire/box-1-bossa-box-mix.png',
   },
   {
     number: '#2',
@@ -28,7 +28,7 @@ const initialBoxes: WeekendBox[] = [
     contents: 'Tenderloin skewer + chicken skewer + garlic sauce + garlic bread',
     price: 'XCG 49.50',
     tagline: 'Tenderloin skewer 35 · Chicken skewer 25 · High-margin fire skewers',
-    image: '/images/bossa/ribs-area.png',
+    image: '/images/bossa/weekend-fire/box-2-skewer-box.png',
   },
   {
     number: '#3',
@@ -37,7 +37,7 @@ const initialBoxes: WeekendBox[] = [
       '#9 Chicken salad 12 · #10 whole legs 12 · #11 chicken boneless 12 · #12 porkchop 12 · #13 chorizo 12 · #14 grilled steak / stew 15 · #15 tenderloin 20',
     price: 'XCG 49.50',
     tagline: 'Fire Bread variety',
-    image: '/images/bossa/fire-breads.png',
+    image: '/images/bossa/weekend-fire/box-3-fire-bread-sandwich-box.png',
   },
   {
     number: '#4',
@@ -45,7 +45,7 @@ const initialBoxes: WeekendBox[] = [
     contents: '4 chicken pieces + bread + garlic sauce + baked potato',
     price: 'XCG 19.50',
     tagline: 'Built for speed & volume',
-    image: '/images/bossa/hero-grill-area.png',
+    image: '/images/bossa/weekend-fire/box-4-community-fire-box.png',
   },
   {
     number: '#5',
@@ -53,7 +53,7 @@ const initialBoxes: WeekendBox[] = [
     contents: 'Whole fire-roasted chicken or 8 pc roast/grill chicken with 2 sides',
     price: 'XCG 49.50',
     tagline: 'Family-style fire meal',
-    image: '/images/bossa/restaurant-design.jpg',
+    image: '/images/bossa/weekend-fire/box-5-chicken-classic.png',
   },
   {
     number: '#6',
@@ -61,7 +61,7 @@ const initialBoxes: WeekendBox[] = [
     contents: 'Slow-smoked ribs: 2 full ribs + garlic sauce + bread',
     price: 'XCG 49.50',
     tagline: 'Slow smoke · fast handoff',
-    image: '/images/bossa/ribs-bossa.png',
+    image: '/images/bossa/weekend-fire/box-6-ribs-classic.png',
   },
   {
     number: '#7',
@@ -69,7 +69,7 @@ const initialBoxes: WeekendBox[] = [
     contents: 'Mixed grill & seafood platter with 1 catch-of-the-day skewer, 1 tenderloin skewer, and 2 sides',
     price: 'XCG 99.50',
     tagline: 'Heavy appetite special',
-    image: '/images/bossa/bbq-party-del-rey.jpg',
+    image: '/images/bossa/weekend-fire/box-7-sea-box-coming-soon.png',
   },
   {
     number: '#8',
@@ -78,7 +78,7 @@ const initialBoxes: WeekendBox[] = [
       'Fresh salad 10 · seaweeds 10 · hummus 10 · homemade garlic bread / pita 4 · baked potato 7 · boiled cassava 10 · boiled potato · 1 pc chorizo 6 · boiled peanuts 6 · beer 6',
     price: 'XCG 6',
     tagline: 'Local pickup favorite',
-    image: '/images/bossa/sandwich-stack.png',
+    image: '/images/bossa/weekend-fire/box-8-local-fire-box.png',
   },
 ];
 
@@ -364,3 +364,4 @@ export default function EditableWeekendFlyer() {
     </div>
   );
 }
+
