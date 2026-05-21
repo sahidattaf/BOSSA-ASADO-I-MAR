@@ -163,6 +163,96 @@ export default function EditableWeekendFlyer() {
     URL.revokeObjectURL(url);
   };
 
+  const blobToDataUrl = (blob: Blob): Promise<string> => {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = () => resolve(String(reader.result));
+      reader.onerror = () => reject(reader.error ?? new Error('Could not read image blob'));
+      reader.readAsDataURL(blob);
+    });
+  };
+
+  const resolveImageSource = (src: string) => {
+    if (src.startsWith('data:') || src.startsWith('blob:')) return src;
+    if (src.startsWith('http://') || src.startsWith('https://')) return src;
+    return new URL(src, window.location.origin).toString();
+  };
+
+  const imageToDataUrl = async (src: string) => {
+    if (!src || src.startsWith('data:')) return src;
+    const response = await fetch(resolveImageSource(src), { cache: 'force-cache' });
+    if (!response.ok) throw new Error(`Could not load image: ${src}`);
+    return blobToDataUrl(await response.blob());
+  };
+
+  const inlineImagesForOfflineExport = async (root: HTMLElement) => {
+    const imageNodes = Array.from(root.querySelectorAll('img'));
+    await Promise.all(
+      imageNodes.map(async (image) => {
+        const originalSource = image.getAttribute('src') ?? '';
+        try {
+          image.setAttribute('src', await imageToDataUrl(originalSource));
+        } catch (error) {
+          console.warn('BOSSA HTML export kept original image source:', originalSource, error);
+          image.setAttribute('data-export-warning', 'Image could not be embedded. Keep the website connection available.');
+        }
+      }),
+    );
+  };
+
+  const buildOfflineHtml = (flyerHtml: string) => `<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>BOSSA Weekend Box — Offline Editable Export</title>
+  <style>
+    body { margin: 0; padding: 20px; background: #0a0a0c; color: #f5f0e8; font-family: Arial, Helvetica, sans-serif; }
+    * { box-sizing: border-box; }
+    img { max-width: 100%; display: block; }
+    [contenteditable='true']:focus { outline: 2px solid #f5bd7a; outline-offset: 2px; }
+    .offline-export-banner { max-width: 1920px; margin: 0 auto 18px; padding: 0.85rem 1rem; border: 1px solid #e67e22; border-radius: 999px; background: linear-gradient(90deg, #0f0e0a, #27170c); color: #f5bd7a; font-weight: 900; text-align: center; letter-spacing: 0.02em; }
+    .flyer { max-width: 1920px; width: 100%; background: #0a0a0c; border-radius: 24px; margin: 0 auto; overflow: hidden; }
+    .flyer-inner { padding: 2rem 2.5rem; }
+    .custom-header, .menu-layout, .contact, .toolbar { display: flex; }
+    .custom-header { justify-content: space-between; align-items: flex-start; gap: 18px; margin-bottom: 2rem; flex-wrap: wrap; }
+    .logo-area { display: flex; align-items: center; gap: 12px; }
+    .logo-placeholder { font-size: 2.2rem; font-weight: 900; background: #12141a; padding: 0.3rem 0.8rem; border-radius: 12px; border-left: 4px solid #e67e22; font-family: Impact, Arial Black, sans-serif; }
+    .title-group { text-align: center; flex: 1; min-width: 280px; }
+    .main-title { margin: 0; font-size: clamp(42px, 5.5vw, 76px); letter-spacing: 4px; line-height: 1; color: #f5dfa0; font-family: Impact, Arial Black, sans-serif; }
+    .subheader { font-weight: 800; color: #e67e22; letter-spacing: 1px; display: inline-block; padding: 0.45rem 1rem; border-radius: 40px; margin-top: 0.8rem; }
+    .menu-layout { gap: 2rem; margin: 2rem 0; }
+    .cards-grid { flex: 3; display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.2rem; }
+    .editable-box-card { background: #12141a; border: 1.5px solid #e67e22; border-radius: 20px; padding: 0.9rem; display: flex; flex-direction: column; }
+    .box-number { display: inline-flex; width: fit-content; background: #e67e22; color: #0a0a0c; font-weight: 900; padding: 0.3rem 0.65rem; border-radius: 999px; }
+    .custom-food-img { height: 120px; background: #1e1c16; border-radius: 12px; margin: 0.5rem 0; overflow: hidden; border: 1px solid #2a2418; width: 100%; padding: 0; }
+    .custom-food-img img { width: 100%; height: 100%; object-fit: cover; }
+    .upload-overlay { display: none; }
+    .box-name { font-weight: 900; font-size: 1rem; display: block; }
+    .contents { font-size: 0.78rem; color: #d0d0d0; line-height: 1.35; display: block; }
+    .price-badge { background: #e67e22; color: #0a0a0c; font-weight: 900; font-size: 0.9rem; padding: 0.26rem 0.65rem; border-radius: 40px; display: inline-block; margin: 0.5rem 0 0.2rem; width: fit-content; }
+    .tagline { font-size: 0.72rem; color: #f5bd7a; font-style: italic; margin-top: auto; display: block; }
+    .custom-sidebar { flex: 1; background: #12141a; border-radius: 24px; padding: 1.2rem; border: 1px solid #e67e22; height: fit-content; }
+    .rule-item { display: flex; align-items: center; gap: 12px; margin: 1rem 0; }
+    .qr-card { display: grid; place-items: center; gap: 0.5rem; margin-top: 1rem; }
+    .qr-card img { width: 120px; height: 120px; }
+    .workflow { background: rgba(0,0,0,0.7); border-radius: 60px; padding: 0.8rem 1rem; display: flex; justify-content: space-around; margin: 1.8rem 0; border-top: 1px solid #e67e22; border-bottom: 1px solid #e67e22; flex-wrap: wrap; gap: 12px; }
+    .step { text-align: center; font-weight: 800; font-size: 0.9rem; color: #e67e22; display: grid; gap: 5px; }
+    .slogan { font-family: Impact, Arial Black, sans-serif; font-size: clamp(34px, 4vw, 56px); letter-spacing: 6px; color: #f5dfa0; text-align: center; }
+    .contact { justify-content: center; gap: 2rem; margin: 0.8rem 0; flex-wrap: wrap; }
+    .contact a { color: #f5bd7a; font-weight: 900; text-decoration: none; }
+    .batch-warning { background: #e67e22; color: #0a0a0c; padding: 10px; text-align: center; border-radius: 40px; margin: 20px auto; max-width: 600px; font-weight: 900; }
+    @media print { body { padding: 0; background: #fff; } .offline-export-banner { display: none; } .flyer { border-radius: 0; } }
+    @media (max-width: 1100px) { .menu-layout { flex-direction: column; } .cards-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 760px) { .flyer-inner { padding: 1rem; } .cards-grid { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+  <div class="offline-export-banner">BOSSA Offline HTML Export · Images embedded · Text remains editable · Use the live customizer for image replacement</div>
+  ${flyerHtml}
+</body>
+</html>`;
+
   const loadHtml2Canvas = async (): Promise<Html2Canvas> => {
     const windowWithLibrary = window as unknown as { html2canvas?: Html2Canvas };
     if (windowWithLibrary.html2canvas) return windowWithLibrary.html2canvas;
@@ -210,59 +300,18 @@ export default function EditableWeekendFlyer() {
     }
   };
 
-  const saveAsHtml = () => {
+  const saveAsHtml = async () => {
     if (!flyerRef.current) return;
-    const flyerHtml = flyerRef.current.outerHTML;
-    const html = `<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>BOSSA Weekend Box</title>
-  <style>
-    body { margin: 0; padding: 20px; background: #0a0a0c; color: #f5f0e8; font-family: Arial, Helvetica, sans-serif; }
-    * { box-sizing: border-box; }
-    img { max-width: 100%; display: block; }
-    [contenteditable='true']:focus { outline: 2px solid #f5bd7a; outline-offset: 2px; }
-    .flyer { max-width: 1920px; width: 100%; background: #0a0a0c; border-radius: 24px; margin: 0 auto; overflow: hidden; }
-    .flyer-inner { padding: 2rem 2.5rem; }
-    .custom-header, .menu-layout, .contact, .toolbar { display: flex; }
-    .custom-header { justify-content: space-between; align-items: flex-start; gap: 18px; margin-bottom: 2rem; flex-wrap: wrap; }
-    .logo-area { display: flex; align-items: center; gap: 12px; }
-    .logo-placeholder { font-size: 2.2rem; font-weight: 900; background: #12141a; padding: 0.3rem 0.8rem; border-radius: 12px; border-left: 4px solid #e67e22; font-family: Impact, Arial Black, sans-serif; }
-    .title-group { text-align: center; flex: 1; min-width: 280px; }
-    .main-title { margin: 0; font-size: clamp(42px, 5.5vw, 76px); letter-spacing: 4px; line-height: 1; color: #f5dfa0; font-family: Impact, Arial Black, sans-serif; }
-    .subheader { font-weight: 800; color: #e67e22; letter-spacing: 1px; display: inline-block; padding: 0.45rem 1rem; border-radius: 40px; margin-top: 0.8rem; }
-    .menu-layout { gap: 2rem; margin: 2rem 0; }
-    .cards-grid { flex: 3; display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.2rem; }
-    .editable-box-card { background: #12141a; border: 1.5px solid #e67e22; border-radius: 20px; padding: 0.9rem; display: flex; flex-direction: column; }
-    .box-number { display: inline-flex; width: fit-content; background: #e67e22; color: #0a0a0c; font-weight: 900; padding: 0.3rem 0.65rem; border-radius: 999px; }
-    .custom-food-img { height: 120px; background: #1e1c16; border-radius: 12px; margin: 0.5rem 0; overflow: hidden; border: 1px solid #2a2418; }
-    .custom-food-img img { width: 100%; height: 100%; object-fit: cover; }
-    .upload-overlay { display: none; }
-    .box-name { font-weight: 900; font-size: 1rem; display: block; }
-    .contents { font-size: 0.78rem; color: #d0d0d0; line-height: 1.35; display: block; }
-    .price-badge { background: #e67e22; color: #0a0a0c; font-weight: 900; font-size: 0.9rem; padding: 0.26rem 0.65rem; border-radius: 40px; display: inline-block; margin: 0.5rem 0 0.2rem; width: fit-content; }
-    .tagline { font-size: 0.72rem; color: #f5bd7a; font-style: italic; margin-top: auto; display: block; }
-    .custom-sidebar { flex: 1; background: #12141a; border-radius: 24px; padding: 1.2rem; border: 1px solid #e67e22; height: fit-content; }
-    .rule-item { display: flex; align-items: center; gap: 12px; margin: 1rem 0; }
-    .workflow { background: rgba(0,0,0,0.7); border-radius: 60px; padding: 0.8rem 1rem; display: flex; justify-content: space-around; margin: 1.8rem 0; border-top: 1px solid #e67e22; border-bottom: 1px solid #e67e22; flex-wrap: wrap; gap: 12px; }
-    .step { text-align: center; font-weight: 800; font-size: 0.9rem; color: #e67e22; display: grid; gap: 5px; }
-    .slogan { font-family: Impact, Arial Black, sans-serif; font-size: clamp(34px, 4vw, 56px); letter-spacing: 6px; color: #f5dfa0; text-align: center; }
-    .contact { justify-content: center; gap: 2rem; margin: 0.8rem 0; flex-wrap: wrap; }
-    .batch-warning { background: #e67e22; color: #0a0a0c; padding: 10px; text-align: center; border-radius: 40px; margin: 20px auto; max-width: 600px; font-weight: 900; }
-    @media (max-width: 1100px) { .menu-layout { flex-direction: column; } .cards-grid { grid-template-columns: repeat(2, 1fr); } }
-    @media (max-width: 760px) { .flyer-inner { padding: 1rem; } .cards-grid { grid-template-columns: 1fr; } }
-  </style>
-</head>
-<body>
-  <p style="text-align:center;color:#f5bd7a;font-weight:700;">Click any text to edit. Print from your browser when ready.</p>
-  ${flyerHtml}
-</body>
-</html>`;
-
-    downloadBlob(new Blob([html], { type: 'text/html' }), 'bossa-weekend-box.html');
-    setExportStatus('Editable HTML downloaded.');
+    try {
+      setExportStatus('Preparing offline HTML with embedded images...');
+      const exportClone = flyerRef.current.cloneNode(true) as HTMLElement;
+      await inlineImagesForOfflineExport(exportClone);
+      downloadBlob(new Blob([buildOfflineHtml(exportClone.outerHTML)], { type: 'text/html' }), 'bossa-weekend-box-offline.html');
+      setExportStatus('Offline HTML downloaded with embedded images.');
+    } catch (error) {
+      console.error(error);
+      setExportStatus('HTML export failed. Use Download PNG or Print / PDF as backup.');
+    }
   };
 
   return (
@@ -272,8 +321,8 @@ export default function EditableWeekendFlyer() {
       <div className="toolbar no-print">
         <div className="toolbar-hint">✏️ Click text to edit · 📸 Click or drag image slots to replace</div>
         <a className="btn-back" href="/weekend-fire">← Back to Weekend Fire</a>
-        <button className="btn-back" type="button" onClick={saveAsHtml} aria-label="Save flyer as editable HTML">
-          Save as HTML
+        <button className="btn-back" type="button" onClick={saveAsHtml} aria-label="Save flyer as offline HTML with images embedded">
+          Save Offline HTML
         </button>
         <button className="btn-pdf" type="button" onClick={saveAsPng} aria-label="Download flyer as PNG">
           Download PNG
@@ -364,4 +413,3 @@ export default function EditableWeekendFlyer() {
     </div>
   );
 }
-
