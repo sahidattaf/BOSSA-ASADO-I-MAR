@@ -1,7 +1,11 @@
+import { mediaAssets } from '../data/media';
 import { paymentDisclaimer, paymentLinks } from '../data/payments';
+import { siteConfig } from '../data/site';
 
-const whatsappNumber = '59995230683';
+const whatsappNumber = siteConfig.whatsappNumber;
 const baseWhatsappUrl = `https://wa.me/${whatsappNumber}`;
+const mainAudio = mediaAssets.audio[0];
+const youtubeVideos = mediaAssets.videos.filter((video) => video.status === 'active');
 
 const buildBoxOrderUrl = (boxNumber: string, boxName: string) => {
   const message = encodeURIComponent(
@@ -33,16 +37,11 @@ const pickupSteps = [
   'Pickup fast. Eat hot. Come early before sold out.',
 ];
 
-const youtubeVideos = [
-  { title: 'BOSSA Asado i Mar — Fire & Flavor Video', embedUrl: 'https://www.youtube.com/embed/fin2x52-A6Y' },
-  { title: 'BOSSA Asado i Mar — Weekend Fire Video', embedUrl: 'https://www.youtube.com/embed/wxO63r9nkHs' },
-];
-
 export default function WeekendFirePage() {
   return (
     <main className="weekend-fire-page">
       <header className="container nav">
-        <a className="brand brand-lockup" href="/" aria-label="BOSSA Asado i Mar home">
+        <a className="brand brand-lockup" href="/" aria-label={`${siteConfig.brandName} home`}>
           <img src="/images/bossa/bossa-logo-fire-gold.svg" alt="" className="brand-logo" />
           <span>BOSSA ASADO I MAR</span>
         </a>
@@ -61,7 +60,7 @@ export default function WeekendFirePage() {
         <span className="badge">Weekend Fire · Take-out only</span>
         <h1>Order by box number. Pickup fast. Eat hot.</h1>
         <p className="lead">
-          Weekend Fire is BOSSA’s take-out ritual: numbered boxes, final flyer assets, audio, video,
+          Weekend Fire is {siteConfig.brandName}’s take-out ritual: numbered boxes, final flyer assets, audio, video,
           WhatsApp ordering, PNG/PDF/offline HTML export, and limited batches from Thursday to Sunday.
         </p>
         <div className="cta-row">
@@ -78,12 +77,12 @@ export default function WeekendFirePage() {
           <div>
             <span className="badge">Weekend Fire Sound</span>
             <h2>Let guests hear the BOSSA mood before they order.</h2>
-            <p>This audio block gives Weekend Fire its own Papiamentu fire, smoke, and island rhythm.</p>
+            <p>This audio block is controlled by generated media data and shared across homepage, Weekend Fire, and party/events.</p>
           </div>
           <div className="info-card audio-card">
-            <h3>Sabor di BOSSA — Papiamentu</h3>
+            <h3>{mainAudio.name}</h3>
             <audio controls preload="metadata">
-              <source src="/audio/bossa/sabor-di-bossa-papiamentu.mp3" type="audio/mpeg" />
+              <source src={mainAudio.path} type="audio/mpeg" />
               Your browser does not support the audio element.
             </audio>
           </div>
@@ -179,11 +178,11 @@ export default function WeekendFirePage() {
         <div className="container footer-grid">
           <div>
             <strong>BOSSA Weekend Fire</strong>
-            <p>Oranjestraat 116 · Pietermaai · Willemstad, Curaçao</p>
+            <p>{siteConfig.address}</p>
           </div>
           <div>
             <p>WhatsApp: +5999 523 0683</p>
-            <p>Weekend Fire: Thursday–Sunday · 12:00 PM–10:00 PM</p>
+            <p>Weekend Fire: {siteConfig.hours}</p>
           </div>
         </div>
       </footer>
