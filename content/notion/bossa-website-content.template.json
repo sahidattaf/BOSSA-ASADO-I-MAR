@@ -1,0 +1,106 @@
+{
+  "meta": {
+    "source": "BOSSA Payment Links Control + BOSSA Menu Notion pages",
+    "owner": "Sahid Attaf",
+    "status": "draft-template",
+    "lastUpdated": "2026-05-23",
+    "rules": [
+      "WhatsApp confirmation comes first.",
+      "Stripe Payment Links only; no secret keys.",
+      "Draft items should not be published.",
+      "Coming Soon items must be clearly labeled."
+    ]
+  },
+  "site": {
+    "brandName": "BOSSA Asado i Mar",
+    "whatsappNumber": "59995230683",
+    "address": "Oranjestraat 116, Pietermaai, Willemstad, Curaçao",
+    "hours": "Thursday–Sunday · 12:00 PM–10:00 PM",
+    "primaryRoutes": ["/", "/weekend-fire", "/weekend-fire/customize", "/party-menu"]
+  },
+  "media": {
+    "audio": [
+      {
+        "name": "Sabor di BOSSA — Papiamentu",
+        "path": "/audio/bossa/sabor-di-bossa-papiamentu.mp3",
+        "status": "active",
+        "usage": ["home", "weekend-fire", "party-menu"]
+      }
+    ],
+    "videos": [
+      {
+        "title": "BOSSA Asado i Mar — Fire & Flavor Video",
+        "embedUrl": "https://www.youtube.com/embed/fin2x52-A6Y",
+        "status": "active"
+      },
+      {
+        "title": "BOSSA Asado i Mar — Weekend Fire Video",
+        "embedUrl": "https://www.youtube.com/embed/wxO63r9nkHs",
+        "status": "active"
+      }
+    ]
+  },
+  "payments": [
+    {
+      "key": "weekendDeposit",
+      "label": "Pay Weekend Deposit",
+      "amount": "USD 14 test / XCG 25 target",
+      "href": "https://buy.stripe.com/test_4gM9ATbzqb8j8NR3cIbZe01",
+      "route": "/weekend-fire",
+      "status": "approved-test",
+      "requiresWhatsAppFirst": true,
+      "note": "Confirm availability with BOSSA on WhatsApp before paying a deposit."
+    },
+    {
+      "key": "partyDeposit",
+      "label": "Pay Event Deposit",
+      "amount": "USD 56 test / XCG 100 target",
+      "href": "https://buy.stripe.com/test_bJe14n6f6gsD3txfZubZe02",
+      "route": "/party-menu",
+      "status": "approved-test",
+      "requiresWhatsAppFirst": true,
+      "note": "Confirm event quote with BOSSA on WhatsApp before paying a deposit."
+    },
+    {
+      "key": "cateringDeposit",
+      "label": "Secure Catering Date",
+      "amount": "USD 140 test / XCG 250 target",
+      "href": "https://buy.stripe.com/test_28E4gz32U90bc03eVqbZe03",
+      "route": "/party-menu",
+      "status": "approved-test",
+      "requiresWhatsAppFirst": true,
+      "note": "Confirm private catering availability with BOSSA on WhatsApp before paying a deposit."
+    }
+  ],
+  "menuSections": [
+    {
+      "id": "weekend-boxes",
+      "title": "Weekend Fire Boxes",
+      "note": "Thursday–Sunday · take-out only · limited fire batches",
+      "status": "active",
+      "items": [
+        {
+          "name": "Box #1 — BOSSA Box Mix",
+          "price": "XCG 49.50",
+          "status": "active",
+          "description": "Fire-roasted 1 pc chicken whole legs, 1/2 ribs, 1 chorizo, 1 porkchop, garlic bread, and garlic sauce.",
+          "image": "/images/bossa/weekend-fire/box-1-bossa-box-mix.png"
+        },
+        {
+          "name": "Box #2 — Skewer Box",
+          "price": "XCG 49.50",
+          "status": "active",
+          "description": "Tenderloin skewer and chicken skewer with garlic sauce and garlic bread.",
+          "image": "/images/bossa/weekend-fire/box-2-skewer-box.png"
+        },
+        {
+          "name": "Box #7 — SEA BOX Coming Soon",
+          "price": "XCG 99.50",
+          "status": "coming-soon",
+          "description": "Mixed grill and seafood platter with catch-of-the-day skewer, tenderloin skewer, and 2 sides.",
+          "image": "/images/bossa/weekend-fire/box-7-sea-box-coming-soon.png"
+        }
+      ]
+    }
+  ]
+}
