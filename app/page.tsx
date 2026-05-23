@@ -183,10 +183,10 @@ export default function HomePage() {
       <section id="menu" className="section">
         <div className="container">
           <span className="badge">Fire & Smoke Menu</span>
-          <h2>Menu blocks from Notion, cleaned for the website.</h2>
+          <h2>Menu blocks from approved BOSSA content JSON.</h2>
           <p>
-            The website menu is powered by <code>app/data/menu.ts</code>. Update that file for boxes, skewers,
-            sandwiches, sides, soups, drinks, and future specials.
+            The website menu is generated into <code>app/data/menu.ts</code>. Update <code>content/notion/bossa-website-content.template.json</code>,
+            then run <code>npm run generate:data</code> to refresh it.
           </p>
           <div className="menu-category-jump">
             {menuSections.map((section) => (
@@ -198,7 +198,7 @@ export default function HomePage() {
               <article className="menu-section editable-menu-section" id={`menu-${section.id}`} key={section.id}>
                 <div className="menu-section-header">
                   <div>
-                    <span className="badge">Editable block</span>
+                    <span className="badge">Generated block</span>
                     <h3>{section.title}</h3>
                     <p>{section.note}</p>
                     <small>{section.editableNote}</small>
