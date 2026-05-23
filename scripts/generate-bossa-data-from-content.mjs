@@ -34,6 +34,28 @@ function paymentsObject(payments = []) {
   );
 }
 
+function publishableMenuSections(menuSections = []) {
+  return menuSections
+    .filter((section) => section.status !== 'draft')
+    .map((section) => ({
+      id: section.id,
+      title: section.title,
+      note: section.note,
+      editableNote: section.editableNote ?? 'Generated from approved BOSSA Notion JSON. Update the JSON source, then run npm run generate:data.',
+      status: section.status ?? 'active',
+      items: (section.items ?? [])
+        .filter((item) => item.status !== 'draft')
+        .map((item) => ({
+          name: item.name,
+          price: item.price,
+          description: item.description,
+          status: item.status ?? 'active',
+          ...(item.image ? { image: item.image } : {}),
+          ...(item.tag ? { tag: item.tag } : {}),
+        })),
+    }));
+}
+
 const source = readSource();
 fs.mkdirSync(dataDir, { recursive: true });
 
@@ -48,6 +70,8 @@ fs.appendFileSync(
   'utf8',
 );
 
-writeTs('menu.generated.ts', 'generatedMenuSections', source.menuSections ?? []);
+const menuSections = publishableMenuSections(source.menuSections ?? []);
+writeTs('menu.ts', 'menuSections', menuSections);
+writeTs('menu.generated.ts', 'generatedMenuSections', menuSections);
 
 console.log('BOSSA website data generation complete.');
