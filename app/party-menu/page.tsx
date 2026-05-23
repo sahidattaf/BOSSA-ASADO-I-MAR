@@ -1,10 +1,14 @@
+import { mediaAssets } from '../data/media';
 import { paymentDisclaimer, paymentLinks } from '../data/payments';
+import { siteConfig } from '../data/site';
 
-const whatsappNumber = '59995230683';
+const whatsappNumber = siteConfig.whatsappNumber;
 const partyMessage = encodeURIComponent(
   'Bon dia BOSSA, I want a party / event quote. Date: ___ Group size: ___ Pickup/event time: ___ Package preference: ___ Budget: ___'
 );
 const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${partyMessage}`;
+const mainAudio = mediaAssets.audio[0];
+const youtubeVideos = mediaAssets.videos.filter((video) => video.status === 'active');
 
 const partyPackages = [
   {
@@ -49,16 +53,11 @@ const orderSteps = [
   'Pickup or event handoff stays fast — when the fire rests, we close.',
 ];
 
-const youtubeVideos = [
-  { title: 'BOSSA Asado i Mar — Fire & Flavor Video', embedUrl: 'https://www.youtube.com/embed/fin2x52-A6Y' },
-  { title: 'BOSSA Asado i Mar — Weekend Fire Video', embedUrl: 'https://www.youtube.com/embed/wxO63r9nkHs' },
-];
-
 export default function PartyMenuPage() {
   return (
     <main>
       <header className="container nav">
-        <a className="brand brand-lockup" href="/" aria-label="BOSSA Asado i Mar home">
+        <a className="brand brand-lockup" href="/" aria-label={`${siteConfig.brandName} home`}>
           <img src="/images/bossa/bossa-logo-fire-gold.svg" alt="" className="brand-logo" />
           <span>BOSSA ASADO I MAR</span>
         </a>
@@ -155,12 +154,12 @@ export default function PartyMenuPage() {
           <div>
             <span className="badge">Party music & ambiance</span>
             <h2>Audio experience</h2>
-            <p>Let the BOSSA Asado i Mar soundtrack set the mood for fire, smoke, and island soul.</p>
+            <p>Let the {siteConfig.brandName} soundtrack set the mood for fire, smoke, and island soul.</p>
           </div>
           <div className="info-card audio-card">
-            <h3>Sabor di BOSSA — Papiamentu</h3>
+            <h3>{mainAudio.name}</h3>
             <audio controls preload="metadata">
-              <source src="/audio/bossa/sabor-di-bossa-papiamentu.mp3" type="audio/mpeg" />
+              <source src={mainAudio.path} type="audio/mpeg" />
               Your browser does not support the audio element.
             </audio>
           </div>
@@ -200,11 +199,11 @@ export default function PartyMenuPage() {
         <div className="container footer-grid">
           <div>
             <strong>BOSSA Party / Events</strong>
-            <p>Oranjestraat 116 · Pietermaai · Willemstad, Curaçao</p>
+            <p>{siteConfig.address}</p>
           </div>
           <div>
             <p>WhatsApp: +5999 523 0683</p>
-            <p>Group orders by request · Thursday–Sunday</p>
+            <p>Group orders by request · {siteConfig.hours}</p>
           </div>
         </div>
       </footer>

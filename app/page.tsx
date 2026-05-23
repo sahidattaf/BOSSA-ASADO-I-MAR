@@ -1,7 +1,11 @@
+import { mediaAssets } from './data/media';
 import { menuSections } from './data/menu';
+import { siteConfig } from './data/site';
 
-const whatsappNumber = '59995230683';
+const whatsappNumber = siteConfig.whatsappNumber;
 const whatsappUrl = `https://wa.me/${whatsappNumber}`;
+const mainAudio = mediaAssets.audio[0];
+const youtubeVideos = mediaAssets.videos.filter((video) => video.status === 'active');
 
 const buildWhatsAppUrl = (message: string) => `${whatsappUrl}?text=${encodeURIComponent(message)}`;
 
@@ -56,22 +60,11 @@ const howItWorks = [
   ['04', 'Pickup or dine', 'Fast handoff, hot food, clean flow, no noise — just heat.'],
 ];
 
-const youtubeVideos = [
-  {
-    title: 'BOSSA Asado i Mar — Fire & Flavor Video',
-    embedUrl: 'https://www.youtube.com/embed/fin2x52-A6Y',
-  },
-  {
-    title: 'BOSSA Asado i Mar — Weekend Fire Video',
-    embedUrl: 'https://www.youtube.com/embed/wxO63r9nkHs',
-  },
-];
-
 export default function HomePage() {
   return (
     <main>
       <header className="container nav">
-        <a className="brand brand-lockup" href="#top" aria-label="BOSSA Asado i Mar home">
+        <a className="brand brand-lockup" href="#top" aria-label={`${siteConfig.brandName} home`}>
           <img src="/images/bossa/bossa-logo-fire-gold.svg" alt="" className="brand-logo" />
           <span>BOSSA ASADO I MAR</span>
         </a>
@@ -88,7 +81,7 @@ export default function HomePage() {
             <span className="badge">Pietermaai · Opposite Avila Hotel · Curaçao</span>
             <h1>Wood fire dining with Caribbean soul.</h1>
             <p className="lead">
-              BOSSA Asado i Mar brings fire boxes, ribs, skewers, sandwiches, side-order bowls, party orders,
+              {siteConfig.brandName} brings fire boxes, ribs, skewers, sandwiches, side-order bowls, party orders,
               audio, videos, and Weekend Fire energy into one clear WhatsApp-first restaurant flow.
             </p>
             <div className="cta-row">
@@ -150,13 +143,13 @@ export default function HomePage() {
             <span className="badge">BOSSA Sound</span>
             <h2>Play the BOSSA mood while guests choose.</h2>
             <p>
-              The audio adds Papiamentu flavor and brand emotion to the homepage, Weekend Fire, and party/event flow.
+              The generated media data controls this audio asset across the homepage, Weekend Fire, and party/event flow.
             </p>
           </div>
           <div className="info-card audio-card">
-            <h3>Sabor di BOSSA — Papiamentu</h3>
+            <h3>{mainAudio.name}</h3>
             <audio controls preload="metadata">
-              <source src="/audio/bossa/sabor-di-bossa-papiamentu.mp3" type="audio/mpeg" />
+              <source src={mainAudio.path} type="audio/mpeg" />
               Your browser does not support the audio element.
             </audio>
             <p>Fire, smoke, island soul, and BOSSA rhythm.</p>
@@ -277,7 +270,7 @@ export default function HomePage() {
         <div className="container split">
           <div>
             <span className="badge">Come to the fire</span>
-            <h2>Oranjestraat 116 · Pietermaai · Willemstad</h2>
+            <h2>{siteConfig.address.replace(', Curaçao', '')}</h2>
             <p>
               BOSSA is positioned for local lunch, dinner, weekend boxes, and visitors around Avila Hotel and Pietermaai.
             </p>
@@ -291,7 +284,7 @@ export default function HomePage() {
             <p>📍 Opposite Avila Hotel / Pietermaai area</p>
             <p>🔥 Wood fire & charcoal only</p>
             <p>📞 +5999 523 0683</p>
-            <p>⏱️ Thursday–Sunday · 12:00 PM–10:00 PM</p>
+            <p>⏱️ {siteConfig.hours}</p>
           </div>
         </div>
       </section>
@@ -299,16 +292,16 @@ export default function HomePage() {
       <footer className="footer">
         <div className="container footer-grid">
           <div className="footer-brand">
-            <img src="/images/bossa/bossa-logo-fire-gold.svg" alt="BOSSA Asado i Mar logo" className="footer-logo" />
+            <img src="/images/bossa/bossa-logo-fire-gold.svg" alt={`${siteConfig.brandName} logo`} className="footer-logo" />
             <div>
-              <strong>BOSSA Asado i Mar</strong>
-              <p>Oranjestraat 116 · Pietermaai · Willemstad, Curaçao</p>
+              <strong>{siteConfig.brandName}</strong>
+              <p>{siteConfig.address}</p>
               <p>#BossaAsado · #WeekendFireGrill · #KandelaDushi</p>
             </div>
           </div>
           <div>
             <p>WhatsApp: +5999 523 0683</p>
-            <p>Open Thursday–Sunday · 12:00 PM–10:00 PM</p>
+            <p>Open {siteConfig.hours}</p>
           </div>
         </div>
       </footer>
