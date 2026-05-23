@@ -1,3 +1,5 @@
+import { paymentDisclaimer, paymentLinks } from '../data/payments';
+
 const whatsappNumber = '59995230683';
 const baseWhatsappUrl = `https://wa.me/${whatsappNumber}`;
 
@@ -63,10 +65,12 @@ export default function WeekendFirePage() {
           WhatsApp ordering, PNG/PDF/offline HTML export, and limited batches from Thursday to Sunday.
         </p>
         <div className="cta-row">
-          <a className="button primary" href={whatsappUrl} target="_blank" rel="noreferrer">Order on WhatsApp</a>
+          <a className="button primary" href={whatsappUrl} target="_blank" rel="noreferrer">Confirm on WhatsApp</a>
+          <a className="button" href={paymentLinks.weekendDeposit.href} target="_blank" rel="noreferrer">{paymentLinks.weekendDeposit.label}</a>
           <a className="button" href="#boxes">View Box #1–#8</a>
           <a className="button" href="/weekend-fire/customize">Open flyer customizer</a>
         </div>
+        <p className="payment-note">{paymentDisclaimer} Test link: {paymentLinks.weekendDeposit.amount}.</p>
       </section>
 
       <section id="audio" className="section media-section">
@@ -121,6 +125,19 @@ export default function WeekendFirePage() {
               </article>
             ))}
           </div>
+        </div>
+      </section>
+
+      <section className="section">
+        <div className="container info-card" style={{ textAlign: 'center' }}>
+          <span className="badge">Deposit option</span>
+          <h2>Reserve Weekend Fire capacity after confirmation.</h2>
+          <p>{paymentLinks.weekendDeposit.note}</p>
+          <div className="cta-row" style={{ justifyContent: 'center' }}>
+            <a className="button primary" href={whatsappUrl} target="_blank" rel="noreferrer">Confirm availability first</a>
+            <a className="button" href={paymentLinks.weekendDeposit.href} target="_blank" rel="noreferrer">{paymentLinks.weekendDeposit.label}</a>
+          </div>
+          <p className="payment-note">{paymentLinks.weekendDeposit.amount}. Test-mode Stripe link for preview only.</p>
         </div>
       </section>
 

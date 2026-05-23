@@ -1,3 +1,5 @@
+import { paymentDisclaimer, paymentLinks } from '../data/payments';
+
 const whatsappNumber = '59995230683';
 const partyMessage = encodeURIComponent(
   'Bon dia BOSSA, I want a party / event quote. Date: ___ Group size: ___ Pickup/event time: ___ Package preference: ___ Budget: ___'
@@ -79,9 +81,12 @@ export default function PartyMenuPage() {
         </p>
         <div className="cta-row">
           <a className="button primary" href={whatsappUrl} target="_blank" rel="noreferrer">Request party quote</a>
+          <a className="button" href={paymentLinks.partyDeposit.href} target="_blank" rel="noreferrer">{paymentLinks.partyDeposit.label}</a>
+          <a className="button" href={paymentLinks.cateringDeposit.href} target="_blank" rel="noreferrer">{paymentLinks.cateringDeposit.label}</a>
           <a className="button" href="/weekend-fire">View Weekend Fire</a>
           <a className="button" href="#packages">View packages</a>
         </div>
+        <p className="payment-note">{paymentDisclaimer} Stripe links are in test mode for preview.</p>
       </section>
 
       <section className="section media-section">
@@ -128,6 +133,20 @@ export default function PartyMenuPage() {
             <h3>Ordering steps</h3>
             <ol>{orderSteps.map((step) => <li key={step}>{step}</li>)}</ol>
           </div>
+        </div>
+      </section>
+
+      <section className="section">
+        <div className="container info-card" style={{ textAlign: 'center' }}>
+          <span className="badge">Deposit options</span>
+          <h2>Pay a deposit after BOSSA confirms availability.</h2>
+          <p>{paymentDisclaimer}</p>
+          <div className="cta-row" style={{ justifyContent: 'center' }}>
+            <a className="button primary" href={whatsappUrl} target="_blank" rel="noreferrer">Confirm quote first</a>
+            <a className="button" href={paymentLinks.partyDeposit.href} target="_blank" rel="noreferrer">{paymentLinks.partyDeposit.label}</a>
+            <a className="button" href={paymentLinks.cateringDeposit.href} target="_blank" rel="noreferrer">{paymentLinks.cateringDeposit.label}</a>
+          </div>
+          <p className="payment-note">{paymentLinks.partyDeposit.amount} · {paymentLinks.cateringDeposit.amount}. Test-mode Stripe links for preview only.</p>
         </div>
       </section>
 
