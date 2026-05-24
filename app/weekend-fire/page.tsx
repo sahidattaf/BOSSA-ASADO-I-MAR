@@ -1,4 +1,5 @@
 import { mediaAssets } from '../data/media';
+import { menuSections } from '../data/menu';
 import { paymentDisclaimer, paymentLinks } from '../data/payments';
 import { siteConfig } from '../data/site';
 
@@ -6,6 +7,15 @@ const whatsappNumber = siteConfig.whatsappNumber;
 const baseWhatsappUrl = `https://wa.me/${whatsappNumber}`;
 const mainAudio = mediaAssets.audio[0];
 const youtubeVideos = mediaAssets.videos.filter((video) => video.status === 'active');
+const weekendBoxSection = menuSections.find((section) => section.id === 'weekend-boxes');
+const weekendBoxes = weekendBoxSection?.items ?? [];
+
+const getBoxNumber = (name: string) => {
+  const match = name.match(/Box #(\d+)/i);
+  return match ? `#${match[1]}` : name;
+};
+
+const getCleanBoxName = (name: string) => name.replace(/^Box\s+#\d+\s+—\s+/i, '');
 
 const buildBoxOrderUrl = (boxNumber: string, boxName: string) => {
   const message = encodeURIComponent(
@@ -18,17 +28,6 @@ const generalOrderMessage = encodeURIComponent(
   'Bon dia BOSSA, Weekend Fire! Please confirm what boxes are available today. Name: ___ Pickup time: ___ Box number: ___ Quantity: ___'
 );
 const whatsappUrl = `${baseWhatsappUrl}?text=${generalOrderMessage}`;
-
-const fireBoxes = [
-  ['#1', 'BOSSA Box Mix', 'XCG 49.50', 'Featured sharing box', '/images/bossa/weekend-fire/box-1-bossa-box-mix.png', 'Fire-roasted 1 pc chicken whole legs + 1/2 ribs + 1 chorizo + 1 porkchop + garlic bread + garlic sauce.'],
-  ['#2', 'Skewer Box', 'XCG 49.50', 'High-margin fire skewers', '/images/bossa/weekend-fire/box-2-skewer-box.png', 'Tenderloin skewer + chicken skewer + garlic sauce + garlic bread.'],
-  ['#3', 'Fire Bread Sandwich Box', 'XCG 49.50', 'Fire Bread variety', '/images/bossa/weekend-fire/box-3-fire-bread-sandwich-box.png', '#9 chicken salad 12 · #10 whole legs 12 · #11 chicken boneless 12 · #12 porkchop 12 · #13 chorizo 12 · #14 grilled steak / stew 15 · #15 tenderloin 20.'],
-  ['#4', 'Community Fire Box', 'XCG 19.50', 'Built for speed & volume', '/images/bossa/weekend-fire/box-4-community-fire-box.png', '4 chicken pieces + bread + garlic sauce + baked potato.'],
-  ['#5', 'Chicken Classic', 'XCG 49.50', 'Family-style fire meal', '/images/bossa/weekend-fire/box-5-chicken-classic.png', 'Whole fire-roasted chicken or 8 pc roast/grill chicken with 2 sides.'],
-  ['#6', 'Ribs Classic', 'XCG 49.50', 'Slow smoke · fast handoff', '/images/bossa/weekend-fire/box-6-ribs-classic.png', 'Slow-smoked ribs: 2 full ribs + garlic sauce + bread.'],
-  ['#7', 'SEA BOX Coming Soon', 'XCG 99.50', 'Heavy appetite special', '/images/bossa/weekend-fire/box-7-sea-box-coming-soon.png', 'Mixed grill and seafood platter with catch-of-the-day skewer, tenderloin skewer, and 2 sides.'],
-  ['#8', 'Local Fire Box', 'XCG 6+', 'Local pickup favorite', '/images/bossa/weekend-fire/box-8-local-fire-box.png', 'Fresh salad, seaweed, hummus, garlic bread/pita, baked potato, cassava, chorizo, boiled peanuts, and beer options.'],
-];
 
 const pickupSteps = [
   'Choose your box number from #1 to #8.',
@@ -107,22 +106,31 @@ export default function WeekendFirePage() {
       <section id="boxes" className="section">
         <div className="container">
           <span className="badge">Active Weekend Menu</span>
-          <h2>Fire box menu.</h2>
-          <p>Simple boxes. Fast flow. Fire decides the rhythm.</p>
+          <h2>{weekendBoxSection?.title ?? 'Fire box menu'}.</h2>
+          <p>{weekendBoxSection?.note ?? 'Simple boxes. Fast flow. Fire decides the rhythm.'}</p>
           <div className="grid weekend-grid box-card-grid">
-            {fireBoxes.map(([number, name, price, tag, image, description]) => (
-              <article className="card tall-card box-card" key={number}>
-                <img src={image} alt={`${name} visual`} style={{ width: '100%', borderRadius: '14px', marginBottom: '14px' }} />
-                <div className="box-card-top">
-                  <span className="box-number">Box {number}</span>
-                  <span className="box-tag">{tag}</span>
-                </div>
-                <h3>{name}</h3>
-                <strong className="price-line">{price}</strong>
-                <p>{description}</p>
-                <a className="button primary box-order-button" href={buildBoxOrderUrl(number, name)} target="_blank" rel="noreferrer">Order Box {number}</a>
-              </article>
-            ))}
+            {weekendBoxes.map((item) => {
+              const boxNumber = getBoxNumber(item.name);
+              const cleanName = getCleanBoxName(item.name);
+              const image = 'image' in item ? item.image : undefined;
+              const tag = 'tag' in item ? item.tag : undefined;
+
+              return (
+                <article className="card tall-card box-card" key={item.name}>
+                  {image ? (
+                    <img src={image} alt={`${cleanName} visual`} style={{ width: '100%', borderRadius: '14px', marginBottom: '14px' }} />
+                  ) : null}
+                  <div className="box-card-top">
+                    <span className="box-number">Box {boxNumber}</span>
+                    <span className="box-tag">{tag ?? item.status}</span>
+                  </div>
+                  <h3>{cleanName}</h3>
+                  <strong className="price-line">{item.price}</strong>
+                  <p>{item.description}</p>
+                  <a className="button primary box-order-button" href={buildBoxOrderUrl(boxNumber, cleanName)} target="_blank" rel="noreferrer">Order Box {boxNumber}</a>
+                </article>
+              );
+            })}
           </div>
         </div>
       </section>
