@@ -56,6 +56,19 @@ function publishableMenuSections(menuSections = []) {
     }));
 }
 
+function publishablePartyPackages(partyPackages = []) {
+  return partyPackages
+    .filter((pkg) => pkg.status !== 'draft')
+    .map((pkg) => ({
+      name: pkg.name,
+      bestFor: pkg.bestFor,
+      price: pkg.price,
+      image: pkg.image,
+      description: pkg.description,
+      status: pkg.status ?? 'active',
+    }));
+}
+
 const source = readSource();
 fs.mkdirSync(dataDir, { recursive: true });
 
@@ -73,5 +86,6 @@ fs.appendFileSync(
 const menuSections = publishableMenuSections(source.menuSections ?? []);
 writeTs('menu.ts', 'menuSections', menuSections);
 writeTs('menu.generated.ts', 'generatedMenuSections', menuSections);
+writeTs('party-packages.ts', 'partyPackages', publishablePartyPackages(source.partyPackages ?? []));
 
 console.log('BOSSA website data generation complete.');

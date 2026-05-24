@@ -72,6 +72,40 @@
       "note": "Confirm private catering availability with BOSSA on WhatsApp before paying a deposit."
     }
   ],
+  "partyPackages": [
+    {
+      "name": "Weekend Fire Box Bundle",
+      "bestFor": "Family pickup, beach groups, and casual office orders",
+      "price": "From XCG 19.50–49.50 per box",
+      "image": "/images/bossa/weekend-fire/box-1-bossa-box-mix.png",
+      "status": "active",
+      "description": "Numbered fire boxes prepared for fast pickup. Best when guests want simple ordering and clean handoff."
+    },
+    {
+      "name": "Skewer Party Platter",
+      "bestFor": "Birthdays, rooftop nights, and team gatherings",
+      "price": "Custom quote",
+      "image": "/images/bossa/weekend-fire/box-2-skewer-box.png",
+      "status": "active",
+      "description": "Chicken, tenderloin, and future seafood skewers served with sides, bread, and sauces. Order ahead."
+    },
+    {
+      "name": "Fire Bread Sandwich Tray",
+      "bestFor": "Quick bites, content shoots, and late-night groups",
+      "price": "Custom quote",
+      "image": "/images/bossa/weekend-fire/box-3-fire-bread-sandwich-box.png",
+      "status": "active",
+      "description": "Chicken salad, whole leg, boneless chicken, porkchop, chorizo, grilled steak/stew, and tenderloin sandwich options."
+    },
+    {
+      "name": "Fire & Sea Event Box — Coming Soon",
+      "bestFor": "Premium sunset moments and seafood weekends",
+      "price": "From XCG 99.50 / custom quote",
+      "image": "/images/bossa/weekend-fire/box-7-sea-box-coming-soon.png",
+      "status": "coming-soon",
+      "description": "Seafood, catch-of-the-day skewers, shrimp, lobster, mixed fire seafood, and limited sunset cocktail offers."
+    }
+  ],
   "menuSections": [
     {
       "id": "weekend-boxes",

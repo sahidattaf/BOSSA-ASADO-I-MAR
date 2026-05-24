@@ -1,4 +1,5 @@
 import { mediaAssets } from '../data/media';
+import { partyPackages } from '../data/party-packages';
 import { paymentDisclaimer, paymentLinks } from '../data/payments';
 import { siteConfig } from '../data/site';
 
@@ -9,41 +10,6 @@ const partyMessage = encodeURIComponent(
 const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${partyMessage}`;
 const mainAudio = mediaAssets.audio[0];
 const youtubeVideos = mediaAssets.videos.filter((video) => video.status === 'active');
-
-const partyPackages = [
-  {
-    name: 'Weekend Fire Box Bundle',
-    bestFor: 'Family pickup, beach groups, and casual office orders',
-    price: 'From XCG 19.50–49.50 per box',
-    image: '/images/bossa/weekend-fire/box-1-bossa-box-mix.png',
-    description:
-      'Numbered fire boxes prepared for fast pickup. Best when guests want simple ordering and clean handoff.',
-  },
-  {
-    name: 'Skewer Party Platter',
-    bestFor: 'Birthdays, rooftop nights, and team gatherings',
-    price: 'Custom quote',
-    image: '/images/bossa/weekend-fire/box-2-skewer-box.png',
-    description:
-      'Chicken, tenderloin, and future seafood skewers served with sides, bread, and sauces. Order ahead.',
-  },
-  {
-    name: 'Fire Bread Sandwich Tray',
-    bestFor: 'Quick bites, content shoots, and late-night groups',
-    price: 'Custom quote',
-    image: '/images/bossa/weekend-fire/box-3-fire-bread-sandwich-box.png',
-    description:
-      'Chicken salad, whole leg, boneless chicken, porkchop, chorizo, grilled steak/stew, and tenderloin sandwich options.',
-  },
-  {
-    name: 'Fire & Sea Event Box — Coming Soon',
-    bestFor: 'Premium sunset moments and seafood weekends',
-    price: 'From XCG 99.50 / custom quote',
-    image: '/images/bossa/weekend-fire/box-7-sea-box-coming-soon.png',
-    description:
-      'Seafood, catch-of-the-day skewers, shrimp, lobster, mixed fire seafood, and limited sunset cocktail offers.',
-  },
-];
 
 const orderSteps = [
   'Send WhatsApp with date, time, group size, budget, and package preference.',
@@ -105,7 +71,7 @@ export default function PartyMenuPage() {
         <div className="container">
           <span className="badge">Party packages</span>
           <h2>Party and event formats.</h2>
-          <p>Built from the same BOSSA fire system: boxes, skewers, sandwiches, sides, sauces, audio, videos, and WhatsApp confirmation.</p>
+          <p>Built from generated BOSSA content data: boxes, skewers, sandwiches, sides, sauces, audio, videos, and WhatsApp confirmation.</p>
           <div className="grid weekend-grid">
             {partyPackages.map((pkg) => (
               <article className="card tall-card" key={pkg.name}>
