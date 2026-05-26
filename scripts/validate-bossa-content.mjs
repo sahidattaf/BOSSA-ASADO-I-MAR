@@ -28,6 +28,11 @@ function loadJson(filePath) {
   }
 }
 
+function validatePublicImagePath(value, label) {
+  assert(value, `${label} is missing image path.`);
+  if (value) assert(isValidPublicPath(value), `${label} image path does not exist or is invalid: ${value}`);
+}
+
 const data = loadJson(contentPath);
 
 if (data) {
@@ -51,6 +56,17 @@ if (data) {
     assert(payment.href?.startsWith('https://buy.stripe.com/'), `Payment ${payment.key ?? 'unknown'} must use a Stripe Payment Link.`);
     assert(payment.requiresWhatsAppFirst === true, `Payment ${payment.key ?? 'unknown'} must require WhatsApp first.`);
     assert(!payment.href?.includes('sk_live'), `Payment ${payment.key ?? 'unknown'} must not contain secret keys.`);
+  }
+
+  for (const pkg of data.partyPackages ?? []) {
+    const label = `Party package ${pkg.name ?? 'unknown'}`;
+    assert(pkg.name, 'Party package is missing name.');
+    assert(pkg.price, `${label} is missing price.`);
+    assert(pkg.bestFor, `${label} is missing bestFor.`);
+    assert(pkg.description, `${label} is missing description.`);
+    assert(pkg.status, `${label} is missing status.`);
+    validatePublicImagePath(pkg.image, label);
+    if (pkg.status === 'draft') errors.push(`Draft party package should not be in publish template: ${pkg.name}`);
   }
 
   for (const section of data.menuSections ?? []) {
