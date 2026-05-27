@@ -63,6 +63,12 @@ const howItWorks = [
 export default function HomePage() {
   return (
     <main>
+      <div className="fire-rhythm-bar" role="status" aria-label="BOSSA Fire Rhythm opening status">
+        <span>🔥 Fire Rhythm</span>
+        <strong>Live Thursday–Sunday · 12 PM–10 PM</strong>
+        <small>When the fire rests, we close. WhatsApp first for today’s batch.</small>
+      </div>
+
       <header className="container nav">
         <a className="brand brand-lockup" href="#top" aria-label={`${siteConfig.brandName} home`}>
           <img src="/images/bossa/bossa-logo-fire-gold.svg" alt="" className="brand-logo" />
