@@ -82,9 +82,24 @@ export const menuSections = [
     "editableNote": "Use this block for chicken, tenderloin, shrimp, seafood, and future veggie skewers.",
     "status": "active",
     "items": [
-      { "name": "Chicken Skewer", "price": "XCG 25", "description": "Marinated chicken skewer grilled with bell pepper, onion, garlic sauce, and fire bread.", "status": "active" },
-      { "name": "Tenderloin Skewer", "price": "XCG 35", "description": "Tenderloin skewer with paprika/onion, bold fire flavor, garlic sauce, and fire bread.", "status": "active" },
-      { "name": "Seafood Skewer — Coming Soon", "price": "Market price", "description": "Catch-of-the-day, shrimp, lobster, or mixed seafood from the fire for the Weekend Fire & Sea Specials launch.", "status": "coming-soon" }
+      {
+        "name": "Chicken Skewer",
+        "price": "XCG 25",
+        "description": "Marinated chicken skewer grilled with bell pepper, onion, garlic sauce, and fire bread.",
+        "status": "active"
+      },
+      {
+        "name": "Tenderloin Skewer",
+        "price": "XCG 35",
+        "description": "Tenderloin skewer with paprika/onion, bold fire flavor, garlic sauce, and fire bread.",
+        "status": "active"
+      },
+      {
+        "name": "Seafood Skewer — Coming Soon",
+        "price": "Market price",
+        "description": "Catch-of-the-day, shrimp, lobster, or mixed seafood from the fire for the Weekend Fire & Sea Specials launch.",
+        "status": "coming-soon"
+      }
     ]
   },
   {
@@ -94,13 +109,48 @@ export const menuSections = [
     "editableNote": "This block supports sandwich trays, party orders, and the Box #3 sandwich box.",
     "status": "active",
     "items": [
-      { "name": "Chicken Salad Sandwich", "price": "XCG 12", "description": "Fresh chicken salad in fire bread with garlic oil and BOSSA flavor.", "status": "active" },
-      { "name": "Whole Leg Chicken Sandwich", "price": "XCG 12", "description": "Whole leg chicken, crispy bread, and BOSSA jus.", "status": "active" },
-      { "name": "Boneless Chicken Sandwich", "price": "XCG 12", "description": "Boneless chicken with fire seasoning, bread, and sauce.", "status": "active" },
-      { "name": "Porkchop Sandwich", "price": "XCG 12", "description": "Wood-fired porkchop, crispy bread, and tamarind-style fire glaze.", "status": "active" },
-      { "name": "Chorizo Sandwich", "price": "XCG 12", "description": "Fire-grilled chorizo in warm bread with BOSSA sauce.", "status": "active" },
-      { "name": "Grilled Steak / Stew Beef Sandwich", "price": "XCG 15", "description": "Grilled steak or slow stew beef with fire bread and island herbs.", "status": "active" },
-      { "name": "Tenderloin Sandwich", "price": "XCG 20", "description": "Tenderloin with toasted bread, fire salt, and premium grill flavor.", "status": "active" }
+      {
+        "name": "Chicken Salad Sandwich",
+        "price": "XCG 12",
+        "description": "Fresh chicken salad in fire bread with garlic oil and BOSSA flavor.",
+        "status": "active"
+      },
+      {
+        "name": "Whole Leg Chicken Sandwich",
+        "price": "XCG 12",
+        "description": "Whole leg chicken, crispy bread, and BOSSA jus.",
+        "status": "active"
+      },
+      {
+        "name": "Boneless Chicken Sandwich",
+        "price": "XCG 12",
+        "description": "Boneless chicken with fire seasoning, bread, and sauce.",
+        "status": "active"
+      },
+      {
+        "name": "Porkchop Sandwich",
+        "price": "XCG 12",
+        "description": "Wood-fired porkchop, crispy bread, and tamarind-style fire glaze.",
+        "status": "active"
+      },
+      {
+        "name": "Chorizo Sandwich",
+        "price": "XCG 12",
+        "description": "Fire-grilled chorizo in warm bread with BOSSA sauce.",
+        "status": "active"
+      },
+      {
+        "name": "Grilled Steak / Stew Beef Sandwich",
+        "price": "XCG 15",
+        "description": "Grilled steak or slow stew beef with fire bread and island herbs.",
+        "status": "active"
+      },
+      {
+        "name": "Tenderloin Sandwich",
+        "price": "XCG 20",
+        "description": "Tenderloin with toasted bread, fire salt, and premium grill flavor.",
+        "status": "active"
+      }
     ]
   },
   {
@@ -110,14 +160,54 @@ export const menuSections = [
     "editableNote": "Update portions and side prices here before publishing future flyers.",
     "status": "active",
     "items": [
-      { "name": "Fresh Salad", "price": "XCG 10", "description": "Fresh salad for balance next to chicken, ribs, skewers, and sandwiches.", "status": "active" },
-      { "name": "Seaweed Bowl", "price": "XCG 10", "description": "Cold seaweed side for fire boxes and seafood specials.", "status": "active" },
-      { "name": "Hummus", "price": "XCG 10", "description": "Creamy hummus for bread, skewers, and party trays.", "status": "active" },
-      { "name": "Homemade Garlic Bread / Pita", "price": "XCG 4", "description": "Bread for sauce, smoke, and box dipping.", "status": "active" },
-      { "name": "Baked Potato", "price": "XCG 7", "description": "Baked potato with fire seasoning and optional garlic sauce.", "status": "active" },
-      { "name": "Boiled Cassava", "price": "XCG 10", "description": "Soft cassava with island seasoning.", "status": "active" },
-      { "name": "Chorizo Piece", "price": "XCG 6", "description": "Single chorizo add-on for boxes or local pickup.", "status": "active" },
-      { "name": "Boiled Peanuts", "price": "XCG 6", "description": "Local-style peanut bowl for snacking and side orders.", "status": "active" }
+      {
+        "name": "Fresh Salad",
+        "price": "XCG 10",
+        "description": "Fresh salad for balance next to chicken, ribs, skewers, and sandwiches.",
+        "status": "active"
+      },
+      {
+        "name": "Seaweed Bowl",
+        "price": "XCG 10",
+        "description": "Cold seaweed side for fire boxes and seafood specials.",
+        "status": "active"
+      },
+      {
+        "name": "Hummus",
+        "price": "XCG 10",
+        "description": "Creamy hummus for bread, skewers, and party trays.",
+        "status": "active"
+      },
+      {
+        "name": "Homemade Garlic Bread / Pita",
+        "price": "XCG 4",
+        "description": "Bread for sauce, smoke, and box dipping.",
+        "status": "active"
+      },
+      {
+        "name": "Baked Potato",
+        "price": "XCG 7",
+        "description": "Baked potato with fire seasoning and optional garlic sauce.",
+        "status": "active"
+      },
+      {
+        "name": "Boiled Cassava",
+        "price": "XCG 10",
+        "description": "Soft cassava with island seasoning.",
+        "status": "active"
+      },
+      {
+        "name": "Chorizo Piece",
+        "price": "XCG 6",
+        "description": "Single chorizo add-on for boxes or local pickup.",
+        "status": "active"
+      },
+      {
+        "name": "Boiled Peanuts",
+        "price": "XCG 6",
+        "description": "Local-style peanut bowl for snacking and side orders.",
+        "status": "active"
+      }
     ]
   },
   {
@@ -127,8 +217,18 @@ export const menuSections = [
     "editableNote": "Use this block for beef soup, chicken soup, stews, and rotating comfort specials.",
     "status": "active",
     "items": [
-      { "name": "BOSSA Beef Soup", "price": "XCG 15", "description": "Hearty beef soup slow-simmered with meat, potato, carrot, and island herbs.", "status": "active" },
-      { "name": "BOSSA Chicken Soup", "price": "XCG 11", "description": "Homestyle chicken soup with vegetables, light smoke, and comfort flavor.", "status": "active" }
+      {
+        "name": "BOSSA Beef Soup",
+        "price": "XCG 15",
+        "description": "Hearty beef soup slow-simmered with meat, potato, carrot, and island herbs.",
+        "status": "active"
+      },
+      {
+        "name": "BOSSA Chicken Soup",
+        "price": "XCG 11",
+        "description": "Homestyle chicken soup with vegetables, light smoke, and comfort flavor.",
+        "status": "active"
+      }
     ]
   },
   {
@@ -138,10 +238,30 @@ export const menuSections = [
     "editableNote": "Add sodas, water, juices, cocktails, beer, and rooftop drinks here.",
     "status": "active",
     "items": [
-      { "name": "Beer", "price": "XCG 6", "description": "Cold beer for weekend boxes and party orders.", "status": "active" },
-      { "name": "Soft Drink", "price": "XCG 5", "description": "Cold soda selection. Final brands can be updated before service.", "status": "active" },
-      { "name": "House Juice", "price": "XCG 7.50", "description": "Island juice. Flavor can rotate by day.", "status": "active" },
-      { "name": "Sunset Cocktail Offer — Coming Soon", "price": "TBD", "description": "Limited sunset cocktail offer for Weekend Fire & Sea Specials.", "status": "coming-soon" }
+      {
+        "name": "Beer",
+        "price": "XCG 6",
+        "description": "Cold beer for weekend boxes and party orders.",
+        "status": "active"
+      },
+      {
+        "name": "Soft Drink",
+        "price": "XCG 5",
+        "description": "Cold soda selection. Final brands can be updated before service.",
+        "status": "active"
+      },
+      {
+        "name": "House Juice",
+        "price": "XCG 7.50",
+        "description": "Island juice. Flavor can rotate by day.",
+        "status": "active"
+      },
+      {
+        "name": "Sunset Cocktail Offer — Coming Soon",
+        "price": "TBD",
+        "description": "Limited sunset cocktail offer for Weekend Fire & Sea Specials.",
+        "status": "coming-soon"
+      }
     ]
   }
 ] as const;
