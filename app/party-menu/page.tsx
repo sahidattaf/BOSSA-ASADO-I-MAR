@@ -1,7 +1,24 @@
+import type { Metadata } from 'next';
 import { mediaAssets } from '../data/media';
 import { partyPackages } from '../data/party-packages';
 import { paymentDisclaimer, paymentLinks } from '../data/payments';
 import { siteConfig } from '../data/site';
+
+export const metadata: Metadata = {
+  title: 'Party & Events Catering | Fire-Grill · Pietermaai, Curaçao',
+  description:
+    'BOSSA Asado i Mar party catering in Curaçao — fire-roasted trays, skewers, ribs, seafood, and event packages for groups. Request a quote via WhatsApp. Pietermaai, near Avila Beach Hotel.',
+  alternates: {
+    canonical: 'https://www.bossaasado.com/party-menu',
+  },
+  openGraph: {
+    title: 'BOSSA Party & Events | Fire Catering · Curaçao',
+    description:
+      'Group fire orders, event trays, skewers, ribs, seafood catering · WhatsApp quote. Pietermaai, Curaçao.',
+    url: 'https://www.bossaasado.com/party-menu',
+    images: ['/images/bossa/bbq-party-del-rey.jpg'],
+  },
+};
 
 const whatsappNumber = siteConfig.whatsappNumber;
 const partyMessage = encodeURIComponent(

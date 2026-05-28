@@ -204,6 +204,38 @@ audio { width: 100%; margin-top: 16px; }
   .btn-pdf, .btn-back { width: 100%; justify-content: center; }
 }
 
+/* ── Live Fire Status ─────────────────────────────────────────────────── */
+.fire-status {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+  padding: 8px 14px;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  line-height: 1.3;
+  margin-bottom: 12px;
+  border: 1px solid transparent;
+}
+.fire-status--live {
+  background: rgba(255, 90, 20, 0.12);
+  border-color: rgba(255, 90, 20, 0.35);
+  color: var(--accent, #ff5a14);
+}
+.fire-status--resting {
+  background: rgba(215, 195, 173, 0.08);
+  border-color: rgba(215, 195, 173, 0.2);
+  color: var(--muted, #d7c3ad);
+}
+.fire-status-label {
+  font-weight: 700;
+  font-size: 0.9rem;
+}
+.fire-status-sub {
+  font-size: 0.78rem;
+  opacity: 0.85;
+}
+
 @media print {
   body { background: white; padding: 0; margin: 0; }
   .no-print, .toolbar, .export-status, .sticky-whatsapp, .language-switcher { display: none !important; }
