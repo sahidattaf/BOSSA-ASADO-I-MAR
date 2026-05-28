@@ -1,3 +1,4 @@
+import LiveFireStatus from './components/LiveFireStatus';
 import { mediaAssets } from './data/media';
 import { menuSections } from './data/menu';
 import { siteConfig } from './data/site';
@@ -78,6 +79,7 @@ export default function HomePage() {
       <section id="top" className="container hero brand-hero premium-hero">
         <div className="hero-grid">
           <div className="hero-copy">
+            <LiveFireStatus />
             <span className="badge">Pietermaai · Opposite Avila Hotel · Curaçao</span>
             <h1>Wood fire dining with Caribbean soul.</h1>
             <p className="lead">

@@ -1,7 +1,25 @@
+import type { Metadata } from 'next';
+import LiveFireStatus from '../components/LiveFireStatus';
 import { mediaAssets } from '../data/media';
 import { menuSections } from '../data/menu';
 import { paymentDisclaimer, paymentLinks } from '../data/payments';
 import { siteConfig } from '../data/site';
+
+export const metadata: Metadata = {
+  title: 'Weekend Fire Boxes | Fire-Grill Take-Out · Pietermaai, Curaçao',
+  description:
+    'Order BOSSA Weekend Fire boxes via WhatsApp. Fire-roasted ribs, chicken, skewers, porkchop, and chorizo — numbered take-out boxes Thu–Sun 12:00–22:00. Pickup near Avila Beach Hotel, Pietermaai, Curaçao.',
+  alternates: {
+    canonical: 'https://www.bossaasado.com/weekend-fire',
+  },
+  openGraph: {
+    title: 'BOSSA Weekend Fire Boxes | Pietermaai, Curaçao',
+    description:
+      'Numbered fire boxes · ribs, skewers, chicken, seafood · Thu–Sun · WhatsApp order. Near Avila Beach Hotel.',
+    url: 'https://www.bossaasado.com/weekend-fire',
+    images: ['/images/bossa/weekend-fire/box-1-bossa-box-mix.png'],
+  },
+};
 
 const whatsappNumber = siteConfig.whatsappNumber;
 const baseWhatsappUrl = `https://wa.me/${whatsappNumber}`;
@@ -17,9 +35,9 @@ const getBoxNumber = (name: string) => {
 
 const getCleanBoxName = (name: string) => name.replace(/^Box\s+#\d+\s+—\s+/i, '');
 
-const buildBoxOrderUrl = (boxNumber: string, boxName: string) => {
+const buildBoxOrderUrl = (boxNumber: string, boxName: string, price: string) => {
   const message = encodeURIComponent(
-    `Bon dia BOSSA, I want to order ${boxNumber} — ${boxName}. Name: ___ Pickup time: ___ Quantity: ___`
+    `Bon dia BOSSA! Weekend Fire 🔥\n\nBox: ${boxNumber} — ${boxName}\nPrice: ${price}\n\nName: ___\nPickup time: ___\nQuantity: ___`
   );
   return `${baseWhatsappUrl}?text=${message}`;
 };
@@ -56,11 +74,13 @@ export default function WeekendFirePage() {
       </header>
 
       <section className="container hero weekend-hero">
+        <LiveFireStatus />
         <span className="badge">Weekend Fire · Take-out only</span>
         <h1>Order by box number. Pickup fast. Eat hot.</h1>
         <p className="lead">
-          Weekend Fire is {siteConfig.brandName}’s take-out ritual: numbered boxes, final flyer assets, audio, video,
+          Weekend Fire is {siteConfig.brandName}'s take-out ritual: numbered boxes, final flyer assets, audio, video,
           WhatsApp ordering, PNG/PDF/offline HTML export, and limited batches from Thursday to Sunday.
+          Near Avila Beach Hotel, Pietermaai, Curaçao.
         </p>
         <div className="cta-row">
           <a className="button primary" href={whatsappUrl} target="_blank" rel="noreferrer">Confirm on WhatsApp</a>
@@ -114,11 +134,12 @@ export default function WeekendFirePage() {
               const cleanName = getCleanBoxName(item.name);
               const image = 'image' in item ? item.image : undefined;
               const tag = 'tag' in item ? item.tag : undefined;
+              const orderUrl = buildBoxOrderUrl(boxNumber, cleanName, item.price);
 
               return (
                 <article className="card tall-card box-card" key={item.name}>
                   {image ? (
-                    <img src={image} alt={`${cleanName} visual`} style={{ width: '100%', borderRadius: '14px', marginBottom: '14px' }} />
+                    <img src={image} alt={`BOSSA ${cleanName} fire box — Curaçao weekend fire`} style={{ width: '100%', borderRadius: '14px', marginBottom: '14px' }} />
                   ) : null}
                   <div className="box-card-top">
                     <span className="box-number">Box {boxNumber}</span>
@@ -127,7 +148,15 @@ export default function WeekendFirePage() {
                   <h3>{cleanName}</h3>
                   <strong className="price-line">{item.price}</strong>
                   <p>{item.description}</p>
-                  <a className="button primary box-order-button" href={buildBoxOrderUrl(boxNumber, cleanName)} target="_blank" rel="noreferrer">Order Box {boxNumber}</a>
+                  <a
+                    className="button primary box-order-button"
+                    href={orderUrl}
+                    target="_blank"
+                    rel="noreferrer"
+                    aria-label={`Order Box ${boxNumber} — ${cleanName} via WhatsApp`}
+                  >
+                    📱 Order Box {boxNumber} via WhatsApp
+                  </a>
                 </article>
               );
             })}
