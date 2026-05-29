@@ -26,7 +26,7 @@ const baseWhatsappUrl = `https://wa.me/${whatsappNumber}`;
 const mainAudio = mediaAssets.audio[0];
 const youtubeVideos = mediaAssets.videos.filter((video) => video.status === 'active');
 const weekendBoxSection = menuSections.find((section) => section.id === 'weekend-boxes');
-const weekendBoxes = weekendBoxSection?.items ?? [];
+const weekendBoxes = [...(weekendBoxSection?.items ?? [])];
 
 const getBoxNumber = (name: string) => {
   const match = name.match(/Box #(\d+)/i);
@@ -83,7 +83,10 @@ export default function WeekendFirePage() {
           Near Avila Beach Hotel, Pietermaai, Curaçao.
         </p>
         <div className="cta-row">
-          <a className="button primary" href={whatsappUrl} target="_blank" rel="noreferrer">Confirm on WhatsApp</a>
+          <a className="button primary" href={whatsappUrl} target="_blank" rel="noreferrer"
+            data-track="whatsapp-click" data-cta-source="weekend-fire" data-cta-label="hero-confirm" data-offer-id="">
+            Confirm on WhatsApp
+          </a>
           <a className="button" href={paymentLinks.weekendDeposit.href} target="_blank" rel="noreferrer">{paymentLinks.weekendDeposit.label}</a>
           <a className="button" href="#boxes">View Box #1–#8</a>
           <a className="button" href="/weekend-fire/customize">Open flyer customizer</a>
@@ -116,7 +119,10 @@ export default function WeekendFirePage() {
             <p>The customizer keeps the flyer editable and exportable for WhatsApp, Instagram, Canva, and print.</p>
             <div className="cta-row">
               <a className="button primary" href="/weekend-fire/customize">Open customizer</a>
-              <a className="button" href={whatsappUrl} target="_blank" rel="noreferrer">Order before sold out</a>
+              <a className="button" href={whatsappUrl} target="_blank" rel="noreferrer"
+                data-track="whatsapp-click" data-cta-source="weekend-fire" data-cta-label="flyer-order" data-offer-id="">
+                Order before sold out
+              </a>
             </div>
           </div>
           <img src="/images/bossa/weekend-fire/box-1-bossa-box-mix.png" alt="BOSSA Weekend Fire final box visual" style={{ width: '100%', borderRadius: '12px' }} />
@@ -154,6 +160,10 @@ export default function WeekendFirePage() {
                     target="_blank"
                     rel="noreferrer"
                     aria-label={`Order Box ${boxNumber} — ${cleanName} via WhatsApp`}
+                    data-track="whatsapp-click"
+                    data-cta-source="weekend-fire"
+                    data-cta-label="box-order"
+                    data-offer-id={boxNumber}
                   >
                     📱 Order Box {boxNumber} via WhatsApp
                   </a>
@@ -170,7 +180,10 @@ export default function WeekendFirePage() {
           <h2>Reserve Weekend Fire capacity after confirmation.</h2>
           <p>{paymentLinks.weekendDeposit.note}</p>
           <div className="cta-row" style={{ justifyContent: 'center' }}>
-            <a className="button primary" href={whatsappUrl} target="_blank" rel="noreferrer">Confirm availability first</a>
+            <a className="button primary" href={whatsappUrl} target="_blank" rel="noreferrer"
+              data-track="whatsapp-click" data-cta-source="weekend-fire" data-cta-label="deposit-confirm" data-offer-id="">
+              Confirm availability first
+            </a>
             <a className="button" href={paymentLinks.weekendDeposit.href} target="_blank" rel="noreferrer">{paymentLinks.weekendDeposit.label}</a>
           </div>
           <p className="payment-note">{paymentLinks.weekendDeposit.amount}. Test-mode Stripe link for preview only.</p>
@@ -201,7 +214,10 @@ export default function WeekendFirePage() {
             <h2>Order by number. Pickup fast. Eat hot.</h2>
             <p>Weekend Fire works best when the order is clear before the rush starts.</p>
             <div className="cta-row">
-              <a className="button primary" href={whatsappUrl} target="_blank" rel="noreferrer">Order before sold out</a>
+              <a className="button primary" href={whatsappUrl} target="_blank" rel="noreferrer"
+                data-track="whatsapp-click" data-cta-source="weekend-fire" data-cta-label="pickup-order" data-offer-id="">
+                Order before sold out
+              </a>
             </div>
           </div>
           <div className="info-card">

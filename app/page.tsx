@@ -39,18 +39,24 @@ const orderCards = [
     text: 'Choose a numbered box, send pickup time and quantity, then BOSSA confirms what is still available from the fire.',
     cta: 'Order boxes',
     href: weekendUrl,
+    trackLabel: 'order-card-weekend',
+    offerId: '',
   },
   {
     title: 'Reserve a table',
     text: 'For dine-in or terrace energy, send name, date, time, party size, and special notes through WhatsApp.',
     cta: 'Reserve now',
     href: reservationUrl,
+    trackLabel: 'order-card-reservation',
+    offerId: '',
   },
   {
     title: 'Plan party / event food',
     text: 'For birthdays, office orders, rooftop nights, and private fire moments, request a quote ahead of time.',
     cta: 'Request quote',
     href: partyUrl,
+    trackLabel: 'order-card-party',
+    offerId: '',
   },
 ];
 
@@ -87,7 +93,10 @@ export default function HomePage() {
               audio, videos, and Weekend Fire energy into one clear WhatsApp-first restaurant flow.
             </p>
             <div className="cta-row">
-              <a className="button primary" href={orderUrl} target="_blank" rel="noreferrer">Order on WhatsApp</a>
+              <a className="button primary" href={orderUrl} target="_blank" rel="noreferrer"
+                data-track="whatsapp-click" data-cta-source="home" data-cta-label="hero-order" data-offer-id="">
+                Order on WhatsApp
+              </a>
               <a className="button" href="/weekend-fire">Weekend Fire Boxes</a>
               <a className="button" href="/party-menu">Party / Events</a>
               <a className="button" href="#menu">View menu</a>
@@ -116,7 +125,18 @@ export default function HomePage() {
               <article className="card" key={card.title}>
                 <h3>{card.title}</h3>
                 <p>{card.text}</p>
-                <a className="button primary" href={card.href} target="_blank" rel="noreferrer">{card.cta}</a>
+                <a
+                  className="button primary"
+                  href={card.href}
+                  target="_blank"
+                  rel="noreferrer"
+                  data-track="whatsapp-click"
+                  data-cta-source="home"
+                  data-cta-label={card.trackLabel}
+                  data-offer-id={card.offerId}
+                >
+                  {card.cta}
+                </a>
               </article>
             ))}
           </div>
@@ -171,7 +191,10 @@ export default function HomePage() {
             <div className="cta-row">
               <a className="button primary" href="/weekend-fire">Open Weekend Fire page</a>
               <a className="button" href="/weekend-fire/customize">Open flyer customizer</a>
-              <a className="button" href={weekendUrl} target="_blank" rel="noreferrer">Order boxes</a>
+              <a className="button" href={weekendUrl} target="_blank" rel="noreferrer"
+                data-track="whatsapp-click" data-cta-source="home" data-cta-label="promo-weekend-order" data-offer-id="">
+                Order boxes
+              </a>
             </div>
           </div>
           <img
@@ -207,7 +230,7 @@ export default function HomePage() {
                   </div>
                 </div>
                 <div className="menu-items">
-                  {section.items.map((item) => (
+                  {section.items.map((item: (typeof menuSections)[number]['items'][number]) => (
                     <div className="menu-item" key={item.name}>
                       <div>
                         <h4>{item.name}</h4>
@@ -257,7 +280,10 @@ export default function HomePage() {
             </p>
             <div className="cta-row">
               <a className="button primary" href="/party-menu">Open Party / Events page</a>
-              <a className="button" href={partyUrl} target="_blank" rel="noreferrer">Request quote</a>
+              <a className="button" href={partyUrl} target="_blank" rel="noreferrer"
+                data-track="whatsapp-click" data-cta-source="home" data-cta-label="promo-party-quote" data-offer-id="">
+                Request quote
+              </a>
             </div>
           </div>
           <img
@@ -277,7 +303,10 @@ export default function HomePage() {
               BOSSA is positioned for local lunch, dinner, weekend boxes, and visitors around Avila Hotel and Pietermaai.
             </p>
             <div className="cta-row">
-              <a className="button primary" href={orderUrl} target="_blank" rel="noreferrer">WhatsApp BOSSA</a>
+              <a className="button primary" href={orderUrl} target="_blank" rel="noreferrer"
+                data-track="whatsapp-click" data-cta-source="home" data-cta-label="location-order" data-offer-id="">
+                WhatsApp BOSSA
+              </a>
               <a className="button" href="https://www.google.com/maps/search/?api=1&query=Oranjestraat%20116%20Pietermaai%20Willemstad%20Curacao" target="_blank" rel="noreferrer">Open Google Maps</a>
             </div>
           </div>

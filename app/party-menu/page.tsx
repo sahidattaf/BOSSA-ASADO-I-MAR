@@ -50,7 +50,10 @@ export default function PartyMenuPage() {
           <a href="#packages">Packages</a>
           <a href="#audio">Audio</a>
           <a href="#videos">Videos</a>
-          <a href={whatsappUrl} target="_blank" rel="noreferrer">Quote</a>
+          <a href={whatsappUrl} target="_blank" rel="noreferrer"
+            data-track="whatsapp-click" data-cta-source="party-menu" data-cta-label="nav-quote" data-offer-id="">
+            Quote
+          </a>
         </nav>
       </header>
 
@@ -62,7 +65,10 @@ export default function PartyMenuPage() {
           private fire experiences, and future Weekend Fire & Sea Specials.
         </p>
         <div className="cta-row">
-          <a className="button primary" href={whatsappUrl} target="_blank" rel="noreferrer">Request party quote</a>
+          <a className="button primary" href={whatsappUrl} target="_blank" rel="noreferrer"
+            data-track="whatsapp-click" data-cta-source="party-menu" data-cta-label="hero-quote" data-offer-id="">
+            Request party quote
+          </a>
           <a className="button" href={paymentLinks.partyDeposit.href} target="_blank" rel="noreferrer">{paymentLinks.partyDeposit.label}</a>
           <a className="button" href={paymentLinks.cateringDeposit.href} target="_blank" rel="noreferrer">{paymentLinks.cateringDeposit.label}</a>
           <a className="button" href="/weekend-fire">View Weekend Fire</a>
@@ -97,7 +103,10 @@ export default function PartyMenuPage() {
                 <strong className="price-line">{pkg.price}</strong>
                 <p>{pkg.description}</p>
                 <p><strong>Best for:</strong> {pkg.bestFor}</p>
-                <a className="button primary" href={whatsappUrl} target="_blank" rel="noreferrer">Request quote</a>
+                <a className="button primary" href={whatsappUrl} target="_blank" rel="noreferrer"
+                  data-track="whatsapp-click" data-cta-source="party-menu" data-cta-label="package-quote" data-offer-id={pkg.name}>
+                  Request quote
+                </a>
               </article>
             ))}
           </div>
@@ -124,7 +133,10 @@ export default function PartyMenuPage() {
           <h2>Pay a deposit after BOSSA confirms availability.</h2>
           <p>{paymentDisclaimer}</p>
           <div className="cta-row" style={{ justifyContent: 'center' }}>
-            <a className="button primary" href={whatsappUrl} target="_blank" rel="noreferrer">Confirm quote first</a>
+            <a className="button primary" href={whatsappUrl} target="_blank" rel="noreferrer"
+              data-track="whatsapp-click" data-cta-source="party-menu" data-cta-label="deposit-confirm" data-offer-id="">
+              Confirm quote first
+            </a>
             <a className="button" href={paymentLinks.partyDeposit.href} target="_blank" rel="noreferrer">{paymentLinks.partyDeposit.label}</a>
             <a className="button" href={paymentLinks.cateringDeposit.href} target="_blank" rel="noreferrer">{paymentLinks.cateringDeposit.label}</a>
           </div>
@@ -173,7 +185,10 @@ export default function PartyMenuPage() {
           <h2>Request your BOSSA party / event quote.</h2>
           <p>Send your event details on WhatsApp. BOSSA confirms availability, format, quantity, pickup/event time, and quote.</p>
           <div className="cta-row" style={{ justifyContent: 'center' }}>
-            <a className="button primary" href={whatsappUrl} target="_blank" rel="noreferrer">Request Party Quote via WhatsApp</a>
+            <a className="button primary" href={whatsappUrl} target="_blank" rel="noreferrer"
+              data-track="whatsapp-click" data-cta-source="party-menu" data-cta-label="closing-quote" data-offer-id="">
+              Request Party Quote via WhatsApp
+            </a>
           </div>
         </div>
       </section>
