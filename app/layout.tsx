@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import LanguageSwitcher from './components/LanguageSwitcher';
+import WhatsAppClickTracker from './components/WhatsAppClickTracker';
 import './globals.css';
 import './home-polish.css';
 
@@ -105,6 +106,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessJsonLd) }}
         />
         <LanguageSwitcher />
+        <WhatsAppClickTracker />
         {children}
         <a
           className="sticky-whatsapp"
@@ -112,6 +114,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           target="_blank"
           rel="noreferrer"
           aria-label="Order or reserve BOSSA on WhatsApp"
+          data-track="whatsapp-click"
+          data-cta-source="sticky"
+          data-cta-label="sticky-whatsapp"
+          data-offer-id=""
         >
           <span>WhatsApp</span>
           <strong>Order / Reserve</strong>
