@@ -3,7 +3,7 @@
     "source": "BOSSA Payment Links Control + BOSSA Menu Notion pages",
     "owner": "Sahid Attaf",
     "status": "approved-template",
-    "lastUpdated": "2026-05-23",
+    "lastUpdated": "2026-05-31",
     "rules": [
       "WhatsApp confirmation comes first.",
       "Stripe Payment Links only; no secret keys.",
@@ -14,6 +14,7 @@
   "site": {
     "brandName": "BOSSA Asado i Mar",
     "whatsappNumber": "59995230683",
+    "email": "info@bossaasado.com",
     "address": "Oranjestraat 116, Pietermaai, Willemstad, Curaçao",
     "hours": "Thursday–Sunday · 12:00 PM–10:00 PM",
     "primaryRoutes": ["/", "/weekend-fire", "/weekend-fire/customize", "/party-menu"]
@@ -78,120 +79,9 @@
       "bestFor": "Family pickup, beach groups, and casual office orders",
       "price": "From XCG 19.50–49.50 per box",
       "image": "/images/bossa/weekend-fire/box-1-bossa-box-mix.png",
-      "status": "active",
-      "description": "Numbered fire boxes prepared for fast pickup. Best when guests want simple ordering and clean handoff."
-    },
-    {
-      "name": "Skewer Party Platter",
-      "bestFor": "Birthdays, rooftop nights, and team gatherings",
-      "price": "Custom quote",
-      "image": "/images/bossa/weekend-fire/box-2-skewer-box.png",
-      "status": "active",
-      "description": "Chicken, tenderloin, and future seafood skewers served with sides, bread, and sauces. Order ahead."
-    },
-    {
-      "name": "Fire Bread Sandwich Tray",
-      "bestFor": "Quick bites, content shoots, and late-night groups",
-      "price": "Custom quote",
-      "image": "/images/bossa/weekend-fire/box-3-fire-bread-sandwich-box.png",
-      "status": "active",
-      "description": "Chicken salad, whole leg, boneless chicken, porkchop, chorizo, grilled steak/stew, and tenderloin sandwich options."
-    },
-    {
-      "name": "Fire & Sea Event Box — Coming Soon",
-      "bestFor": "Premium sunset moments and seafood weekends",
-      "price": "From XCG 99.50 / custom quote",
-      "image": "/images/bossa/weekend-fire/box-7-sea-box-coming-soon.png",
-      "status": "coming-soon",
-      "description": "Seafood, catch-of-the-day skewers, shrimp, lobster, mixed fire seafood, and limited sunset cocktail offers."
+      "description": "Numbered boxes for groups that want simple pickup and clean fire flavor.",
+      "status": "active"
     }
   ],
-  "menuSections": [
-    {
-      "id": "weekend-boxes",
-      "title": "Weekend Fire Boxes",
-      "note": "Thursday–Sunday · take-out only · limited fire batches",
-      "editableNote": "Source of truth: update approved Notion JSON, then run npm run generate:data.",
-      "status": "active",
-      "items": [
-        { "name": "Box #1 — BOSSA Box Mix", "price": "XCG 49.50", "status": "active", "description": "Fire-roasted 1 pc chicken whole legs, 1/2 ribs, 1 chorizo, 1 porkchop, garlic bread, and garlic sauce.", "image": "/images/bossa/weekend-fire/box-1-bossa-box-mix.png", "tag": "Featured sharing box" },
-        { "name": "Box #2 — Skewer Box", "price": "XCG 49.50", "status": "active", "description": "Tenderloin skewer and chicken skewer with garlic sauce and garlic bread. Tenderloin skewer 35 · chicken skewer 25.", "image": "/images/bossa/weekend-fire/box-2-skewer-box.png", "tag": "High-margin fire skewers" },
-        { "name": "Box #3 — Fire Bread Sandwich Box", "price": "XCG 49.50", "status": "active", "description": "#9 chicken salad 12 · #10 whole legs 12 · #11 chicken boneless 12 · #12 porkchop 12 · #13 chorizo 12 · #14 grilled steak / stew 15 · #15 tenderloin 20.", "image": "/images/bossa/weekend-fire/box-3-fire-bread-sandwich-box.png", "tag": "Fire Bread variety" },
-        { "name": "Box #4 — Community Fire Box", "price": "XCG 19.50", "status": "active", "description": "4 chicken pieces with bread, garlic sauce, and baked potato. Built for speed and volume.", "image": "/images/bossa/weekend-fire/box-4-community-fire-box.png", "tag": "Built for speed & volume" },
-        { "name": "Box #5 — Chicken Classic", "price": "XCG 49.50", "status": "active", "description": "Whole fire-roasted chicken or 8 pc roast/grill chicken with 2 sides. Family-style fire meal.", "image": "/images/bossa/weekend-fire/box-5-chicken-classic.png", "tag": "Family-style fire meal" },
-        { "name": "Box #6 — Ribs Classic", "price": "XCG 49.50", "status": "active", "description": "Slow-smoked ribs: 2 full ribs with garlic sauce and bread. Slow smoke, fast handoff.", "image": "/images/bossa/weekend-fire/box-6-ribs-classic.png", "tag": "Slow smoke · fast handoff" },
-        { "name": "Box #7 — SEA BOX Coming Soon", "price": "XCG 99.50", "status": "coming-soon", "description": "Mixed grill and seafood platter with 1 catch-of-the-day skewer, 1 tenderloin skewer, and 2 sides.", "image": "/images/bossa/weekend-fire/box-7-sea-box-coming-soon.png", "tag": "Heavy appetite special" },
-        { "name": "Box #8 — Local Fire Box", "price": "XCG 6+", "status": "active", "description": "Side-order style local pickup box: fresh salad, seaweed, hummus, garlic bread/pita, baked potato, cassava, chorizo, boiled peanuts, and beer options.", "image": "/images/bossa/weekend-fire/box-8-local-fire-box.png", "tag": "Local pickup favorite" }
-      ]
-    },
-    {
-      "id": "skewers",
-      "title": "Skewers / Pinchos",
-      "note": "Flame-grilled · smoky · served with fire sides",
-      "editableNote": "Use this block for chicken, tenderloin, shrimp, seafood, and future veggie skewers.",
-      "status": "active",
-      "items": [
-        { "name": "Chicken Skewer", "price": "XCG 25", "status": "active", "description": "Marinated chicken skewer grilled with bell pepper, onion, garlic sauce, and fire bread." },
-        { "name": "Tenderloin Skewer", "price": "XCG 35", "status": "active", "description": "Tenderloin skewer with paprika/onion, bold fire flavor, garlic sauce, and fire bread." },
-        { "name": "Seafood Skewer — Coming Soon", "price": "Market price", "status": "coming-soon", "description": "Catch-of-the-day, shrimp, lobster, or mixed seafood from the fire for the Weekend Fire & Sea Specials launch." }
-      ]
-    },
-    {
-      "id": "sandwiches",
-      "title": "Fire Bread Sandwiches",
-      "note": "Crispy bread · smoke · sauce · island bite",
-      "editableNote": "This block supports sandwich trays, party orders, and the Box #3 sandwich box.",
-      "status": "active",
-      "items": [
-        { "name": "Chicken Salad Sandwich", "price": "XCG 12", "status": "active", "description": "Fresh chicken salad in fire bread with garlic oil and BOSSA flavor." },
-        { "name": "Whole Leg Chicken Sandwich", "price": "XCG 12", "status": "active", "description": "Whole leg chicken, crispy bread, and BOSSA jus." },
-        { "name": "Boneless Chicken Sandwich", "price": "XCG 12", "status": "active", "description": "Boneless chicken with fire seasoning, bread, and sauce." },
-        { "name": "Porkchop Sandwich", "price": "XCG 12", "status": "active", "description": "Wood-fired porkchop, crispy bread, and tamarind-style fire glaze." },
-        { "name": "Chorizo Sandwich", "price": "XCG 12", "status": "active", "description": "Fire-grilled chorizo in warm bread with BOSSA sauce." },
-        { "name": "Grilled Steak / Stew Beef Sandwich", "price": "XCG 15", "status": "active", "description": "Grilled steak or slow stew beef with fire bread and island herbs." },
-        { "name": "Tenderloin Sandwich", "price": "XCG 20", "status": "active", "description": "Tenderloin with toasted bread, fire salt, and premium grill flavor." }
-      ]
-    },
-    {
-      "id": "sides",
-      "title": "Sides & Add-ons",
-      "note": "Simple sides · fast pickup · box friendly",
-      "editableNote": "Update portions and side prices here before publishing future flyers.",
-      "status": "active",
-      "items": [
-        { "name": "Fresh Salad", "price": "XCG 10", "status": "active", "description": "Fresh salad for balance next to chicken, ribs, skewers, and sandwiches." },
-        { "name": "Seaweed Bowl", "price": "XCG 10", "status": "active", "description": "Cold seaweed side for fire boxes and seafood specials." },
-        { "name": "Hummus", "price": "XCG 10", "status": "active", "description": "Creamy hummus for bread, skewers, and party trays." },
-        { "name": "Homemade Garlic Bread / Pita", "price": "XCG 4", "status": "active", "description": "Bread for sauce, smoke, and box dipping." },
-        { "name": "Baked Potato", "price": "XCG 7", "status": "active", "description": "Baked potato with fire seasoning and optional garlic sauce." },
-        { "name": "Boiled Cassava", "price": "XCG 10", "status": "active", "description": "Soft cassava with island seasoning." },
-        { "name": "Chorizo Piece", "price": "XCG 6", "status": "active", "description": "Single chorizo add-on for boxes or local pickup." },
-        { "name": "Boiled Peanuts", "price": "XCG 6", "status": "active", "description": "Local-style peanut bowl for snacking and side orders." }
-      ]
-    },
-    {
-      "id": "soups-stews",
-      "title": "Soups & Stews",
-      "note": "Soul in a bowl · slow fire comfort",
-      "editableNote": "Use this block for beef soup, chicken soup, stews, and rotating comfort specials.",
-      "status": "active",
-      "items": [
-        { "name": "BOSSA Beef Soup", "price": "XCG 15", "status": "active", "description": "Hearty beef soup slow-simmered with meat, potato, carrot, and island herbs." },
-        { "name": "BOSSA Chicken Soup", "price": "XCG 11", "status": "active", "description": "Homestyle chicken soup with vegetables, light smoke, and comfort flavor." }
-      ]
-    },
-    {
-      "id": "drinks",
-      "title": "Drinks / Bebidas",
-      "note": "Cold drinks · island refreshment · easy upsell",
-      "editableNote": "Add sodas, water, juices, cocktails, beer, and rooftop drinks here.",
-      "status": "active",
-      "items": [
-        { "name": "Beer", "price": "XCG 6", "status": "active", "description": "Cold beer for weekend boxes and party orders." },
-        { "name": "Soft Drink", "price": "XCG 5", "status": "active", "description": "Cold soda selection. Final brands can be updated before service." },
-        { "name": "House Juice", "price": "XCG 7.50", "status": "active", "description": "Island juice. Flavor can rotate by day." },
-        { "name": "Sunset Cocktail Offer — Coming Soon", "price": "TBD", "status": "coming-soon", "description": "Limited sunset cocktail offer for Weekend Fire & Sea Specials." }
-      ]
-    }
-  ]
+  "menuSections": []
 }
