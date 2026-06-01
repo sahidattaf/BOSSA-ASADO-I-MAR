@@ -16,8 +16,18 @@ const ALLOWED_STATUSES = [
 
 const ALLOWED_CURRENCIES = ['XCG', 'USD'] as const;
 
+const ALLOWED_OWNERS = [
+  'Unassigned',
+  'Coach Sahid',
+  'Manager',
+  'Kitchen',
+  'Sales',
+  'Events',
+] as const;
+
 type LeadStatus = (typeof ALLOWED_STATUSES)[number];
 type Currency = (typeof ALLOWED_CURRENCIES)[number];
+type LeadOwner = (typeof ALLOWED_OWNERS)[number];
 
 function isAllowedStatus(value: unknown): value is LeadStatus {
   return typeof value === 'string' && ALLOWED_STATUSES.includes(value as LeadStatus);
@@ -25,6 +35,10 @@ function isAllowedStatus(value: unknown): value is LeadStatus {
 
 function isAllowedCurrency(value: unknown): value is Currency {
   return typeof value === 'string' && ALLOWED_CURRENCIES.includes(value as Currency);
+}
+
+function isAllowedOwner(value: unknown): value is LeadOwner {
+  return typeof value === 'string' && ALLOWED_OWNERS.includes(value as LeadOwner);
 }
 
 function isUuid(value: string) {
@@ -91,6 +105,14 @@ export async function PATCH(
       }
 
       updateRecord.currency = body.currency;
+    }
+
+    if ('follow_up_owner' in body) {
+      if (!isAllowedOwner(body.follow_up_owner)) {
+        return NextResponse.json({ ok: false, error: 'Invalid owner.' }, { status: 400 });
+      }
+
+      updateRecord.follow_up_owner = body.follow_up_owner === 'Unassigned' ? null : body.follow_up_owner;
     }
 
     if (Object.keys(updateRecord).length === 1) {
