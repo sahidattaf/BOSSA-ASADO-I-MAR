@@ -102,3 +102,30 @@ export async function selectSupabaseRows<TRecord>(
 
   return payload as TRecord[];
 }
+
+export async function updateSupabaseRows<TRecord extends Record<string, unknown>>(
+  tableName: string,
+  filterQuery: string,
+  record: TRecord,
+) {
+  if (!SUPABASE_URL || !SUPABASE_SERVER_KEY) {
+    throw new Error('Supabase environment variables are not configured.');
+  }
+
+  const response = await fetch(`${SUPABASE_URL}/rest/v1/${tableName}?${filterQuery}`, {
+    method: 'PATCH',
+    headers: getSupabaseHeaders({
+      Prefer: 'return=representation',
+    }),
+    body: JSON.stringify(record),
+    cache: 'no-store',
+  });
+
+  const payload = (await response.json()) as SupabaseErrorPayload | TRecord[];
+
+  if (!response.ok) {
+    throw new Error(getSupabaseErrorMessage(payload, response.status));
+  }
+
+  return payload;
+}
