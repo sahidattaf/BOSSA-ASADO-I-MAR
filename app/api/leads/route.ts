@@ -20,6 +20,8 @@ const ALLOWED_INTENTS = [
 
 const ALLOWED_CURRENCIES = ['XCG', 'USD'] as const;
 
+type SafeMetadataValue = string | number | boolean | null;
+
 const PRIVATE_FIELD_PATTERNS = [
   /name/i,
   /phone/i,
@@ -34,6 +36,15 @@ const PRIVATE_FIELD_PATTERNS = [
 
 function isPrivateField(key: string) {
   return PRIVATE_FIELD_PATTERNS.some((pattern) => pattern.test(key));
+}
+
+function isSafeMetadataValue(value: unknown): value is SafeMetadataValue {
+  return (
+    typeof value === 'string' ||
+    typeof value === 'number' ||
+    typeof value === 'boolean' ||
+    value === null
+  );
 }
 
 function cleanString(value: unknown, maxLength = 160) {
@@ -58,19 +69,13 @@ function cleanMetadata(value: unknown) {
     return {};
   }
 
-  const metadata: Record<string, string | number | boolean | null> = {};
+  const metadata: Record<string, SafeMetadataValue> = {};
 
   Object.entries(value as Record<string, unknown>).forEach(([key, item]) => {
     if (isPrivateField(key)) return;
+    if (!isSafeMetadataValue(item)) return;
 
-    if (
-      typeof item === 'string' ||
-      typeof item === 'number' ||
-      typeof item === 'boolean' ||
-      item === null
-    ) {
-      metadata[key] = item;
-    }
+    metadata[key] = item;
   });
 
   return metadata;
