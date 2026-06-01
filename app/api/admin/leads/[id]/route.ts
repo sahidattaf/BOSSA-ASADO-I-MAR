@@ -57,6 +57,19 @@ function cleanMoney(value: unknown) {
   return Math.round(numberValue * 100) / 100;
 }
 
+function cleanFollowUpDue(value: unknown) {
+  if (value === null || value === undefined || value === '') return null;
+  if (typeof value !== 'string') throw new Error('Invalid follow-up due value.');
+
+  const date = new Date(value);
+
+  if (Number.isNaN(date.getTime())) {
+    throw new Error('Invalid follow-up due date.');
+  }
+
+  return date.toISOString();
+}
+
 export async function PATCH(
   request: NextRequest,
   { params }: { params: { id: string } },
@@ -113,6 +126,11 @@ export async function PATCH(
       }
 
       updateRecord.follow_up_owner = body.follow_up_owner === 'Unassigned' ? null : body.follow_up_owner;
+    }
+
+    if ('follow_up_due' in body) {
+      updateRecord.follow_up_due = cleanFollowUpDue(body.follow_up_due);
+      updateRecord.last_follow_up_at = new Date().toISOString();
     }
 
     if (Object.keys(updateRecord).length === 1) {
