@@ -95,6 +95,34 @@ function statusClass(status: string) {
   return 'badge active';
 }
 
+function getFollowUpQueue(leads: BossaLead[]) {
+  return leads
+    .filter((lead) => activeStatuses.has(lead.lead_status))
+    .filter((lead) => lead.follow_up_owner || lead.follow_up_due || lead.lead_status === 'WhatsApp Clicked')
+    .sort((a, b) => {
+      if (!a.follow_up_due && !b.follow_up_due) return new Date(b.created_at).getTime() - new Date(a.created_at).getTime();
+      if (!a.follow_up_due) return 1;
+      if (!b.follow_up_due) return -1;
+      return new Date(a.follow_up_due).getTime() - new Date(b.follow_up_due).getTime();
+    })
+    .slice(0, 8);
+}
+
+function getFollowUpLabel(lead: BossaLead) {
+  if (!lead.follow_up_due) return 'No due time set';
+
+  const dueDate = new Date(lead.follow_up_due);
+  const now = new Date();
+  const isOverdue = dueDate.getTime() < now.getTime();
+
+  return `${isOverdue ? 'Overdue' : 'Due'} · ${formatDate(lead.follow_up_due)}`;
+}
+
+function getFollowUpClass(lead: BossaLead) {
+  if (!lead.follow_up_due) return 'queue-due unset';
+  return new Date(lead.follow_up_due).getTime() < Date.now() ? 'queue-due overdue' : 'queue-due';
+}
+
 function StatCard({ label, value, helper }: { label: string; value: string | number; helper: string }) {
   return (
     <div className="stat-card">
@@ -126,6 +154,7 @@ export default async function AdminLeadsPage() {
   const activeFollowUps = getActiveFollowUps(leads);
   const completedOrders = getStatusCount(leads, 'Completed');
   const completedRevenue = getCompletedRevenue(leads);
+  const followUpQueue = getFollowUpQueue(leads);
 
   return (
     <main className="admin-shell">
@@ -146,17 +175,25 @@ export default async function AdminLeadsPage() {
         .button { display: inline-flex; align-items: center; justify-content: center; border-radius: 999px; padding: 12px 18px; font-weight: 900; font-size: 14px; text-decoration: none; border: 1px solid rgba(254, 243, 199, 0.18); color: #fde68a; }
         .button.primary { background: #fcd34d; color: #1c0f08; border-color: #fcd34d; }
         .stats { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 16px; margin-top: 28px; }
-        .stat-card, .panel, .table-card { border: 1px solid rgba(254, 243, 199, 0.12); background: rgba(255,255,255,0.045); border-radius: 24px; box-shadow: 0 20px 50px rgba(0,0,0,0.24); }
+        .stat-card, .panel, .table-card, .queue-card { border: 1px solid rgba(254, 243, 199, 0.12); background: rgba(255,255,255,0.045); border-radius: 24px; box-shadow: 0 20px 50px rgba(0,0,0,0.24); }
         .stat-card { padding: 20px; }
         .stat-card p { margin: 0; color: rgba(253, 230, 138, 0.78); text-transform: uppercase; letter-spacing: 0.18em; font-size: 11px; font-weight: 900; }
         .stat-card strong { display: block; font-size: 34px; margin-top: 12px; }
         .stat-card span { display: block; color: #a8a29e; margin-top: 8px; font-size: 14px; }
         .ops-grid { display: grid; grid-template-columns: 1fr 3fr; gap: 16px; margin-top: 24px; }
         .panel { padding: 20px; }
-        .panel h2 { margin: 0 0 14px; font-size: 13px; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(253, 230, 138, 0.78); }
+        .panel h2, .queue-card h2 { margin: 0 0 14px; font-size: 13px; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(253, 230, 138, 0.78); }
         .panel ol { margin: 0; padding-left: 20px; color: #d6d3d1; line-height: 1.8; }
         .filter-row { display: flex; flex-wrap: wrap; gap: 10px; }
         .chip { border-radius: 999px; padding: 9px 13px; background: rgba(255,255,255,0.08); color: #fff; font-weight: 800; font-size: 13px; }
+        .queue-card { margin-top: 24px; padding: 20px; }
+        .queue-list { display: grid; gap: 10px; }
+        .queue-item { display: grid; grid-template-columns: 1.3fr .8fr .9fr .9fr; gap: 12px; align-items: center; padding: 14px; border: 1px solid rgba(254, 243, 199, 0.1); border-radius: 18px; background: rgba(10, 8, 6, 0.35); }
+        .queue-title { font-weight: 900; color: white; }
+        .queue-meta { color: #a8a29e; font-size: 12px; margin-top: 4px; }
+        .queue-due { color: #fde68a; font-weight: 900; font-size: 13px; }
+        .queue-due.overdue { color: #fca5a5; }
+        .queue-due.unset { color: #a8a29e; }
         .table-card { margin-top: 24px; overflow: hidden; background: rgba(10, 8, 6, 0.78); }
         .table-head { padding: 18px 20px; border-bottom: 1px solid rgba(254, 243, 199, 0.12); }
         .table-head h2 { margin: 0; font-size: 22px; }
@@ -174,7 +211,7 @@ export default async function AdminLeadsPage() {
         .badge.active { background: rgba(245, 158, 11, 0.14); color: #fde68a; border-color: rgba(252, 211, 77, 0.35); }
         .badge.danger { background: rgba(239, 68, 68, 0.14); color: #fecaca; border-color: rgba(252, 165, 165, 0.35); }
         .empty { margin-top: 24px; padding: 48px; text-align: center; border: 1px dashed rgba(254, 243, 199, 0.22); border-radius: 24px; background: rgba(10, 8, 6, 0.62); }
-        @media (max-width: 960px) { .admin-header, .ops-grid { grid-template-columns: 1fr; display: grid; } .stats { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+        @media (max-width: 960px) { .admin-header, .ops-grid, .queue-item { grid-template-columns: 1fr; display: grid; } .stats { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
         @media (max-width: 640px) { .admin-shell { padding: 22px 14px; } .stats { grid-template-columns: 1fr; } table { min-width: 760px; } }
       `}</style>
 
@@ -220,6 +257,30 @@ export default async function AdminLeadsPage() {
             </div>
             <p className="intro">Version 1 is read-only. Status editing comes next through a secure API route and protected admin controls.</p>
           </div>
+        </section>
+
+        <section className="queue-card">
+          <h2>Follow-Up Queue</h2>
+          {followUpQueue.length === 0 ? (
+            <p className="intro">No active follow-ups. Nice — the grill has no dangling leads.</p>
+          ) : (
+            <div className="queue-list">
+              {followUpQueue.map((lead) => (
+                <div className="queue-item" key={lead.id}>
+                  <div>
+                    <div className="queue-title">{getLeadTitle(lead)}</div>
+                    <div className="queue-meta">{leadTypeLabels[lead.lead_type]} · {lead.source_page ?? 'unknown source'}</div>
+                  </div>
+                  <span className={statusClass(lead.lead_status)}>{lead.lead_status}</span>
+                  <div>
+                    <div className="queue-meta">Owner</div>
+                    <div>{lead.follow_up_owner ?? 'Unassigned'}</div>
+                  </div>
+                  <div className={getFollowUpClass(lead)}>{getFollowUpLabel(lead)}</div>
+                </div>
+              ))}
+            </div>
+          )}
         </section>
 
         {leads.length === 0 ? (
