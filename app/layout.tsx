@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import AdminChromeGuard from './components/AdminChromeGuard';
 import LanguageSwitcher from './components/LanguageSwitcher';
 import WhatsAppClickTracker from './components/WhatsAppClickTracker';
 import './globals.css';
@@ -105,23 +106,27 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessJsonLd) }}
         />
-        <LanguageSwitcher />
-        <WhatsAppClickTracker />
+        <AdminChromeGuard>
+          <LanguageSwitcher />
+          <WhatsAppClickTracker />
+        </AdminChromeGuard>
         {children}
-        <a
-          className="sticky-whatsapp"
-          href={`https://wa.me/${WA_NUMBER}`}
-          target="_blank"
-          rel="noreferrer"
-          aria-label="Order or reserve BOSSA on WhatsApp"
-          data-track="whatsapp-click"
-          data-cta-source="sticky"
-          data-cta-label="sticky-whatsapp"
-          data-offer-id=""
-        >
-          <span>WhatsApp</span>
-          <strong>Order / Reserve</strong>
-        </a>
+        <AdminChromeGuard>
+          <a
+            className="sticky-whatsapp"
+            href={`https://wa.me/${WA_NUMBER}`}
+            target="_blank"
+            rel="noreferrer"
+            aria-label="Order or reserve BOSSA on WhatsApp"
+            data-track="whatsapp-click"
+            data-cta-source="sticky"
+            data-cta-label="sticky-whatsapp"
+            data-offer-id=""
+          >
+            <span>WhatsApp</span>
+            <strong>Order / Reserve</strong>
+          </a>
+        </AdminChromeGuard>
       </body>
     </html>
   );
