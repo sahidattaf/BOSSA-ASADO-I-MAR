@@ -14,14 +14,33 @@ const ALLOWED_STATUSES = [
   'Cancelled',
 ] as const;
 
+const ALLOWED_CURRENCIES = ['XCG', 'USD'] as const;
+
 type LeadStatus = (typeof ALLOWED_STATUSES)[number];
+type Currency = (typeof ALLOWED_CURRENCIES)[number];
 
 function isAllowedStatus(value: unknown): value is LeadStatus {
   return typeof value === 'string' && ALLOWED_STATUSES.includes(value as LeadStatus);
 }
 
+function isAllowedCurrency(value: unknown): value is Currency {
+  return typeof value === 'string' && ALLOWED_CURRENCIES.includes(value as Currency);
+}
+
 function isUuid(value: string) {
   return /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(value);
+}
+
+function cleanMoney(value: unknown) {
+  if (value === null || value === undefined || value === '') return null;
+
+  const numberValue = typeof value === 'number' ? value : Number(value);
+
+  if (!Number.isFinite(numberValue) || numberValue < 0) {
+    throw new Error('Invalid actual value.');
+  }
+
+  return Math.round(numberValue * 100) / 100;
 }
 
 export async function PATCH(
@@ -37,26 +56,45 @@ export async function PATCH(
 
     const body = await request.json();
 
-    if (!isAllowedStatus(body?.lead_status)) {
-      return NextResponse.json({ ok: false, error: 'Invalid lead status.' }, { status: 400 });
-    }
-
     const updateRecord: Record<string, unknown> = {
-      lead_status: body.lead_status,
       updated_at: new Date().toISOString(),
     };
 
-    if (body.lead_status === 'Completed') {
-      updateRecord.order_status = 'Completed';
-      updateRecord.completed_at = new Date().toISOString();
+    if ('lead_status' in body) {
+      if (!isAllowedStatus(body.lead_status)) {
+        return NextResponse.json({ ok: false, error: 'Invalid lead status.' }, { status: 400 });
+      }
+
+      updateRecord.lead_status = body.lead_status;
+
+      if (body.lead_status === 'Completed') {
+        updateRecord.order_status = 'Completed';
+        updateRecord.completed_at = new Date().toISOString();
+      }
+
+      if (body.lead_status === 'Lost') {
+        updateRecord.lost_at = new Date().toISOString();
+      }
+
+      if (body.lead_status === 'Cancelled') {
+        updateRecord.order_status = 'Cancelled';
+      }
     }
 
-    if (body.lead_status === 'Lost') {
-      updateRecord.lost_at = new Date().toISOString();
+    if ('actual_value' in body) {
+      updateRecord.actual_value = cleanMoney(body.actual_value);
     }
 
-    if (body.lead_status === 'Cancelled') {
-      updateRecord.order_status = 'Cancelled';
+    if ('currency' in body) {
+      if (!isAllowedCurrency(body.currency)) {
+        return NextResponse.json({ ok: false, error: 'Invalid currency.' }, { status: 400 });
+      }
+
+      updateRecord.currency = body.currency;
+    }
+
+    if (Object.keys(updateRecord).length === 1) {
+      return NextResponse.json({ ok: false, error: 'No valid update fields.' }, { status: 400 });
     }
 
     const result = await updateSupabaseRows(
@@ -72,7 +110,7 @@ export async function PATCH(
     }
 
     return NextResponse.json(
-      { ok: false, error: 'Lead status update failed.' },
+      { ok: false, error: error instanceof Error ? error.message : 'Lead update failed.' },
       { status: 500 },
     );
   }
