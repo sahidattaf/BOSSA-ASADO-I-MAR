@@ -15,13 +15,17 @@ type WhatsAppTrackingParams = {
   timestamp: string;
 };
 
+function isAdminRoute() {
+  return typeof window !== 'undefined' && window.location.pathname.startsWith('/admin');
+}
+
 /**
  * Sends a bossa_whatsapp_click event to GA4 if window.gtag is available.
  * Falls back to a clean dev-only console message when gtag is absent.
  * No external packages. No secrets. Browser-only.
  */
 function sendEvent(params: WhatsAppTrackingParams) {
-  if (typeof window === 'undefined') return;
+  if (typeof window === 'undefined' || isAdminRoute()) return;
 
   const { gtag } = window as WindowWithGtag;
 
@@ -102,6 +106,8 @@ function inferLeadInput(params: WhatsAppTrackingParams): BossaLeadInput {
 }
 
 function createLeadFromClick(params: WhatsAppTrackingParams) {
+  if (isAdminRoute()) return;
+
   const leadInput = inferLeadInput(params);
 
   createBossaLead(leadInput).catch((error) => {
@@ -124,6 +130,8 @@ function createLeadFromClick(params: WhatsAppTrackingParams) {
  */
 export default function WhatsAppClickTracker() {
   useEffect(() => {
+    if (isAdminRoute()) return undefined;
+
     const handleClick = (e: MouseEvent) => {
       let el = e.target as HTMLElement | null;
 
