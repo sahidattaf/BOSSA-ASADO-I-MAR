@@ -29,6 +29,12 @@ type LeadStatus = (typeof ALLOWED_STATUSES)[number];
 type Currency = (typeof ALLOWED_CURRENCIES)[number];
 type LeadOwner = (typeof ALLOWED_OWNERS)[number];
 
+type RouteContext = {
+  params: Promise<{
+    id: string;
+  }>;
+};
+
 function isAllowedStatus(value: unknown): value is LeadStatus {
   return typeof value === 'string' && ALLOWED_STATUSES.includes(value as LeadStatus);
 }
@@ -70,12 +76,9 @@ function cleanFollowUpDue(value: unknown) {
   return date.toISOString();
 }
 
-export async function PATCH(
-  request: NextRequest,
-  { params }: { params: { id: string } },
-) {
+export async function PATCH(request: NextRequest, context: RouteContext) {
   try {
-    const { id } = params;
+    const { id } = await context.params;
 
     if (!isUuid(id)) {
       return NextResponse.json({ ok: false, error: 'Invalid lead id.' }, { status: 400 });
