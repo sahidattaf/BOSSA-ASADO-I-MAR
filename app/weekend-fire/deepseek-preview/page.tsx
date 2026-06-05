@@ -103,8 +103,9 @@ export default function DeepSeekWeekendFirePreviewPage() {
         data-track="whatsapp-click"
         data-cta-source="deepseek-preview"
         data-cta-label="floating-whatsapp"
+        aria-label="Order BOSSA Weekend Fire on WhatsApp"
       >
-        WhatsApp
+        💬 Order on WhatsApp
       </a>
 
       <header className="preview-header">
@@ -120,8 +121,9 @@ export default function DeepSeekWeekendFirePreviewPage() {
           data-track="whatsapp-click"
           data-cta-source="deepseek-preview"
           data-cta-label="header-order"
+          aria-label="Order BOSSA Weekend Fire on WhatsApp"
         >
-          Order Now
+          Order on WhatsApp
         </a>
       </header>
 
@@ -142,10 +144,11 @@ export default function DeepSeekWeekendFirePreviewPage() {
               data-track="whatsapp-click"
               data-cta-source="deepseek-preview"
               data-cta-label="hero-order"
+              aria-label="Order BOSSA Weekend Fire on WhatsApp"
             >
-              Order via WhatsApp
+              Reserve Weekend Fire
             </a>
-            <a className="secondary-btn" href="#menu">Explore Boxes</a>
+            <a className="secondary-btn" href="#menu">View Fire Boxes</a>
           </div>
         </div>
       </section>
@@ -177,8 +180,9 @@ export default function DeepSeekWeekendFirePreviewPage() {
                       data-cta-source="deepseek-preview"
                       data-cta-label="box-order"
                       data-offer-id={box.number.replace('#', 'box-')}
+                      aria-label={`Order ${box.name} on WhatsApp`}
                     >
-                      Order
+                      Order on WhatsApp
                     </a>
                   ) : (
                     <span className="soon">Soon</span>
@@ -212,7 +216,7 @@ export default function DeepSeekWeekendFirePreviewPage() {
             <span>Pickup</span>
           </div>
           <p>
-            This preview keeps BOSSA CRM tracking alive: CTA click → Supabase lead → admin dashboard.
+            Tap WhatsApp, confirm your box, and we&apos;ll prepare it fresh for pickup.
           </p>
         </div>
       </section>
@@ -229,8 +233,9 @@ export default function DeepSeekWeekendFirePreviewPage() {
           data-track="whatsapp-click"
           data-cta-source="deepseek-preview"
           data-cta-label="location-whatsapp"
+          aria-label="Ask about BOSSA Weekend Fire availability on WhatsApp"
         >
-          Ask availability
+          Ask Availability
         </a>
       </section>
 
@@ -555,6 +560,7 @@ export default function DeepSeekWeekendFirePreviewPage() {
           .preview-header {
             align-items: flex-start;
             flex-direction: column;
+            gap: 12px;
           }
 
           .box-grid,
@@ -562,13 +568,24 @@ export default function DeepSeekWeekendFirePreviewPage() {
             grid-template-columns: 1fr;
           }
 
+          .image-wrap {
+            height: 200px;
+          }
+
           .section {
-            padding: 60px 18px;
+            padding: 52px 16px;
+          }
+
+          .hero-actions {
+            flex-direction: column;
+            align-items: center;
           }
 
           .floating-wa {
             bottom: 16px;
             right: 16px;
+            font-size: 14px;
+            padding: 12px 16px;
           }
         }
       `}</style>
