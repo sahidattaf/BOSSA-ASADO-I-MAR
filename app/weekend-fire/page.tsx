@@ -68,7 +68,6 @@ export default function WeekendFirePage() {
           <a href="#audio">Audio</a>
           <a href="#videos">Videos</a>
           <a href="#pickup">Pickup Flow</a>
-          <a href="/weekend-fire/customize">Customizer</a>
           <a href={whatsappUrl} target="_blank" rel="noreferrer">Order</a>
         </nav>
       </header>
@@ -89,7 +88,6 @@ export default function WeekendFirePage() {
           </a>
           <a className="button" href={paymentLinks.weekendDeposit.href} target="_blank" rel="noreferrer">{paymentLinks.weekendDeposit.label}</a>
           <a className="button" href="#boxes">View Box #1–#8</a>
-          <a className="button" href="/weekend-fire/customize">Open flyer customizer</a>
         </div>
         <p className="payment-note">{paymentDisclaimer} Test link: {paymentLinks.weekendDeposit.amount}.</p>
       </section>
@@ -114,11 +112,10 @@ export default function WeekendFirePage() {
       <section className="section media-section">
         <div className="container media-grid">
           <div>
-            <span className="badge">Final Weekend Flyer</span>
-            <h2>Edit once. Export PNG, PDF, or offline HTML.</h2>
-            <p>The customizer keeps the flyer editable and exportable for WhatsApp, Instagram, Canva, and print.</p>
+            <span className="badge">Weekend Fire Signal</span>
+            <h2>Show the box. Confirm the batch. Keep the order simple.</h2>
+            <p>Guests choose the numbered box, send pickup time and quantity, then BOSSA confirms what is still available from the fire.</p>
             <div className="cta-row">
-              <a className="button primary" href="/weekend-fire/customize">Open customizer</a>
               <a className="button" href={whatsappUrl} target="_blank" rel="noreferrer"
                 data-track="whatsapp-click" data-cta-source="weekend-fire" data-cta-label="flyer-order" data-offer-id="">
                 Order before sold out

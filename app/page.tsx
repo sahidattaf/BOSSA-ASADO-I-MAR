@@ -1,4 +1,6 @@
 import LiveFireStatus from './components/LiveFireStatus';
+import PublicHeader from './components/PublicHeader';
+import SiteFooter from './components/SiteFooter';
 import { mediaAssets } from './data/media';
 import { menuSections } from './data/menu';
 import { siteConfig } from './data/site';
@@ -23,16 +25,6 @@ const partyUrl = buildWhatsAppUrl(
   'Bon dia BOSSA, I want a party / event quote. Date: ___ Group size: ___ Pickup/event time: ___ Package preference: ___'
 );
 
-const routes = [
-  ['Order', '#order'],
-  ['Menu', '#menu'],
-  ['Audio', '#audio'],
-  ['Videos', '#videos'],
-  ['Weekend Fire', '/weekend-fire'],
-  ['Party / Events', '/party-menu'],
-  ['Location', '#location'],
-];
-
 const orderCards = [
   {
     title: 'Order Weekend Fire',
@@ -51,10 +43,10 @@ const orderCards = [
     offerId: '',
   },
   {
-    title: 'Plan party / event food',
-    text: 'For birthdays, office orders, rooftop nights, and private fire moments, request a quote ahead of time.',
+    title: 'Plan catering or private event',
+    text: 'For villas, birthdays, office orders, rooftop nights, tourist groups, and private fire moments, request a quote ahead of time.',
     cta: 'Request quote',
-    href: partyUrl,
+    href: '/catering',
     trackLabel: 'order-card-party',
     offerId: '',
   },
@@ -70,27 +62,17 @@ const howItWorks = [
 export default function HomePage() {
   return (
     <main>
-      <header className="container nav">
-        <a className="brand brand-lockup" href="#top" aria-label={`${siteConfig.brandName} home`}>
-          <img src="/images/bossa/bossa-logo-fire-gold.svg" alt="" className="brand-logo" />
-          <span>BOSSA ASADO I MAR</span>
-        </a>
-        <nav className="nav-links" aria-label="Primary navigation">
-          {routes.map(([label, href]) => (
-            <a key={href} href={href}>{label}</a>
-          ))}
-        </nav>
-      </header>
+      <PublicHeader />
 
       <section id="top" className="container hero brand-hero premium-hero">
         <div className="hero-grid">
           <div className="hero-copy">
             <LiveFireStatus />
             <span className="badge">Pietermaai · Opposite Avila Hotel · Curaçao</span>
-            <h1>Wood fire dining with Caribbean soul.</h1>
+            <h1>Fire. Flavor. Ocean.</h1>
             <p className="lead">
-              {siteConfig.brandName} brings fire boxes, ribs, skewers, sandwiches, side-order bowls, party orders,
-              audio, videos, and Weekend Fire energy into one clear WhatsApp-first restaurant flow.
+              Wood-fire dining with Caribbean soul in Pietermaai, Curaçao. Order Weekend Fire Boxes,
+              reserve a table, or plan your private fire-grill event.
             </p>
             <div className="cta-row">
               <a className="button primary" href={orderUrl} target="_blank" rel="noreferrer"
@@ -98,8 +80,8 @@ export default function HomePage() {
                 Order on WhatsApp
               </a>
               <a className="button" href="/weekend-fire">Weekend Fire Boxes</a>
-              <a className="button" href="/party-menu">Party / Events</a>
-              <a className="button" href="#menu">View menu</a>
+              <a className="button" href="/catering">Catering</a>
+              <a className="button" href="/menu">View menu</a>
             </div>
           </div>
           <div className="hero-visual-card">
@@ -118,8 +100,8 @@ export default function HomePage() {
       <section id="order" className="section media-section">
         <div className="container">
           <span className="badge">Order Flow</span>
-          <h2>One website. Three clean actions.</h2>
-          <p>Guests should never wonder what to do next: order boxes, reserve, or request a party/event quote.</p>
+          <h2>One website. Clear revenue paths.</h2>
+          <p>Guests should never wonder what to do next: order boxes, reserve, request catering, plan private events, or book tourist experiences.</p>
           <div className="grid" style={{ marginTop: '24px' }}>
             {orderCards.map((card) => (
               <article className="card" key={card.title}>
@@ -128,8 +110,8 @@ export default function HomePage() {
                 <a
                   className="button primary"
                   href={card.href}
-                  target="_blank"
-                  rel="noreferrer"
+                  target={card.href.startsWith('http') ? '_blank' : undefined}
+                  rel={card.href.startsWith('http') ? 'noreferrer' : undefined}
                   data-track="whatsapp-click"
                   data-cta-source="home"
                   data-cta-label={card.trackLabel}
@@ -185,12 +167,11 @@ export default function HomePage() {
             <span className="badge">Weekend Fire</span>
             <h2>Numbered boxes built for Thursday through Sunday.</h2>
             <p>
-              BOSSA Weekend Fire now has the live customizer, final flyer images, offline HTML export, PNG export,
-              PDF print flow, and WhatsApp order buttons. Box #7 is the SEA BOX Coming Soon slot.
+              BOSSA Weekend Fire is the fast order path: numbered boxes, clear pickup timing,
+              and WhatsApp confirmation before the batch sells out.
             </p>
             <div className="cta-row">
               <a className="button primary" href="/weekend-fire">Open Weekend Fire page</a>
-              <a className="button" href="/weekend-fire/customize">Open flyer customizer</a>
               <a className="button" href={weekendUrl} target="_blank" rel="noreferrer"
                 data-track="whatsapp-click" data-cta-source="home" data-cta-label="promo-weekend-order" data-offer-id="">
                 Order boxes
@@ -208,10 +189,9 @@ export default function HomePage() {
       <section id="menu" className="section">
         <div className="container">
           <span className="badge">Fire & Smoke Menu</span>
-          <h2>Menu blocks from approved BOSSA content JSON.</h2>
+          <h2>Signature menu direction.</h2>
           <p>
-            The website menu is generated into <code>app/data/menu.ts</code>. Update <code>content/notion/bossa-website-content.template.json</code>,
-            then run <code>npm run generate:data</code> to refresh it.
+            Ribs, skewers, sandwiches, sides, sauces, fire boxes, and Caribbean grill favorites.
           </p>
           <div className="menu-category-jump">
             {menuSections.map((section) => (
@@ -272,14 +252,16 @@ export default function HomePage() {
       <section id="party" className="section">
         <div className="container split">
           <div>
-            <span className="badge">Party / Events</span>
-            <h2>Group orders, private fire moments, and future rooftop events.</h2>
+            <span className="badge">Catering · Private Events · Tourist Experiences</span>
+            <h2>More than food orders: BOSSA is a hospitality platform.</h2>
             <p>
-              Party orders use the same BOSSA fire system: boxes, classics, skewers, sandwiches, sides,
-              soups, and event-ready quote requests through WhatsApp.
+              Turn villas, birthdays, offices, hotels, yacht groups, and tourist nights into clear
+              fire-grill revenue paths with simple WhatsApp quote flows.
             </p>
             <div className="cta-row">
-              <a className="button primary" href="/party-menu">Open Party / Events page</a>
+              <a className="button primary" href="/catering">Catering</a>
+              <a className="button" href="/private-events">Private Events</a>
+              <a className="button" href="/tourist-experiences">Tourist Experiences</a>
               <a className="button" href={partyUrl} target="_blank" rel="noreferrer"
                 data-track="whatsapp-click" data-cta-source="home" data-cta-label="promo-party-quote" data-offer-id="">
                 Request quote
@@ -291,6 +273,31 @@ export default function HomePage() {
             alt="BOSSA Seafood Coming Soon event visual"
             style={{ width: '100%', borderRadius: '12px' }}
           />
+        </div>
+      </section>
+
+      <section className="section premium-section">
+        <div className="container">
+          <div className="section-heading-row">
+            <div>
+              <span className="badge">BOSSA V2</span>
+              <h2>Choose the intent. BOSSA handles the flow.</h2>
+            </div>
+            <p>Every major customer path now has a dedicated page, SEO metadata, and WhatsApp CTA.</p>
+          </div>
+          <div className="grid signature-grid">
+            {[
+              ['Rooftop Lounge', '/rooftop-lounge', 'Sunset, fire, music, and private group energy.'],
+              ['Gallery', '/gallery', 'Food, fire, rooftop, events, and behind-the-scenes visuals.'],
+              ['Partners', '/partners', 'Hotels, Airbnb hosts, villa managers, tour operators, and yacht charters.'],
+            ].map(([title, href, text]) => (
+              <article className="card signature-card" key={href}>
+                <h3>{title}</h3>
+                <p>{text}</p>
+                <a className="button" href={href}>Open page</a>
+              </article>
+            ))}
+          </div>
         </div>
       </section>
 
@@ -320,22 +327,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <footer className="footer">
-        <div className="container footer-grid">
-          <div className="footer-brand">
-            <img src="/images/bossa/bossa-logo-fire-gold.svg" alt={`${siteConfig.brandName} logo`} className="footer-logo" />
-            <div>
-              <strong>{siteConfig.brandName}</strong>
-              <p>{siteConfig.address}</p>
-              <p>#BossaAsado · #WeekendFireGrill · #KandelaDushi</p>
-            </div>
-          </div>
-          <div>
-            <p>WhatsApp: +5999 523 0683</p>
-            <p>Open {siteConfig.hours}</p>
-          </div>
-        </div>
-      </footer>
+      <SiteFooter />
     </main>
   );
 }

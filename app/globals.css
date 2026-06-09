@@ -58,6 +58,8 @@ h1 { max-width: 900px; margin: 22px 0 18px; font-size: clamp(44px, 8vw, 92px); l
 .card { min-height: 190px; }
 .card h3, .menu-section h3, .info-card h3, .video-card h3 { margin: 0 0 10px; color: var(--gold); }
 .card p, .section p, .menu-item p, .menu-section-header p, .footer p { color: var(--muted); line-height: 1.6; }
+.revenue-list { margin: 16px 0 0; padding-left: 20px; color: var(--muted); line-height: 1.65; }
+.revenue-list li + li { margin-top: 8px; }
 .media-section { background: rgba(255,255,255,0.025); }
 .media-grid img, .split > img { border: 1px solid var(--line); box-shadow: var(--shadow); max-height: 760px; object-fit: cover; }
 .media-placeholder { min-height: 260px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 16px; text-align: center; background: radial-gradient(circle at center, rgba(255,106,26,0.28), transparent 48%), rgba(255,255,255,0.055); }

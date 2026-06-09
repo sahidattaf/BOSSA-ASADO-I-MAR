@@ -23,26 +23,61 @@ This repo is being upgraded from a business codex repository into a deployable p
 
 ---
 
-## Website Scope — Phase 1
+## Website Scope — BOSSA V2
 
-The first version of the BOSSA website should launch with:
+The public site is now being upgraded from a Phase 1 restaurant website into a multi-page hospitality revenue platform.
 
 - Homepage
-- Menu direction
-- WhatsApp reservation CTA
-- Events / rooftop storytelling
+- Menu
+- Weekend Fire Boxes
+- Rooftop Lounge
+- Catering
+- Private Events
+- Tourist Experiences
+- Gallery
+- About BOSSA
+- Reviews
+- Partners
+- Contact
 - AI Concierge placeholder
-- Contact / location section
 
-Future pages:
+The first V2 pass is intentionally static: clear customer pages, SEO metadata, sitemap, robots rules, and WhatsApp CTAs before adding heavier backend capture.
 
-- `/menu`
-- `/reserve`
-- `/events`
-- `/private-dining`
-- `/ai-concierge`
-- `/about`
-- `/subscribe`
+---
+
+## BOSSA V2 Revenue Flow
+
+```text
+Visitor lands
+   ↓
+Chooses intent
+   ↓
+Order / Reserve / Quote / Partner
+   ↓
+WhatsApp handoff
+   ↓
+Follow-up
+   ↓
+Revenue
+```
+
+Primary pages:
+
+```text
+/
+/menu
+/weekend-fire
+/rooftop-lounge
+/catering
+/private-events
+/tourist-experiences
+/gallery
+/reviews
+/about
+/partners
+/contact
+/ai-concierge
+```
 
 ---
 
@@ -123,12 +158,14 @@ The Notion system contains the fuller BOSSA operating structure, including:
 
 - [ ] Connect this repo to a Vercel project
 - [ ] Confirm the production domain mapping for `bossaasado.com`
-- [ ] Replace placeholder WhatsApp number with the real BOSSA number
-- [ ] Add real opening hours
+- [x] Add BOSSA V2 static revenue pages
+- [x] Add sitemap and robots rules
+- [x] Hide `/weekend-fire/customize` from search indexing
 - [ ] Add final menu items and prices
 - [ ] Add real images / video hero
+- [ ] Replace sample review layout with real Google / TripAdvisor / Instagram proof
 - [ ] Add AI Concierge implementation
-- [ ] Add Supabase reservation capture later
+- [ ] Add Notion or Supabase lead capture later
 
 ---
 
