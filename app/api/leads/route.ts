@@ -2,11 +2,18 @@ import { randomUUID } from 'crypto';
 import { NextRequest, NextResponse } from 'next/server';
 import { insertSupabaseRow, isSupabaseConfigured } from '../../lib/supabase-server';
 
+const NOTION_API_VERSION = '2022-06-28';
+
 const ALLOWED_LEAD_TYPES = [
   'weekend_fire_order',
   'reservation',
   'party_event_quote',
   'general_inquiry',
+  'catering',
+  'private_event',
+  'tourist_experience',
+  'partner',
+  'contact',
 ] as const;
 
 const ALLOWED_INTENTS = [
@@ -56,6 +63,22 @@ function cleanString(value: unknown, maxLength = 160) {
   return trimmed.slice(0, maxLength);
 }
 
+function requireString(value: unknown, fieldName: string, maxLength = 160) {
+  const cleaned = cleanString(value, maxLength);
+
+  if (!cleaned) {
+    return {
+      value: null,
+      error: `${fieldName} is required.`,
+    };
+  }
+
+  return {
+    value: cleaned,
+    error: null,
+  };
+}
+
 function cleanNumber(value: unknown) {
   if (typeof value !== 'number') return null;
   if (!Number.isFinite(value)) return null;
@@ -81,11 +104,170 @@ function cleanMetadata(value: unknown) {
   return metadata;
 }
 
+function cleanLeadType(value: unknown) {
+  const leadType = cleanString(value, 60);
+  if (!leadType) return null;
+
+  return leadType.toLowerCase().replace(/[\s-]+/g, '_');
+}
+
+function isLeadType(value: string): value is (typeof ALLOWED_LEAD_TYPES)[number] {
+  return ALLOWED_LEAD_TYPES.includes(value as (typeof ALLOWED_LEAD_TYPES)[number]);
+}
+
+function isFormLead(body: Record<string, unknown>) {
+  return (
+    body.form_kind === 'lead_form' ||
+    body.formKind === 'lead_form' ||
+    body.leadType !== undefined ||
+    body.sourcePage !== undefined
+  );
+}
+
+function notionRichText(value: string | null) {
+  return value ? { rich_text: [{ text: { content: value } }] } : { rich_text: [] };
+}
+
+function notionSelect(value: string | null) {
+  return value ? { select: { name: value } } : { select: null };
+}
+
+async function createNotionLead(lead: {
+  id: string;
+  name: string;
+  phone: string;
+  email: string | null;
+  leadType: string;
+  eventDate: string | null;
+  guestCount: string | null;
+  budget: string | null;
+  message: string;
+  sourcePage: string;
+}) {
+  const apiKey = process.env.NOTION_API_KEY;
+  const databaseId = process.env.NOTION_LEADS_DATABASE_ID;
+
+  if (!apiKey || !databaseId) {
+    return {
+      configured: false,
+      stored: false,
+    };
+  }
+
+  const response = await fetch('https://api.notion.com/v1/pages', {
+    method: 'POST',
+    headers: {
+      Authorization: `Bearer ${apiKey}`,
+      'Content-Type': 'application/json',
+      'Notion-Version': NOTION_API_VERSION,
+    },
+    body: JSON.stringify({
+      parent: { database_id: databaseId },
+      properties: {
+        Name: {
+          title: [{ text: { content: lead.name } }],
+        },
+        Phone: notionRichText(lead.phone),
+        Email: notionRichText(lead.email),
+        'Lead Type': notionSelect(lead.leadType),
+        'Source Page': notionRichText(lead.sourcePage),
+        'Event Date': notionRichText(lead.eventDate),
+        'Guest Count': notionRichText(lead.guestCount),
+        Budget: notionRichText(lead.budget),
+        Message: notionRichText(lead.message),
+        Status: notionSelect('New'),
+        'Lead ID': notionRichText(lead.id),
+      },
+    }),
+  });
+
+  if (!response.ok) {
+    const errorBody = await response.text();
+    throw new Error(`Notion lead creation failed: ${response.status} ${errorBody}`);
+  }
+
+  return {
+    configured: true,
+    stored: true,
+  };
+}
+
+async function handleFormLead(body: Record<string, unknown>) {
+  const name = requireString(body.name, 'name', 120);
+  const phone = requireString(body.phone, 'phone', 80);
+  const message = requireString(body.message, 'message', 1200);
+  const sourcePage = requireString(body.sourcePage, 'sourcePage', 160);
+  const leadTypeInput = cleanLeadType(body.leadType);
+
+  const validationError =
+    name.error ||
+    phone.error ||
+    message.error ||
+    sourcePage.error ||
+    (!leadTypeInput ? 'leadType is required.' : null);
+
+  if (validationError) {
+    return NextResponse.json(
+      {
+        ok: false,
+        error: validationError,
+      },
+      { status: 400 },
+    );
+  }
+
+  if (!isLeadType(leadTypeInput)) {
+    return NextResponse.json(
+      {
+        ok: false,
+        error: 'Invalid leadType.',
+      },
+      { status: 400 },
+    );
+  }
+
+  const leadId = randomUUID();
+  const leadRecord = {
+    id: leadId,
+    name: name.value,
+    phone: phone.value,
+    email: cleanString(body.email, 160),
+    leadType: leadTypeInput,
+    eventDate: cleanString(body.eventDate, 80),
+    guestCount: cleanString(body.guestCount, 80),
+    budget: cleanString(body.budget, 120),
+    message: message.value,
+    sourcePage: sourcePage.value,
+    createdAt: new Date().toISOString(),
+  };
+
+  const notionResult = await createNotionLead(leadRecord);
+
+  if (!notionResult.configured) {
+    console.info('[BOSSA lead form fallback]', leadRecord);
+  }
+
+  return NextResponse.json({
+    ok: true,
+    lead_id: leadId,
+    storage: notionResult.configured ? 'notion' : 'console_fallback',
+    warning: notionResult.configured ? undefined : 'Notion environment variables are not configured.',
+  });
+}
+
 export async function POST(request: NextRequest) {
   try {
-    const body = await request.json();
+    const body = (await request.json()) as Record<string, unknown>;
 
-    if (!body?.lead_type) {
+    if (isFormLead(body)) {
+      return handleFormLead(body);
+    }
+
+    const leadType = cleanLeadType(body.lead_type);
+    const intent = cleanString(body.intent, 60);
+    const currency = cleanString(body.currency, 10);
+
+    if (!leadType) {
       return NextResponse.json(
         {
           ok: false,
@@ -95,7 +277,7 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    if (!ALLOWED_LEAD_TYPES.includes(body.lead_type)) {
+    if (!isLeadType(leadType)) {
       return NextResponse.json(
         {
           ok: false,
@@ -105,7 +287,7 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    if (body.intent && !ALLOWED_INTENTS.includes(body.intent)) {
+    if (intent && !ALLOWED_INTENTS.includes(intent as (typeof ALLOWED_INTENTS)[number])) {
       return NextResponse.json(
         {
           ok: false,
@@ -115,7 +297,7 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    if (body.currency && !ALLOWED_CURRENCIES.includes(body.currency)) {
+    if (currency && !ALLOWED_CURRENCIES.includes(currency as (typeof ALLOWED_CURRENCIES)[number])) {
       return NextResponse.json(
         {
           ok: false,
@@ -134,16 +316,16 @@ export async function POST(request: NextRequest) {
       utm_medium: cleanString(body.utm_medium, 120),
       utm_campaign: cleanString(body.utm_campaign, 120),
       utm_content: cleanString(body.utm_content, 120),
-      lead_type: body.lead_type,
-      intent: body.intent ?? null,
+      lead_type: leadType,
+      intent: intent ?? null,
       offer: cleanString(body.offer, 120),
       item_name: cleanString(body.item_name, 160),
       box_number: cleanString(body.box_number, 20),
       estimated_value: cleanNumber(body.estimated_value),
-      currency: body.currency ?? 'XCG',
+      currency: currency ?? 'XCG',
       lead_status: 'WhatsApp Clicked',
-      order_status: body.intent === 'order' ? 'Requested' : 'Not Started',
-      payment_status: body.intent === 'deposit' ? 'Pending' : 'Not Required',
+      order_status: intent === 'order' ? 'Requested' : 'Not Started',
+      payment_status: intent === 'deposit' ? 'Pending' : 'Not Required',
       metadata: cleanMetadata(body.metadata),
     };
 

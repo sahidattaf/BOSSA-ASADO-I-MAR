@@ -120,6 +120,35 @@ Start production server locally:
 npm start
 ```
 
+### Lead Capture Environment
+
+BOSSA V2.1 lead forms post to `app/api/leads/route.ts`.
+
+Required for Notion lead storage:
+
+```bash
+NOTION_API_KEY=
+NOTION_LEADS_DATABASE_ID=
+```
+
+Expected Notion database properties:
+
+```text
+Name
+Phone
+Email
+Lead Type
+Source Page
+Event Date
+Guest Count
+Budget
+Message
+Status
+Lead ID
+```
+
+If the Notion variables are missing, the API keeps the form safe and returns success while logging the lead server-side as a console fallback. No secret keys are exposed to the frontend.
+
 ---
 
 ## Deployment Flow

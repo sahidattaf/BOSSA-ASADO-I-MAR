@@ -10,5 +10,12 @@ export const metadata: Metadata = {
 };
 
 export default function TouristExperiencesPage() {
-  return <RevenuePage content={revenuePages.touristExperiences} ctaSource="tourist-experiences" />;
+  return (
+    <RevenuePage
+      content={revenuePages.touristExperiences}
+      ctaSource="tourist-experiences"
+      leadType="tourist_experience"
+      sourcePage="/tourist-experiences"
+    />
+  );
 }

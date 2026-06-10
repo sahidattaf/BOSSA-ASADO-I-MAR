@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import AdminChromeGuard from './components/AdminChromeGuard';
+import FloatingShareButton from './components/FloatingShareButton';
 import LanguageSwitcher from './components/LanguageSwitcher';
 import WhatsAppClickTracker from './components/WhatsAppClickTracker';
 import './globals.css';
@@ -112,6 +113,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         </AdminChromeGuard>
         {children}
         <AdminChromeGuard>
+          <FloatingShareButton />
           <a
             className="sticky-whatsapp"
             href={`https://wa.me/${WA_NUMBER}`}

@@ -1,3 +1,4 @@
+import LeadForm from './LeadForm';
 import PublicHeader from './PublicHeader';
 import SiteFooter from './SiteFooter';
 import { siteConfig } from '../data/site';
@@ -21,9 +22,13 @@ const whatsappUrl = (message: string) =>
 export default function RevenuePage({
   content,
   ctaSource,
+  leadType,
+  sourcePage,
 }: {
   content: RevenuePageContent;
   ctaSource: string;
+  leadType?: 'catering' | 'private_event' | 'tourist_experience' | 'partner';
+  sourcePage?: string;
 }) {
   const href = whatsappUrl(content.whatsappMessage);
 
@@ -86,23 +91,33 @@ export default function RevenuePage({
       </section>
 
       <section className="section">
-        <div className="container premium-final-cta">
-          <span className="badge">WhatsApp Quote Flow</span>
-          <h2>Send the details. BOSSA confirms the best fire format.</h2>
-          <p>{content.whatsappMessage}</p>
-          <div className="cta-row" style={{ justifyContent: 'center' }}>
-            <a
-              className="button primary"
-              href={href}
-              target="_blank"
-              rel="noreferrer"
-              data-track="whatsapp-click"
-              data-cta-source={ctaSource}
-              data-cta-label="closing-whatsapp"
-              data-offer-id=""
-            >
-              {content.primaryCta}
-            </a>
+        <div className="container lead-capture-grid">
+          {leadType && sourcePage ? (
+            <LeadForm
+              leadType={leadType}
+              sourcePage={sourcePage}
+              title="Request a BOSSA quote"
+              intro="Send the planning details now. WhatsApp stays open for the fastest confirmation."
+            />
+          ) : null}
+          <div className="premium-final-cta">
+            <span className="badge">WhatsApp Quote Flow</span>
+            <h2>Send the details. BOSSA confirms the best fire format.</h2>
+            <p>{content.whatsappMessage}</p>
+            <div className="cta-row" style={{ justifyContent: 'center' }}>
+              <a
+                className="button primary"
+                href={href}
+                target="_blank"
+                rel="noreferrer"
+                data-track="whatsapp-click"
+                data-cta-source={ctaSource}
+                data-cta-label="closing-whatsapp"
+                data-offer-id=""
+              >
+                {content.primaryCta}
+              </a>
+            </div>
           </div>
         </div>
       </section>

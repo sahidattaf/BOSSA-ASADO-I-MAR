@@ -10,5 +10,5 @@ export const metadata: Metadata = {
 };
 
 export default function CateringPage() {
-  return <RevenuePage content={revenuePages.catering} ctaSource="catering" />;
+  return <RevenuePage content={revenuePages.catering} ctaSource="catering" leadType="catering" sourcePage="/catering" />;
 }

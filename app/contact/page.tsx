@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import LeadForm from '../components/LeadForm';
 import PublicHeader from '../components/PublicHeader';
 import SiteFooter from '../components/SiteFooter';
 import { siteConfig } from '../data/site';
@@ -42,6 +43,26 @@ export default function ContactPage() {
           <div className="info-card">
             <h3>Contact Topics</h3>
             <p>Orders, reservations, catering, private events, tourist packages, partnerships, and general questions.</p>
+          </div>
+        </div>
+      </section>
+      <section className="section">
+        <div className="container lead-capture-grid">
+          <LeadForm
+            leadType="contact"
+            sourcePage="/contact"
+            title="Send BOSSA a message"
+            intro="Use this form for orders, reservations, catering, private events, tourist packages, partnerships, or general questions."
+          />
+          <div className="premium-final-cta">
+            <span className="badge">WhatsApp Still Open</span>
+            <h2>Need the fastest answer?</h2>
+            <p>Send BOSSA a WhatsApp message and include your name, topic, date, guest count, and preferred follow-up.</p>
+            <div className="cta-row" style={{ justifyContent: 'center' }}>
+              <a className="button primary" href={contactUrl} target="_blank" rel="noreferrer" data-track="whatsapp-click" data-cta-source="contact" data-cta-label="form-whatsapp" data-offer-id="">
+                WhatsApp BOSSA
+              </a>
+            </div>
           </div>
         </div>
       </section>

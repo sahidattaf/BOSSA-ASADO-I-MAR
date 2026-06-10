@@ -10,5 +10,12 @@ export const metadata: Metadata = {
 };
 
 export default function PrivateEventsPage() {
-  return <RevenuePage content={revenuePages.privateEvents} ctaSource="private-events" />;
+  return (
+    <RevenuePage
+      content={revenuePages.privateEvents}
+      ctaSource="private-events"
+      leadType="private_event"
+      sourcePage="/private-events"
+    />
+  );
 }
