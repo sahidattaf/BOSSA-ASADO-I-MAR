@@ -132,6 +132,58 @@ function notionSelect(value: string | null) {
   return value ? { select: { name: value } } : { select: null };
 }
 
+function notionPhone(value: string | null) {
+  return { phone_number: value || null };
+}
+
+function notionEmail(value: string | null) {
+  return { email: value || null };
+}
+
+function notionDate(value: string | null) {
+  return { date: value ? { start: value } : null };
+}
+
+function notionNumber(value: string | null) {
+  if (!value) return { number: null };
+
+  const number = Number(value);
+  return { number: Number.isFinite(number) ? number : null };
+}
+
+function mapLeadTypeToNotion(value: string) {
+  const labels: Record<string, string> = {
+    catering: 'Catering',
+    private_event: 'Private Event',
+    tourist_experience: 'Tourist Experience',
+    partner: 'Partner',
+    contact: 'General Contact',
+    reservation: 'Reservation',
+    weekend_fire_order: 'Weekend Fire Order',
+    general_inquiry: 'General Contact',
+    party_event_quote: 'Private Event',
+  };
+
+  return labels[value] ?? 'General Contact';
+}
+
+function mapSourcePageToNotion(value: string) {
+  const normalized = value.trim().toLowerCase().replace(/^\/+/, '').replace(/\/+$/, '') || '/';
+  const labels: Record<string, string> = {
+    '/': 'Home',
+    catering: 'Catering',
+    'private-events': 'Private Events',
+    'tourist-experiences': 'Tourist Experiences',
+    partners: 'Partners',
+    contact: 'Contact',
+    'ai-concierge': 'AI Concierge',
+    'weekend-fire': 'Weekend Fire',
+    menu: 'Menu',
+  };
+
+  return labels[normalized] ?? labels[value] ?? 'Home';
+}
+
 async function createNotionLead(lead: {
   id: string;
   name: string;
@@ -167,22 +219,29 @@ async function createNotionLead(lead: {
         Name: {
           title: [{ text: { content: lead.name } }],
         },
-        Phone: notionRichText(lead.phone),
-        Email: notionRichText(lead.email),
-        'Lead Type': notionSelect(lead.leadType),
-        'Source Page': notionRichText(lead.sourcePage),
-        'Event Date': notionRichText(lead.eventDate),
-        'Guest Count': notionRichText(lead.guestCount),
+        Phone: notionPhone(lead.phone),
+        Email: notionEmail(lead.email),
+        'Lead Type': notionSelect(mapLeadTypeToNotion(lead.leadType)),
+        'Source Page': notionSelect(mapSourcePageToNotion(lead.sourcePage)),
+        Status: notionSelect('New'),
+        'Follow-Up Status': notionSelect('Needs Follow-Up'),
+        'Event Date': notionDate(lead.eventDate),
+        'Guest Count': notionNumber(lead.guestCount),
         Budget: notionRichText(lead.budget),
         Message: notionRichText(lead.message),
-        Status: notionSelect('New'),
-        'Lead ID': notionRichText(lead.id),
       },
     }),
   });
 
   if (!response.ok) {
     const errorBody = await response.text();
+    console.error('[BOSSA Notion lead API]', {
+      status: response.status,
+      statusText: response.statusText,
+      body: errorBody,
+      leadType: lead.leadType,
+      sourcePage: lead.sourcePage,
+    });
     throw new Error(`Notion lead creation failed: ${response.status} ${errorBody}`);
   }
 
