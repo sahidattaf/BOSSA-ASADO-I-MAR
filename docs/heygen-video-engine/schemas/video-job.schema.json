@@ -1,0 +1,60 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://bossaasado.com/schemas/video-job.schema.json",
+  "title": "BOSSA Video Job",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "campaign_name",
+    "objective",
+    "audience",
+    "message",
+    "language",
+    "channel",
+    "format",
+    "cta",
+    "approval_owner",
+    "status"
+  ],
+  "properties": {
+    "campaign_name": {"type": "string", "minLength": 3},
+    "objective": {
+      "type": "string",
+      "enum": ["reservations", "catering", "private_events", "tourist_awareness", "brand", "staff_training", "other"]
+    },
+    "audience": {"type": "string", "minLength": 3},
+    "message": {"type": "string", "minLength": 3},
+    "supporting_facts": {"type": "array", "items": {"type": "string"}},
+    "language": {"type": "string", "enum": ["EN", "PAP", "NL", "ES"]},
+    "channel": {
+      "type": "string",
+      "enum": ["Instagram", "TikTok", "WhatsApp", "Website", "YouTube", "Staff Training", "Other"]
+    },
+    "format": {"type": "string", "enum": ["9:16", "1:1", "16:9"]},
+    "duration_seconds": {"type": "integer", "minimum": 5, "maximum": 600},
+    "cta": {"type": "string", "minLength": 2},
+    "destination_url": {"type": ["string", "null"], "format": "uri"},
+    "avatar_name": {"type": ["string", "null"]},
+    "approval_owner": {"type": "string", "minLength": 2},
+    "status": {
+      "type": "string",
+      "enum": ["Backlog", "Brief Ready", "Script Draft", "Awaiting Approval", "In Production", "Quality Review", "Scheduled", "Published", "Measured", "Archived"]
+    },
+    "due_date": {"type": ["string", "null"], "format": "date"},
+    "script_version": {"type": "string", "default": "v0.1"},
+    "published_url": {"type": ["string", "null"], "format": "uri"},
+    "tracking_id": {"type": ["string", "null"]},
+    "metrics": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "views": {"type": "integer", "minimum": 0},
+        "completion_rate": {"type": "number", "minimum": 0, "maximum": 1},
+        "clicks": {"type": "integer", "minimum": 0},
+        "qualified_inquiries": {"type": "integer", "minimum": 0},
+        "confirmed_bookings": {"type": "integer", "minimum": 0},
+        "attributed_revenue": {"type": "number", "minimum": 0}
+      }
+    }
+  }
+}
