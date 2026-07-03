@@ -2,6 +2,16 @@
 
 This document turns the BOSSA Notion menu workspace into an operating system for menu, kitchen, stock, content, promotions, and website publishing.
 
+## Notion Source
+
+Primary Notion build sheet:
+
+- [BOSSA One Clean Menu + Restaurant OS Build Sheet](https://app.notion.com/p/BOSSA-One-Clean-Menu-Restaurant-OS-Build-Sheet-391a269fc947816d9bb7c940fbf5b503?source=copy_link)
+
+GitHub tracking issue:
+
+- [Phase 2 BOSSA Restaurant OS](https://github.com/sahidattaf/BOSSA-ASADO-I-MAR/issues/53)
+
 ## 1. System Goal
 
 BOSSA should have one clean source of truth:
