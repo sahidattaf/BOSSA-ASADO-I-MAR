@@ -1,0 +1,26 @@
+/* BOSSA Asado i Mar — Spacing, radii, shadows */
+:root {
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 22px;
+  --space-6: 32px;
+  --space-7: 48px;
+  --space-8: 64px;
+  --space-9: 92px;
+
+  /* Radii — BOSSA leans pill + soft rounded cards */
+  --radius-sm: 12px;
+  --radius-md: 20px;
+  --radius-card: 26px;   /* default card */
+  --radius-lg: 32px;     /* hero visual wells */
+  --radius-pill: 999px;  /* buttons, badges, box numbers */
+
+  /* Shadows */
+  --shadow: 0 24px 70px rgba(0, 0, 0, 0.38);
+  --shadow-fire: 0 14px 34px rgba(255, 106, 26, 0.22);
+  --shadow-fire-glow: 0 24px 80px rgba(255, 106, 26, 0.12);
+
+  --container: min(1120px, calc(100% - 32px)); /* @kind spacing */
+}
