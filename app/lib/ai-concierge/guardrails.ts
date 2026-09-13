@@ -8,9 +8,9 @@ const MAX_REQUESTS = 12;
 
 export function detectLanguage(text: string): ConciergeLanguage {
   const value = text.toLowerCase();
-  if (/\b(mi|bo|nos|unda|por|hende|awe|keda|bon dia)\b/.test(value)) return 'pap';
-  if (/\b(waar|jullie|tafel|open|reserveren|kun je|zondag)\b/.test(value)) return 'nl';
-  if (/\b(dónde|estan|están|tienen|mesa|esta noche|reservar|hola)\b/.test(value)) return 'es';
+  if (/\b(unda|hende|awe|keda|bon dia|mi ta|bo ta|nos ta)\b/.test(value)) return 'pap';
+  if (/\b(waar|jullie|tafel|reserveren|kun je|zondag|maandag|zijn|gesloten)\b/.test(value)) return 'nl';
+  if (/\b(dónde|estan|están|tienen|mesa|esta noche|reservar|hola|ubicados|ubicadas|horario)\b/.test(value)) return 'es';
   return 'en';
 }
 
