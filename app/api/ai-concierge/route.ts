@@ -2,7 +2,7 @@ import { randomUUID } from 'crypto';
 import { NextRequest, NextResponse } from 'next/server';
 import { buildWhatsAppText, checkRateLimit, detectIntent, detectLanguage, needsHumanHandoff } from '../../lib/ai-concierge/guardrails';
 import { serializeConciergeKnowledge } from '../../lib/ai-concierge/knowledge';
-import { generateConciergeReply } from '../../lib/ai-concierge/provider';
+import { ConciergeProviderError, generateConciergeReply } from '../../lib/ai-concierge/provider';
 
 const MAX_MESSAGE_LENGTH = 1200;
 const SYSTEM_RULES = `You are BOSSA AI Concierge, a customer-facing host for BOSSA Asado i Mar in Curaçao.
@@ -42,7 +42,16 @@ export async function POST(request: NextRequest) {
         messages: [{ role: 'user', content: message }],
       });
     } catch (error) {
-      if (process.env.NODE_ENV !== 'production') console.error('[BOSSA AI Concierge provider]', error instanceof Error ? error.message : 'provider error');
+      if (error instanceof ConciergeProviderError) {
+        console.error('[BOSSA AI Concierge provider]', JSON.stringify({
+          code: error.code,
+          status: error.status ?? null,
+          request_id: error.requestId ?? null,
+          retryable: error.retryable,
+        }));
+      } else {
+        console.error('[BOSSA AI Concierge provider]', JSON.stringify({ code: 'unknown_provider_error' }));
+      }
       return NextResponse.json({ ok: false, error: 'The concierge is temporarily unavailable. Please use WhatsApp for BOSSA assistance.' }, { status: 503 });
     }
 
