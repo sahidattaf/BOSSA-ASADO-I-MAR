@@ -73,3 +73,6 @@ if (failures.length) {
   process.exit(1);
 }
 console.log(`PASS ${checks.length} concierge MVP controls + ${languageCases.length} executable language cases validated`);
+
+// Keep provider behavior executable in the existing deployment validation gate.
+await import('./test-ai-concierge-provider.mjs');
