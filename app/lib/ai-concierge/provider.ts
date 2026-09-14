@@ -23,6 +23,30 @@ export class ConciergeProviderError extends Error {
 
 const REQUEST_TIMEOUT_MS = 12_000;
 const MAX_ATTEMPTS = 2;
+// Gate 10E exhausted 500 tokens on reasoning alone. Low effort plus 1500 leaves
+// room for a concise final reply; one 2000-token recovery caps total output at 3500.
+// Both reasoning and visible text count: https://developers.openai.com/api/docs/guides/reasoning
+const OUTPUT_BUDGET = 1500;
+const RECOVERY_OUTPUT_BUDGET = 2000;
+
+function isTokenBudgetExceeded(value: unknown): boolean {
+  return record(value) && value.status === 'incomplete' &&
+    record(value.incomplete_details) && value.incomplete_details.reason === 'max_output_tokens';
+}
+
+function canRetryTokenBudget(value: unknown): boolean {
+  if (!record(value) || value.error != null || !Array.isArray(value.output) ||
+      (value.output_text !== undefined && typeof value.output_text !== 'string')) return false;
+  // No tools or side effects are requested. Reject unknown items and refusals.
+  return value.output.every((item) => {
+    if (!record(item)) return false;
+    if (item.type === 'reasoning') return Array.isArray(item.summary);
+    return item.type === 'message' && item.role === 'assistant' &&
+      (item.status === 'completed' || item.status === 'incomplete') &&
+      Array.isArray(item.content) && item.content.every((part) =>
+        record(part) && part.type === 'output_text' && typeof part.text === 'string');
+  });
+}
 
 function record(value: unknown): value is Record<string, unknown> {
   return Boolean(value) && typeof value === 'object' && !Array.isArray(value);
@@ -108,6 +132,8 @@ export async function generateConciergeReply(input: ProviderInput) {
   if (!apiKey) throw new ConciergeProviderError('missing_api_key', 'AI provider is not configured.');
 
   const model = process.env.BOSSA_AI_CONCIERGE_MODEL || 'gpt-5-mini';
+  let outputBudget = OUTPUT_BUDGET;
+  let budgetRetry = false;
 
   for (let attempt = 1; attempt <= MAX_ATTEMPTS; attempt += 1) {
     const controller = new AbortController();
@@ -127,7 +153,8 @@ export async function generateConciergeReply(input: ProviderInput) {
             role: message.role,
             content: [{ type: 'input_text', text: message.content }],
           })),
-          max_output_tokens: 500,
+          reasoning: { effort: 'low' },
+          max_output_tokens: outputBudget,
         }),
         signal: controller.signal,
       });
@@ -159,8 +186,32 @@ export async function generateConciergeReply(input: ProviderInput) {
           status: response.status, requestId,
         });
       }
+      // Never deliver a token-truncated answer, including a partial safety reply.
+      if (isTokenBudgetExceeded(data)) {
+        const retryable = canRetryTokenBudget(data) && attempt < MAX_ATTEMPTS;
+        console.warn('[BOSSA AI Concierge response shape]', JSON.stringify({
+          code: 'max_output_tokens', status: response.status, request_id: requestId ?? null,
+          attempt, retryable, retry_scheduled: retryable, max_output_tokens: outputBudget,
+          reasoning_effort: 'low', ...responseShape(data),
+        }));
+        if (retryable) {
+          outputBudget = RECOVERY_OUTPUT_BUDGET;
+          budgetRetry = true;
+          await wait(350 * attempt);
+          continue;
+        }
+        throw new ConciergeProviderError('max_output_tokens', 'AI provider exhausted its response budget.', {
+          status: response.status, requestId, retryable: false,
+        });
+      }
       const text = extractResponseText(data);
-      if (text) return text;
+      if (text) {
+        if (budgetRetry) console.info('[BOSSA AI Concierge budget recovery]', JSON.stringify({
+          code: 'budget_retry_recovered', attempt, request_id: requestId ?? null,
+          max_output_tokens: outputBudget,
+        }));
+        return text;
+      }
 
       const retryable = isRetryableEmptyResponse(data);
       console.warn('[BOSSA AI Concierge response shape]', JSON.stringify({

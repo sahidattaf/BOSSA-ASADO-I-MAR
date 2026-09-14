@@ -129,9 +129,8 @@ await test('H: diagnostics never include sensitive text or full payloads', async
   assert.equal(shape.request_id, 'req_fixture');
   assert.equal(shape.top_level_output_text_present, true);
 });
-await test('incomplete token budget, content filter, refusal and malformed empties never retry', async () => {
+await test('content filter, refusal and malformed empties never retry', async () => {
   for (const body of [
-    { ...envelope(), status: 'incomplete', incomplete_details: { reason: 'max_output_tokens' } },
     { ...envelope(), status: 'incomplete', incomplete_details: { reason: 'content_filter' } },
     envelope([{ ...message(), content: [{ type: 'refusal', refusal: sensitive }] }]),
     { ...envelope(), status: 'failed', error: { message: sensitive } },
@@ -178,6 +177,71 @@ await test('successful extraction logs no payload and preserves model configurat
   assert.equal(h.logs.length, 0);
   const sent = JSON.parse(h.calls[0].options.body);
   assert.equal(sent.model, 'gpt-5-mini');
-  assert.equal(sent.max_output_tokens, 500);
+  assert.equal(sent.max_output_tokens, 1500);
+  assert.equal(sent.reasoning.effort, 'low');
+  assert.equal(sent.instructions, input.system);
+});
+const exhaustedBudget = (output = [{ type: 'reasoning', summary: [] }]) => ({
+  ...envelope(output), status: 'incomplete', incomplete_details: { reason: 'max_output_tokens' },
+});
+await test('token exhaustion retries once at 2000 and records sanitized recovery', async () => {
+  const body = { ...exhaustedBudget(), instructions: sensitive };
+  const h = harness([{ body }, { body: envelope([message('Recovered')]) }]);
+  assert.equal(await h.generateConciergeReply(input), 'Recovered');
+  assert.deepEqual(h.calls.map((c) => JSON.parse(c.options.body).max_output_tokens), [1500, 2000]);
+  assert.ok(h.calls.every((c) => JSON.parse(c.options.body).reasoning.effort === 'low'));
+  const logs = h.logs.map((l) => JSON.parse(l[1]));
+  assert.equal(logs[0].code, 'max_output_tokens');
+  assert.equal(logs[0].retry_scheduled, true);
+  assert.equal(logs[0].output_items[0].type, 'reasoning');
+  assert.equal(logs[1].code, 'budget_retry_recovered');
+  assert.equal(JSON.stringify(h.logs).includes(sensitive), false);
+  assert.equal(h.timers.size, 0);
+});
+await test('token retry exhaustion is controlled and never returns partial text', async () => {
+  const h = harness([{ body: exhaustedBudget([message(sensitive)]) }, { body: exhaustedBudget() }]);
+  await assert.rejects(h.generateConciergeReply(input), { code: 'max_output_tokens', retryable: false });
+  assert.equal(h.calls.length, 2);
+  assert.deepEqual(h.logs.map((l) => JSON.parse(l[1]).retry_scheduled), [true, false]);
+  assert.equal(JSON.stringify(h.logs).includes(sensitive), false);
+});
+await test('token exhaustion with refusals or unsupported shapes never retries', async () => {
+  for (const output of [[{ type: 'unknown' }], [null], {},
+    [{ ...message(), content: [{ type: 'refusal', refusal: sensitive }] }],
+    [{ type: 'reasoning', summary: null }]]) {
+    const h = harness([{ body: exhaustedBudget(output) }]);
+    await assert.rejects(h.generateConciergeReply(input), { code: 'max_output_tokens', retryable: false });
+    assert.equal(h.calls.length, 1);
+  }
+});
+await test('mixed transport and budget failures share the two-attempt ceiling', async () => {
+  const h = harness([{ status: 429 }, { body: exhaustedBudget() }]);
+  await assert.rejects(h.generateConciergeReply(input), { code: 'max_output_tokens', retryable: false });
+  assert.equal(h.calls.length, 2);
+});
+await test('actual route maps exhausted budget to sanitized HTTP 503', async () => {
+  const h = harness([{ body: exhaustedBudget() }, { body: exhaustedBudget() }]);
+  const routeSource = fs.readFileSync('app/api/ai-concierge/route.ts', 'utf8');
+  const route = { exports: {}, console: { error: (...args) => h.logs.push(args) },
+    require(name) {
+      if (name === 'crypto') return { randomUUID: () => 'test-id' };
+      if (name === 'next/server') return { NextResponse: { json: (body, options) => ({ body, status: options?.status ?? 200 }) } };
+      if (name.endsWith('/provider')) return h;
+      if (name.endsWith('/knowledge')) return { serializeConciergeKnowledge: () => '{}' };
+      if (name.endsWith('/guardrails')) return {
+        checkRateLimit: () => ({ allowed: true }), detectLanguage: () => 'en',
+        detectIntent: () => 'general', needsHumanHandoff: () => false,
+      };
+      throw new Error('Unexpected route dependency');
+    },
+  };
+  vm.runInNewContext(ts.transpileModule(routeSource, {
+    compilerOptions: { module: ts.ModuleKind.CommonJS, target: ts.ScriptTarget.ES2020 },
+  }).outputText, route);
+  const result = await route.exports.POST({ headers: new Headers(), json: async () => ({ message: sensitive }) });
+  assert.equal(result.status, 503);
+  assert.equal(result.body.ok, false);
+  assert.match(result.body.error, /temporarily unavailable/);
+  assert.equal(JSON.stringify(h.logs).includes(sensitive), false);
 });
 console.log('PASS ' + passed + ' provider test groups');
