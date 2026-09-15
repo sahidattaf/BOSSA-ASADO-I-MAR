@@ -48,6 +48,11 @@ const checks = [
   })()],
   ['full-reply language purity instruction present', route.includes('ENTIRE reply') && route.includes('Do not switch into English mid-reply')],
   ['WhatsApp handoff text is language-aware', guardrails.includes("buildWhatsAppText(intent: ConciergeIntent, language: ConciergeLanguage")],
+  ['ordinary grounded answers do not append unrequested handoff content', route.includes('answer that fact directly and stop there')],
+  ['Papiamentu purity instruction avoids Spanish loanwords', route.includes('Do not substitute Spanish words such as "abierto", "disponibilidad" or "estado actual"') && route.includes('Spanish weekday abbreviations such as "Jue"')],
+  ['internal data-format terms (e.g. JSON) never presented to customers', route.includes('internal implementation details such as data formats, file names or "JSON"') && !route.includes('BOSSA KNOWLEDGE JSON')],
+  ['cross-contact warning stays general, no unverified equipment claims', route.includes('do not assert specific unverified equipment')],
+  ['terminal provider failure prepares a structured handoff instead of a bare error', route.includes('needsHumanHandoff(intent, message)') && route.includes("handoff_text: fallbackHandoff ? buildWhatsAppText(intent, language) : null")],
 ];
 
 for (const [name, passed] of checks) {
