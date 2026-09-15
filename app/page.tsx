@@ -1,6 +1,7 @@
 import LiveFireStatus from './components/LiveFireStatus';
 import PublicHeader from './components/PublicHeader';
 import SiteFooter from './components/SiteFooter';
+import { MobileDisclosure, MobileSectionNav } from './components/MobileHomeSections';
 import { mediaAssets } from './data/media';
 import { menuSections } from './data/menu';
 import { siteConfig } from './data/site';
@@ -97,6 +98,10 @@ export default function HomePage() {
         </div>
       </section>
 
+      <div className="container mobile-section-nav-wrap">
+        <MobileSectionNav />
+      </div>
+
       <section id="order" className="section media-section">
         <div className="container">
           <span className="badge">Order Flow</span>
@@ -125,8 +130,8 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section id="how-it-works" className="section">
-        <div className="container">
+      <section id="how-it-works" className="section mobile-collapsible-section">
+        <div className="container desktop-section-content">
           <span className="badge">How BOSSA Works</span>
           <h2>Simple order flow. Clean fire execution.</h2>
           <div className="grid weekend-grid">
@@ -139,10 +144,23 @@ export default function HomePage() {
             ))}
           </div>
         </div>
+        <div className="container mobile-only-section-content">
+          <MobileDisclosure title="How BOSSA Works" summary="4 quick steps from choice to pickup">
+            <div className="mobile-compact-grid">
+              {howItWorks.map(([step, title, text]) => (
+                <article className="card tall-card" key={step}>
+                  <span className="badge">{step}</span>
+                  <h3>{title}</h3>
+                  <p>{text}</p>
+                </article>
+              ))}
+            </div>
+          </MobileDisclosure>
+        </div>
       </section>
 
-      <section id="audio" className="section media-section">
-        <div className="container media-grid">
+      <section id="audio" className="section media-section mobile-collapsible-section">
+        <div className="container media-grid desktop-section-content">
           <div>
             <span className="badge">BOSSA Sound</span>
             <h2>Play the BOSSA mood while guests choose.</h2>
@@ -158,6 +176,18 @@ export default function HomePage() {
             </audio>
             <p>Fire, smoke, island soul, and BOSSA rhythm.</p>
           </div>
+        </div>
+        <div className="container mobile-only-section-content">
+          <MobileDisclosure title="BOSSA Sound" summary="Open the restaurant mood player">
+            <div className="info-card audio-card">
+              <h3>{mainAudio.name}</h3>
+              <audio controls preload="metadata">
+                <source src={mainAudio.path} type="audio/mpeg" />
+                Your browser does not support the audio element.
+              </audio>
+              <p>Fire, smoke, island soul, and BOSSA rhythm.</p>
+            </div>
+          </MobileDisclosure>
         </div>
       </section>
 
@@ -193,12 +223,12 @@ export default function HomePage() {
           <p>
             Ribs, skewers, sandwiches, sides, sauces, fire boxes, and Caribbean grill favorites.
           </p>
-          <div className="menu-category-jump">
+          <div className="menu-category-jump desktop-section-content">
             {menuSections.map((section) => (
               <a href={`#menu-${section.id}`} key={section.id}>{section.title}</a>
             ))}
           </div>
-          <div className="menu-stack editable-menu-stack">
+          <div className="menu-stack editable-menu-stack desktop-section-content">
             {menuSections.map((section) => (
               <article className="menu-section editable-menu-section" id={`menu-${section.id}`} key={section.id}>
                 <div className="menu-section-header">
@@ -223,11 +253,32 @@ export default function HomePage() {
               </article>
             ))}
           </div>
+          <div className="mobile-menu-accordions mobile-only-section-content">
+            {menuSections.map((section) => (
+              <MobileDisclosure
+                key={section.id}
+                title={section.title}
+                summary={`${section.items.length} item${section.items.length === 1 ? '' : 's'}`}
+              >
+                <div className="menu-items mobile-menu-items">
+                  {section.items.map((item: (typeof menuSections)[number]['items'][number]) => (
+                    <div className="menu-item" key={item.name}>
+                      <div>
+                        <h4>{item.name}</h4>
+                        <p>{item.description}</p>
+                      </div>
+                      <strong>{item.price}</strong>
+                    </div>
+                  ))}
+                </div>
+              </MobileDisclosure>
+            ))}
+          </div>
         </div>
       </section>
 
-      <section id="videos" className="section media-section">
-        <div className="container">
+      <section id="videos" className="section media-section mobile-collapsible-section">
+        <div className="container desktop-section-content">
           <span className="badge">BOSSA YouTube Channel</span>
           <h2>Watch the fire before you order.</h2>
           <p>Use videos as trust proof for fire, smoke, island flavor, and the BOSSA story in motion.</p>
@@ -247,10 +298,29 @@ export default function HomePage() {
             ))}
           </div>
         </div>
+        <div className="container mobile-only-section-content">
+          <MobileDisclosure title="Watch the fire" summary={`${youtubeVideos.length} BOSSA video${youtubeVideos.length === 1 ? '' : 's'}`}>
+            <div className="mobile-compact-grid">
+              {youtubeVideos.map((video) => (
+                <article className="video-card" key={video.embedUrl}>
+                  <div className="video-frame">
+                    <iframe
+                      src={video.embedUrl}
+                      title={video.title}
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                      allowFullScreen
+                    />
+                  </div>
+                  <h3>{video.title}</h3>
+                </article>
+              ))}
+            </div>
+          </MobileDisclosure>
+        </div>
       </section>
 
-      <section id="party" className="section">
-        <div className="container split">
+      <section id="party" className="section mobile-collapsible-section">
+        <div className="container split desktop-section-content">
           <div>
             <span className="badge">Catering · Private Events · Tourist Experiences</span>
             <h2>More than food orders: BOSSA is a hospitality platform.</h2>
@@ -274,10 +344,29 @@ export default function HomePage() {
             style={{ width: '100%', borderRadius: '12px' }}
           />
         </div>
+        <div className="container mobile-only-section-content">
+          <MobileDisclosure title="Catering & Events" summary="Private events, tourist groups and catering">
+            <div>
+              <p>
+                Turn villas, birthdays, offices, hotels, yacht groups, and tourist nights into clear
+                fire-grill revenue paths with simple WhatsApp quote flows.
+              </p>
+              <div className="cta-row">
+                <a className="button primary" href="/catering">Catering</a>
+                <a className="button" href="/private-events">Private Events</a>
+                <a className="button" href="/tourist-experiences">Tourist Experiences</a>
+                <a className="button" href={partyUrl} target="_blank" rel="noreferrer"
+                  data-track="whatsapp-click" data-cta-source="home" data-cta-label="promo-party-quote" data-offer-id="">
+                  Request quote
+                </a>
+              </div>
+            </div>
+          </MobileDisclosure>
+        </div>
       </section>
 
-      <section className="section premium-section">
-        <div className="container">
+      <section className="section premium-section mobile-collapsible-section">
+        <div className="container desktop-section-content">
           <div className="section-heading-row">
             <div>
               <span className="badge">BOSSA V2</span>
@@ -298,6 +387,23 @@ export default function HomePage() {
               </article>
             ))}
           </div>
+        </div>
+        <div className="container mobile-only-section-content">
+          <MobileDisclosure title="More BOSSA" summary="Rooftop, gallery and partner pages">
+            <div className="mobile-compact-grid">
+              {[
+                ['Rooftop Lounge', '/rooftop-lounge', 'Sunset, fire, music, and private group energy.'],
+                ['Gallery', '/gallery', 'Food, fire, rooftop, events, and behind-the-scenes visuals.'],
+                ['Partners', '/partners', 'Hotels, Airbnb hosts, villa managers, tour operators, and yacht charters.'],
+              ].map(([title, href, text]) => (
+                <article className="card signature-card" key={href}>
+                  <h3>{title}</h3>
+                  <p>{text}</p>
+                  <a className="button" href={href}>Open page</a>
+                </article>
+              ))}
+            </div>
+          </MobileDisclosure>
         </div>
       </section>
 
