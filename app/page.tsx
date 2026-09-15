@@ -86,12 +86,12 @@ export default function HomePage() {
           </div>
           <div className="hero-visual-card">
             <img
-              src="/images/bossa/bossa-hero-pietermaai-business-hub.jpg"
-              alt="BOSSA Pietermaai Business Hub rooftop sunset hero"
+              src="/images/bossa/publicimagesbossabossa-hero-building.jpg.png"
+              alt="BOSSA terrace and rooftop grill bar concept"
             />
             <div className="hero-visual-caption">
-              <strong>Pietermaai Business Hub</strong>
-              <span>Retail · Beauty · Rooftop Dining · BOSSA fire energy</span>
+              <strong>BOSSA Terrace & Rooftop Concept</strong>
+              <span>Fire-grill dining · Bar · Rooftop · Pietermaai energy</span>
             </div>
           </div>
         </div>
