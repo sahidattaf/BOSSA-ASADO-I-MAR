@@ -76,3 +76,4 @@ console.log(`PASS ${checks.length} concierge MVP controls + ${languageCases.leng
 
 // Keep provider behavior executable in the existing deployment validation gate.
 await import('./test-ai-concierge-provider.mjs');
+await import('./test-ai-concierge-grounding.mjs');

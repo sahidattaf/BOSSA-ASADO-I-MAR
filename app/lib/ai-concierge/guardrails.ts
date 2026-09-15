@@ -28,9 +28,20 @@ export function detectIntent(text: string): ConciergeIntent {
   return 'general';
 }
 
-export function needsHumanHandoff(intent: ConciergeIntent, text: string) {
+export function needsHumanHandoff(intent: ConciergeIntent, text: string, reply = '') {
   if (['reservation', 'catering', 'private_event', 'events', 'allergen', 'human'].includes(intent)) return true;
-  return /available|availability|disponib|confirm|refund|deposit|parking|lost|wallet/.test(text.toLowerCase());
+  if (/available|availability|disponib|confirm|refund|deposit|parking|lost|wallet|christmas|holiday|special.?date|easter|new year|kerst|feestdag|navidad|feriado|pasco|partner|commission|payment|paid|charge.*card|reembolso|betaling|terugbetaling|comisi[oó]n/.test(text.toLowerCase())) return true;
+  if (isLiveStatusRequest(text)) return true;
+  // Optional WhatsApp offers on grounded answers are not confirmation requirements.
+  const value = reply.toLowerCase();
+  const confirmation = /confirm|verif|check|bevestig|control|konfirm/;
+  const required = /need|must|require|cannot|can't|can’t|unverified|not verified|moet|nodig|no puedo|necesit|debe|mester|no por/;
+  return value.split(/[.!?\n]+/).some((sentence) =>
+    confirmation.test(sentence) && required.test(sentence));
+}
+
+export function isLiveStatusRequest(text: string) {
+  return /available|availability|disponib|reserve|reservation|book|table|tafel|reserva|mesa|right now|currently|tonight|today|esta noche|ahora|hoy|vandaag|vanavond|\bnu\b|\bawe\b|\bawor\b|next.*(day|night)|9:55/.test(text.toLowerCase());
 }
 
 export function checkRateLimit(key: string) {
