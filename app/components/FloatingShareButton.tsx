@@ -92,7 +92,14 @@ export default function FloatingShareButton() {
         aria-expanded={isOpen}
         onClick={() => setIsOpen((current) => !current)}
       >
-        <span className="share-icon" aria-hidden="true">↗</span>
+        <svg
+          className="share-icon"
+          viewBox="0 0 24 24"
+          aria-hidden="true"
+          focusable="false"
+        >
+          <path d="M18 8a3 3 0 1 0-2.83-4H15a3 3 0 0 0 .28 1.26L8.91 8.44A3 3 0 0 0 4 11a3 3 0 0 0 4.91 2.56l6.37 3.18A3 3 0 0 0 15 18a3 3 0 1 0 .83-2.07l-6.37-3.18a3 3 0 0 0 0-1.5l6.37-3.18A3 3 0 0 0 18 8Z" fill="currentColor" />
+        </svg>
         <span className="share-label">Share</span>
       </button>
     </div>
