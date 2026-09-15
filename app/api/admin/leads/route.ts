@@ -1,4 +1,5 @@
-import { NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
+import { adminUnauthorizedResponse, authorizeAdminRequest } from '../../../lib/admin-auth';
 
 const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL ?? process.env.SUPABASE_URL;
 const SUPABASE_KEY =
@@ -61,7 +62,10 @@ function calculateStats(leads: SupabaseLead[]): DashboardStats {
   };
 }
 
-export async function GET() {
+export async function GET(request: NextRequest) {
+  const auth = authorizeAdminRequest(request);
+  if (!auth.authorized) return adminUnauthorizedResponse(auth.configured);
+
   if (!SUPABASE_URL || !SUPABASE_KEY) {
     return NextResponse.json(
       {
