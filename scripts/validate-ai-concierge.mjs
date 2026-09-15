@@ -36,6 +36,18 @@ const checks = [
   ['provider timeout configured', provider.includes('REQUEST_TIMEOUT_MS') && provider.includes('AbortController')],
   ['transient retry configured', provider.includes('MAX_ATTEMPTS') && provider.includes('response.status === 429 || response.status >= 500')],
   ['sanitized provider diagnostics', route.includes('request_id') && route.includes('retryable') && !route.includes('OPENAI_API_KEY')],
+  ['two-attempt ceiling unchanged', provider.includes('MAX_ATTEMPTS = 2')],
+  ['route maxDuration covers two-attempt provider recovery', (() => {
+    const match = route.match(/export const maxDuration = (\d+)/);
+    if (!match) return false;
+    const timeoutMatch = provider.match(/REQUEST_TIMEOUT_MS = (\d+)/);
+    if (!timeoutMatch) return false;
+    // Worst case: two full provider timeouts plus backoff between attempts.
+    const worstCaseMs = Number(timeoutMatch[1]) * 2 + 1000;
+    return Number(match[1]) * 1000 >= worstCaseMs;
+  })()],
+  ['full-reply language purity instruction present', route.includes('ENTIRE reply') && route.includes('Do not switch into English mid-reply')],
+  ['WhatsApp handoff text is language-aware', guardrails.includes("buildWhatsAppText(intent: ConciergeIntent, language: ConciergeLanguage")],
 ];
 
 for (const [name, passed] of checks) {

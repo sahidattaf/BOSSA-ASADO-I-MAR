@@ -104,6 +104,40 @@ await test('optional WhatsApp on grounded facts does not force handoff', async (
   const r = await request('Where are you located?', 'Oranjestraat 116. Want directions? WhatsApp BOSSA.');
   assert.equal(r.needs_handoff, false);
 });
+await test('E01/E02/E06 grounded courtesy phrasing does not force handoff', async () => {
+  const cases = [
+    ['Where are you located?', 'We are at Oranjestraat 116. You can also confirm the exact entrance with our team if needed.'],
+    ['Are you open Monday?', "We're open Thursday to Sunday, 12 PM to 10 PM, so Monday is outside those hours. Feel free to confirm with us if you'd like."],
+    ['What does your Community Fire Box cost?', 'The Community Fire Box is $45. Prices can change, so please confirm before ordering if needed.'],
+  ];
+  for (const [prompt, reply] of cases) {
+    const r = await request(prompt, reply);
+    assert.equal(r.needs_handoff, false, `${prompt} -> unexpected handoff for: ${reply}`);
+  }
+});
+await test('mandatory confirmation phrasing still forces handoff even for grounded intents', async () => {
+  const cases = [
+    ['What does your Community Fire Box cost?', 'Which item exactly? Its current price needs confirmation from BOSSA staff.'],
+    ['Are you open Monday?', 'Our hours are not verified for that date.'],
+  ];
+  for (const [prompt, reply] of cases) {
+    const r = await request(prompt, reply);
+    assert.equal(r.needs_handoff, true, `${prompt} -> expected handoff for: ${reply}`);
+  }
+});
+await test('WhatsApp handoff text is generated in the conversation language', async () => {
+  const guardContext2 = { exports: {} };
+  vm.runInNewContext(compile('app/lib/ai-concierge/guardrails.ts'), guardContext2);
+  const { buildWhatsAppText } = guardContext2.exports;
+  assert.match(buildWhatsAppText('reservation', 'pap'), /^Bon dia BOSSA,/);
+  assert.match(buildWhatsAppText('reservation', 'nl'), /^Hallo BOSSA,/);
+  assert.match(buildWhatsAppText('reservation', 'es'), /^Hola BOSSA,/);
+  assert.match(buildWhatsAppText('reservation', 'en'), /^Hello BOSSA,/);
+  for (const lang of ['pap', 'nl', 'es']) {
+    const text = buildWhatsAppText('general', lang);
+    assert.equal(/\b(I have|I want|I need)\b/i.test(text), false, `${lang} handoff text unexpectedly contains English: ${text}`);
+  }
+});
 await test('partnership, catering, private events and lost property route to humans', async () => {
   for (const prompt of ['What commission do you pay partners?', 'Can you cater a villa dinner?',
     'Private dinner for 20 people.', 'I left my wallet there last night.']) {
