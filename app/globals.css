@@ -127,6 +127,22 @@ audio { width: 100%; margin-top: 16px; }
 .floating-share-action:hover, .floating-share-action:focus-visible { transform: translateX(-2px); border-color: rgba(243,179,91,0.58); background: rgba(255,255,255,0.08); outline: none; }
 .floating-share-main:focus-visible { outline: 3px solid rgba(243,179,91,0.7); outline-offset: 3px; }
 
+.mobile-section-nav-wrap,
+.mobile-only-section-content { display: none; }
+
+.mobile-section-nav { display: flex; gap: 8px; overflow-x: auto; padding: 0 0 12px; scrollbar-width: none; }
+.mobile-section-nav::-webkit-scrollbar { display: none; }
+.mobile-section-nav a { flex: 0 0 auto; padding: 9px 12px; border-radius: 999px; border: 1px solid var(--line); color: var(--muted); background: rgba(255,255,255,0.035); font-size: 13px; font-weight: 800; }
+.mobile-disclosure { border: 1px solid var(--line); border-radius: 20px; background: rgba(255,255,255,0.035); overflow: hidden; }
+.mobile-disclosure-trigger { width: 100%; border: 0; color: var(--text); background: transparent; padding: 16px; display: flex; align-items: center; justify-content: space-between; gap: 16px; text-align: left; font: inherit; cursor: pointer; }
+.mobile-disclosure-trigger strong { display: block; color: var(--gold); font-size: 17px; }
+.mobile-disclosure-trigger small { display: block; margin-top: 4px; color: var(--muted); font-size: 12px; font-weight: 700; }
+.mobile-disclosure-icon { display: inline-flex; align-items: center; justify-content: center; width: 34px; height: 34px; flex: 0 0 34px; border-radius: 50%; background: rgba(255,106,26,0.12); color: var(--gold); font-size: 22px; font-weight: 900; }
+.mobile-disclosure-panel { padding: 0 14px 14px; }
+.mobile-compact-grid { display: grid; gap: 12px; }
+.mobile-menu-accordions { display: grid; gap: 10px; margin-top: 18px; }
+.mobile-menu-items { display: grid; gap: 0; }
+
 @media (max-width: 1400px) { .cards-grid { gap: 0.8rem; } .main-title { font-size: clamp(38px, 5vw, 62px); } }
 @media (max-width: 1100px) { .menu-layout { flex-direction: column; } .cards-grid { grid-template-columns: repeat(2, 1fr); } }
 @media (max-width: 900px) { .hero-grid, .visual-strip, .weekend-highlight-grid { grid-template-columns: 1fr; } }
@@ -177,6 +193,19 @@ audio { width: 100%; margin-top: 16px; }
   .toolbar { justify-content: stretch; }
   .toolbar-hint, .export-status { width: 100%; text-align: center; }
   .btn-pdf, .btn-back { width: 100%; justify-content: center; }
+
+  .mobile-section-nav-wrap { display: block; margin-top: -24px; margin-bottom: 20px; }
+  .mobile-only-section-content { display: block; }
+  .desktop-section-content { display: none !important; }
+  .mobile-collapsible-section { padding: 26px 0; }
+  .mobile-collapsible-section + .mobile-collapsible-section { border-top-color: rgba(255,247,237,0.08); }
+  .mobile-section-nav { padding-bottom: 4px; }
+  .mobile-disclosure-panel .card,
+  .mobile-disclosure-panel .info-card,
+  .mobile-disclosure-panel .video-card { box-shadow: none; }
+  .mobile-menu-items .menu-item { grid-template-columns: 1fr auto; }
+  .mobile-menu-items .menu-item p { font-size: 13px; line-height: 1.45; }
+  .mobile-menu-items .menu-item strong { font-size: 13px; }
 }
 
 /* ── Live Fire Status ─────────────────────────────────────────────────── */
@@ -213,7 +242,7 @@ audio { width: 100%; margin-top: 16px; }
 
 @media print {
   body { background: white; padding: 0; margin: 0; }
-  .no-print, .toolbar, .export-status, .sticky-whatsapp, .floating-share, .language-switcher { display: none !important; }
+  .no-print, .toolbar, .export-status, .sticky-whatsapp, .floating-share, .language-switcher, .mobile-section-nav-wrap { display: none !important; }
   .custom-flyer-shell { padding: 0; background: white; }
   .flyer { box-shadow: none; max-width: 100%; margin: 0; border-radius: 0; }
   .editable-box-card { break-inside: avoid; }
