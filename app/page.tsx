@@ -258,7 +258,7 @@ export default function HomePage() {
               <MobileDisclosure
                 key={section.id}
                 title={section.title}
-                summary={`${section.items.length} item${section.items.length === 1 ? '' : 's'}`}
+                summary={`${section.items.length} items`}
               >
                 <div className="menu-items mobile-menu-items">
                   {section.items.map((item: (typeof menuSections)[number]['items'][number]) => (
@@ -299,7 +299,7 @@ export default function HomePage() {
           </div>
         </div>
         <div className="container mobile-only-section-content">
-          <MobileDisclosure title="Watch the fire" summary={`${youtubeVideos.length} BOSSA video${youtubeVideos.length === 1 ? '' : 's'}`}>
+          <MobileDisclosure title="Watch the fire" summary={`${youtubeVideos.length} BOSSA videos`}>
             <div className="mobile-compact-grid">
               {youtubeVideos.map((video) => (
                 <article className="video-card" key={video.embedUrl}>
@@ -389,7 +389,7 @@ export default function HomePage() {
           </div>
         </div>
         <div className="container mobile-only-section-content">
-          <MobileDisclosure title="More BOSSA" summary="Rooftop, gallery and partner pages">
+          <MobileDisclosure title="More BOSSA" summary="Rooftop, gallery and partner experiences">
             <div className="mobile-compact-grid">
               {[
                 ['Rooftop Lounge', '/rooftop-lounge', 'Sunset, fire, music, and private group energy.'],
