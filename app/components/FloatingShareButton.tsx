@@ -92,7 +92,8 @@ export default function FloatingShareButton() {
         aria-expanded={isOpen}
         onClick={() => setIsOpen((current) => !current)}
       >
-        Share
+        <span className="share-icon" aria-hidden="true">↗</span>
+        <span className="share-label">Share</span>
       </button>
     </div>
   );
