@@ -151,7 +151,7 @@ export default function WeekendFirePage() {
                   <h3>{cleanName}</h3>
                   <strong className="price-line">{item.price}</strong>
                   <p>{item.description}</p>
-                  <a
+                  {item.whatsappEnabled && item.status === 'active' ? <a
                     className="button primary box-order-button"
                     href={orderUrl}
                     target="_blank"
@@ -163,7 +163,7 @@ export default function WeekendFirePage() {
                     data-offer-id={boxNumber}
                   >
                     📱 Order Box {boxNumber} via WhatsApp
-                  </a>
+                  </a> : <span className="badge">Coming Soon</span>}
                 </article>
               );
             })}
