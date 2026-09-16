@@ -6,7 +6,6 @@ export const menuSections = [
     "id": "weekend-boxes",
     "title": "Weekend Fire Boxes",
     "note": "Thursday–Sunday · take-out only · limited fire batches",
-    "editableNote": "Source of truth: update approved Notion JSON, then run npm run generate:data.",
     "status": "active",
     "items": [
       {
@@ -87,7 +86,6 @@ export const menuSections = [
     "id": "skewers",
     "title": "Skewers / Pinchos",
     "note": "Flame-grilled · smoky · served with fire sides",
-    "editableNote": "Use this block for chicken, tenderloin, shrimp, seafood, and future veggie skewers.",
     "status": "active",
     "items": [
       {
@@ -117,7 +115,6 @@ export const menuSections = [
     "id": "sandwiches",
     "title": "Fire Bread Sandwiches",
     "note": "Crispy bread · smoke · sauce · island bite",
-    "editableNote": "This block supports sandwich trays, party orders, and the Box #3 sandwich box.",
     "status": "active",
     "items": [
       {
@@ -175,7 +172,6 @@ export const menuSections = [
     "id": "sides",
     "title": "Sides & Add-ons",
     "note": "Simple sides · fast pickup · box friendly",
-    "editableNote": "Update portions and side prices here before publishing future flyers.",
     "status": "active",
     "items": [
       {
@@ -240,7 +236,6 @@ export const menuSections = [
     "id": "soups-stews",
     "title": "Soups & Stews",
     "note": "Soul in a bowl · slow fire comfort",
-    "editableNote": "Use this block for beef soup, chicken soup, stews, and rotating comfort specials.",
     "status": "active",
     "items": [
       {
@@ -263,7 +258,6 @@ export const menuSections = [
     "id": "drinks",
     "title": "Drinks / Bebidas",
     "note": "Cold drinks · island refreshment · easy upsell",
-    "editableNote": "Add sodas, water, juices, cocktails, beer, and rooftop drinks here.",
     "status": "active",
     "items": [
       {

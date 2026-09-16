@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import LiveFireStatus from '../components/LiveFireStatus';
 import { mediaAssets } from '../data/media';
 import { menuSections } from '../data/menu';
-import { paymentDisclaimer, paymentLinks } from '../data/payments';
+import { paymentDisclaimer } from '../data/payments';
 import { siteConfig } from '../data/site';
 
 export const metadata: Metadata = {
@@ -77,8 +77,8 @@ export default function WeekendFirePage() {
         <span className="badge">Weekend Fire · Take-out only</span>
         <h1>Order by box number. Pickup fast. Eat hot.</h1>
         <p className="lead">
-          Weekend Fire is {siteConfig.brandName}'s take-out ritual: numbered boxes, final flyer assets, audio, video,
-          WhatsApp ordering, PNG/PDF/offline HTML export, and limited batches from Thursday to Sunday.
+          Weekend Fire is {siteConfig.brandName}'s take-out ritual: numbered boxes, WhatsApp ordering,
+          and limited batches from Thursday to Sunday.
           Near Avila Beach Hotel, Pietermaai, Curaçao.
         </p>
         <div className="cta-row">
@@ -86,10 +86,9 @@ export default function WeekendFirePage() {
             data-track="whatsapp-click" data-cta-source="weekend-fire" data-cta-label="hero-confirm" data-offer-id="">
             Confirm on WhatsApp
           </a>
-          <a className="button" href={paymentLinks.weekendDeposit.href} target="_blank" rel="noreferrer">{paymentLinks.weekendDeposit.label}</a>
           <a className="button" href="#boxes">View Box #1–#8</a>
         </div>
-        <p className="payment-note">{paymentDisclaimer} Test link: {paymentLinks.weekendDeposit.amount}.</p>
+        <p className="payment-note">{paymentDisclaimer}</p>
       </section>
 
       <section id="audio" className="section media-section">
@@ -97,7 +96,6 @@ export default function WeekendFirePage() {
           <div>
             <span className="badge">Weekend Fire Sound</span>
             <h2>Let guests hear the BOSSA mood before they order.</h2>
-            <p>This audio block is controlled by generated media data and shared across homepage, Weekend Fire, and party/events.</p>
           </div>
           <div className="info-card audio-card">
             <h3>{mainAudio.name}</h3>
@@ -175,15 +173,13 @@ export default function WeekendFirePage() {
         <div className="container info-card" style={{ textAlign: 'center' }}>
           <span className="badge">Deposit option</span>
           <h2>Reserve Weekend Fire capacity after confirmation.</h2>
-          <p>{paymentLinks.weekendDeposit.note}</p>
           <div className="cta-row" style={{ justifyContent: 'center' }}>
             <a className="button primary" href={whatsappUrl} target="_blank" rel="noreferrer"
               data-track="whatsapp-click" data-cta-source="weekend-fire" data-cta-label="deposit-confirm" data-offer-id="">
               Confirm availability first
             </a>
-            <a className="button" href={paymentLinks.weekendDeposit.href} target="_blank" rel="noreferrer">{paymentLinks.weekendDeposit.label}</a>
           </div>
-          <p className="payment-note">{paymentLinks.weekendDeposit.amount}. Test-mode Stripe link for preview only.</p>
+          <p className="payment-note">{paymentDisclaimer}</p>
         </div>
       </section>
 

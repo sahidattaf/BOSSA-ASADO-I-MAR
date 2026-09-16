@@ -41,7 +41,6 @@ function publishableMenuSections(menuSections = []) {
       id: section.id,
       title: section.title,
       note: section.note,
-      editableNote: section.editableNote ?? 'Generated from approved BOSSA Notion JSON. Update the JSON source, then run npm run generate:data.',
       status: section.status ?? 'active',
       items: (section.items ?? [])
         .filter((item) => item.status !== 'draft')
