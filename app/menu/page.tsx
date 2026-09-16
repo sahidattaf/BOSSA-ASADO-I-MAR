@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import PublicHeader from '../components/PublicHeader';
 import SiteFooter from '../components/SiteFooter';
-import { menuSections } from '../data/menu';
+import MenuCatalog from '../components/MenuCatalog';
 import { siteConfig } from '../data/site';
 
 export const metadata: Metadata = {
@@ -35,35 +35,7 @@ export default function MenuPage() {
 
       <section className="section">
         <div className="container">
-          <div className="menu-category-jump">
-            {menuSections.map((section) => (
-              <a href={`#menu-${section.id}`} key={section.id}>{section.title}</a>
-            ))}
-          </div>
-          <div className="menu-stack editable-menu-stack">
-            {menuSections.map((section) => (
-              <article className="menu-section editable-menu-section" id={`menu-${section.id}`} key={section.id}>
-                <div className="menu-section-header">
-                  <div>
-                    <span className="badge">Menu block</span>
-                    <h3>{section.title}</h3>
-                    <p>{section.note}</p>
-                  </div>
-                </div>
-                <div className="menu-items">
-                  {section.items.map((item) => (
-                    <div className="menu-item" key={item.name}>
-                      <div>
-                        <h4>{item.name}</h4>
-                        <p>{item.description}</p>
-                      </div>
-                      <strong>{item.price}</strong>
-                    </div>
-                  ))}
-                </div>
-              </article>
-            ))}
-          </div>
+          <MenuCatalog sectionHeadingLevel="h2" showOrderActions />
         </div>
       </section>
       <SiteFooter label="BOSSA Menu" />
