@@ -94,7 +94,7 @@ h1 { max-width: 900px; margin: 22px 0 18px; font-size: clamp(44px, 8vw, 92px); l
 .menu-items { display: grid; gap: 0; }
 .menu-item { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: 18px; align-items: start; padding: 16px 0; border-top: 1px solid var(--line); }
 .menu-item img { width: 112px; height: 84px; border-radius: 14px; object-fit: cover; }
-.menu-item h4 { margin: 0; }
+.menu-item h3, .menu-item h4 { margin: 0; color: var(--text); }
 .menu-item-heading { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
 .menu-item-copy p { margin: 6px 0 0; }
 .menu-item-action { display: grid; justify-items: end; gap: 10px; }

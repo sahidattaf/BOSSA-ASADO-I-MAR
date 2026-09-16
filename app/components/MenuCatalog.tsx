@@ -18,6 +18,7 @@ export default function MenuCatalog({
   showOrderActions = false,
 }: MenuCatalogProps) {
   const SectionHeading = sectionHeadingLevel;
+  const ItemHeading = sectionHeadingLevel === 'h2' ? 'h3' : 'h4';
 
   return (
     <div className="menu-catalog">
@@ -61,7 +62,7 @@ export default function MenuCatalog({
                       {image ? <img src={image} alt={`${item.name} from BOSSA`} loading="lazy" /> : null}
                       <div className="menu-item-copy">
                         <div className="menu-item-heading">
-                          <h4>{item.name}</h4>
+                          <ItemHeading>{item.name}</ItemHeading>
                           {item.status === 'coming-soon' ? <span className="menu-status">Coming Soon</span> : null}
                         </div>
                         <p>{item.description}</p>
