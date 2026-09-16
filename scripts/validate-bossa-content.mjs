@@ -69,11 +69,14 @@ if (data) {
     if (pkg.status === 'draft') errors.push(`Draft party package should not be in publish template: ${pkg.name}`);
   }
 
+  assert(Array.isArray(data.menuSections) && data.menuSections.length > 0, 'menuSections must not be empty.');
   for (const section of data.menuSections ?? []) {
     assert(section.id, 'Menu section is missing id.');
     assert(section.title, `Menu section ${section.id ?? 'unknown'} is missing title.`);
 
     for (const item of section.items ?? []) {
+      assert(typeof item.whatsappEnabled === 'boolean', `Menu item ${item.name} needs explicit WhatsApp eligibility.`);
+      assert(!item.whatsappEnabled || item.status === 'active', `Non-active item ${item.name} cannot enable ordering.`);
       assert(item.name, `Menu item in ${section.title} is missing name.`);
       assert(item.price, `Menu item ${item.name ?? 'unknown'} is missing price.`);
       assert(item.description, `Menu item ${item.name ?? 'unknown'} is missing description.`);

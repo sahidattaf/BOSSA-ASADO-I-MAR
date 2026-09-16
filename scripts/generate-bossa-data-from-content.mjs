@@ -50,6 +50,7 @@ function publishableMenuSections(menuSections = []) {
           price: item.price,
           description: item.description,
           status: item.status ?? 'active',
+          whatsappEnabled: item.whatsappEnabled === true && item.status === 'active',
           ...(item.image ? { image: item.image } : {}),
           ...(item.tag ? { tag: item.tag } : {}),
         })),
