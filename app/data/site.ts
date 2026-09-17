@@ -4,6 +4,7 @@
 export const siteConfig = {
   "brandName": "BOSSA Asado i Mar",
   "whatsappNumber": "59995230683",
+  "email": "info@bossaasado.com",
   "address": "Oranjestraat 116, Pietermaai, Willemstad, Curaçao",
   "hours": "Thursday–Sunday · 12:00 PM–10:00 PM",
   "primaryRoutes": [

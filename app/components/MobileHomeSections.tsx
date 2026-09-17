@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useId, useState } from 'react';
 import type { ReactNode } from 'react';
 
 export function MobileSectionNav() {
@@ -24,6 +24,7 @@ export function MobileSectionNav() {
 
 export function MobileDisclosure({ title, summary, children, defaultOpen = false }: { title: string; summary?: string; children: ReactNode; defaultOpen?: boolean }) {
   const [open, setOpen] = useState(defaultOpen);
+  const panelId = useId();
 
   return (
     <div className={`mobile-disclosure${open ? ' is-open' : ''}`}>
@@ -31,6 +32,7 @@ export function MobileDisclosure({ title, summary, children, defaultOpen = false
         type="button"
         className="mobile-disclosure-trigger"
         aria-expanded={open}
+        aria-controls={panelId}
         onClick={() => setOpen((current) => !current)}
       >
         <span>
@@ -39,7 +41,7 @@ export function MobileDisclosure({ title, summary, children, defaultOpen = false
         </span>
         <span className="mobile-disclosure-icon" aria-hidden="true">{open ? '−' : '+'}</span>
       </button>
-      <div className="mobile-disclosure-panel" hidden={!open}>{children}</div>
+      <div className="mobile-disclosure-panel" id={panelId} hidden={!open}>{children}</div>
     </div>
   );
 }

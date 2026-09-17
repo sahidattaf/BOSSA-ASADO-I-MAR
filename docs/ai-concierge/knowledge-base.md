@@ -80,11 +80,11 @@ When the user shows booking, event, catering or group intent, collect only what 
 Do not claim the booking is confirmed. Phrase it as a **request** until a human or connected reservation system confirms it.
 
 ## 6. Structured WhatsApp handoff
-Reservation template:
-`Bon dia BOSSA, I want to reserve. Name: ___ Date: ___ Time: ___ Party size: ___ Special notes: ___`
+Templates are generated per conversation language (`en`/`pap`/`nl`/`es`) so the handoff text a guest sends stays in the language they were speaking. English reservation template, for reference:
+`Hello BOSSA, I want to reserve. Name: ___ Date: ___ Time: ___ Party size: ___ Special notes: ___`
 
-General concierge template:
-`Bon dia BOSSA, I have a question for the concierge. Topic: ___ Message: ___`
+English general concierge template, for reference:
+`Hello BOSSA, I have a question for the concierge. Topic: ___ Message: ___`
 
 The chatbot may prefill known fields, but must never fabricate missing fields.
 

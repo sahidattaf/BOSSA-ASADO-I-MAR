@@ -1,9 +1,9 @@
 import LiveFireStatus from './components/LiveFireStatus';
 import PublicHeader from './components/PublicHeader';
 import SiteFooter from './components/SiteFooter';
+import MenuCatalog from './components/MenuCatalog';
 import { MobileDisclosure, MobileSectionNav } from './components/MobileHomeSections';
 import { mediaAssets } from './data/media';
-import { menuSections } from './data/menu';
 import { siteConfig } from './data/site';
 
 const whatsappNumber = siteConfig.whatsappNumber;
@@ -164,9 +164,6 @@ export default function HomePage() {
           <div>
             <span className="badge">BOSSA Sound</span>
             <h2>Play the BOSSA mood while guests choose.</h2>
-            <p>
-              The generated media data controls this audio asset across the homepage, Weekend Fire, and party/event flow.
-            </p>
           </div>
           <div className="info-card audio-card">
             <h3>{mainAudio.name}</h3>
@@ -223,57 +220,7 @@ export default function HomePage() {
           <p>
             Ribs, skewers, sandwiches, sides, sauces, fire boxes, and Caribbean grill favorites.
           </p>
-          <div className="menu-category-jump desktop-section-content">
-            {menuSections.map((section) => (
-              <a href={`#menu-${section.id}`} key={section.id}>{section.title}</a>
-            ))}
-          </div>
-          <div className="menu-stack editable-menu-stack desktop-section-content">
-            {menuSections.map((section) => (
-              <article className="menu-section editable-menu-section" id={`menu-${section.id}`} key={section.id}>
-                <div className="menu-section-header">
-                  <div>
-                    <span className="badge">Generated block</span>
-                    <h3>{section.title}</h3>
-                    <p>{section.note}</p>
-                    <small>{section.editableNote}</small>
-                  </div>
-                </div>
-                <div className="menu-items">
-                  {section.items.map((item: (typeof menuSections)[number]['items'][number]) => (
-                    <div className="menu-item" key={item.name}>
-                      <div>
-                        <h4>{item.name}</h4>
-                        <p>{item.description}</p>
-                      </div>
-                      <strong>{item.price}</strong>
-                    </div>
-                  ))}
-                </div>
-              </article>
-            ))}
-          </div>
-          <div className="mobile-menu-accordions mobile-only-section-content">
-            {menuSections.map((section) => (
-              <MobileDisclosure
-                key={section.id}
-                title={section.title}
-                summary={`${section.items.length} items`}
-              >
-                <div className="menu-items mobile-menu-items">
-                  {section.items.map((item: (typeof menuSections)[number]['items'][number]) => (
-                    <div className="menu-item" key={item.name}>
-                      <div>
-                        <h4>{item.name}</h4>
-                        <p>{item.description}</p>
-                      </div>
-                      <strong>{item.price}</strong>
-                    </div>
-                  ))}
-                </div>
-              </MobileDisclosure>
-            ))}
-          </div>
+          <MenuCatalog idPrefix="home-menu" />
         </div>
       </section>
 
@@ -281,7 +228,6 @@ export default function HomePage() {
         <div className="container desktop-section-content">
           <span className="badge">BOSSA YouTube Channel</span>
           <h2>Watch the fire before you order.</h2>
-          <p>Use videos as trust proof for fire, smoke, island flavor, and the BOSSA story in motion.</p>
           <div className="grid video-grid">
             {youtubeVideos.map((video) => (
               <article className="video-card" key={video.embedUrl}>
