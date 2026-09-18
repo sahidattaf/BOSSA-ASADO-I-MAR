@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { authorizeAdminRequest } from '../../../lib/admin-auth';
-import { selectSupabaseRows } from '../../../lib/supabase-server';
+import { selectBossaAdminLeads } from '../../../lib/bossa-leads-adapter';
 
 export const dynamic = 'force-dynamic';
 
@@ -23,7 +23,7 @@ export async function GET(request: NextRequest) {
   const unauthorized = authorizeAdminRequest(request);
   if (unauthorized) return unauthorized;
   try {
-    const leads = await selectSupabaseRows<SupabaseLead>('bossa_leads', 'select=*&order=created_at.desc&limit=100');
+    const leads = await selectBossaAdminLeads();
     return NextResponse.json({ ok: true, leads, stats: calculateStats(leads) }, { headers: { 'Cache-Control': 'private, no-store' } });
   } catch (error) {
     if (process.env.NODE_ENV !== 'production') console.error('[BOSSA admin leads]', error);
