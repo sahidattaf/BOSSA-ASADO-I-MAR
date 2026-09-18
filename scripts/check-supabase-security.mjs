@@ -11,6 +11,11 @@ const secretAssignments = gitGrep('^(SUPABASE_SERVICE_ROLE_KEY|NOTION_API_KEY|ST
 const secretTokens = gitGrep('(sb_secret_[A-Za-z0-9._-]{8,}|sk_(live|test)_[A-Za-z0-9._-]{8,})');
 if (secretAssignments || secretTokens) throw new Error(`Secret-like value detected in tracked files:\n${secretAssignments}${secretTokens}`);
 
+const adapter = readFileSync('app/lib/bossa-leads-adapter.ts', 'utf8');
+for (const proof of ['whatsapp_leads', 'insertBossaClickLead', 'updateBossaLeadStatus']) {
+  if (!adapter.includes(proof)) throw new Error(`Active schema adapter proof is incomplete: ${proof}`);
+}
+
 const serverHelper = readFileSync('app/lib/supabase-server.ts', 'utf8');
 for (const forbidden of ['SUPABASE_SECRET_KEY', 'SUPABASE_SERVICE_KEY', 'NEXT_PUBLIC_SUPABASE_ANON_KEY', 'SUPABASE_ANON_KEY', 'NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY', 'SUPABASE_PUBLISHABLE_KEY']) {
   if (serverHelper.includes(forbidden)) throw new Error(`Public/alternate Supabase fallback remains in server helper: ${forbidden}`);
