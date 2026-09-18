@@ -5,7 +5,7 @@ export default function robots(): MetadataRoute.Robots {
     rules: {
       userAgent: '*',
       allow: '/',
-      disallow: ['/weekend-fire/customize'],
+      disallow: ['/weekend-fire/customize', '/admin/', '/api/admin/'],
     },
     sitemap: 'https://www.bossaasado.com/sitemap.xml',
   };
