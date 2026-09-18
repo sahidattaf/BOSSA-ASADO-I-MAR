@@ -4,11 +4,13 @@
 .brand-hero .hero-copy { max-width: 650px; }
 .brand-hero h1 { max-width: 680px; font-size: clamp(44px, 5.2vw, 74px); line-height: 0.98; letter-spacing: -0.052em; }
 .brand-hero .lead { max-width: 610px; font-size: clamp(17px, 1.7vw, 22px); line-height: 1.62; }
-.hero-visual-card { border-color: rgba(255, 247, 237, 0.18); box-shadow: 0 30px 90px rgba(0, 0, 0, 0.48); isolation: isolate; }
-.hero-visual-card img { height: clamp(360px, 42vw, 540px); min-height: 0; object-position: center; transform: scale(1.01); }
-.hero-visual-card::before { content: ''; position: absolute; inset: 0; background: radial-gradient(circle at 74% 18%, rgba(255, 211, 142, 0.22), transparent 22%), linear-gradient(180deg, rgba(0,0,0,0.04), rgba(0,0,0,0.5)); pointer-events: none; z-index: 1; }
+.hero-visual-card { border-color: rgba(255, 247, 237, 0.18); box-shadow: 0 30px 90px rgba(0, 0, 0, 0.48); isolation: isolate; overflow: hidden; }
+.hero-visual-card img { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: cover; object-position: center center; transform: none; }
+.hero-visual-card::before { content: ''; position: absolute; inset: 0; background: radial-gradient(circle at 74% 18%, rgba(255, 211, 142, 0.14), transparent 24%), linear-gradient(180deg, rgba(0,0,0,0.02), rgba(0,0,0,0.34)); pointer-events: none; z-index: 1; }
 .hero-visual-card::after { z-index: 2; }
-.hero-visual-caption { z-index: 3; }
+.hero-visual-caption { z-index: 3; padding: 11px 14px; background: rgba(18, 13, 10, 0.72); backdrop-filter: blur(8px); }
+.brand-hero .cta-row .button:not(.primary) { opacity: 0.86; }
+.brand-hero .cta-row .button.primary { box-shadow: 0 12px 32px rgba(255, 106, 26, 0.22); }
 .language-switcher { top: 92px; right: 22px; }
 
 /* PR #25: premium restaurant brand flow */
@@ -34,5 +36,24 @@
 .premium-final-cta h2 { max-width: 850px; margin-inline: auto; }
 .premium-final-cta p { max-width: 720px; margin-inline: auto; }
 
-@media (max-width: 980px) { .brand-hero .hero-grid, .section-heading-row, .signature-grid { grid-template-columns: 1fr; } .brand-hero .hero-copy, .brand-hero h1 { max-width: 780px; } }
-@media (max-width: 760px) { .brand-hero { padding-top: 32px; } .brand-hero h1 { font-size: clamp(42px, 12vw, 58px); line-height: 1; } .hero-visual-card { border-radius: 24px; } .hero-visual-card img { height: 320px; min-height: 0; } .hero-visual-caption { left: 12px; right: 12px; bottom: 12px; } .language-switcher { top: 12px; right: 12px; } .hero-proof-row span { font-size: 12px; } .signature-card { min-height: 280px; } }
+@media (max-width: 980px) {
+  .brand-hero .hero-grid, .section-heading-row, .signature-grid { grid-template-columns: 1fr; }
+  .brand-hero .hero-copy, .brand-hero h1 { max-width: 780px; }
+  .hero-visual-card img { aspect-ratio: 16 / 9; }
+}
+
+@media (max-width: 760px) {
+  .brand-hero { padding-top: 24px; padding-bottom: 48px; }
+  .brand-hero .hero-grid { gap: 22px; }
+  .brand-hero h1 { font-size: clamp(42px, 12vw, 58px); line-height: 1; }
+  .brand-hero .lead { line-height: 1.5; }
+  .brand-hero .cta-row { gap: 9px; }
+  .hero-visual-card { border-radius: 22px; }
+  .hero-visual-card img { width: 100%; height: auto; aspect-ratio: 2 / 1; object-fit: cover; object-position: center center; }
+  .hero-visual-caption { left: 12px; right: 12px; bottom: 12px; padding: 6px 9px; max-width: 76%; font-size: 11px; line-height: 1.2; background: rgba(18, 13, 10, 0.58); }
+  .hero-visual-caption strong { display: block; font-size: 13px; line-height: 1.15; }
+  .hero-visual-caption span { display: block; margin-top: 2px; font-size: 10px; line-height: 1.2; }
+  .language-switcher { top: 12px; right: 12px; }
+  .hero-proof-row span { font-size: 12px; }
+  .signature-card { min-height: 280px; }
+}

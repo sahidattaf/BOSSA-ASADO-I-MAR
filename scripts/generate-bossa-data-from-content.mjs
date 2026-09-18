@@ -41,7 +41,6 @@ function publishableMenuSections(menuSections = []) {
       id: section.id,
       title: section.title,
       note: section.note,
-      editableNote: section.editableNote ?? 'Generated from approved BOSSA Notion JSON. Update the JSON source, then run npm run generate:data.',
       status: section.status ?? 'active',
       items: (section.items ?? [])
         .filter((item) => item.status !== 'draft')
@@ -50,6 +49,7 @@ function publishableMenuSections(menuSections = []) {
           price: item.price,
           description: item.description,
           status: item.status ?? 'active',
+          whatsappEnabled: item.whatsappEnabled === true && item.status === 'active',
           ...(item.image ? { image: item.image } : {}),
           ...(item.tag ? { tag: item.tag } : {}),
         })),
