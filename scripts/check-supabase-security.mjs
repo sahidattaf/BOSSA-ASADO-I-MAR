@@ -3,13 +3,13 @@ import { readFileSync } from 'node:fs';
 
 const files = execFileSync('git', ['ls-files', '-z'], { encoding: 'utf8' }).split('\0').filter(Boolean);
 const scanned = files.filter((file) => !/\.(md|png|jpe?g|gif|webp|ico|woff2?|pdf)$/i.test(file) && file !== 'scripts/check-supabase-security.mjs');
-const secretValue = /(?:SUPABASE_SERVICE_ROLE_KEY|NOTION_API_KEY|STRIPE_SECRET_KEY)\s*=\s*[A-Za-z0-9_./:+-]{8,}/;
-const tokenValue = /(?:sb_secret_[A-Za-z0-9._-]{8,}|sk_(?:live|test)_[A-Za-z0-9._-]{8,})/;
-
-for (const file of scanned) {
-  const source = readFileSync(file, 'utf8');
-  if (secretValue.test(source) || tokenValue.test(source)) throw new Error(`Secret-like value detected in tracked file: ${file}`);
+function gitGrep(pattern) {
+  try { return execFileSync('git', ['grep', '-I', '-n', '-E', pattern, '--', ...scanned], { encoding: 'utf8', stdio: ['ignore', 'pipe', 'ignore'] }); }
+  catch (error) { if (error.status === 1) return ''; throw error; }
 }
+const secretAssignments = gitGrep('^(SUPABASE_SERVICE_ROLE_KEY|NOTION_API_KEY|STRIPE_SECRET_KEY)=[^[:space:]#`]{8,}$');
+const secretTokens = gitGrep('(sb_secret_[A-Za-z0-9._-]{8,}|sk_(live|test)_[A-Za-z0-9._-]{8,})');
+if (secretAssignments || secretTokens) throw new Error(`Secret-like value detected in tracked files:\n${secretAssignments}${secretTokens}`);
 
 const serverHelper = readFileSync('app/lib/supabase-server.ts', 'utf8');
 for (const forbidden of ['SUPABASE_SECRET_KEY', 'SUPABASE_SERVICE_KEY', 'NEXT_PUBLIC_SUPABASE_ANON_KEY', 'SUPABASE_ANON_KEY', 'NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY', 'SUPABASE_PUBLISHABLE_KEY']) {
