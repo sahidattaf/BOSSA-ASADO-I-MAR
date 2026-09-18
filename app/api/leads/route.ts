@@ -1,6 +1,7 @@
 import { randomUUID } from 'crypto';
 import { NextRequest, NextResponse } from 'next/server';
-import { insertSupabaseRow, isSupabaseConfigured } from '../../lib/supabase-server';
+import { insertBossaClickLead } from '../../lib/bossa-leads-adapter';
+import { isSupabaseConfigured } from '../../lib/supabase-server';
 
 const NOTION_API_VERSION = '2022-06-28';
 
@@ -400,7 +401,7 @@ export async function POST(request: NextRequest) {
       });
     }
 
-    await insertSupabaseRow('bossa_leads', leadRecord);
+    await insertBossaClickLead(leadRecord);
 
     return NextResponse.json({
       ok: true,
