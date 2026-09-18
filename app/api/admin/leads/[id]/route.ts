@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { authorizeAdminRequest } from '../../../../lib/admin-auth';
 import { updateSupabaseRows } from '../../../../lib/supabase-server';
 
 const ALLOWED_STATUSES = [
@@ -77,6 +78,9 @@ function cleanFollowUpDue(value: unknown) {
 }
 
 export async function PATCH(request: NextRequest, context: RouteContext) {
+  const unauthorized = authorizeAdminRequest(request);
+  if (unauthorized) return unauthorized;
+
   try {
     const { id } = await context.params;
 
