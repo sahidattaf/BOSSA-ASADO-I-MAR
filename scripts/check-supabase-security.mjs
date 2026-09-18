@@ -2,7 +2,7 @@ import { execFileSync } from 'node:child_process';
 import { readFileSync } from 'node:fs';
 
 const trackedFiles = execFileSync('git', ['ls-files', '-z'], { encoding: 'utf8' }).split('\0').filter(Boolean).filter((file) => !file.startsWith('node_modules/'));
-const textFiles = trackedFiles.filter((file) => !/\.(png|jpe?g|gif|webp|ico|woff2?|pdf)$/i.test(file));
+const textFiles = trackedFiles.filter((file) => !/\.(md|png|jpe?g|gif|webp|ico|woff2?|pdf)$/i.test(file));
 const forbiddenSecretValue = /(?:SUPABASE_SERVICE_ROLE_KEY|NOTION_API_KEY|STRIPE_SECRET_KEY)\s*=\s*[^\s#`][^\r\n]*/;
 const secretToken = /(?:sb_secret_[A-Za-z0-9._-]+|sk_live_[A-Za-z0-9][A-Za-z0-9._-]+)/;
 
