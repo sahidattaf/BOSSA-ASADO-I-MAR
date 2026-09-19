@@ -167,6 +167,25 @@ Production launch
 
 ---
 
+## YouTube Content Operating System
+
+BOSSA's YouTube channel is managed as an internal content-to-revenue workflow in Notion:
+
+- **Channel:** BOSSA Asado i Mar
+- **Positioning:** Live Fire Cooking • Curaçao Food & Travel
+- **Tagline:** Fire, Flavors & the Sea
+- **Primary CTA:** WhatsApp +5999 523 0683
+- **Operating hub:** [BOSSA YouTube Live Cooking Content System](https://app.notion.com/p/38fa269fc947813fb986fc250dc16d76)
+
+Operating model:
+
+```text
+Cook once → Film once → Publish long-form → Repurpose Shorts/Reels/TikTok
+→ Drive WhatsApp orders, reservations, and partner inquiries → Measure → Repeat
+```
+
+Keep production calendars, scripts, unpublished offers, analytics, partner pipelines, and agent prompts in Notion. Only public-safe channel links and approved media assets should be added to this repository.
+
 ## Source Documents
 
 The original business codex remains in:
