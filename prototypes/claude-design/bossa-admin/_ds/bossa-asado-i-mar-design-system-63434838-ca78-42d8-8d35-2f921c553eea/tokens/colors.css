@@ -1,0 +1,39 @@
+/* BOSSA Asado i Mar — Color tokens
+   Source of truth: app/globals.css in sahidattaf/BOSSA-ASADO-I-MAR */
+:root {
+  /* ── Base palette ─────────────────────────────── */
+  --charcoal: #120d0a;        /* page base — near-black warm charcoal */
+  --charcoal-soft: #1d1510;   /* raised surface */
+  --charcoal-deep: #050403;   /* gradient floor / image wells */
+  --brown-deep: #3a2416;      /* wood / deep brown accent */
+
+  --fire: #ff6a1a;            /* ember orange — primary brand */
+  --fire-bright: #ff7d35;     /* hover ember */
+  --fire-soft: rgba(255, 106, 26, 0.14);
+  --gold: #f3b35b;            /* fire gold — headings / accents */
+  --sea: #44c7c4;             /* sea blue accent — use sparingly */
+
+  --cream: #fff7ed;           /* primary text on dark */
+  --sand: #d7c3ad;            /* muted body text */
+
+  --line: rgba(255, 247, 237, 0.14);   /* hairline borders */
+  --line-strong: rgba(255, 247, 237, 0.22);
+
+  /* ── Semantic aliases ─────────────────────────── */
+  --bg: var(--charcoal);
+  --bg-soft: var(--charcoal-soft);
+  --surface-card: linear-gradient(180deg, rgba(255,255,255,0.07), rgba(255,255,255,0.035));
+  --text: var(--cream);
+  --text-muted: var(--sand);
+  --text-accent: var(--gold);
+  --brand: var(--fire);
+  --brand-hover: var(--fire-bright);
+
+  --status-live: #ff5a14;
+  --status-success: var(--sea);
+  --status-error: #ff9a76;
+
+  /* Page background wash used across all BOSSA surfaces */
+  --bg-wash: radial-gradient(circle at top left, rgba(255,106,26,0.18), transparent 34%),
+             linear-gradient(135deg, var(--charcoal), var(--charcoal-deep) 70%);
+}
