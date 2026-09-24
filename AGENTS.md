@@ -139,7 +139,7 @@ When operating in this repository:
 ## 9. Supabase Governance
 
 - **Schema:** `supabase/migrations/20260531_create_bossa_leads.sql` defines `public.bossa_leads` — the lead-tracking table for safe, non-sensitive WhatsApp/order/quote CTA events.
-- **Project reference (from migration comment):** `zgfncoexiqnqeqaxpqdy` — treat as informational only; do not assume live connection without confirmation.
+- **Active project reference (read-only verified):** `oqmftkttkfktyzefswpz` (`bossa-ai-os`). The repository migration still describes the legacy `bossa_leads` contract; do not assume it matches the active project.
 - **Row Level Security (RLS):**
   - Enabled on `bossa_leads`.
   - `anon` role: insert-only, restricted to the allowed `lead_type` values, and `metadata` must be a JSON object.

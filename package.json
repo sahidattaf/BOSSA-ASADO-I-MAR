@@ -12,7 +12,8 @@
     "validate:ai-concierge": "node scripts/validate-ai-concierge.mjs",
     "generate:data": "node scripts/generate-bossa-data-from-content.mjs",
     "content:check": "npm run validate:content && npm run generate:data",
-    "deploy:check": "npm run content:check && npm run validate:ai-concierge && npm run typecheck && npm run build"
+    "deploy:check": "npm run content:check && npm run validate:ai-concierge && npm run typecheck && npm run build",
+    "security:check": "node scripts/check-supabase-security.mjs"
   },
   "dependencies": {
     "@types/node": "latest",

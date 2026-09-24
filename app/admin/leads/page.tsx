@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { selectSupabaseRows } from '../../lib/supabase-server';
+import { selectBossaAdminLeads } from '../../lib/bossa-leads-adapter';
 
 type BossaLead = {
   id: string;
@@ -135,7 +135,7 @@ function StatCard({ label, value, helper }: { label: string; value: string | num
 
 async function getLeads() {
   try {
-    return await selectSupabaseRows<BossaLead>('bossa_leads', 'select=*&order=created_at.desc&limit=100');
+    return await selectBossaAdminLeads();
   } catch (error) {
     if (process.env.NODE_ENV !== 'production') {
       console.error('[BOSSA admin leads]', error);
