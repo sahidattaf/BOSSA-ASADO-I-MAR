@@ -121,7 +121,7 @@ export default async function AdminReservationsPage() {
             <h1>Reservations</h1>
             <p className="intro">
               Every online request arrives as <strong>pending</strong>. Confirm it, then send the guest a WhatsApp confirmation. Capacity: 40 guests per
-              30-minute slot · Wednesday–Sunday · 5:00 PM–9:30 PM reservation times.
+              30-minute slot · Thursday – Sunday · 12:00 PM – 9:30 PM reservation times (open until 10:00 PM).
             </p>
           </div>
           <div className="actions">

@@ -4,13 +4,13 @@ Gate: BOSSA-RESERVATIONS-1 · Built 2026-10-21
 
 Guests request a table at `/reserve`. Every request is stored in Supabase as **pending**. Staff confirm, cancel, seat or mark no-shows at `/admin/reservations`, then send the guest a WhatsApp confirmation.
 
-## Business rules (owner-confirmed 2026-10-21)
+## Business rules (official hours, owner-confirmed 2026-10-21)
 
 | Rule | Value | Enforced in |
 | --- | --- | --- |
-| Opening days | Wednesday–Sunday. Closed Monday & Tuesday | Form, API, database check constraint |
-| Opening hours | 5:00 PM–11:00 PM (America/Curacao) | Copy on `/reserve` |
-| Reservation times | 5:00 PM–9:30 PM, every 30 minutes (10 slots) | Form, API, database check constraint |
+| Opening days | Thursday – Sunday. Closed Monday, Tuesday & Wednesday | Form, API, database check constraint (active bookings) |
+| Opening hours | 12:00 PM – 10:00 PM (America/Curacao) | `content/notion/bossa-website-content.template.json` → `siteConfig.hours` (footer, contact, homepage, concierge) and `/reserve` copy |
+| Reservation times | 12:00 PM – 9:30 PM, every 30 minutes (20 slots). Last seating 9:30 PM | Form, API, database check constraint |
 | Capacity | 40 guests per 30-minute slot | API pre-check + database trigger (authoritative) |
 | Party size | 1–40 | Form, API, database check constraint |
 | Approval | Manual — every request starts as `pending` | Database default + insert policy |
@@ -20,7 +20,7 @@ Guests request a table at `/reserve`. Every request is stored in Supabase as **p
 Rules live in two places that must stay in sync:
 
 - `app/lib/reservations.ts` — shared by the guest form, API and dashboard.
-- `supabase/migrations/005_create_reservations.sql` — check constraints and `public.enforce_reservation_slot_rules()`.
+- `supabase/migrations/005_create_reservations.sql` + `006_update_reservation_hours.sql` — check constraints and `public.enforce_reservation_slot_rules()`. 006 replaces 005's original Wednesday–Sunday 5:00–9:30 PM rules.
 
 ## Architecture
 
@@ -43,6 +43,7 @@ Staff ─► /admin/reservations (Basic Auth via proxy.ts)
 | File | Purpose |
 | --- | --- |
 | `supabase/migrations/005_create_reservations.sql` | Table, indexes, slot rules trigger, RLS policies, grants |
+| `supabase/migrations/006_update_reservation_hours.sql` | Official hours: Thursday–Sunday, slots 12:00–21:30 |
 | `app/lib/reservations.ts` | Shared rules, validation, date/time helpers (client-safe) |
 | `app/lib/reservations-store.ts` | Server-only Supabase access (reuses `supabase-server.ts`) |
 | `app/api/reservations/route.ts` | `POST` public request · `GET` staff list |
@@ -82,7 +83,7 @@ Field codes: `required`, `name_invalid`, `phone_invalid`, `email_invalid`, `part
 
 ## Go-live checklist (owner actions)
 
-1. **Apply the migration** `supabase/migrations/005_create_reservations.sql` to the active Supabase project (`bossa-ai-os`, ref `oqmftkttkfktyzefswpz`). Until this is done, `/reserve` shows "Online reservations are temporarily unavailable" with a WhatsApp link, and the dashboard shows a database warning.
+1. **Apply the migrations** `supabase/migrations/005_create_reservations.sql` then `006_update_reservation_hours.sql` to the active Supabase project (`bossa-ai-os`, ref `oqmftkttkfktyzefswpz`). Until this is done, `/reserve` shows "Online reservations are temporarily unavailable" with a WhatsApp link, and the dashboard shows a database warning.
 2. **Set admin credentials in Vercel** (Production): `BOSSA_ADMIN_USERNAME`, `BOSSA_ADMIN_PASSWORD`. Without them, `/admin/*` and the staff `GET` fail closed with 503.
 3. Confirm `SUPABASE_SERVICE_ROLE_KEY` and `NEXT_PUBLIC_SUPABASE_URL` (or `SUPABASE_URL`) remain set for Production — the reservation API uses the same server-only boundary as the leads adapter.
 4. Have a native speaker review the Papiamentu copy in `app/components/ReservationForm.tsx` and the WhatsApp confirmation text in `app/components/admin/ReservationsBoard.tsx`.
@@ -104,8 +105,8 @@ npm run deploy:check     # validate content, generate data, concierge checks, ty
 | D1 | anon inserts a valid request | Row saved with `status = pending` |
 | D2 | anon selects | `permission denied` |
 | D3 | anon tries to set `status = confirmed` | `permission denied` |
-| D4 | Monday / Tuesday | `reservations_open_day_check` |
-| D5 | 16:30, 17:15, 22:00 | `reservations_slot_time_check` |
+| D4 | Monday / Tuesday / Wednesday | `reservations_open_day_check` |
+| D5 | 11:30, 12:15, 22:00 | `reservations_slot_time_check` (12:00 and 21:30 accepted) |
 | D6 | Party size 0 or 41 | `reservations_party_size_check` |
 | D7 | Bad phone, bad email, blank name | Matching check constraint |
 | D8 | Slot already in the past | `BOSSA_SLOT_IN_PAST` |
@@ -120,11 +121,11 @@ npm run deploy:check     # validate content, generate data, concierge checks, ty
 
 | # | Case | Request | Expected |
 | --- | --- | --- | --- |
-| A1 | **Valid submission** | Thursday 19:00, 4 guests, all required fields | 201, `status: pending`, no PII echoed |
+| A1 | **Valid submission** | Thursday 19:00, 4 guests, all required fields (also 12:00 and 21:30) | 201, `status: pending`, no PII echoed |
 | A2 | **Missing fields** | `{}` | 400 `validation_failed`, every required field = `required` |
 | A3 | Invalid phone / email / party size 0 or 41 | | 400 with matching field codes |
-| A4 | **Closed day** | Next Monday or Tuesday | 400, `reservation_date: closed_day` |
-| A5 | Time outside slots | 17:15 or 22:00 | 400, `reservation_time: time_invalid` |
+| A4 | **Closed day** | Next Monday, Tuesday or Wednesday | 400, `reservation_date: closed_day` |
+| A5 | Time outside slots | 11:30, 12:15 or 22:00 | 400, `reservation_time: time_invalid` |
 | A6 | Past date / earlier slot today | | 400, `date_past` / `time_past` |
 | A7 | **Full slot** | Fill a slot to 40, then request 1 more | 400 `slot_full`, `seats_left: 0` |
 | A8 | Partially full slot | 34 booked, request 7 | 400 `slot_full`, `seats_left: 6`; request 6 → 201 |
@@ -144,7 +145,7 @@ npm run deploy:check     # validate content, generate data, concierge checks, ty
 | --- | --- | --- |
 | B1 | Open `/reserve` | No horizontal scroll; header shows the orange **Reserve** button |
 | B2 | Submit empty form | Inline errors; focus moves to Name |
-| B3 | Pick a Monday | "We are closed on Monday and Tuesday…" under Date |
+| B3 | Pick a Monday, Tuesday or Wednesday | "We are closed on Monday, Tuesday and Wednesday…" under Date |
 | B4 | Switch to Papiamentu | All labels, errors and success text switch language |
 | B5 | Valid request | "Your request has been received. We will confirm via WhatsApp shortly." + WhatsApp follow-up link to +5999 523 0683 |
 | B6 | Full slot | "This time is fully booked… Only N seats are left at this time." |
@@ -162,7 +163,7 @@ npm run deploy:check     # validate content, generate data, concierge checks, ty
 
 ## Known limitations and follow-ups
 
-- **Hours shown elsewhere differ:** `app/data/site.ts` (generated from the content JSON) still says "Thursday–Sunday · 12:00 PM–10:00 PM". It appears in the site footer (including on `/reserve`), the contact page, page metadata and the AI concierge. Needs an owner decision: are 12:00–10:00 PM Thursday–Sunday the Weekend Fire take-out hours, or should all public hours change to Wednesday–Sunday 5:00–11:00 PM?
+- **Hours are now one source of truth:** Thursday – Sunday · 12:00 PM – 10:00 PM (owner-confirmed 2026-10-21) in `content/notion/bossa-website-content.template.json`, matched by `app/lib/reservations.ts`, migration 006, `LiveFireStatus`, page metadata and the LocalBusiness schema in `app/layout.tsx`. If the hours change, update all of them together.
 - No automatic guest notifications (email/WhatsApp API). Staff send the confirmation from the dashboard's WhatsApp button.
 - How far ahead guests may book is not limited — needs confirmation.
 - Holidays and special closures are not modelled — needs confirmation of how they should be blocked.

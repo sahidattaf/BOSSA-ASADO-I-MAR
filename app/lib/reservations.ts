@@ -1,14 +1,19 @@
 // Shared reservation rules for the guest form, the API and the staff dashboard.
-// Owner-confirmed 2026-10-21: open Wednesday–Sunday 5:00 PM–11:00 PM, closed
-// Monday & Tuesday, 40 guests per 30-minute slot, manual staff confirmation.
-// The same rules are enforced in supabase/migrations/005_create_reservations.sql.
+// Official hours (owner-confirmed 2026-10-21): Thursday – Sunday · 12:00 PM – 10:00 PM,
+// closed Monday, Tuesday & Wednesday. Reservation slots 12:00 PM – 9:30 PM every
+// 30 minutes (last seating 9:30 PM), 40 guests per slot, manual staff confirmation.
+// The same rules are enforced in supabase/migrations/005_create_reservations.sql
+// and 006_update_reservation_hours.sql.
 
 export const RESERVATION_TIMEZONE = 'America/Curacao';
 export const SLOT_CAPACITY = 40;
 export const MAX_PARTY_SIZE = 40;
-export const SLOT_TIMES = ['17:00', '17:30', '18:00', '18:30', '19:00', '19:30', '20:00', '20:30', '21:00', '21:30'] as const;
-// ISO weekday numbers (Monday = 1 … Sunday = 7).
-export const CLOSED_ISO_WEEKDAYS = [1, 2] as const;
+export const SLOT_TIMES = [
+  '12:00', '12:30', '13:00', '13:30', '14:00', '14:30', '15:00', '15:30', '16:00', '16:30',
+  '17:00', '17:30', '18:00', '18:30', '19:00', '19:30', '20:00', '20:30', '21:00', '21:30',
+] as const;
+// ISO weekday numbers (Monday = 1 … Sunday = 7). Closed Monday, Tuesday & Wednesday.
+export const CLOSED_ISO_WEEKDAYS = [1, 2, 3] as const;
 
 export const RESERVATION_STATUSES = ['pending', 'confirmed', 'cancelled', 'seated', 'no_show'] as const;
 export const ACTIVE_RESERVATION_STATUSES = ['pending', 'confirmed', 'seated'] as const;
@@ -156,10 +161,11 @@ export function formatReservationDate(date: string, locale = 'en-US') {
   }).format(new Date(Date.UTC(year, month - 1, day)));
 }
 
-const PAP_DAYS = ['djadumingu', 'djaluna', 'djamars', 'djarason', 'djuev', 'djabièrnè', 'djasabra'];
+// Curaçao Papiamentu spelling, matching prompts/style-guide.md (djaweps = Thursday).
+const PAP_DAYS = ['djadumingu', 'djaluna', 'djamars', 'djarason', 'djaweps', 'djabièrnè', 'djasabra'];
 const PAP_MONTHS = ['yanüari', 'febrüari', 'mart', 'aprel', 'mei', 'yüni', 'yüli', 'ougùstùs', 'sèptèmber', 'òktober', 'novèmber', 'desèmber'];
 
-/** "2026-10-22" -> "Thursday, October 22" (en) or "djuev 22 di òktober" (pap). */
+/** "2026-10-22" -> "Thursday, October 22" (en) or "djaweps 22 di òktober" (pap). */
 export function formatReservationDateLong(date: string, language: 'en' | 'pap' = 'en') {
   const [year, month, day] = date.split('-').map(Number);
   const value = new Date(Date.UTC(year, month - 1, day));

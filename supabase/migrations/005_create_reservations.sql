@@ -1,6 +1,10 @@
 -- BOSSA-RESERVATIONS-1
 -- Table reservation requests for BOSSA Asado i Mar.
 --
+-- NOTE: the opening days and reservation times below were superseded the same
+-- day by 006_update_reservation_hours.sql (Thursday–Sunday, slots 12:00–21:30).
+-- Always apply 005 and 006 together.
+--
 -- Owner-confirmed business rules (Coach Sahid, 2026-10-21):
 --   * Open Wednesday–Sunday, 5:00 PM–11:00 PM (America/Curacao). Closed Monday & Tuesday.
 --   * Bookable times: 17:00–21:30 in 30-minute slots.

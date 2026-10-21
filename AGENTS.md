@@ -53,7 +53,7 @@ If a doc in `docs/` conflicts with the actual code, treat the code as current tr
 6. **Site config facts** (from `app/data/site.ts`, generated):
    - Brand name: BOSSA Asado i Mar
    - Address: Oranjestraat 116, Pietermaai, Willemstad, Curaçao
-   - Hours: Thursday–Sunday · 12:00 PM–10:00 PM
+   - Hours: Thursday – Sunday · 12:00 PM – 10:00 PM (closed Monday, Tuesday & Wednesday; owner-confirmed 2026-10-21)
    - Primary routes: `/`, `/weekend-fire`, `/weekend-fire/customize`, `/party-menu`
 
 Do not change prices, hours, address, partners, or WhatsApp number unless explicitly instructed — these are business facts, not code defaults.
