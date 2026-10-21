@@ -10,7 +10,7 @@ export default function PublicHeader() {
       </a>
       <nav className="nav-links" aria-label="Primary navigation">
         {siteRoutes.map(([label, href]) => (
-          <a key={href} href={href}>
+          <a key={href} href={href} className={href === '/reserve' ? 'nav-reserve' : undefined}>
             {label}
           </a>
         ))}

@@ -30,6 +30,9 @@ img { max-width: 100%; display: block; }
 .nav-links { display: flex; gap: 18px; color: var(--muted); font-size: 14px; flex-wrap: wrap; justify-content: flex-end; }
 .nav-links a { transition: color 0.2s ease, opacity 0.2s ease; }
 .nav-links a:hover { color: var(--gold); }
+.nav-links a.nav-reserve { padding: 6px 14px; border-radius: 999px; background: #ff6b35; color: #0a2342; font-weight: 900; }
+.nav-links a.nav-reserve:hover { color: #0a2342; background: #ff7f4f; }
+.card-secondary-link { display: block; margin-top: 12px; color: var(--gold); font-size: 14px; font-weight: 700; text-decoration: underline; text-underline-offset: 3px; }
 .hero { padding: 92px 0 72px; }
 .brand-hero { padding-top: 56px; }
 .weekend-hero { padding-bottom: 54px; }

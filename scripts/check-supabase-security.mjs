@@ -20,11 +20,19 @@ const serverHelper = readFileSync('app/lib/supabase-server.ts', 'utf8');
 for (const forbidden of ['SUPABASE_SECRET_KEY', 'SUPABASE_SERVICE_KEY', 'NEXT_PUBLIC_SUPABASE_ANON_KEY', 'SUPABASE_ANON_KEY', 'NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY', 'SUPABASE_PUBLISHABLE_KEY']) {
   if (serverHelper.includes(forbidden)) throw new Error(`Public/alternate Supabase fallback remains in server helper: ${forbidden}`);
 }
-for (const route of ['app/api/admin/leads/route.ts', 'app/api/admin/leads/[id]/route.ts']) {
+for (const route of ['app/api/admin/leads/route.ts', 'app/api/admin/leads/[id]/route.ts', 'app/api/admin/reservations/[id]/route.ts', 'app/api/reservations/route.ts']) {
   if (!readFileSync(route, 'utf8').includes('authorizeAdminRequest')) throw new Error(`Admin route lacks authentication: ${route}`);
 }
 const migration = readFileSync('supabase/migrations/20260531_create_bossa_leads.sql', 'utf8').toLowerCase();
 for (const proof of ['enable row level security', 'create policy', 'to anon', 'for insert', 'with check']) {
   if (!migration.includes(proof)) throw new Error(`Repository RLS proof is incomplete: missing ${proof}`);
+}
+const reservationsMigration = readFileSync('supabase/migrations/005_create_reservations.sql', 'utf8').toLowerCase();
+for (const proof of ['enable row level security', 'revoke all on table public.reservations from anon', 'grant insert (guest_name', 'for insert', 'to anon', 'is_bossa_staff', 'security definer', 'pg_advisory_xact_lock']) {
+  if (!reservationsMigration.includes(proof)) throw new Error(`Reservations RLS/capacity proof is incomplete: missing ${proof}`);
+}
+for (const clientFile of ['app/components/ReservationForm.tsx', 'app/components/admin/ReservationsBoard.tsx', 'app/lib/reservations.ts']) {
+  const source = readFileSync(clientFile, 'utf8');
+  if (/supabase-server|reservations-store|SUPABASE_SERVICE_ROLE_KEY/.test(source)) throw new Error(`Client-reachable file imports the server Supabase boundary: ${clientFile}`);
 }
 console.log('Security repair checks passed.');

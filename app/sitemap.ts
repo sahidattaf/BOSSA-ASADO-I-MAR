@@ -6,6 +6,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   return [
     '',
     '/menu',
+    '/reserve',
     '/weekend-fire',
     '/rooftop-lounge',
     '/catering',

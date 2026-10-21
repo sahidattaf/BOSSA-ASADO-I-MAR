@@ -1,6 +1,7 @@
 export const siteRoutes = [
   ['Home', '/'],
   ['Menu', '/menu'],
+  ['Reserve', '/reserve'],
   ['Weekend Fire', '/weekend-fire'],
   ['Rooftop', '/rooftop-lounge'],
   ['Catering', '/catering'],

@@ -37,11 +37,12 @@ const orderCards = [
   },
   {
     title: 'Reserve a table',
-    text: 'For dine-in or terrace energy, send name, date, time, party size, and special notes through WhatsApp.',
-    cta: 'Reserve now',
-    href: reservationUrl,
+    text: 'For dine-in or terrace energy, pick your date, time, and party size online. BOSSA confirms every table on WhatsApp.',
+    cta: 'Reserve online',
+    href: '/reserve',
     trackLabel: 'order-card-reservation',
     offerId: '',
+    secondary: { label: 'Or reserve on WhatsApp', href: reservationUrl, trackLabel: 'order-card-reservation-whatsapp' },
   },
   {
     title: 'Plan catering or private event',
@@ -117,13 +118,27 @@ export default function HomePage() {
                   href={card.href}
                   target={card.href.startsWith('http') ? '_blank' : undefined}
                   rel={card.href.startsWith('http') ? 'noreferrer' : undefined}
-                  data-track="whatsapp-click"
+                  data-track={card.href === '/reserve' ? undefined : 'whatsapp-click'}
                   data-cta-source="home"
                   data-cta-label={card.trackLabel}
                   data-offer-id={card.offerId}
                 >
                   {card.cta}
                 </a>
+                {'secondary' in card && card.secondary ? (
+                  <a
+                    className="card-secondary-link"
+                    href={card.secondary.href}
+                    target="_blank"
+                    rel="noreferrer"
+                    data-track="whatsapp-click"
+                    data-cta-source="home"
+                    data-cta-label={card.secondary.trackLabel}
+                    data-offer-id=""
+                  >
+                    {card.secondary.label}
+                  </a>
+                ) : null}
               </article>
             ))}
           </div>

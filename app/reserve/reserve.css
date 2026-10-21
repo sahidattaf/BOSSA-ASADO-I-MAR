@@ -1,0 +1,147 @@
+/* /reserve — guest reservation page.
+   Brand accents for this flow (owner-specified): navy #0A2342, gold #FFD700, ember #FF6B35,
+   layered on the site's charcoal background from globals.css. */
+.reserve-page {
+  --reserve-navy: #0a2342;
+  --reserve-navy-deep: #061529;
+  --reserve-gold: #ffd700;
+  --reserve-ember: #ff6b35;
+  --reserve-ember-hover: #ff7f4f;
+  --reserve-error: #ffb199;
+  --reserve-success: #8fe3c4;
+}
+
+.reserve-hero { padding: 48px 0 28px; }
+.reserve-hero h1 { font-size: clamp(38px, 6.5vw, 76px); }
+.reserve-hero .badge { color: var(--reserve-gold); }
+
+.reserve-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr);
+  gap: 24px;
+  align-items: start;
+  padding-bottom: 72px;
+}
+
+.reserve-card {
+  position: relative;
+  display: grid;
+  gap: 16px;
+  min-width: 0;
+  padding: clamp(20px, 4vw, 34px);
+  border: 1px solid rgba(255, 215, 0, 0.22);
+  border-radius: 26px;
+  background: linear-gradient(160deg, var(--reserve-navy), var(--reserve-navy-deep));
+  box-shadow: var(--shadow);
+  color: var(--text);
+}
+.reserve-card h2 { margin: 0; color: var(--reserve-gold); font-size: clamp(28px, 4vw, 40px); letter-spacing: -0.03em; }
+.reserve-badge {
+  justify-self: start;
+  border: 1px solid rgba(255, 215, 0, 0.4);
+  border-radius: 999px;
+  padding: 7px 12px;
+  color: var(--reserve-gold);
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.reserve-intro, .reserve-hours { margin: 0; color: #dbe4f0; line-height: 1.6; }
+.reserve-hours { font-size: 14px; padding: 12px 14px; border-radius: 14px; background: rgba(255, 255, 255, 0.06); }
+.reserve-hours span { display: block; color: var(--reserve-gold); font-weight: 700; }
+
+.reserve-language { justify-self: end; display: inline-flex; gap: 4px; padding: 4px; border-radius: 999px; background: rgba(0, 0, 0, 0.28); border: 1px solid rgba(255, 255, 255, 0.12); }
+.reserve-card .reserve-language { position: absolute; top: clamp(16px, 3vw, 24px); right: clamp(16px, 3vw, 24px); }
+.reserve-language button { border: 0; border-radius: 999px; padding: 7px 12px; background: transparent; color: #dbe4f0; font: inherit; font-size: 13px; font-weight: 800; cursor: pointer; }
+.reserve-language button[aria-pressed='true'] { background: var(--reserve-gold); color: var(--reserve-navy); }
+.reserve-language button:focus-visible { outline: 2px solid var(--reserve-gold); outline-offset: 2px; }
+
+.reserve-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+.reserve-field { display: grid; gap: 7px; align-content: start; min-width: 0; color: #dbe4f0; font-weight: 800; font-size: 15px; }
+.reserve-field--wide { grid-column: 1 / -1; }
+.reserve-field abbr { color: var(--reserve-ember); text-decoration: none; }
+.reserve-field small { color: #9fb0c6; font-weight: 600; font-size: 12px; line-height: 1.4; }
+.reserve-field input,
+.reserve-field select,
+.reserve-field textarea {
+  width: 100%;
+  min-width: 0;
+  min-height: 48px;
+  border: 1px solid rgba(219, 228, 240, 0.24);
+  border-radius: 12px;
+  padding: 12px 14px;
+  background: rgba(3, 10, 22, 0.72);
+  color: var(--text);
+  font: inherit;
+  font-weight: 500;
+  color-scheme: dark;
+}
+.reserve-field textarea { resize: vertical; min-height: 96px; }
+.reserve-field input:focus,
+.reserve-field select:focus,
+.reserve-field textarea:focus { outline: 2px solid var(--reserve-gold); outline-offset: 2px; border-color: rgba(255, 215, 0, 0.6); }
+.reserve-field [aria-invalid='true'] { border-color: var(--reserve-error); box-shadow: 0 0 0 1px var(--reserve-error); }
+.reserve-field select option:disabled { color: #6b7a90; }
+.reserve-field-error { color: var(--reserve-error); font-size: 13px; font-weight: 700; line-height: 1.4; }
+.reserve-honeypot { position: absolute; left: -10000px; width: 1px; height: 1px; overflow: hidden; }
+
+.reserve-form-error { margin: 0; padding: 12px 14px; border-radius: 14px; background: rgba(255, 107, 53, 0.14); border: 1px solid rgba(255, 107, 53, 0.45); color: #ffe1d6; font-weight: 700; line-height: 1.5; }
+.reserve-form-error a, .reserve-alt a { color: var(--reserve-gold); text-decoration: underline; text-underline-offset: 3px; }
+
+.reserve-actions { display: flex; flex-wrap: wrap; gap: 12px 18px; align-items: center; }
+.reserve-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 50px;
+  border: 1px solid var(--reserve-ember);
+  border-radius: 999px;
+  padding: 13px 22px;
+  background: var(--reserve-ember);
+  color: var(--reserve-navy);
+  font: inherit;
+  font-weight: 900;
+  cursor: pointer;
+  box-shadow: 0 14px 34px rgba(255, 107, 53, 0.25);
+  transition: transform 0.2s ease, background 0.2s ease;
+}
+.reserve-button:hover { background: var(--reserve-ember-hover); transform: translateY(-1px); }
+.reserve-button:focus-visible { outline: 2px solid var(--reserve-gold); outline-offset: 3px; }
+.reserve-button:disabled { opacity: 0.65; cursor: progress; transform: none; }
+.reserve-button--whatsapp { background: var(--reserve-gold); border-color: var(--reserve-gold); box-shadow: 0 14px 34px rgba(255, 215, 0, 0.18); }
+.reserve-button--whatsapp:hover { background: #ffe14d; }
+.reserve-button--ghost { background: transparent; color: var(--text); border-color: rgba(219, 228, 240, 0.35); box-shadow: none; }
+.reserve-button--ghost:hover { background: rgba(255, 255, 255, 0.06); }
+.reserve-alt { margin: 0; color: #dbe4f0; font-size: 14px; }
+
+.reserve-success { gap: 18px; }
+.reserve-success-message { margin: 0; color: var(--reserve-success); font-size: clamp(18px, 2.4vw, 21px); font-weight: 800; line-height: 1.5; }
+.reserve-summary { display: grid; gap: 4px; padding: 14px 16px; border-radius: 16px; background: rgba(255, 255, 255, 0.06); border: 1px solid rgba(255, 215, 0, 0.22); }
+.reserve-summary strong { color: var(--reserve-gold); font-size: 17px; }
+.reserve-summary span { color: #dbe4f0; font-size: 14px; }
+
+.reserve-side { display: grid; gap: 16px; min-width: 0; }
+.reserve-info { padding: 22px; border-radius: 22px; border: 1px solid var(--line); background: linear-gradient(180deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.035)); }
+.reserve-info h2 { margin: 0 0 12px; color: var(--reserve-gold); font-size: 18px; letter-spacing: 0.02em; }
+.reserve-info p { margin: 6px 0 0; color: var(--muted); line-height: 1.6; }
+.reserve-info dl { margin: 0; display: grid; gap: 10px; }
+.reserve-info dl div { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; padding-bottom: 10px; border-bottom: 1px solid var(--line); }
+.reserve-info dl div:last-child { border-bottom: 0; padding-bottom: 0; }
+.reserve-info dt { color: var(--muted); }
+.reserve-info dd { margin: 0; font-weight: 800; color: var(--text); }
+.reserve-steps { list-style: none; margin: 0; padding: 0; display: grid; gap: 14px; }
+.reserve-steps li { display: grid; grid-template-columns: auto 1fr; gap: 12px; align-items: start; }
+.reserve-steps li > span { display: inline-grid; place-items: center; width: 34px; height: 34px; border-radius: 50%; background: var(--reserve-ember); color: var(--reserve-navy); font-weight: 900; font-size: 13px; }
+.reserve-steps strong { color: var(--text); }
+.reserve-steps p { margin: 2px 0 0; font-size: 14px; }
+
+@media (max-width: 900px) {
+  .reserve-layout { grid-template-columns: 1fr; }
+}
+@media (max-width: 560px) {
+  .reserve-grid { grid-template-columns: 1fr; }
+  .reserve-card .reserve-language { position: static; justify-self: start; }
+  .reserve-actions { flex-direction: column; align-items: stretch; }
+  .reserve-button { width: 100%; }
+}
