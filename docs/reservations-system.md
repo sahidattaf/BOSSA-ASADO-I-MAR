@@ -42,6 +42,7 @@ Staff ─► /admin/reservations (Basic Auth via proxy.ts)
 
 | File | Purpose |
 | --- | --- |
+| `supabase/migrations/004_reconcile_preexisting_reservations.sql` | Aligns a pre-existing production table with 005 (no-op on fresh databases) |
 | `supabase/migrations/005_create_reservations.sql` | Table, indexes, slot rules trigger, RLS policies, grants |
 | `supabase/migrations/006_update_reservation_hours.sql` | Official hours: Thursday–Sunday, slots 12:00–21:30 |
 | `app/lib/reservations.ts` | Shared rules, validation, date/time helpers (client-safe) |
@@ -83,7 +84,7 @@ Field codes: `required`, `name_invalid`, `phone_invalid`, `email_invalid`, `part
 
 ## Go-live checklist (owner actions)
 
-1. **Apply the migrations** `supabase/migrations/005_create_reservations.sql` then `006_update_reservation_hours.sql` to the active Supabase project (`bossa-ai-os`, ref `oqmftkttkfktyzefswpz`). Until this is done, `/reserve` shows "Online reservations are temporarily unavailable" with a WhatsApp link, and the dashboard shows a database warning.
+1. **Apply the migrations** `supabase/migrations/004_reconcile_preexisting_reservations.sql`, then `005_create_reservations.sql`, then `006_update_reservation_hours.sql` to the active Supabase project. Production already had a hand-made `reservations` table with permissive access (found 2026-10-21); 004 brings it to the 005 shape and is a no-op on a fresh database (`bossa-ai-os`, ref `oqmftkttkfktyzefswpz`). Until this is done, `/reserve` shows "Online reservations are temporarily unavailable" with a WhatsApp link, and the dashboard shows a database warning.
 2. **Set admin credentials in Vercel** (Production): `BOSSA_ADMIN_USERNAME`, `BOSSA_ADMIN_PASSWORD`. Without them, `/admin/*` and the staff `GET` fail closed with 503.
 3. Confirm `SUPABASE_SERVICE_ROLE_KEY` and `NEXT_PUBLIC_SUPABASE_URL` (or `SUPABASE_URL`) remain set for Production — the reservation API uses the same server-only boundary as the leads adapter.
 4. Have a native speaker review the Papiamentu copy in `app/components/ReservationForm.tsx` and the WhatsApp confirmation text in `app/components/admin/ReservationsBoard.tsx`.
