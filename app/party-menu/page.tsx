@@ -3,6 +3,7 @@ import { mediaAssets } from '../data/media';
 import { partyPackages } from '../data/party-packages';
 import { paymentDisclaimer, paymentLinks } from '../data/payments';
 import { siteConfig } from '../data/site';
+import PhoneLink from '../components/PhoneLink';
 
 export const metadata: Metadata = {
   title: 'Party & Events Catering | Fire-Grill · Pietermaai, Curaçao',
@@ -200,7 +201,7 @@ export default function PartyMenuPage() {
             <p>{siteConfig.address}</p>
           </div>
           <div>
-            <p>WhatsApp: +5999 523 0683</p>
+            <p>WhatsApp: <PhoneLink /></p>
             <p>Group orders by request · {siteConfig.hours}</p>
           </div>
         </div>

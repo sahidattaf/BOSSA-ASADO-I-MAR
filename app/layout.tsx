@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import AdminChromeGuard from './components/AdminChromeGuard';
 import FloatingShareButton from './components/FloatingShareButton';
+import GrandOpeningBanner from './components/GrandOpeningBanner';
 import LanguageSwitcher from './components/LanguageSwitcher';
 import WhatsAppClickTracker from './components/WhatsAppClickTracker';
 import './globals.css';
@@ -108,26 +109,29 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessJsonLd) }}
         />
         <AdminChromeGuard>
+          <GrandOpeningBanner />
           <LanguageSwitcher />
           <WhatsAppClickTracker />
         </AdminChromeGuard>
         {children}
         <AdminChromeGuard>
           <FloatingShareButton />
-          <a
-            className="sticky-whatsapp"
-            href={`https://wa.me/${WA_NUMBER}`}
-            target="_blank"
-            rel="noreferrer"
-            aria-label="Order or reserve BOSSA on WhatsApp"
-            data-track="whatsapp-click"
-            data-cta-source="sticky"
-            data-cta-label="sticky-whatsapp"
-            data-offer-id=""
-          >
-            <span>WhatsApp</span>
-            <strong>Order / Reserve</strong>
-          </a>
+          <div className="sticky-whatsapp" role="group" aria-label="Contact BOSSA">
+            <a
+              className="sticky-whatsapp-chat"
+              href={`https://wa.me/${WA_NUMBER}`}
+              target="_blank"
+              rel="noreferrer"
+              aria-label="Order or ask BOSSA on WhatsApp"
+              data-track="whatsapp-click"
+              data-cta-source="sticky"
+              data-cta-label="sticky-whatsapp"
+              data-offer-id=""
+            >
+              WhatsApp
+            </a>
+            <a className="sticky-whatsapp-reserve" href="/reserve">Reserve</a>
+          </div>
         </AdminChromeGuard>
       </body>
     </html>

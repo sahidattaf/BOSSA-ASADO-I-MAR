@@ -3,6 +3,7 @@ import PublicHeader from '../components/PublicHeader';
 import ReservationForm from '../components/ReservationForm';
 import SiteFooter from '../components/SiteFooter';
 import { siteConfig } from '../data/site';
+import PhoneLink from '../components/PhoneLink';
 import './reserve.css';
 
 export const metadata: Metadata = {
@@ -69,7 +70,7 @@ export default function ReservePage() {
           <div className="reserve-info">
             <h2>Find us</h2>
             <p>{siteConfig.address}</p>
-            <p>WhatsApp: +5999 523 0683</p>
+            <p>WhatsApp: <PhoneLink /></p>
           </div>
         </aside>
       </section>
