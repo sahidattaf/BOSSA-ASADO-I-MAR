@@ -132,9 +132,12 @@ audio { width: 100%; margin-top: 16px; }
 .footer { padding: 34px 0 48px; color: var(--muted); border-top: 1px solid var(--line); }
 .footer-brand { display: flex; gap: 16px; align-items: flex-start; }
 .footer-logo { width: 116px; max-width: 32vw; border-radius: 14px; border: 1px solid var(--line); background: #080504; }
-.sticky-whatsapp { position: fixed; right: 18px; bottom: 18px; z-index: 50; display: grid; gap: 2px; padding: 14px 18px; border-radius: 999px; background: linear-gradient(135deg, var(--fire), var(--gold)); color: #120d0a; box-shadow: 0 18px 44px rgba(0,0,0,0.42), 0 12px 28px rgba(255,106,26,0.24); border: 1px solid rgba(255,255,255,0.22); }
-.sticky-whatsapp span { font-size: 11px; text-transform: uppercase; letter-spacing: 0.12em; opacity: 0.78; }
-.sticky-whatsapp strong { font-size: 14px; }
+.sticky-whatsapp { position: fixed; right: 18px; bottom: 18px; z-index: 50; display: flex; gap: 8px; }
+.sticky-whatsapp a { display: inline-flex; align-items: center; justify-content: center; min-height: 48px; padding: 12px 20px; border-radius: 999px; font-size: 14px; font-weight: 800; text-align: center; box-shadow: 0 18px 44px rgba(0,0,0,0.42); border: 1px solid rgba(255,255,255,0.22); }
+.sticky-whatsapp .sticky-whatsapp-chat { background: linear-gradient(135deg, var(--fire), var(--gold)); color: #120d0a; box-shadow: 0 18px 44px rgba(0,0,0,0.42), 0 12px 28px rgba(255,106,26,0.24); }
+.sticky-whatsapp .sticky-whatsapp-reserve { background: #140c08; color: var(--text); border-color: rgba(243, 179, 91, 0.6); }
+.grand-opening-banner { background: linear-gradient(135deg, var(--fire), var(--gold)); color: #120d0a; text-align: center; padding: 10px 16px; font-size: 14px; font-weight: 800; }
+.grand-opening-banner a { color: inherit; }
 .floating-share { position: fixed; right: 18px; top: 52%; transform: translateY(-50%); z-index: 55; display: grid; justify-items: end; gap: 10px; }
 .floating-share-main, .floating-share-action { border: 1px solid rgba(255,247,237,0.18); color: var(--text); background: rgba(18,13,10,0.88); box-shadow: var(--shadow); backdrop-filter: blur(12px); cursor: pointer; font: inherit; font-weight: 900; }
 .floating-share-main { min-width: 74px; min-height: 46px; border-radius: 999px; padding: 12px 15px; color: #120d0a; background: linear-gradient(135deg, var(--gold), var(--fire)); }
@@ -185,13 +188,8 @@ audio { width: 100%; margin-top: 16px; }
     left: 16px;
     right: 16px;
     bottom: calc(12px + env(safe-area-inset-bottom, 0px));
-    min-height: 64px;
-    padding: 12px 18px;
-    text-align: center;
-    justify-items: center;
   }
-  .sticky-whatsapp span { display: none; }
-  .sticky-whatsapp strong { font-size: 16px; }
+  .sticky-whatsapp a { flex: 1 1 0; min-height: 56px; font-size: 16px; }
   .floating-share {
     top: auto;
     right: 16px;

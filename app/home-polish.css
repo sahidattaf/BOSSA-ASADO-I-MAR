@@ -57,3 +57,4 @@
   .hero-proof-row span { font-size: 12px; }
   .signature-card { min-height: 280px; }
 }
+.hero-hours { margin: 14px 0 0; color: var(--muted); font-size: 14px; font-weight: 700; }

@@ -4,6 +4,7 @@ import { mediaAssets } from '../data/media';
 import { menuSections } from '../data/menu';
 import { paymentDisclaimer } from '../data/payments';
 import { siteConfig } from '../data/site';
+import PhoneLink from '../components/PhoneLink';
 
 export const metadata: Metadata = {
   title: 'Weekend Fire Boxes | Fire-Grill Take-Out · Pietermaai, Curaçao',
@@ -227,7 +228,7 @@ export default function WeekendFirePage() {
             <p>{siteConfig.address}</p>
           </div>
           <div>
-            <p>WhatsApp: +5999 523 0683</p>
+            <p>WhatsApp: <PhoneLink /></p>
             <p>Weekend Fire: {siteConfig.hours}</p>
           </div>
         </div>

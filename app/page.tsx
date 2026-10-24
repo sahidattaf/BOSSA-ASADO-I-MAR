@@ -1,4 +1,5 @@
 import LiveFireStatus from './components/LiveFireStatus';
+import PhoneLink from './components/PhoneLink';
 import PublicHeader from './components/PublicHeader';
 import SiteFooter from './components/SiteFooter';
 import MenuCatalog from './components/MenuCatalog';
@@ -73,18 +74,18 @@ export default function HomePage() {
             <span className="badge">Pietermaai · Opposite Avila Hotel · Curaçao</span>
             <h1>Fire. Flavor. Ocean.</h1>
             <p className="lead">
-              Wood-fire dining with Caribbean soul in Pietermaai, Curaçao. Order Weekend Fire Boxes,
-              reserve a table, or plan your private fire-grill event.
+              Wood-fire dining with Caribbean soul in Pietermaai, Curaçao. Our grand opening is coming
+              soon — reserve your table now, or plan your private fire-grill event.
             </p>
             <div className="cta-row">
-              <a className="button primary" href={orderUrl} target="_blank" rel="noreferrer"
+              <a className="button primary" href="/reserve">Reserve for our Grand Opening</a>
+              <a className="button" href={orderUrl} target="_blank" rel="noreferrer"
                 data-track="whatsapp-click" data-cta-source="home" data-cta-label="hero-order" data-offer-id="">
-                Order on WhatsApp
+                Ask on WhatsApp
               </a>
               <a className="button" href="/weekend-fire">Weekend Fire Boxes</a>
-              <a className="button" href="/catering">Catering</a>
-              <a className="button" href="/menu">View menu</a>
             </div>
+            <p className="hero-hours">Opening soon · {siteConfig.hours}</p>
           </div>
           <div className="hero-visual-card">
             <img
@@ -105,9 +106,9 @@ export default function HomePage() {
 
       <section id="order" className="section media-section">
         <div className="container">
-          <span className="badge">Order Flow</span>
-          <h2>One website. Clear revenue paths.</h2>
-          <p>Guests should never wonder what to do next: order boxes, reserve, request catering, plan private events, or book tourist experiences.</p>
+          <span className="badge">Order · Reserve · Celebrate</span>
+          <h2>Order, reserve, or plan your event.</h2>
+          <p>Order Weekend Fire Boxes, book a table, or request a quote for catering and private events. Pick what fits and BOSSA confirms on WhatsApp.</p>
           <div className="grid" style={{ marginTop: '24px' }}>
             {orderCards.map((card) => (
               <article className="card" key={card.title}>
@@ -231,7 +232,7 @@ export default function HomePage() {
       <section id="menu" className="section">
         <div className="container">
           <span className="badge">Fire & Smoke Menu</span>
-          <h2>Signature menu direction.</h2>
+          <h2>From the fire to your table.</h2>
           <p>
             Ribs, skewers, sandwiches, sides, sauces, fire boxes, and Caribbean grill favorites.
           </p>
@@ -284,10 +285,10 @@ export default function HomePage() {
         <div className="container split desktop-section-content">
           <div>
             <span className="badge">Catering · Private Events · Tourist Experiences</span>
-            <h2>More than food orders: BOSSA is a hospitality platform.</h2>
+            <h2>Catering, private events and tourist nights.</h2>
             <p>
-              Turn villas, birthdays, offices, hotels, yacht groups, and tourist nights into clear
-              fire-grill revenue paths with simple WhatsApp quote flows.
+              Villas, birthdays, offices, hotels, yacht groups, and tourist nights — tell BOSSA
+              your date and group size on WhatsApp and get a fire-grill quote.
             </p>
             <div className="cta-row">
               <a className="button primary" href="/catering">Catering</a>
@@ -301,7 +302,7 @@ export default function HomePage() {
           </div>
           <img
             src="/images/bossa/weekend-fire/box-7-sea-box-coming-soon.png"
-            alt="BOSSA Seafood Coming Soon event visual"
+            alt="BOSSA Sea Box, coming soon"
             style={{ width: '100%', borderRadius: '12px' }}
           />
         </div>
@@ -309,8 +310,8 @@ export default function HomePage() {
           <MobileDisclosure title="Catering & Events" summary="Private events, tourist groups and catering">
             <div>
               <p>
-                Turn villas, birthdays, offices, hotels, yacht groups, and tourist nights into clear
-                fire-grill revenue paths with simple WhatsApp quote flows.
+                Villas, birthdays, offices, hotels, yacht groups, and tourist nights — tell BOSSA
+                your date and group size on WhatsApp and get a fire-grill quote.
               </p>
               <div className="cta-row">
                 <a className="button primary" href="/catering">Catering</a>
@@ -330,10 +331,10 @@ export default function HomePage() {
         <div className="container desktop-section-content">
           <div className="section-heading-row">
             <div>
-              <span className="badge">BOSSA V2</span>
-              <h2>Choose the intent. BOSSA handles the flow.</h2>
+              <span className="badge">More at BOSSA</span>
+              <h2>More ways to enjoy BOSSA.</h2>
             </div>
-            <p>Every major customer path now has a dedicated page, SEO metadata, and WhatsApp CTA.</p>
+            <p>Rooftop nights, photos from the fire, and partnerships with hotels and hosts.</p>
           </div>
           <div className="grid signature-grid">
             {[
@@ -388,7 +389,7 @@ export default function HomePage() {
             <h3>Quick info</h3>
             <p>📍 Opposite Avila Hotel / Pietermaai area</p>
             <p>🔥 Wood fire & charcoal only</p>
-            <p>📞 +5999 523 0683</p>
+            <p>📞 <PhoneLink /></p>
             <p>⏱️ {siteConfig.hours}</p>
           </div>
         </div>

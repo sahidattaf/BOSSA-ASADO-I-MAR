@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { GRAND_OPENING_PENDING } from '../data/opening-status';
 
 interface FireStatus {
   live: boolean;
@@ -24,6 +25,10 @@ function getCuracaoFireStatus(): FireStatus {
   const isFireDay = day === 0 || day === 4 || day === 5 || day === 6;
   const isFireTime = timeDecimal >= 12 && timeDecimal < 22;
   const live = isFireDay && isFireTime;
+
+  if (GRAND_OPENING_PENDING) {
+    return { live: false, label: '🔥 Opening Soon', sub: 'Grand Opening · Reserve your table now' };
+  }
 
   return {
     live,

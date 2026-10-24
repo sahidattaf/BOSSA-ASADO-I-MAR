@@ -1,4 +1,5 @@
 import { siteConfig } from '../data/site';
+import PhoneLink from './PhoneLink';
 
 export default function SiteFooter({ label = siteConfig.brandName }: { label?: string }) {
   return (
@@ -13,7 +14,7 @@ export default function SiteFooter({ label = siteConfig.brandName }: { label?: s
           </div>
         </div>
         <div>
-          <p>WhatsApp: +5999 523 0683</p>
+          <p>WhatsApp: <PhoneLink /></p>
           <p>Open {siteConfig.hours}</p>
         </div>
       </div>

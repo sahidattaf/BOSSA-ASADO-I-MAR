@@ -3,6 +3,7 @@ import LeadForm from '../components/LeadForm';
 import PublicHeader from '../components/PublicHeader';
 import SiteFooter from '../components/SiteFooter';
 import { siteConfig } from '../data/site';
+import PhoneLink from '../components/PhoneLink';
 
 export const metadata: Metadata = {
   title: 'Contact',
@@ -37,7 +38,7 @@ export default function ContactPage() {
           <div className="info-card">
             <h3>Quick Info</h3>
             <p>Address: {siteConfig.address}</p>
-            <p>WhatsApp: +5999 523 0683</p>
+            <p>WhatsApp: <PhoneLink /></p>
             <p>Hours: {siteConfig.hours}</p>
           </div>
           <div className="info-card">
