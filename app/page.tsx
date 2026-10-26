@@ -162,6 +162,8 @@ export default function HomePage() {
         </div>
         <div className="container mobile-only-section-content">
           <MobileDisclosure title="How BOSSA Works" summary="4 quick steps from choice to pickup">
+            <span className="badge">How BOSSA Works</span>
+            <h2>Simple order flow. Clean fire execution.</h2>
             <div className="mobile-compact-grid">
               {howItWorks.map(([step, title, text]) => (
                 <article className="card tall-card" key={step}>
@@ -192,6 +194,8 @@ export default function HomePage() {
         </div>
         <div className="container mobile-only-section-content">
           <MobileDisclosure title="BOSSA Sound" summary="Open the restaurant mood player">
+            <span className="badge">BOSSA Sound</span>
+            <h2>Play the BOSSA mood while guests choose.</h2>
             <div className="info-card audio-card">
               <h3>{mainAudio.name}</h3>
               <audio controls preload="metadata">
@@ -262,6 +266,8 @@ export default function HomePage() {
         </div>
         <div className="container mobile-only-section-content">
           <MobileDisclosure title="Watch the fire" summary={`${youtubeVideos.length} BOSSA videos`}>
+            <span className="badge">BOSSA YouTube Channel</span>
+            <h2>Watch the fire before you order.</h2>
             <div className="mobile-compact-grid">
               {youtubeVideos.map((video) => (
                 <article className="video-card" key={video.embedUrl}>
@@ -309,6 +315,8 @@ export default function HomePage() {
         <div className="container mobile-only-section-content">
           <MobileDisclosure title="Catering & Events" summary="Private events, tourist groups and catering">
             <div>
+              <span className="badge">Catering · Private Events · Tourist Experiences</span>
+              <h2>More than food orders: BOSSA is a hospitality platform.</h2>
               <p>
                 Villas, birthdays, offices, hotels, yacht groups, and tourist nights — tell BOSSA
                 your date and group size on WhatsApp and get a fire-grill quote.
@@ -323,6 +331,11 @@ export default function HomePage() {
                 </a>
               </div>
             </div>
+            <img
+              src="/images/bossa/weekend-fire/box-7-sea-box-coming-soon.png"
+              alt="BOSSA Seafood Coming Soon event visual"
+              style={{ width: '100%', borderRadius: '12px', marginTop: '22px' }}
+            />
           </MobileDisclosure>
         </div>
       </section>
@@ -352,6 +365,9 @@ export default function HomePage() {
         </div>
         <div className="container mobile-only-section-content">
           <MobileDisclosure title="More BOSSA" summary="Rooftop, gallery and partner experiences">
+            <span className="badge">BOSSA V2</span>
+            <h2>Choose the intent. BOSSA handles the flow.</h2>
+            <p>Every major customer path now has a dedicated page, SEO metadata, and WhatsApp CTA.</p>
             <div className="mobile-compact-grid">
               {[
                 ['Rooftop Lounge', '/rooftop-lounge', 'Sunset, fire, music, and private group energy.'],

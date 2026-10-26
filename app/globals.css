@@ -91,7 +91,7 @@ h1 { max-width: 900px; margin: 22px 0 18px; font-size: clamp(44px, 8vw, 92px); l
 .menu-category-jump a:focus-visible, .menu-section-summary:focus-visible, .menu-order-button:focus-visible { outline: 3px solid rgba(243,179,91,0.72); outline-offset: 3px; }
 .menu-stack { display: grid; gap: 18px; margin-top: 14px; }
 .menu-section { padding: 0; scroll-margin-top: 18px; overflow: hidden; }
-.menu-section-summary { display: none; }
+.menu-section-summary { display: none; width: 100%; border: 0; background: transparent; font: inherit; text-align: left; }
 .menu-section-content { padding: 22px; }
 .menu-section-header { display: flex; justify-content: space-between; gap: 18px; margin-bottom: 12px; }
 .menu-items { display: grid; gap: 0; }
@@ -160,10 +160,6 @@ audio { width: 100%; margin-top: 16px; }
 .mobile-disclosure-panel { padding: 0 14px 14px; }
 .mobile-compact-grid { display: grid; gap: 12px; }
 
-@media (min-width: 761px) {
-  .menu-section:not([open]) .menu-section-content { display: block; }
-}
-
 @media (max-width: 1400px) { .cards-grid { gap: 0.8rem; } .main-title { font-size: clamp(38px, 5vw, 62px); } }
 @media (max-width: 1100px) { .menu-layout { flex-direction: column; } .cards-grid { grid-template-columns: repeat(2, 1fr); } }
 @media (max-width: 900px) { .hero-grid, .visual-strip, .weekend-highlight-grid { grid-template-columns: 1fr; } }
@@ -226,7 +222,8 @@ audio { width: 100%; margin-top: 16px; }
   .menu-section-summary strong { color: var(--gold); font-size: 17px; }
   .menu-section-summary small { margin-top: 4px; color: var(--muted); font-size: 12px; }
   .menu-section-count { flex: 0 0 auto; color: var(--muted); font-size: 12px; font-weight: 800; }
-  .menu-section[open] .menu-section-summary { border-bottom: 1px solid var(--line); }
+  .menu-section.is-open .menu-section-summary { border-bottom: 1px solid var(--line); }
+  .menu-section:not(.is-open) .menu-section-content { display: none; }
   .menu-section-content { padding: 0 16px 12px; }
   .menu-section-header { display: none; }
   .menu-item { grid-template-columns: 76px minmax(0, 1fr); gap: 12px; padding: 14px 0; }
